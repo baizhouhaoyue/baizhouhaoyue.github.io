@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ubuntu16.04的安装</title>
+    <title>SSH服务安装</title>
+    <url>/2023/08/16/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="第一章-SSH服务"><a href="#第一章-SSH服务" class="headerlink" title="第一章    SSH服务"></a>第一章    SSH服务</h1><p><strong>SSH服务功能：实现远程连接，及文件传输服务。</strong></p>
+<p><u></u></p>
+<h1 id="第二章换源操作："><a href="#第二章换源操作：" class="headerlink" title="第二章	换源操作："></a>第二章	换源操作：</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816152039215.png"
+                      alt="image-20230816152039215"
+                ></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/08/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>ubuntu22.04的安装</title>
     <url>/2023/08/16/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="第一章-开始软件"><a href="#第一章-开始软件" class="headerlink" title="第一章 开始软件"></a>第一章 开始软件</h1><p>虚拟机工具VMware：</p>
 <p><a class="link"   href="https://customerconnect.vmware.com/cn/downloads/#all_products" >所有下载 (vmware.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
@@ -45,7 +76,7 @@
                      data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095612327-1692166364806.png"
                       alt="image-20230816095612327"
                 ></p>
-<h1 id="第三章-知识点2【对ubuntu16进行硬件配置】"><a href="#第三章-知识点2【对ubuntu16进行硬件配置】" class="headerlink" title="第三章     知识点2【对ubuntu16进行硬件配置】"></a>第三章     知识点2【对ubuntu16进行硬件配置】</h1><p><img  
+<h1 id="第三章-对ubuntu16进行硬件配置"><a href="#第三章-对ubuntu16进行硬件配置" class="headerlink" title="第三章     对ubuntu16进行硬件配置"></a>第三章     对ubuntu16进行硬件配置</h1><p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095700054-1692166380640.png"
@@ -112,24 +143,79 @@
                       alt="image-20230816102123509"
                 ></p>
 <p>下载完后安装完毕</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2023/08/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+<h1 id="第四章-vmtool工具安装"><a href="#第四章-vmtool工具安装" class="headerlink" title="第四章  vmtool工具安装"></a>第四章  vmtool工具安装</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143153587.png"
+                      alt="image-20230816143153587"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143426805.png"
+                      alt="image-20230816143426805"
+                ></p>
+<p>桌面鼠标右键新建文件夹</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143935974.png"
+                      alt="image-20230816143935974"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143903174.png"
+                      alt="image-20230816143903174"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144146568.png"
+                      alt="image-20230816144146568"
+                ></p>
+<p>输入以下指令：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf  VMware Tools-10.0.5-3228253.tar.gz</span><br></pre></td></tr></table></figure></div>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144226310.png"
+                      alt="image-20230816144226310"
+                ></p>
+<p>进入解压文件夹</p>
+<p>输入以下指令：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> vmware-tools-distrib/</span><br></pre></td></tr></table></figure></div>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144805755.png"
+                      alt="image-20230816144805755"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145129812.png"
+                      alt="image-20230816145129812"
+                ></p>
+<p>输入以下指令安装</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ./vmware-intall.pl</span><br></pre></td></tr></table></figure></div>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145318287.png"
+                      alt="image-20230816145318287"
+                ></p>
+<p>有问题就一直回车，当出现yes或no时，一直输入yes</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145659470.png"
+                      alt="image-20230816145659470"
+                ></p>
+<p>出现时表示安装成功</p>
 ]]></content>
   </entry>
   <entry>
