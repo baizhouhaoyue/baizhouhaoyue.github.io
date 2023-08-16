@@ -13,50 +13,30 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2023/08/16/ubuntu22-04的安装/"/>
+    <link rel="canonical" href="http://example.com/2023/08/16/c编程-预处理、动态库、静态库/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="第一章 开始软件虚拟机工具VMware： 所有下载 (vmware.com)  VMtool： 下载 VMware Tools - VMware Customer Connect  ubuntu所需镜像： ubuntu-releases-22.04安装包下载_开源镜像站-阿里云 (aliyun.com)   第二章   vmware新建ubuntu     第三章     对ubuntu16进行硬">
+        <meta name="description" content="第一章c 语言编译过程 1：预编译将.c 中的头文件展开、宏展开生成的文件是.i 文件 2：编译将预处理之后的.i 文件生成 .s汇编文件 3、汇编将.s 汇编文件生成.o 目标文件 4、链接将.o 文件链接成目标文件  01_code.c 1234567891011#include &lt;stdio.h&gt;#include &quot;fun.h&quot;#include &quot;f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu22.04的安装">
-<meta property="og:url" content="http://example.com/2023/08/16/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="C编程____预处理、动态库、静态库">
+<meta property="og:url" content="http://example.com/2023/08/16/C%E7%BC%96%E7%A8%8B-%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/index.html">
 <meta property="og:site_name" content="白昼">
-<meta property="og:description" content="第一章 开始软件虚拟机工具VMware： 所有下载 (vmware.com)  VMtool： 下载 VMware Tools - VMware Customer Connect  ubuntu所需镜像： ubuntu-releases-22.04安装包下载_开源镜像站-阿里云 (aliyun.com)   第二章   vmware新建ubuntu     第三章     对ubuntu16进行硬">
+<meta property="og:description" content="第一章c 语言编译过程 1：预编译将.c 中的头文件展开、宏展开生成的文件是.i 文件 2：编译将预处理之后的.i 文件生成 .s汇编文件 3、汇编将.s 汇编文件生成.o 目标文件 4、链接将.o 文件链接成目标文件  01_code.c 1234567891011#include &lt;stdio.h&gt;#include &quot;fun.h&quot;#include &quot;f">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/a066d04eef0f40f0b085c721b229bf0a.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094803019.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094808162.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094816344.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095606500.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095612327-1692166364806.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095700054-1692166380640.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095830906-1692166386417.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100029825-1692166394987.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100216999.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100423202.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100446951.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101236635.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101433412.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166437093.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166445930.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816102123509-1692166451322.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143153587.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143426805.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143935974.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143903174.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144146568.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144226310.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144805755.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145129812.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145318287.png">
-<meta property="og:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145659470.png">
-<meta property="article:published_time" content="2023-08-16T01:14:43.000Z">
-<meta property="article:modified_time" content="2023-08-16T06:58:01.649Z">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816222343291.png">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816222746494.png">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225303733.png">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225310914.png">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225316432.png">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225436719.png">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225442029.png">
+<meta property="article:published_time" content="2023-08-16T14:18:21.000Z">
+<meta property="article:modified_time" content="2023-08-16T15:02:26.996Z">
 <meta property="article:author" content="白昼">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/a066d04eef0f40f0b085c721b229bf0a.png">
+<meta name="twitter:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816222343291.png">
     
     
     <!--- Icon Part-->
@@ -68,7 +48,7 @@
     
     <title>
         
-            ubuntu22.04的安装 -
+            C编程____预处理、动态库、静态库 -
         
         白昼的宝典
     </title>
@@ -437,7 +417,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">ubuntu22.04的安装</h1>
+                <h1 class="article-title-regular">C编程____预处理、动态库、静态库</h1>
             
             </div>
             
@@ -459,15 +439,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-08-16 09:14:43</span>
-        <span class="mobile">2023-08-16 09:14:43</span>
+        <span class="desktop">2023-08-16 22:18:21</span>
+        <span class="mobile">2023-08-16 22:18:21</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-08-16 14:58:01</span>
-            <span class="mobile">2023-08-16 14:58:01</span>
+            <span class="desktop">2023-08-16 23:02:26</span>
+            <span class="mobile">2023-08-16 23:02:26</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -491,188 +471,162 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="第一章-开始软件"><a href="#第一章-开始软件" class="headerlink" title="第一章 开始软件"></a>第一章 开始软件</h1><p>虚拟机工具VMware：</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://customerconnect.vmware.com/cn/downloads/#all_products" >所有下载 (vmware.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>VMtool：</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://customerconnect.vmware.com/cn/downloads/info/slug/datacenter_cloud_infrastructure/vmware_tools/12_x" >下载 VMware Tools - VMware Customer Connect <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>ubuntu所需镜像：</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://mirrors.aliyun.com/ubuntu-releases/22.04/" >ubuntu-releases-22.04安装包下载_开源镜像站-阿里云 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><img  
+            <h1 id="第一章c-语言编译过程"><a href="#第一章c-语言编译过程" class="headerlink" title="第一章c 语言编译过程"></a>第一章c 语言编译过程</h1><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/a066d04eef0f40f0b085c721b229bf0a.png"
-                      alt="a066d04eef0f40f0b085c721b229bf0a"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816222343291.png"
+                      alt="image-20230816222343291"
                 ></p>
-<h1 id="第二章-vmware新建ubuntu"><a href="#第二章-vmware新建ubuntu" class="headerlink" title="第二章   vmware新建ubuntu"></a>第二章   vmware新建ubuntu</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094803019.png"
-                      alt="image-20230816094803019"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094808162.png"
-                      alt="image-20230816094808162"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094816344.png"
-                      alt="image-20230816094816344"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095606500.png"
-                      alt="image-20230816095606500"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095612327-1692166364806.png"
-                      alt="image-20230816095612327"
-                ></p>
-<h1 id="第三章-对ubuntu16进行硬件配置"><a href="#第三章-对ubuntu16进行硬件配置" class="headerlink" title="第三章     对ubuntu16进行硬件配置"></a>第三章     对ubuntu16进行硬件配置</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095700054-1692166380640.png"
-                      alt="image-20230816095700054"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095830906-1692166386417.png"
-                      alt="image-20230816095830906"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100029825-1692166394987.png"
-                      alt="image-20230816100029825"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100216999.png"
-                      alt="image-20230816100216999"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100423202.png"
-                      alt="image-20230816100423202"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100446951.png"
-                      alt="image-20230816100446951"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101236635.png"
-                      alt="image-20230816101236635"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101433412.png"
-                      alt="image-20230816101433412"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166437093.png"
-                      alt="image-20230816101910424"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166445930.png"
-                      alt="image-20230816101910424"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816102123509-1692166451322.png"
-                      alt="image-20230816102123509"
-                ></p>
-<p>下载完后安装完毕</p>
-<h1 id="第四章-vmtool工具安装"><a href="#第四章-vmtool工具安装" class="headerlink" title="第四章  vmtool工具安装"></a>第四章  vmtool工具安装</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143153587.png"
-                      alt="image-20230816143153587"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143426805.png"
-                      alt="image-20230816143426805"
-                ></p>
-<p>桌面鼠标右键新建文件夹</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143935974.png"
-                      alt="image-20230816143935974"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143903174.png"
-                      alt="image-20230816143903174"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144146568.png"
-                      alt="image-20230816144146568"
-                ></p>
-<p>输入以下指令：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf  VMware Tools-10.0.5-3228253.tar.gz</span><br></pre></td></tr></table></figure></div>
+<p>1：预编译将.c 中的头文件展开、宏展开生成的文件是.i 文件</p>
+<p>2：编译将预处理之后的.i 文件生成 .s汇编文件</p>
+<p>3、汇编将.s 汇编文件生成.o 目标文件</p>
+<p>4、链接将.o 文件链接成目标文件</p>
+<p><u></u></p>
+<p><strong>01_code.c</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun1.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//打印num</span></span><br><span class="line">    printNum();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144226310.png"
-                      alt="image-20230816144226310"
-                ></p>
-<p>进入解压文件夹</p>
-<p>输入以下指令：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> vmware-tools-distrib/</span><br></pre></td></tr></table></figure></div>
+<p><strong>fun.c</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br></pre></td></tr></table></figure></div>
 
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144805755.png"
-                      alt="image-20230816144805755"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145129812.png"
-                      alt="image-20230816145129812"
-                ></p>
-<p>输入以下指令安装</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./vmware-intall.pl</span><br></pre></td></tr></table></figure></div>
+<p><strong>fun.h</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _FUN_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _FUN_H_</span></span><br><span class="line"><span class="comment">/*global parmeters*************************************/</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> num;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*global function**************************************/</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></div>
 
+<p><strong>fun1.c</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"><span class="comment">/*private parmeters********************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*private function*********************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*split********************************************/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printNum</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;num = %d\n&quot;</span>, num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>fun1.h</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">printNum</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure></div>
+
+<p>完整的编译：gcc 01_code.c fun.c fun1.c -o main</p>
+<p>预处理编译：gcc  -E 01_code.c -o fun.i</p>
+<h1 id="第二章include"><a href="#第二章include" class="headerlink" title="第二章	include"></a>第二章	include</h1><p>#include&lt;&gt;&#x2F;&#x2F;用尖括号包含头文件，在系统指定的路径下找头文件</p>
+<p>#include “” &#x2F;&#x2F;用双引号包含头文件，先在当前目录下找头文件，找不到，再到系统指定的路径下找。</p>
+<p><strong>注意：</strong> include 经常用来包含头文件，可以包含 .c 文件，但是大家不要包含.c因为 include 包含的文件会在预编译被展开，如果一个.c 被包含多次，展开多次，会导致函数重复定义。所以不要包含.c 文件。</p>
+<p><strong>注意：</strong>预处理只是对 include 等预处理操作进行处理并不会进行语法检查这个阶段有语法错误也不会报错，第二个阶段即编译阶段才进行语法检查。</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145318287.png"
-                      alt="image-20230816145318287"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816222746494.png"
+                      alt="image-20230816222746494"
                 ></p>
-<p>有问题就一直回车，当出现yes或no时，一直输入yes</p>
+<h1 id="第三章宏定义"><a href="#第三章宏定义" class="headerlink" title="第三章	宏定义"></a>第三章	宏定义</h1><p>宏定义的语法： #define 宏名称    (宏展开的内容)</p>
+<p>宏名称用大写来定义，末尾不能有分号</p>
+<p>案例1：</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXLEN   (1024)  <span class="comment">///&lt;无参宏</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PI       (3.14)   </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MULTI(a, b)  (a)*(b)  <span class="comment">///&lt;有参宏</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a, b)     do&#123;((a) &gt; (b)) ? (a) : (b)&#125;while(0)</span></span><br></pre></td></tr></table></figure></div>
+
+<p>作用范围：宏定义的作用范围，从<strong>定义的地方到本文件末尾。</strong></p>
+<p>终止宏的定义范围：利用关键字 #undef</p>
+<p>宏没有作用域的限制：不能作为结构体的成员:</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun1.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*private macro defined *******************************************/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXLEN   (2048)  <span class="comment">///&lt;无参宏</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MULTI(a, b)  (a)*(b)  <span class="comment">///&lt;有参宏   </span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a, b)     do&#123;((a) &gt; (b)) ? (a) : (b)&#125;while(0)</span></span><br><span class="line"><span class="comment">/*private type*****************************************************/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">st_test</span>&#123;</span></span><br><span class="line">    <span class="type">double</span> num;</span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> PI       (3.14)</span></span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*split-line**********************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mul = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lf\n&quot;</span>, PI);</span><br><span class="line">   <span class="comment">// #undef MULTI(a, b)   ///&lt; 终止宏定义</span></span><br><span class="line">    mul = MULTI(<span class="number">10</span> + <span class="number">20</span>, <span class="number">20</span>);</span><br><span class="line">    <span class="comment">//打印num</span></span><br><span class="line">    printNum(MAXLEN);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>fun1.c</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printNum</span><span class="params">(<span class="type">int</span> val)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;val = %d\n&quot;</span>, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>fun1.h</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">printNum</span><span class="params">(<span class="type">int</span> val)</span>;</span><br></pre></td></tr></table></figure></div>
+
+<p>带参宏：</p>
+<p>1.注意带参宏的形参没有类型名，</p>
+<p>2带参宏和带参函数的区别：</p>
+<p>2.1.带参宏被调用多少次就会展开多少次，执行代码的时候没有函数调用的过程，不需要压栈弹栈.所以带参宏，是浪费了空间，因为被展开多次，节省时间。</p>
+<p>2.2 带参函数，代码只有一份，存在代码段，调用的时候去代码段取指令，调用的时候要，压栈弹栈。有个调用的过程。所以说，带参函数是浪费了时间，节省了空间。</p>
+<p><strong>扩展知识****：“#” 和 “##”</strong> </p>
+<p><strong>“#”符号</strong></p>
+<p>1、单独一个“#”符号表示：<strong>替换这个变量后，再加双引号引起来</strong>。</p>
+<p>2、例如，宏定义 __string_1(x) 。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span>    __string_1(x)    #x</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>“##”****连接符号</strong></p>
+<p>1、“##”连接符号，其功能是在带参数的宏定义中将两个子串(token)联接起来，从而形成一个新的子串。但它不可以是第一个或者最后一个子串。所谓的子串(token)就是指编译器能够识别的最小语法单元。</p>
+<p>简单来说，“##”是一种分隔连接方式，它的作用是先分隔，然后进行强制连接。分隔的作用类似于空格。</p>
+<p>2、在普通的宏定义中，预处理器一般把空格解释成分段标志，并把分隔后的每一段和前面的定义比较，相同的就被替换。如果采用空格来分隔，被替换后，段与段之间存在一些空格。如果我们不希望出现这些空格，就可以通过添加一些 “##”来替代空格。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span>  _TYPE_BUF_SIZE(type)  sizeof #type  </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>  TYPE_BUF_SIZE(type)   _TYPE_BUF_SIZE(type)</span></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章分文件编程"><a href="#第四章分文件编程" class="headerlink" title="第四章	分文件编程"></a>第四章	分文件编程</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225303733.png"
+                      alt="image-20230816225303733"
+                ></p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145659470.png"
-                      alt="image-20230816145659470"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225310914.png"
+                      alt="image-20230816225310914"
                 ></p>
-<p>出现时表示安装成功</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225316432.png"
+                      alt="image-20230816225316432"
+                ></p>
+<h1 id="第五章静态库与动态库"><a href="#第五章静态库与动态库" class="headerlink" title="第五章	静态库与动态库"></a>第五章	静态库与动态库</h1><p><strong>静态库和动态库的区别</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225436719.png"
+                      alt="image-20230816225436719"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225442029.png"
+                      alt="image-20230816225442029"
+                ></p>
+<p><strong>用户编译程序</strong></p>
+<p>程序编译默认是动态链接：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o main 01_code.c fun.c fun1.c</span><br></pre></td></tr></table></figure></div>
+
+<p>main的大小8k</p>
+<p>静态链接需加关键字 -static</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o main 01_code.c fun.c fun1.c -static</span><br></pre></td></tr></table></figure></div>
+
+<p>main的大小912k</p>
+<p><strong>静态库制作</strong></p>
+<p>静态库制作步骤：</p>
+<p>1）把当前项目中的所有.c文件生成.o</p>
+<p>gcc -c xxx.c -o xxx.o</p>
+<p>2)将所有的.o文件链接生成静态库,格式：libxxx.a</p>
+<p>ar rcs libxxx.a xxx.o xxx1.o ….xxxn.o</p>
+<p>注意：静态库起名的时候必须以 lib 开头以.a 结束。</p>
+<p><strong>静态库的使用</strong></p>
+<p>** 当静态库位于系统库目录下(&#x2F;usr&#x2F;lib)**</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c) -static -lxxx</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>当静态库不在系统目录下</strong></p>
+<p>方法1：利用-L选项</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c) -static  -L 指定库的路径 -lxxx</span><br></pre></td></tr></table></figure></div>
+
+<p>通过-L 来指明库文件所在的路径</p>
+<p><strong>扩展知识：指定头文件目录</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c) -static  -L 指定库的路径 -lxxx -I .h文件目录</span><br></pre></td></tr></table></figure></div>
+
+<p>注意： -L 是指定库文件的路径；-l 指定找哪个库；-I 指定头文件的路径。</p>
+<p><strong>动态库的制作</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fPIC xxx.c xxx1.c.....xxxn.c -o libxxx.so.version</span><br></pre></td></tr></table></figure></div>
+
+<p>-fPIC：生成位置无关的动态库。</p>
+<p>正常情况下生成动态库需加上<strong>版本号</strong>，但程序动态链接时只识别.so文件,<strong>此时我们需通过ln命令生成.so文件。</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s libxxx.so.version libxxx.so</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>动态库的使用</strong></p>
+<p>方法1：利用-L选项</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c)  -L 指定库的路径 -lxxx</span><br></pre></td></tr></table></figure></div>
+
+<p>当运行时提示：<strong>can not open shared object file:no such file or directory</strong>错误时可以通过下列办法解决</p>
+<p>方法1：添加LD_LIBRARY_PATH环境变量   </p>
+<p>1）修改:~&#x2F;.bashrc文件加入如下内容：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=库路径:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure></div>
+
+<p>2）source ~&#x2F;.bashrc</p>
+<p>方法2： </p>
+<p>1)修改&#x2F;etc&#x2F;ld.so.conf.d&#x2F;libc.conf文件，在文件内加入自定义库所在目录</p>
+<p>2)输入ldconfig命令</p>
+<p><strong>5.7 动态库与静态库同时链接</strong></p>
+<p>1）通过-Wl,-Bdynamic 来制定链接的动态库，</p>
+<p>2）通过-Wl,-Bstatic 来制定链接的静态库。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o main 01_code.c -L ./ -Wl,-Bstatic -lfun -Wl,-Bdynamic -lfun1</span><br></pre></td></tr></table></figure></div>
+
 
         </div>
 
@@ -680,16 +634,16 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> ubuntu22.04的安装</li>
+        <li><strong>标题:</strong> C编程____预处理、动态库、静态库</li>
         <li><strong>作者:</strong> BAI ZHOU</li>
-        <li><strong>创建于:</strong> 2023-08-16 09:14:43</li>
+        <li><strong>创建于:</strong> 2023-08-16 22:18:21</li>
         
             <li>
-                <strong>更新于:</strong> 2023-08-16 14:58:01
+                <strong>更新于:</strong> 2023-08-16 23:02:26
             </li>
         
         <li>
-            <strong>链接:</strong> https://redefine.ohevan.com/2023/08/16/ubuntu22-04的安装/
+            <strong>链接:</strong> https://redefine.ohevan.com/2023/08/16/C编程-预处理、动态库、静态库/
         </li>
         <li>
             <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
@@ -710,13 +664,13 @@
                     <div class="article-prev">
                         <a class="prev"
                         rel="prev"
-                        href="/2023/08/16/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/"
+                        href="/2023/08/16/C%E7%BC%96%E7%A8%8B-%E6%8C%87%E9%92%88/"
                         >
                             <span class="left arrow-icon flex-center">
                                 <i class="fa-solid fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">SSH服务安装</span>
+                                <span class="post-nav-title-item">C编程____指针</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -726,10 +680,10 @@
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/2023/08/14/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-Windows/"
+                        href="/2023/08/16/C%E4%B8%8EC-%E5%9F%BA%E7%A1%80-%E8%BF%90%E7%AE%97%E7%AC%A6/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Hexo博客搭建和使用教程(Windows)</span>
+                                <span class="post-nav-title-item">C与C++基础____运算符</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -794,8 +748,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">ubuntu22.04的安装</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%80%E5%A7%8B%E8%BD%AF%E4%BB%B6"><span class="nav-text">第一章 开始软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-vmware%E6%96%B0%E5%BB%BAubuntu"><span class="nav-text">第二章   vmware新建ubuntu</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%AF%B9ubuntu16%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-text">第三章     对ubuntu16进行硬件配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-vmtool%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85"><span class="nav-text">第四章  vmtool工具安装</span></a></li></ol>
+        <div class="page-title">C编程____预处理、动态库、静态库</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0c-%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-text">第一章c 语言编译过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0include"><span class="nav-text">第二章	include</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AE%8F%E5%AE%9A%E4%B9%89"><span class="nav-text">第三章	宏定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%88%86%E6%96%87%E4%BB%B6%E7%BC%96%E7%A8%8B"><span class="nav-text">第四章	分文件编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93"><span class="nav-text">第五章	静态库与动态库</span></a></li></ol>
 
     </div>
 </div>
