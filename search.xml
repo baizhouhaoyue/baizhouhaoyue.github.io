@@ -59,6 +59,9 @@
 <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">loop:</span><br><span class="line">    itmp = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;itmp = %d\n&quot;</span>, itmp);</span><br><span class="line"></span><br><span class="line">    sleep(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">goto</span> loop;</span><br></pre></td></tr></table></figure></div>
 
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
         <tag>嵌入式 c语言</tag>
       </tags>
@@ -278,6 +281,9 @@
 <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> * argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; argc; i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, argv[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
         <tag>嵌入式 c语言</tag>
       </tags>
@@ -437,6 +443,9 @@
                       alt="image-20230816221442430"
                 ></p>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
         <tag>嵌入式 c语言</tag>
       </tags>
@@ -667,6 +676,9 @@
 <h3 id="16-3volatile-关键字"><a href="#16-3volatile-关键字" class="headerlink" title="16.3volatile 关键字"></a>16.3volatile 关键字</h3><p>防止编译器对该变量进行优化，强制访问内存。</p>
 <p>volatile int data&#x3D;0;&#x2F;&#x2F;对data的访问 必须从内存访问</p>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
         <tag>嵌入式 c语言</tag>
       </tags>
@@ -732,6 +744,9 @@
 
 <p><strong>总结：申请的内存，一定不要把首地址给丢了，在不用的时候一定要释放内存</strong></p>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
         <tag>嵌入式 c语言</tag>
       </tags>
@@ -785,8 +800,423 @@
 <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test06</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> str1[<span class="number">32</span>] = <span class="string">&quot;abcdefg&quot;</span>;</span><br><span class="line">    <span class="type">char</span> str2[<span class="number">32</span>] = <span class="string">&quot;de&quot;</span>;</span><br><span class="line">    <span class="comment">// char str2[32] = &quot;df&quot;;</span></span><br><span class="line">    <span class="type">char</span> *p = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    p = <span class="built_in">strstr</span>(str1, str2);</span><br><span class="line">    <span class="comment">// if(strstr(str1, str2) != NULL)</span></span><br><span class="line">    <span class="keyword">if</span> (p == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;no match!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, p);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
         <tag>嵌入式 c语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C编程____结构体、共用体及枚举</title>
+    <url>/2023/08/17/C%E7%BC%96%E7%A8%8B-%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<h1 id="结构体类型的概念及定义"><a href="#结构体类型的概念及定义" class="headerlink" title="结构体类型的概念及定义"></a>结构体类型的概念及定义</h1><h1 id="第一章结构体类型的概念及定义"><a href="#第一章结构体类型的概念及定义" class="headerlink" title="第一章	结构体类型的概念及定义"></a>第一章	结构体类型的概念及定义</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h2><p>结构体是一种构造类型的数据结构，是一种或多种基本类型或构造类型的数据的集合</p>
+<h2 id="1-2结构体定义"><a href="#1-2结构体定义" class="headerlink" title="1.2结构体定义"></a>1.2结构体定义</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817093642859.png"
+                      alt="image-20230817093642859"
+                ></p>
+<h2 id="1-3-最常用的办法"><a href="#1-3-最常用的办法" class="headerlink" title="1.3 最常用的办法"></a>1.3 最常用的办法</h2><p>通常咱们将一个结构体类型重新起个类型名，用新的类型名替代原先的类型</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">STU</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="type">char</span> name[<span class="number">20</span>];</span><br><span class="line">&#125; <span class="type">st_stu_t</span>, *st_stu_p;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_stu_t</span> stu1;</span><br><span class="line">    st_stu_p stu2;</span><br><span class="line"></span><br><span class="line">    stu1.age = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(stu1.name, <span class="string">&quot;bob&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu1.age, stu1.name);</span><br><span class="line"></span><br><span class="line">    stu2 = (st_stu_p)<span class="built_in">calloc</span>(<span class="number">1</span>, <span class="keyword">sizeof</span>(<span class="type">st_stu_t</span>));</span><br><span class="line">    stu2-&gt;age = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(stu2-&gt;name, <span class="string">&quot;lucy&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu2-&gt;age, stu2-&gt;name);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(stu2);</span><br><span class="line">    stu2 = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-4-结构体成员初始化"><a href="#1-4-结构体成员初始化" class="headerlink" title="1.4 结构体成员初始化"></a><strong>1.4</strong> 结构体成员初始化</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test02</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// st_stu_t stu = &#123;23, &quot;bob&quot;&#125;;  ///&lt;初始化成员的顺序一定要和结构体的定义保持一致</span></span><br><span class="line">    <span class="type">st_stu_t</span> stu[] = &#123;</span><br><span class="line">        &#123;.name = <span class="string">&quot;bob&quot;</span>, .age = <span class="number">13</span>&#125;,  <span class="comment">///&lt; 根据成员名来进行结构体的初始化</span></span><br><span class="line">        &#123;.age = <span class="number">20</span>, .name = <span class="string">&quot;lucy&quot;</span>&#125;,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n = <span class="keyword">sizeof</span>(stu) / <span class="keyword">sizeof</span>(stu[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu[i].age, stu[i].name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-5从键盘获取结构体成员的数值"><a href="#1-5从键盘获取结构体成员的数值" class="headerlink" title="1.5从键盘获取结构体成员的数值"></a>1.5从键盘获取结构体成员的数值</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test03</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_stu_t</span> stu;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;please intput the member of struct:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %s&quot;</span>, &amp;stu.age, stu.name);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu.age, stu.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-6、结构体变量间的赋值"><a href="#1-6、结构体变量间的赋值" class="headerlink" title="1.6、结构体变量间的赋值"></a>1.6、结构体变量间的赋值</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817093818024.png"
+                      alt="image-20230817093818024"
+                ></p>
+<h2 id="1-7-结构体大小计算"><a href="#1-7-结构体大小计算" class="headerlink" title="1.7 结构体大小计算"></a><strong>1.7</strong> 结构体大小计算</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test04</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stu</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        <span class="type">char</span> name[<span class="number">20</span>];</span><br><span class="line">        <span class="type">int</span> score;</span><br><span class="line">        <span class="type">char</span> *addr;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stu1</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        <span class="comment">// char name[20];</span></span><br><span class="line">        <span class="comment">// int score;</span></span><br><span class="line">        <span class="type">char</span> *addr;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stu1</span> <span class="title">lucy</span>;</span></span><br><span class="line">    <span class="built_in">memset</span>(&amp;lucy, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> stu1));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> stu));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;addr = %p, num = %p\n&quot;</span>, &amp;lucy.addr, (<span class="type">long</span>)&amp;lucy.num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>字节对齐:结构体成员中成员的对齐方法，各个默认的对齐字节数和value相比，取较小值</p>
+<p>#include</p>
+<p>#pragma pack(2)  &#x2F;&#x2F;&#x2F;以2字节对齐</p>
+<p>struct stu</p>
+<p>{</p>
+<p>char a;</p>
+<p>int b;</p>
+<p>}temp;</p>
+<p>int main()</p>
+<p>{</p>
+<p>printf(“%d\n”,sizeof(temp));</p>
+<p>printf(“%p\n”,&amp;(temp.a));</p>
+<p>printf(“%p\n”,&amp;(temp.b));</p>
+<p>return 0；</p>
+<p>}</p>
+<p><strong>注意：如果指定对齐值：设为1：则short、 int、 float等均为1，设为 2：则 char 仍为 1， short 为 2， int 变为 2</strong></p>
+<h2 id="1-8-memcpy函数"><a href="#1-8-memcpy函数" class="headerlink" title="1.8 memcpy函数"></a>1.8 memcpy函数</h2><p>函数原型： void *memcpy(void *dest, const void *src, size_t n);</p>
+<p>函数功能： 从src拷贝n个字节到dest</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> buf[<span class="number">100</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="built_in">memcpy</span>(buf, <span class="string">&quot;hello world&quot;</span>, <span class="built_in">strlen</span>(<span class="string">&quot;hello world&quot;</span>));</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第二章结构体指针变量"><a href="#第二章结构体指针变量" class="headerlink" title="第二章	结构体指针变量"></a>第二章	结构体指针变量</h1><h2 id="2-1本质时指针变量-保存时结构体变量地址"><a href="#2-1本质时指针变量-保存时结构体变量地址" class="headerlink" title="2.1本质时指针变量 保存时结构体变量地址"></a>2.1本质时指针变量 保存时结构体变量地址</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test05</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_stu_t</span> stu1 = &#123;<span class="number">20</span>, <span class="string">&quot;lucy&quot;</span>&#125;;</span><br><span class="line">    st_stu_p stu2 = &amp;stu1;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu1.age, stu1.name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, (*stu2).age, (*stu2).name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu2-&gt;age, stu2-&gt;name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="2-2结构体指针做函数的形参"><a href="#2-2结构体指针做函数的形参" class="headerlink" title="2.2结构体指针做函数的形参"></a>2.2结构体指针做函数的形参</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">fun01</span><span class="params">(st_stu_p stu)</span></span><br><span class="line">&#123;</span><br><span class="line">    stu-&gt;age = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(stu-&gt;name, <span class="string">&quot;lucy&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test06</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_stu_t</span> stu;</span><br><span class="line">    fun01(&amp;stu);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu.age, stu.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>注意：结构体变量的地址编号和结构体第一个成员的地址编号相同，但指针的类型不同</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test07</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stu</span> <span class="title">lucy</span>;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;lucy = %p, num = %p\n&quot;</span>, &amp;lucy, &amp;lucy.num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817094059534.png"
+                      alt="image-20230817094059534"
+                ></p>
+<h2 id="2-3通过结构体指针做协议转换"><a href="#2-3通过结构体指针做协议转换" class="headerlink" title="2.3通过结构体指针做协议转换"></a>2.3通过结构体指针做协议转换</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test08</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[] = &#123;<span class="string">&#x27;10&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;1&#x27;</span>&#125;;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        <span class="type">char</span> len;</span><br><span class="line">        <span class="type">char</span> fun_code;</span><br><span class="line">        <span class="type">short</span> val;</span><br><span class="line">    &#125; <span class="type">st_test_t</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">st_test_t</span> *test = (<span class="type">st_test_t</span> *)buf;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;len = %d, fun_code = %d, val = %d\n&quot;</span>, test-&gt;len, test-&gt;fun_code, test-&gt;val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第三章结构体嵌套"><a href="#第三章结构体嵌套" class="headerlink" title="第三章	结构体嵌套"></a>第三章	结构体嵌套</h1><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125; <span class="type">st_a_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line">    <span class="type">st_a_t</span> _a;</span><br><span class="line">&#125; <span class="type">st_b_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">test09</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_b_t</span> _b;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;_b, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="type">st_b_t</span>));</span><br><span class="line"></span><br><span class="line">    _b.tmp = <span class="number">10</span>;</span><br><span class="line">    _b._a.num = <span class="number">20</span>;</span><br><span class="line">    _b._a.age = <span class="number">23</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;tmp = %d, a.num = %d, a.age = %d\n&quot;</span>, _b.tmp, _b._a.num, _b._a.age);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章结构体内的指针成员"><a href="#第四章结构体内的指针成员" class="headerlink" title="第四章	结构体内的指针成员"></a>第四章	结构体内的指针成员</h1><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="type">char</span> *name;</span><br><span class="line">&#125; st_stu, *st_pstu;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test10</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    st_pstu stu = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    stu = (st_pstu)<span class="built_in">calloc</span>(<span class="number">1</span>, <span class="keyword">sizeof</span>(st_stu));<span class="comment">//创建时先为外部指针创空间</span></span><br><span class="line">    stu-&gt;age = <span class="number">10</span>;</span><br><span class="line">   <span class="comment">// stu-&gt;name = &quot;bob&quot;;</span></span><br><span class="line"></span><br><span class="line">    stu-&gt;name = (<span class="type">char</span> *)<span class="built_in">calloc</span>(<span class="number">10</span>, <span class="number">1</span>);<span class="comment">//再为内部指针创空间</span></span><br><span class="line">    <span class="built_in">strcpy</span>(stu-&gt;name, <span class="string">&quot;bob&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu-&gt;age, stu-&gt;name);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (stu-&gt;name != <span class="literal">NULL</span>)<span class="comment">//释放时先为内部指针释放空间</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(stu-&gt;name);</span><br><span class="line">        stu-&gt;name = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (stu != <span class="literal">NULL</span>)<span class="comment">//再为外部指针释放空间</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(stu);</span><br><span class="line">        stu = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>特别案例：结构体变量被清</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">st_stu stu1;</span><br><span class="line">stu1.age = <span class="number">20</span>;</span><br><span class="line">stu1.name = (<span class="type">char</span> *)<span class="built_in">calloc</span>(<span class="number">10</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(stu1.name, <span class="string">&quot;bob&quot;</span>);</span><br><span class="line"><span class="built_in">memset</span>(&amp;stu1, <span class="number">0</span>, <span class="keyword">sizeof</span>(st_stu));</span><br><span class="line"><span class="built_in">strcpy</span>(stu1.name, <span class="string">&quot;bob&quot;</span>);</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817094710635.png"
+                      alt="image-20230817094710635"
+                ></p>
+<p><strong>结构体的浅拷贝</strong></p>
+<p>相同类型的结构体变量可以整体赋值，默认赋值方式为：浅拷贝</p>
+<p><strong>浅拷贝</strong>：将结构体变量空间内容 赋值一份 到另一个相同类型的结构体变量空间中</p>
+<p>如果结构体中没有指针成员 浅拷贝 不会带来问题。</p>
+<p>如果结构体中有指针成员 浅拷贝 会带来多次释放堆区空间的问题</p>
+<p>如果结构体中有<strong>指针成员</strong> 容易发生<strong>浅拷贝</strong>（有危害）</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Data5</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="type">char</span> *name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test12</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Data5</span> <span class="title">lucy</span>;</span></span><br><span class="line">    lucy.num = <span class="number">100</span>;</span><br><span class="line">    lucy.name = (<span class="type">char</span> *)<span class="built_in">calloc</span>(<span class="number">1</span>, <span class="number">32</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(lucy.name, <span class="string">&quot;德玛西亚&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Data5</span> <span class="title">bob</span>;</span></span><br><span class="line">    bob = lucy; <span class="comment">//(浅拷贝 有危害)  ///&lt; 指向了同一地址，最终会报duble free错误</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %s\n&quot;</span>, bob.num, bob.name);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (lucy.name != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(lucy.name);</span><br><span class="line">        lucy.name = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (bob.name != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(bob.name);</span><br><span class="line">        bob.name = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817100504369.png"
+                      alt="image-20230817100504369"
+                ></p>
+<p><strong>结构体的深拷贝</strong></p>
+<p>如果结构体中有指针成员 尽量使用深拷贝</p>
+<p>所谓的深拷贝，就是为结构体的指针成员 分配独立空间 然后再内容拷贝</p>
+<h1 id="第五章位段"><a href="#第五章位段" class="headerlink" title="第五章	位段"></a>第五章	位段</h1><h2 id="5-1-位段的定义"><a href="#5-1-位段的定义" class="headerlink" title="5.1 位段的定义"></a>5.1 位段的定义</h2><p>在结构体中，以位为单位的成员，咱们称之为位段(位域)。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817101020351.png"
+                      alt="image-20230817101020351"
+                ></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> packed_data));</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817101044063.png"
+                      alt="image-20230817101044063"
+                ></p>
+<p>a的类型还是unsigned int， abcd叫相邻位域，可以压缩。不能超过自身类型大小。</p>
+<p><strong>注意：</strong>不能对位段成员取地址，</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">packed_data</span> <span class="title">data</span> =</span> &#123;<span class="number">1</span>, <span class="number">32</span>, <span class="number">18</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">100</span>&#125;;</span><br><span class="line">&amp;data.a   <span class="comment">///&lt; 错误的</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>5.2 位段成员的引用</strong></p>
+<p>案例1：赋值时，不要超出位段定义的范围;如超出位段定义的范围高位将丢弃。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">packed_data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> a : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> b : <span class="number">7</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> c : <span class="number">4</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> d : <span class="number">4</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> e : <span class="number">7</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> i;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test13</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> packed_data));</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">packed_data</span> <span class="title">data</span> =</span> &#123;<span class="number">1</span>, <span class="number">32</span>, <span class="number">18</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">100</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;data.b = %u, data.c = %u, data.d = %u\n&quot;</span>, data.b, data.c, data.d);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;data = %p, data.i = %p\n&quot;</span>, &amp;data, &amp;data.i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817101144525.png"
+                      alt="image-20230817101144525"
+                ></p>
+<p>案例2：位段的长度不能大于存储单元的长度</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> a : <span class="number">9</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> b : <span class="number">12</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817101206963.png"
+                      alt="image-20230817101206963"
+                ></p>
+<p>案例3：一个段要从另一个存储单元开始</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> a : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> b : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> : <span class="number">0</span>;   <span class="comment">///&lt; 告诉编译器从另一个存储单元开始存储</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> d : <span class="number">2</span>;</span><br><span class="line">&#125; <span class="type">data_t</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test14</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">data_t</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817102725611.png"
+                      alt="image-20230817102725611"
+                ></p>
+<p>案例4：寄存器赋值</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> a : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> b : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> c : <span class="number">2</span>;</span><br><span class="line">&#125; <span class="type">reg_t</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test14</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">data_t</span>));</span><br><span class="line">    <span class="comment">//方法1：</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> reg = <span class="number">0</span>;</span><br><span class="line">    reg &amp;= ~((<span class="number">0x3</span>) | (<span class="number">0x3</span> &lt;&lt; <span class="number">3</span>) | (<span class="number">0x3</span> &lt;&lt; <span class="number">6</span>));</span><br><span class="line">    reg |= (<span class="number">0x1</span> | (<span class="number">0x1</span> &lt;&lt; <span class="number">3</span>) | (<span class="number">0x2</span> &lt;&lt; <span class="number">6</span>));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;reg = %#x\n&quot;</span>, reg);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//方法2：</span></span><br><span class="line">    <span class="type">reg_t</span> <span class="type">reg8_t</span>;</span><br><span class="line">    <span class="type">reg8_t</span>.a = <span class="number">0x2</span>;</span><br><span class="line">    <span class="type">reg8_t</span>.b = <span class="number">0x1</span>;</span><br><span class="line">    <span class="type">reg8_t</span>.c = <span class="number">0x1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %#x, b = %#x, c = %#x\n&quot;</span>, <span class="type">reg8_t</span>.a, <span class="type">reg8_t</span>.b, <span class="type">reg8_t</span>.c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第六章共用体"><a href="#第六章共用体" class="headerlink" title="第六章	共用体"></a>第六章	共用体</h1><p>定义：共用体和结构体类似，也是一种构造类型的数据结构。既然是构造类型的，咱们得先定义出类型，然后用类型定义变量。</p>
+<p>共用体定义方式：定义共用体类型的方法和结构体非常相似，把 struct 改成 union 就可以了。</p>
+<h2 id="6-1共用体与结构体之间的不同点："><a href="#6-1共用体与结构体之间的不同点：" class="headerlink" title="6.1共用体与结构体之间的不同点："></a>6.1共用体与结构体之间的不同点：</h2><p>1.所占空间的差异，共用体所有成员占有同一段地址空间，共用体的大小是共用体内部最大成员的大小。</p>
+<p>2.共用体内所有成员的首地址相同。</p>
+<p>案例1：利用共用体实现数据类型转换</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">union</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">char</span> ch[<span class="number">4</span>];</span><br><span class="line">    <span class="type">int</span>  ival;</span><br><span class="line">    <span class="type">float</span> fval;</span><br><span class="line">&#125; <span class="type">un_ch2f_t</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test01</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">un_ch2f_t</span> ch2f;</span><br><span class="line">    ch2f.ch[<span class="number">0</span>] = <span class="number">0x01</span>;</span><br><span class="line">    ch2f.ch[<span class="number">1</span>] = <span class="number">0x02</span>;</span><br><span class="line">    ch2f.ch[<span class="number">2</span>] = <span class="number">0x03</span>;</span><br><span class="line">    ch2f.ch[<span class="number">3</span>] = <span class="number">0x04</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;fval = %#x\n&quot;</span>, ch2f.fval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="6-2-共用体特点"><a href="#6-2-共用体特点" class="headerlink" title="6.2 共用体特点"></a>6.2 共用体特点</h2><p>1、同一内存段可以用来存放几种不同类型的成员，但每一瞬时只有一种起作用。</p>
+<p>2、共用体变量中起作用的成员是最后一次存放的成员，在存入一个新的成员后原有的成员的值会被覆盖。</p>
+<p>3、共用体变量的地址和它的各成员的地址都是同一地址。</p>
+<h1 id="第七章枚举"><a href="#第七章枚举" class="headerlink" title="第七章	枚举"></a>第七章	枚举</h1><p>枚举：将变量的值一一列举出来，变量的值只限于列举出来的值的范围内。</p>
+<h2 id="7-1-枚举类型定义方法"><a href="#7-1-枚举类型定义方法" class="headerlink" title="7.1 枚举类型定义方法"></a>7.1 枚举类型定义方法</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> 枚举类型名称&#123;</span></span><br><span class="line">   成员列表，</span><br><span class="line">   。。。。</span><br><span class="line">   成员列表， </span><br><span class="line">&#125;；</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="7-2-枚举变量的定义及使用"><a href="#7-2-枚举变量的定义及使用" class="headerlink" title="7.2 枚举变量的定义及使用"></a>7.2 枚举变量的定义及使用</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">WEEK</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    MON = <span class="number">1</span>,</span><br><span class="line">    TUES,</span><br><span class="line">    WED,</span><br><span class="line">    THURS,</span><br><span class="line">    FRI,</span><br><span class="line">    SAT,</span><br><span class="line">    SUN,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test01</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">WEEK</span> <span class="title">day</span>;</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;day);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (day)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> MON:</span><br><span class="line">    <span class="keyword">case</span> WED:</span><br><span class="line">    <span class="keyword">case</span> FRI:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;do something !\n&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> TUES:</span><br><span class="line">    <span class="keyword">case</span> THURS:</span><br><span class="line">    <span class="keyword">case</span> SAT:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;do other something !\n&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;have  a rest!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>注意：</strong>在定义枚举类型的时候枚举元素可以用等号给它赋值，用来代表元素从几开始编号在程序中，不能再次对枚举元素赋值，因为枚举元素是常量。</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>嵌入式 c语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C编程____预处理、动态库、静态库</title>
+    <url>/2023/08/16/C%E7%BC%96%E7%A8%8B-%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="第一章c-语言编译过程"><a href="#第一章c-语言编译过程" class="headerlink" title="第一章c 语言编译过程"></a>第一章c 语言编译过程</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816222343291.png"
+                      alt="image-20230816222343291"
+                ></p>
+<p>1：预编译将.c 中的头文件展开、宏展开生成的文件是.i 文件</p>
+<p>2：编译将预处理之后的.i 文件生成 .s汇编文件</p>
+<p>3、汇编将.s 汇编文件生成.o 目标文件</p>
+<p>4、链接将.o 文件链接成目标文件</p>
+<p><u></u></p>
+<p><strong>01_code.c</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun1.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//打印num</span></span><br><span class="line">    printNum();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>fun.c</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>fun.h</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _FUN_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _FUN_H_</span></span><br><span class="line"><span class="comment">/*global parmeters*************************************/</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> num;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*global function**************************************/</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>fun1.c</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"><span class="comment">/*private parmeters********************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*private function*********************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*split********************************************/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printNum</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;num = %d\n&quot;</span>, num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>fun1.h</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">printNum</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure></div>
+
+<p>完整的编译：gcc 01_code.c fun.c fun1.c -o main</p>
+<p>预处理编译：gcc  -E 01_code.c -o fun.i</p>
+<h1 id="第二章include"><a href="#第二章include" class="headerlink" title="第二章	include"></a>第二章	include</h1><p>#include&lt;&gt;&#x2F;&#x2F;用尖括号包含头文件，在系统指定的路径下找头文件</p>
+<p>#include “” &#x2F;&#x2F;用双引号包含头文件，先在当前目录下找头文件，找不到，再到系统指定的路径下找。</p>
+<p><strong>注意：</strong> include 经常用来包含头文件，可以包含 .c 文件，但是大家不要包含.c因为 include 包含的文件会在预编译被展开，如果一个.c 被包含多次，展开多次，会导致函数重复定义。所以不要包含.c 文件。</p>
+<p><strong>注意：</strong>预处理只是对 include 等预处理操作进行处理并不会进行语法检查这个阶段有语法错误也不会报错，第二个阶段即编译阶段才进行语法检查。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816222746494.png"
+                      alt="image-20230816222746494"
+                ></p>
+<h1 id="第三章宏定义"><a href="#第三章宏定义" class="headerlink" title="第三章	宏定义"></a>第三章	宏定义</h1><p>宏定义的语法： #define 宏名称    (宏展开的内容)</p>
+<p>宏名称用大写来定义，末尾不能有分号</p>
+<p>案例1：</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXLEN   (1024)  <span class="comment">///&lt;无参宏</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PI       (3.14)   </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MULTI(a, b)  (a)*(b)  <span class="comment">///&lt;有参宏</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a, b)     do&#123;((a) &gt; (b)) ? (a) : (b)&#125;while(0)</span></span><br></pre></td></tr></table></figure></div>
+
+<p>作用范围：宏定义的作用范围，从<strong>定义的地方到本文件末尾。</strong></p>
+<p>终止宏的定义范围：利用关键字 #undef</p>
+<p>宏没有作用域的限制：不能作为结构体的成员:</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun1.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*private macro defined *******************************************/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXLEN   (2048)  <span class="comment">///&lt;无参宏</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MULTI(a, b)  (a)*(b)  <span class="comment">///&lt;有参宏   </span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a, b)     do&#123;((a) &gt; (b)) ? (a) : (b)&#125;while(0)</span></span><br><span class="line"><span class="comment">/*private type*****************************************************/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">st_test</span>&#123;</span></span><br><span class="line">    <span class="type">double</span> num;</span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> PI       (3.14)</span></span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*split-line**********************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mul = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lf\n&quot;</span>, PI);</span><br><span class="line">   <span class="comment">// #undef MULTI(a, b)   ///&lt; 终止宏定义</span></span><br><span class="line">    mul = MULTI(<span class="number">10</span> + <span class="number">20</span>, <span class="number">20</span>);</span><br><span class="line">    <span class="comment">//打印num</span></span><br><span class="line">    printNum(MAXLEN);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>fun1.c</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printNum</span><span class="params">(<span class="type">int</span> val)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;val = %d\n&quot;</span>, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>fun1.h</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">printNum</span><span class="params">(<span class="type">int</span> val)</span>;</span><br></pre></td></tr></table></figure></div>
+
+<p>带参宏：</p>
+<p>1.注意带参宏的形参没有类型名，</p>
+<p>2带参宏和带参函数的区别：</p>
+<p>2.1.带参宏被调用多少次就会展开多少次，执行代码的时候没有函数调用的过程，不需要压栈弹栈.所以带参宏，是浪费了空间，因为被展开多次，节省时间。</p>
+<p>2.2 带参函数，代码只有一份，存在代码段，调用的时候去代码段取指令，调用的时候要，压栈弹栈。有个调用的过程。所以说，带参函数是浪费了时间，节省了空间。</p>
+<p><strong>扩展知识****：“#” 和 “##”</strong> </p>
+<p><strong>“#”符号</strong></p>
+<p>1、单独一个“#”符号表示：<strong>替换这个变量后，再加双引号引起来</strong>。</p>
+<p>2、例如，宏定义 __string_1(x) 。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span>    __string_1(x)    #x</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>“##”****连接符号</strong></p>
+<p>1、“##”连接符号，其功能是在带参数的宏定义中将两个子串(token)联接起来，从而形成一个新的子串。但它不可以是第一个或者最后一个子串。所谓的子串(token)就是指编译器能够识别的最小语法单元。</p>
+<p>简单来说，“##”是一种分隔连接方式，它的作用是先分隔，然后进行强制连接。分隔的作用类似于空格。</p>
+<p>2、在普通的宏定义中，预处理器一般把空格解释成分段标志，并把分隔后的每一段和前面的定义比较，相同的就被替换。如果采用空格来分隔，被替换后，段与段之间存在一些空格。如果我们不希望出现这些空格，就可以通过添加一些 “##”来替代空格。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span>  _TYPE_BUF_SIZE(type)  sizeof #type  </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>  TYPE_BUF_SIZE(type)   _TYPE_BUF_SIZE(type)</span></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章分文件编程"><a href="#第四章分文件编程" class="headerlink" title="第四章	分文件编程"></a>第四章	分文件编程</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225303733.png"
+                      alt="image-20230816225303733"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225310914.png"
+                      alt="image-20230816225310914"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225316432.png"
+                      alt="image-20230816225316432"
+                ></p>
+<h1 id="第五章静态库与动态库"><a href="#第五章静态库与动态库" class="headerlink" title="第五章	静态库与动态库"></a>第五章	静态库与动态库</h1><p><strong>静态库和动态库的区别</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225436719.png"
+                      alt="image-20230816225436719"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225442029.png"
+                      alt="image-20230816225442029"
+                ></p>
+<p><strong>用户编译程序</strong></p>
+<p>程序编译默认是动态链接：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o main 01_code.c fun.c fun1.c</span><br></pre></td></tr></table></figure></div>
+
+<p>main的大小8k</p>
+<p>静态链接需加关键字 -static</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o main 01_code.c fun.c fun1.c -static</span><br></pre></td></tr></table></figure></div>
+
+<p>main的大小912k</p>
+<p><strong>静态库制作</strong></p>
+<p>静态库制作步骤：</p>
+<p>1）把当前项目中的所有.c文件生成.o</p>
+<p>gcc -c xxx.c -o xxx.o</p>
+<p>2)将所有的.o文件链接生成静态库,格式：libxxx.a</p>
+<p>ar rcs libxxx.a xxx.o xxx1.o ….xxxn.o</p>
+<p>注意：静态库起名的时候必须以 lib 开头以.a 结束。</p>
+<p><strong>静态库的使用</strong></p>
+<p>** 当静态库位于系统库目录下(&#x2F;usr&#x2F;lib)**</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c) -static -lxxx</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>当静态库不在系统目录下</strong></p>
+<p>方法1：利用-L选项</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c) -static  -L 指定库的路径 -lxxx</span><br></pre></td></tr></table></figure></div>
+
+<p>通过-L 来指明库文件所在的路径</p>
+<p><strong>扩展知识：指定头文件目录</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c) -static  -L 指定库的路径 -lxxx -I .h文件目录</span><br></pre></td></tr></table></figure></div>
+
+<p>注意： -L 是指定库文件的路径；-l 指定找哪个库；-I 指定头文件的路径。</p>
+<p><strong>动态库的制作</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -shared -fPIC xxx.c xxx1.c.....xxxn.c -o libxxx.so.version</span><br></pre></td></tr></table></figure></div>
+
+<p>-fPIC：生成位置无关的动态库。</p>
+<p>正常情况下生成动态库需加上<strong>版本号</strong>，但程序动态链接时只识别.so文件,<strong>此时我们需通过ln命令生成.so文件。</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">ln -s libxxx.so.version libxxx.so</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>动态库的使用</strong></p>
+<p>方法1：利用-L选项</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c)  -L 指定库的路径 -lxxx</span><br></pre></td></tr></table></figure></div>
+
+<p>当运行时提示：<strong>can not open shared object file:no such file or directory</strong>错误时可以通过下列办法解决</p>
+<p>方法1：添加LD_LIBRARY_PATH环境变量   </p>
+<p>1）修改:~&#x2F;.bashrc文件加入如下内容：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=库路径:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure></div>
+
+<p>2）source ~&#x2F;.bashrc</p>
+<p>方法2： </p>
+<p>1)修改&#x2F;etc&#x2F;ld.so.conf.d&#x2F;libc.conf文件，在文件内加入自定义库所在目录</p>
+<p>2)输入ldconfig命令</p>
+<p><strong>5.7 动态库与静态库同时链接</strong></p>
+<p>1）通过-Wl,-Bdynamic 来制定链接的动态库，</p>
+<p>2）通过-Wl,-Bstatic 来制定链接的静态库。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o main 01_code.c -L ./ -Wl,-Bstatic -lfun -Wl,-Bdynamic -lfun1</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>嵌入式 c语言 Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSH服务安装</title>
+    <url>/2023/08/16/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="第一章-SSH服务"><a href="#第一章-SSH服务" class="headerlink" title="第一章    SSH服务"></a>第一章    SSH服务</h1><p><strong>SSH服务功能：实现远程连接，及文件传输服务。</strong></p>
+<p><u></u></p>
+<h1 id="第二章换源操作："><a href="#第二章换源操作：" class="headerlink" title="第二章	换源操作："></a>第二章	换源操作：</h1><p><strong>方法1：通过图形化界面方式进行换源操作；</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816152039215.png"
+                      alt="image-20230816152039215"
+                ></p>
+<p><strong>方法2：手动方式进行换源</strong></p>
+<p>备份原始源文件source.list</p>
+<p>打开终端，执行命令：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo  <span class="built_in">cp</span>   /etc/apt/sources.list   /etc/apt/sources.list.bak</span><br></pre></td></tr></table></figure></div>
+
+<p>2.修改源文件sources.list</p>
+<p>（1）终端执行命令：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo  <span class="built_in">chmod</span>  777  /etc/apt/sources.list </span><br></pre></td></tr></table></figure></div>
+
+<p>  更改文件权限使其可编辑；（不提倡）</p>
+<p>（2）执行命令：       </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo  gedit   /etc/apt/sources.list</span><br></pre></td></tr></table></figure></div>
+
+<p>​             打开文件进行编辑；</p>
+<p>（3）删除原来的文件内容，根据系统版本复制下面的任意一个到其中并保存（常用的是阿里源和清华源，推荐阿里源）；</p>
+<p>阿里源：</p>
+<p>ubuntu 16</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial main deb-src http://mirrors.aliyun.com/ubuntu/ xenial main  deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main  deb http://mirrors.aliyun.com/ubuntu/ xenial universe deb-src http://mirrors.aliyun.com/ubuntu/ xenial universe deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates universe  deb http://mirrors.aliyun.com/ubuntu/ xenial-security main deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security universe</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>sudo apt-get update</strong></p>
+<p>如提示：*** Error in &#96;appstreamcli’: double free or corruption (fasttop): 0x00000000015c5550 ***错误</p>
+<p> 输入sudo apt-get purge libappstream3，然后再重新 sudo apt-get update</p>
+<p>[可选] 复损坏的软件包，尝试卸载出错的包，重新安装正确版本的 <strong>sudo apt-get  install -f</strong></p>
+<p><strong>sudo apt-get upgrade</strong></p>
+<h1 id="第三章SSH服务安装"><a href="#第三章SSH服务安装" class="headerlink" title="第三章	SSH服务安装"></a>第三章	SSH服务安装</h1><p><strong>1.ubuntu安装ssh服务器：</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>2.重启ssh服务：</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>3.查看服务状态：</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -an |grep 22</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816154019160.png"
+                      alt="image-20230816154019160"
+                ></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -a | grep ssh</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816154109215.png"
+                      alt="image-20230816154109215"
+                ></p>
+<h1 id="4-在windows环境下利用MobaXterm连接SSH服务"><a href="#4-在windows环境下利用MobaXterm连接SSH服务" class="headerlink" title="4.在windows环境下利用MobaXterm连接SSH服务"></a>4.在windows环境下利用MobaXterm连接SSH服务</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816154355042.png"
+                      alt="image-20230816154355042"
+                ></p>
+<h1 id="5-设置开机自启动："><a href="#5-设置开机自启动：" class="headerlink" title="5.设置开机自启动："></a>5.设置开机自启动：</h1><p>1) </p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/rc.local</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>输入：</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">service ssh start</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>软件 装机</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -998,411 +1428,11 @@
 <p>1）让函数的功能 多样化。</p>
 <p>2）作为回调函数使用，可隐藏底层逻辑。</p>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
         <tag>嵌入式 c语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C编程____预处理、动态库、静态库</title>
-    <url>/2023/08/16/C%E7%BC%96%E7%A8%8B-%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="第一章c-语言编译过程"><a href="#第一章c-语言编译过程" class="headerlink" title="第一章c 语言编译过程"></a>第一章c 语言编译过程</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816222343291.png"
-                      alt="image-20230816222343291"
-                ></p>
-<p>1：预编译将.c 中的头文件展开、宏展开生成的文件是.i 文件</p>
-<p>2：编译将预处理之后的.i 文件生成 .s汇编文件</p>
-<p>3、汇编将.s 汇编文件生成.o 目标文件</p>
-<p>4、链接将.o 文件链接成目标文件</p>
-<p><u></u></p>
-<p><strong>01_code.c</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun1.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//打印num</span></span><br><span class="line">    printNum();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>fun.c</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>fun.h</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _FUN_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _FUN_H_</span></span><br><span class="line"><span class="comment">/*global parmeters*************************************/</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> num;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*global function**************************************/</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>fun1.c</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"><span class="comment">/*private parmeters********************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*private function*********************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*split********************************************/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printNum</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;num = %d\n&quot;</span>, num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>fun1.h</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">printNum</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure></div>
-
-<p>完整的编译：gcc 01_code.c fun.c fun1.c -o main</p>
-<p>预处理编译：gcc  -E 01_code.c -o fun.i</p>
-<h1 id="第二章include"><a href="#第二章include" class="headerlink" title="第二章	include"></a>第二章	include</h1><p>#include&lt;&gt;&#x2F;&#x2F;用尖括号包含头文件，在系统指定的路径下找头文件</p>
-<p>#include “” &#x2F;&#x2F;用双引号包含头文件，先在当前目录下找头文件，找不到，再到系统指定的路径下找。</p>
-<p><strong>注意：</strong> include 经常用来包含头文件，可以包含 .c 文件，但是大家不要包含.c因为 include 包含的文件会在预编译被展开，如果一个.c 被包含多次，展开多次，会导致函数重复定义。所以不要包含.c 文件。</p>
-<p><strong>注意：</strong>预处理只是对 include 等预处理操作进行处理并不会进行语法检查这个阶段有语法错误也不会报错，第二个阶段即编译阶段才进行语法检查。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816222746494.png"
-                      alt="image-20230816222746494"
-                ></p>
-<h1 id="第三章宏定义"><a href="#第三章宏定义" class="headerlink" title="第三章	宏定义"></a>第三章	宏定义</h1><p>宏定义的语法： #define 宏名称    (宏展开的内容)</p>
-<p>宏名称用大写来定义，末尾不能有分号</p>
-<p>案例1：</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXLEN   (1024)  <span class="comment">///&lt;无参宏</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PI       (3.14)   </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MULTI(a, b)  (a)*(b)  <span class="comment">///&lt;有参宏</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a, b)     do&#123;((a) &gt; (b)) ? (a) : (b)&#125;while(0)</span></span><br></pre></td></tr></table></figure></div>
-
-<p>作用范围：宏定义的作用范围，从<strong>定义的地方到本文件末尾。</strong></p>
-<p>终止宏的定义范围：利用关键字 #undef</p>
-<p>宏没有作用域的限制：不能作为结构体的成员:</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun1.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*private macro defined *******************************************/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXLEN   (2048)  <span class="comment">///&lt;无参宏</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MULTI(a, b)  (a)*(b)  <span class="comment">///&lt;有参宏   </span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a, b)     do&#123;((a) &gt; (b)) ? (a) : (b)&#125;while(0)</span></span><br><span class="line"><span class="comment">/*private type*****************************************************/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">st_test</span>&#123;</span></span><br><span class="line">    <span class="type">double</span> num;</span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> PI       (3.14)</span></span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*split-line**********************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mul = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lf\n&quot;</span>, PI);</span><br><span class="line">   <span class="comment">// #undef MULTI(a, b)   ///&lt; 终止宏定义</span></span><br><span class="line">    mul = MULTI(<span class="number">10</span> + <span class="number">20</span>, <span class="number">20</span>);</span><br><span class="line">    <span class="comment">//打印num</span></span><br><span class="line">    printNum(MAXLEN);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>fun1.c</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;fun.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printNum</span><span class="params">(<span class="type">int</span> val)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;val = %d\n&quot;</span>, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>fun1.h</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">printNum</span><span class="params">(<span class="type">int</span> val)</span>;</span><br></pre></td></tr></table></figure></div>
-
-<p>带参宏：</p>
-<p>1.注意带参宏的形参没有类型名，</p>
-<p>2带参宏和带参函数的区别：</p>
-<p>2.1.带参宏被调用多少次就会展开多少次，执行代码的时候没有函数调用的过程，不需要压栈弹栈.所以带参宏，是浪费了空间，因为被展开多次，节省时间。</p>
-<p>2.2 带参函数，代码只有一份，存在代码段，调用的时候去代码段取指令，调用的时候要，压栈弹栈。有个调用的过程。所以说，带参函数是浪费了时间，节省了空间。</p>
-<p><strong>扩展知识****：“#” 和 “##”</strong> </p>
-<p><strong>“#”符号</strong></p>
-<p>1、单独一个“#”符号表示：<strong>替换这个变量后，再加双引号引起来</strong>。</p>
-<p>2、例如，宏定义 __string_1(x) 。</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span>    __string_1(x)    #x</span></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>“##”****连接符号</strong></p>
-<p>1、“##”连接符号，其功能是在带参数的宏定义中将两个子串(token)联接起来，从而形成一个新的子串。但它不可以是第一个或者最后一个子串。所谓的子串(token)就是指编译器能够识别的最小语法单元。</p>
-<p>简单来说，“##”是一种分隔连接方式，它的作用是先分隔，然后进行强制连接。分隔的作用类似于空格。</p>
-<p>2、在普通的宏定义中，预处理器一般把空格解释成分段标志，并把分隔后的每一段和前面的定义比较，相同的就被替换。如果采用空格来分隔，被替换后，段与段之间存在一些空格。如果我们不希望出现这些空格，就可以通过添加一些 “##”来替代空格。</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span>  _TYPE_BUF_SIZE(type)  sizeof #type  </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>  TYPE_BUF_SIZE(type)   _TYPE_BUF_SIZE(type)</span></span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第四章分文件编程"><a href="#第四章分文件编程" class="headerlink" title="第四章	分文件编程"></a>第四章	分文件编程</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225303733.png"
-                      alt="image-20230816225303733"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225310914.png"
-                      alt="image-20230816225310914"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225316432.png"
-                      alt="image-20230816225316432"
-                ></p>
-<h1 id="第五章静态库与动态库"><a href="#第五章静态库与动态库" class="headerlink" title="第五章	静态库与动态库"></a>第五章	静态库与动态库</h1><p><strong>静态库和动态库的区别</strong></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225436719.png"
-                      alt="image-20230816225436719"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/$%7Bfiilename%7D/image-20230816225442029.png"
-                      alt="image-20230816225442029"
-                ></p>
-<p><strong>用户编译程序</strong></p>
-<p>程序编译默认是动态链接：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o main 01_code.c fun.c fun1.c</span><br></pre></td></tr></table></figure></div>
-
-<p>main的大小8k</p>
-<p>静态链接需加关键字 -static</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o main 01_code.c fun.c fun1.c -static</span><br></pre></td></tr></table></figure></div>
-
-<p>main的大小912k</p>
-<p><strong>静态库制作</strong></p>
-<p>静态库制作步骤：</p>
-<p>1）把当前项目中的所有.c文件生成.o</p>
-<p>gcc -c xxx.c -o xxx.o</p>
-<p>2)将所有的.o文件链接生成静态库,格式：libxxx.a</p>
-<p>ar rcs libxxx.a xxx.o xxx1.o ….xxxn.o</p>
-<p>注意：静态库起名的时候必须以 lib 开头以.a 结束。</p>
-<p><strong>静态库的使用</strong></p>
-<p>** 当静态库位于系统库目录下(&#x2F;usr&#x2F;lib)**</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c) -static -lxxx</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>当静态库不在系统目录下</strong></p>
-<p>方法1：利用-L选项</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c) -static  -L 指定库的路径 -lxxx</span><br></pre></td></tr></table></figure></div>
-
-<p>通过-L 来指明库文件所在的路径</p>
-<p><strong>扩展知识：指定头文件目录</strong></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c) -static  -L 指定库的路径 -lxxx -I .h文件目录</span><br></pre></td></tr></table></figure></div>
-
-<p>注意： -L 是指定库文件的路径；-l 指定找哪个库；-I 指定头文件的路径。</p>
-<p><strong>动态库的制作</strong></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -shared -fPIC xxx.c xxx1.c.....xxxn.c -o libxxx.so.version</span><br></pre></td></tr></table></figure></div>
-
-<p>-fPIC：生成位置无关的动态库。</p>
-<p>正常情况下生成动态库需加上<strong>版本号</strong>，但程序动态链接时只识别.so文件,<strong>此时我们需通过ln命令生成.so文件。</strong></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">ln -s libxxx.so.version libxxx.so</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>动态库的使用</strong></p>
-<p>方法1：利用-L选项</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o 目标文件 源文件(.c)  -L 指定库的路径 -lxxx</span><br></pre></td></tr></table></figure></div>
-
-<p>当运行时提示：<strong>can not open shared object file:no such file or directory</strong>错误时可以通过下列办法解决</p>
-<p>方法1：添加LD_LIBRARY_PATH环境变量   </p>
-<p>1）修改:~&#x2F;.bashrc文件加入如下内容：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=库路径:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure></div>
-
-<p>2）source ~&#x2F;.bashrc</p>
-<p>方法2： </p>
-<p>1)修改&#x2F;etc&#x2F;ld.so.conf.d&#x2F;libc.conf文件，在文件内加入自定义库所在目录</p>
-<p>2)输入ldconfig命令</p>
-<p><strong>5.7 动态库与静态库同时链接</strong></p>
-<p>1）通过-Wl,-Bdynamic 来制定链接的动态库，</p>
-<p>2）通过-Wl,-Bstatic 来制定链接的静态库。</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -o main 01_code.c -L ./ -Wl,-Bstatic -lfun -Wl,-Bdynamic -lfun1</span><br></pre></td></tr></table></figure></div>
-
-]]></content>
-      <tags>
-        <tag>嵌入式 c语言 Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C编程____结构体、共用体及枚举</title>
-    <url>/2023/08/17/C%E7%BC%96%E7%A8%8B-%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/</url>
-    <content><![CDATA[<h1 id="结构体类型的概念及定义"><a href="#结构体类型的概念及定义" class="headerlink" title="结构体类型的概念及定义"></a>结构体类型的概念及定义</h1><h1 id="第一章结构体类型的概念及定义"><a href="#第一章结构体类型的概念及定义" class="headerlink" title="第一章	结构体类型的概念及定义"></a>第一章	结构体类型的概念及定义</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h2><p>结构体是一种构造类型的数据结构，是一种或多种基本类型或构造类型的数据的集合</p>
-<h2 id="1-2结构体定义"><a href="#1-2结构体定义" class="headerlink" title="1.2结构体定义"></a>1.2结构体定义</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817093642859.png"
-                      alt="image-20230817093642859"
-                ></p>
-<h2 id="1-3-最常用的办法"><a href="#1-3-最常用的办法" class="headerlink" title="1.3 最常用的办法"></a>1.3 最常用的办法</h2><p>通常咱们将一个结构体类型重新起个类型名，用新的类型名替代原先的类型</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">STU</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="type">char</span> name[<span class="number">20</span>];</span><br><span class="line">&#125; <span class="type">st_stu_t</span>, *st_stu_p;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_stu_t</span> stu1;</span><br><span class="line">    st_stu_p stu2;</span><br><span class="line"></span><br><span class="line">    stu1.age = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(stu1.name, <span class="string">&quot;bob&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu1.age, stu1.name);</span><br><span class="line"></span><br><span class="line">    stu2 = (st_stu_p)<span class="built_in">calloc</span>(<span class="number">1</span>, <span class="keyword">sizeof</span>(<span class="type">st_stu_t</span>));</span><br><span class="line">    stu2-&gt;age = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(stu2-&gt;name, <span class="string">&quot;lucy&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu2-&gt;age, stu2-&gt;name);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(stu2);</span><br><span class="line">    stu2 = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-4-结构体成员初始化"><a href="#1-4-结构体成员初始化" class="headerlink" title="1.4 结构体成员初始化"></a><strong>1.4</strong> 结构体成员初始化</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test02</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// st_stu_t stu = &#123;23, &quot;bob&quot;&#125;;  ///&lt;初始化成员的顺序一定要和结构体的定义保持一致</span></span><br><span class="line">    <span class="type">st_stu_t</span> stu[] = &#123;</span><br><span class="line">        &#123;.name = <span class="string">&quot;bob&quot;</span>, .age = <span class="number">13</span>&#125;,  <span class="comment">///&lt; 根据成员名来进行结构体的初始化</span></span><br><span class="line">        &#123;.age = <span class="number">20</span>, .name = <span class="string">&quot;lucy&quot;</span>&#125;,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n = <span class="keyword">sizeof</span>(stu) / <span class="keyword">sizeof</span>(stu[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu[i].age, stu[i].name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-5从键盘获取结构体成员的数值"><a href="#1-5从键盘获取结构体成员的数值" class="headerlink" title="1.5从键盘获取结构体成员的数值"></a>1.5从键盘获取结构体成员的数值</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test03</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_stu_t</span> stu;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;please intput the member of struct:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %s&quot;</span>, &amp;stu.age, stu.name);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu.age, stu.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-6、结构体变量间的赋值"><a href="#1-6、结构体变量间的赋值" class="headerlink" title="1.6、结构体变量间的赋值"></a>1.6、结构体变量间的赋值</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817093818024.png"
-                      alt="image-20230817093818024"
-                ></p>
-<h2 id="1-7-结构体大小计算"><a href="#1-7-结构体大小计算" class="headerlink" title="1.7 结构体大小计算"></a><strong>1.7</strong> 结构体大小计算</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test04</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stu</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        <span class="type">char</span> name[<span class="number">20</span>];</span><br><span class="line">        <span class="type">int</span> score;</span><br><span class="line">        <span class="type">char</span> *addr;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stu1</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        <span class="comment">// char name[20];</span></span><br><span class="line">        <span class="comment">// int score;</span></span><br><span class="line">        <span class="type">char</span> *addr;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stu1</span> <span class="title">lucy</span>;</span></span><br><span class="line">    <span class="built_in">memset</span>(&amp;lucy, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> stu1));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> stu));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;addr = %p, num = %p\n&quot;</span>, &amp;lucy.addr, (<span class="type">long</span>)&amp;lucy.num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>字节对齐:结构体成员中成员的对齐方法，各个默认的对齐字节数和value相比，取较小值</p>
-<p>#include</p>
-<p>#pragma pack(2)  &#x2F;&#x2F;&#x2F;以2字节对齐</p>
-<p>struct stu</p>
-<p>{</p>
-<p>char a;</p>
-<p>int b;</p>
-<p>}temp;</p>
-<p>int main()</p>
-<p>{</p>
-<p>printf(“%d\n”,sizeof(temp));</p>
-<p>printf(“%p\n”,&amp;(temp.a));</p>
-<p>printf(“%p\n”,&amp;(temp.b));</p>
-<p>return 0；</p>
-<p>}</p>
-<p><strong>注意：如果指定对齐值：设为1：则short、 int、 float等均为1，设为 2：则 char 仍为 1， short 为 2， int 变为 2</strong></p>
-<h2 id="1-8-memcpy函数"><a href="#1-8-memcpy函数" class="headerlink" title="1.8 memcpy函数"></a>1.8 memcpy函数</h2><p>函数原型： void *memcpy(void *dest, const void *src, size_t n);</p>
-<p>函数功能： 从src拷贝n个字节到dest</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> buf[<span class="number">100</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="built_in">memcpy</span>(buf, <span class="string">&quot;hello world&quot;</span>, <span class="built_in">strlen</span>(<span class="string">&quot;hello world&quot;</span>));</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第二章结构体指针变量"><a href="#第二章结构体指针变量" class="headerlink" title="第二章	结构体指针变量"></a>第二章	结构体指针变量</h1><h2 id="2-1本质时指针变量-保存时结构体变量地址"><a href="#2-1本质时指针变量-保存时结构体变量地址" class="headerlink" title="2.1本质时指针变量 保存时结构体变量地址"></a>2.1本质时指针变量 保存时结构体变量地址</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test05</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_stu_t</span> stu1 = &#123;<span class="number">20</span>, <span class="string">&quot;lucy&quot;</span>&#125;;</span><br><span class="line">    st_stu_p stu2 = &amp;stu1;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu1.age, stu1.name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, (*stu2).age, (*stu2).name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu2-&gt;age, stu2-&gt;name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="2-2结构体指针做函数的形参"><a href="#2-2结构体指针做函数的形参" class="headerlink" title="2.2结构体指针做函数的形参"></a>2.2结构体指针做函数的形参</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">fun01</span><span class="params">(st_stu_p stu)</span></span><br><span class="line">&#123;</span><br><span class="line">    stu-&gt;age = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(stu-&gt;name, <span class="string">&quot;lucy&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test06</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_stu_t</span> stu;</span><br><span class="line">    fun01(&amp;stu);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu.age, stu.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>注意：结构体变量的地址编号和结构体第一个成员的地址编号相同，但指针的类型不同</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test07</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stu</span> <span class="title">lucy</span>;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;lucy = %p, num = %p\n&quot;</span>, &amp;lucy, &amp;lucy.num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817094059534.png"
-                      alt="image-20230817094059534"
-                ></p>
-<h2 id="2-3通过结构体指针做协议转换"><a href="#2-3通过结构体指针做协议转换" class="headerlink" title="2.3通过结构体指针做协议转换"></a>2.3通过结构体指针做协议转换</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test08</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[] = &#123;<span class="string">&#x27;10&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;1&#x27;</span>&#125;;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        <span class="type">char</span> len;</span><br><span class="line">        <span class="type">char</span> fun_code;</span><br><span class="line">        <span class="type">short</span> val;</span><br><span class="line">    &#125; <span class="type">st_test_t</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">st_test_t</span> *test = (<span class="type">st_test_t</span> *)buf;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;len = %d, fun_code = %d, val = %d\n&quot;</span>, test-&gt;len, test-&gt;fun_code, test-&gt;val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第三章结构体嵌套"><a href="#第三章结构体嵌套" class="headerlink" title="第三章	结构体嵌套"></a>第三章	结构体嵌套</h1><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125; <span class="type">st_a_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line">    <span class="type">st_a_t</span> _a;</span><br><span class="line">&#125; <span class="type">st_b_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">test09</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_b_t</span> _b;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;_b, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="type">st_b_t</span>));</span><br><span class="line"></span><br><span class="line">    _b.tmp = <span class="number">10</span>;</span><br><span class="line">    _b._a.num = <span class="number">20</span>;</span><br><span class="line">    _b._a.age = <span class="number">23</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;tmp = %d, a.num = %d, a.age = %d\n&quot;</span>, _b.tmp, _b._a.num, _b._a.age);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第四章结构体内的指针成员"><a href="#第四章结构体内的指针成员" class="headerlink" title="第四章	结构体内的指针成员"></a>第四章	结构体内的指针成员</h1><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="type">char</span> *name;</span><br><span class="line">&#125; st_stu, *st_pstu;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test10</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    st_pstu stu = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    stu = (st_pstu)<span class="built_in">calloc</span>(<span class="number">1</span>, <span class="keyword">sizeof</span>(st_stu));<span class="comment">//创建时先为外部指针创空间</span></span><br><span class="line">    stu-&gt;age = <span class="number">10</span>;</span><br><span class="line">   <span class="comment">// stu-&gt;name = &quot;bob&quot;;</span></span><br><span class="line"></span><br><span class="line">    stu-&gt;name = (<span class="type">char</span> *)<span class="built_in">calloc</span>(<span class="number">10</span>, <span class="number">1</span>);<span class="comment">//再为内部指针创空间</span></span><br><span class="line">    <span class="built_in">strcpy</span>(stu-&gt;name, <span class="string">&quot;bob&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;age = %d, name = %s\n&quot;</span>, stu-&gt;age, stu-&gt;name);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (stu-&gt;name != <span class="literal">NULL</span>)<span class="comment">//释放时先为内部指针释放空间</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(stu-&gt;name);</span><br><span class="line">        stu-&gt;name = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (stu != <span class="literal">NULL</span>)<span class="comment">//再为外部指针释放空间</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(stu);</span><br><span class="line">        stu = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>特别案例：结构体变量被清</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">st_stu stu1;</span><br><span class="line">stu1.age = <span class="number">20</span>;</span><br><span class="line">stu1.name = (<span class="type">char</span> *)<span class="built_in">calloc</span>(<span class="number">10</span>, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(stu1.name, <span class="string">&quot;bob&quot;</span>);</span><br><span class="line"><span class="built_in">memset</span>(&amp;stu1, <span class="number">0</span>, <span class="keyword">sizeof</span>(st_stu));</span><br><span class="line"><span class="built_in">strcpy</span>(stu1.name, <span class="string">&quot;bob&quot;</span>);</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817094710635.png"
-                      alt="image-20230817094710635"
-                ></p>
-<p><strong>结构体的浅拷贝</strong></p>
-<p>相同类型的结构体变量可以整体赋值，默认赋值方式为：浅拷贝</p>
-<p><strong>浅拷贝</strong>：将结构体变量空间内容 赋值一份 到另一个相同类型的结构体变量空间中</p>
-<p>如果结构体中没有指针成员 浅拷贝 不会带来问题。</p>
-<p>如果结构体中有指针成员 浅拷贝 会带来多次释放堆区空间的问题</p>
-<p>如果结构体中有<strong>指针成员</strong> 容易发生<strong>浅拷贝</strong>（有危害）</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Data5</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="type">char</span> *name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test12</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Data5</span> <span class="title">lucy</span>;</span></span><br><span class="line">    lucy.num = <span class="number">100</span>;</span><br><span class="line">    lucy.name = (<span class="type">char</span> *)<span class="built_in">calloc</span>(<span class="number">1</span>, <span class="number">32</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(lucy.name, <span class="string">&quot;德玛西亚&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Data5</span> <span class="title">bob</span>;</span></span><br><span class="line">    bob = lucy; <span class="comment">//(浅拷贝 有危害)  ///&lt; 指向了同一地址，最终会报duble free错误</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %s\n&quot;</span>, bob.num, bob.name);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (lucy.name != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(lucy.name);</span><br><span class="line">        lucy.name = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (bob.name != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>(bob.name);</span><br><span class="line">        bob.name = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817100504369.png"
-                      alt="image-20230817100504369"
-                ></p>
-<p><strong>结构体的深拷贝</strong></p>
-<p>如果结构体中有指针成员 尽量使用深拷贝</p>
-<p>所谓的深拷贝，就是为结构体的指针成员 分配独立空间 然后再内容拷贝</p>
-<h1 id="第五章位段"><a href="#第五章位段" class="headerlink" title="第五章	位段"></a>第五章	位段</h1><h2 id="5-1-位段的定义"><a href="#5-1-位段的定义" class="headerlink" title="5.1 位段的定义"></a>5.1 位段的定义</h2><p>在结构体中，以位为单位的成员，咱们称之为位段(位域)。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817101020351.png"
-                      alt="image-20230817101020351"
-                ></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> packed_data));</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817101044063.png"
-                      alt="image-20230817101044063"
-                ></p>
-<p>a的类型还是unsigned int， abcd叫相邻位域，可以压缩。不能超过自身类型大小。</p>
-<p><strong>注意：</strong>不能对位段成员取地址，</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">packed_data</span> <span class="title">data</span> =</span> &#123;<span class="number">1</span>, <span class="number">32</span>, <span class="number">18</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">100</span>&#125;;</span><br><span class="line">&amp;data.a   <span class="comment">///&lt; 错误的</span></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>5.2 位段成员的引用</strong></p>
-<p>案例1：赋值时，不要超出位段定义的范围;如超出位段定义的范围高位将丢弃。</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">packed_data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> a : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> b : <span class="number">7</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> c : <span class="number">4</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> d : <span class="number">4</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> e : <span class="number">7</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> i;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test13</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> packed_data));</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">packed_data</span> <span class="title">data</span> =</span> &#123;<span class="number">1</span>, <span class="number">32</span>, <span class="number">18</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">100</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;data.b = %u, data.c = %u, data.d = %u\n&quot;</span>, data.b, data.c, data.d);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;data = %p, data.i = %p\n&quot;</span>, &amp;data, &amp;data.i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817101144525.png"
-                      alt="image-20230817101144525"
-                ></p>
-<p>案例2：位段的长度不能大于存储单元的长度</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> a : <span class="number">9</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> b : <span class="number">12</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817101206963.png"
-                      alt="image-20230817101206963"
-                ></p>
-<p>案例3：一个段要从另一个存储单元开始</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> a : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> b : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> : <span class="number">0</span>;   <span class="comment">///&lt; 告诉编译器从另一个存储单元开始存储</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> d : <span class="number">2</span>;</span><br><span class="line">&#125; <span class="type">data_t</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test14</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">data_t</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B____%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/$%7Bfiilename%7D/image-20230817102725611.png"
-                      alt="image-20230817102725611"
-                ></p>
-<p>案例4：寄存器赋值</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> a : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> b : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> c : <span class="number">2</span>;</span><br><span class="line">&#125; <span class="type">reg_t</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test14</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size = %lu\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">data_t</span>));</span><br><span class="line">    <span class="comment">//方法1：</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> reg = <span class="number">0</span>;</span><br><span class="line">    reg &amp;= ~((<span class="number">0x3</span>) | (<span class="number">0x3</span> &lt;&lt; <span class="number">3</span>) | (<span class="number">0x3</span> &lt;&lt; <span class="number">6</span>));</span><br><span class="line">    reg |= (<span class="number">0x1</span> | (<span class="number">0x1</span> &lt;&lt; <span class="number">3</span>) | (<span class="number">0x2</span> &lt;&lt; <span class="number">6</span>));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;reg = %#x\n&quot;</span>, reg);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//方法2：</span></span><br><span class="line">    <span class="type">reg_t</span> <span class="type">reg8_t</span>;</span><br><span class="line">    <span class="type">reg8_t</span>.a = <span class="number">0x2</span>;</span><br><span class="line">    <span class="type">reg8_t</span>.b = <span class="number">0x1</span>;</span><br><span class="line">    <span class="type">reg8_t</span>.c = <span class="number">0x1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %#x, b = %#x, c = %#x\n&quot;</span>, <span class="type">reg8_t</span>.a, <span class="type">reg8_t</span>.b, <span class="type">reg8_t</span>.c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第六章共用体"><a href="#第六章共用体" class="headerlink" title="第六章	共用体"></a>第六章	共用体</h1><p>定义：共用体和结构体类似，也是一种构造类型的数据结构。既然是构造类型的，咱们得先定义出类型，然后用类型定义变量。</p>
-<p>共用体定义方式：定义共用体类型的方法和结构体非常相似，把 struct 改成 union 就可以了。</p>
-<h2 id="6-1共用体与结构体之间的不同点："><a href="#6-1共用体与结构体之间的不同点：" class="headerlink" title="6.1共用体与结构体之间的不同点："></a>6.1共用体与结构体之间的不同点：</h2><p>1.所占空间的差异，共用体所有成员占有同一段地址空间，共用体的大小是共用体内部最大成员的大小。</p>
-<p>2.共用体内所有成员的首地址相同。</p>
-<p>案例1：利用共用体实现数据类型转换</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">union</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">char</span> ch[<span class="number">4</span>];</span><br><span class="line">    <span class="type">int</span>  ival;</span><br><span class="line">    <span class="type">float</span> fval;</span><br><span class="line">&#125; <span class="type">un_ch2f_t</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test01</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">un_ch2f_t</span> ch2f;</span><br><span class="line">    ch2f.ch[<span class="number">0</span>] = <span class="number">0x01</span>;</span><br><span class="line">    ch2f.ch[<span class="number">1</span>] = <span class="number">0x02</span>;</span><br><span class="line">    ch2f.ch[<span class="number">2</span>] = <span class="number">0x03</span>;</span><br><span class="line">    ch2f.ch[<span class="number">3</span>] = <span class="number">0x04</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;fval = %#x\n&quot;</span>, ch2f.fval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="6-2-共用体特点"><a href="#6-2-共用体特点" class="headerlink" title="6.2 共用体特点"></a>6.2 共用体特点</h2><p>1、同一内存段可以用来存放几种不同类型的成员，但每一瞬时只有一种起作用。</p>
-<p>2、共用体变量中起作用的成员是最后一次存放的成员，在存入一个新的成员后原有的成员的值会被覆盖。</p>
-<p>3、共用体变量的地址和它的各成员的地址都是同一地址。</p>
-<h1 id="第七章枚举"><a href="#第七章枚举" class="headerlink" title="第七章	枚举"></a>第七章	枚举</h1><p>枚举：将变量的值一一列举出来，变量的值只限于列举出来的值的范围内。</p>
-<h2 id="7-1-枚举类型定义方法"><a href="#7-1-枚举类型定义方法" class="headerlink" title="7.1 枚举类型定义方法"></a>7.1 枚举类型定义方法</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> 枚举类型名称&#123;</span></span><br><span class="line">   成员列表，</span><br><span class="line">   。。。。</span><br><span class="line">   成员列表， </span><br><span class="line">&#125;；</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="7-2-枚举变量的定义及使用"><a href="#7-2-枚举变量的定义及使用" class="headerlink" title="7.2 枚举变量的定义及使用"></a>7.2 枚举变量的定义及使用</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">WEEK</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    MON = <span class="number">1</span>,</span><br><span class="line">    TUES,</span><br><span class="line">    WED,</span><br><span class="line">    THURS,</span><br><span class="line">    FRI,</span><br><span class="line">    SAT,</span><br><span class="line">    SUN,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">void</span> <span class="title function_">test01</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">enum</span> <span class="title">WEEK</span> <span class="title">day</span>;</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;day);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (day)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> MON:</span><br><span class="line">    <span class="keyword">case</span> WED:</span><br><span class="line">    <span class="keyword">case</span> FRI:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;do something !\n&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> TUES:</span><br><span class="line">    <span class="keyword">case</span> THURS:</span><br><span class="line">    <span class="keyword">case</span> SAT:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;do other something !\n&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;have  a rest!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>注意：</strong>在定义枚举类型的时候枚举元素可以用等号给它赋值，用来代表元素从几开始编号在程序中，不能再次对枚举元素赋值，因为枚举元素是常量。</p>
-]]></content>
-      <tags>
-        <tag>嵌入式 c语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSH服务安装</title>
-    <url>/2023/08/16/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<h1 id="第一章-SSH服务"><a href="#第一章-SSH服务" class="headerlink" title="第一章    SSH服务"></a>第一章    SSH服务</h1><p><strong>SSH服务功能：实现远程连接，及文件传输服务。</strong></p>
-<p><u></u></p>
-<h1 id="第二章换源操作："><a href="#第二章换源操作：" class="headerlink" title="第二章	换源操作："></a>第二章	换源操作：</h1><p><strong>方法1：通过图形化界面方式进行换源操作；</strong></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816152039215.png"
-                      alt="image-20230816152039215"
-                ></p>
-<p><strong>方法2：手动方式进行换源</strong></p>
-<p>备份原始源文件source.list</p>
-<p>打开终端，执行命令：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo  <span class="built_in">cp</span>   /etc/apt/sources.list   /etc/apt/sources.list.bak</span><br></pre></td></tr></table></figure></div>
-
-<p>2.修改源文件sources.list</p>
-<p>（1）终端执行命令：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo  <span class="built_in">chmod</span>  777  /etc/apt/sources.list </span><br></pre></td></tr></table></figure></div>
-
-<p>  更改文件权限使其可编辑；（不提倡）</p>
-<p>（2）执行命令：       </p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo  gedit   /etc/apt/sources.list</span><br></pre></td></tr></table></figure></div>
-
-<p>​             打开文件进行编辑；</p>
-<p>（3）删除原来的文件内容，根据系统版本复制下面的任意一个到其中并保存（常用的是阿里源和清华源，推荐阿里源）；</p>
-<p>阿里源：</p>
-<p>ubuntu 16</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial main deb-src http://mirrors.aliyun.com/ubuntu/ xenial main  deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main  deb http://mirrors.aliyun.com/ubuntu/ xenial universe deb-src http://mirrors.aliyun.com/ubuntu/ xenial universe deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates universe  deb http://mirrors.aliyun.com/ubuntu/ xenial-security main deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security universe</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>sudo apt-get update</strong></p>
-<p>如提示：*** Error in &#96;appstreamcli’: double free or corruption (fasttop): 0x00000000015c5550 ***错误</p>
-<p> 输入sudo apt-get purge libappstream3，然后再重新 sudo apt-get update</p>
-<p>[可选] 复损坏的软件包，尝试卸载出错的包，重新安装正确版本的 <strong>sudo apt-get  install -f</strong></p>
-<p><strong>sudo apt-get upgrade</strong></p>
-<h1 id="第三章SSH服务安装"><a href="#第三章SSH服务安装" class="headerlink" title="第三章	SSH服务安装"></a>第三章	SSH服务安装</h1><p><strong>1.ubuntu安装ssh服务器：</strong></p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>2.重启ssh服务：</strong></p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>3.查看服务状态：</strong></p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -an |grep 22</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816154019160.png"
-                      alt="image-20230816154019160"
-                ></p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -a | grep ssh</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816154109215.png"
-                      alt="image-20230816154109215"
-                ></p>
-<h1 id="4-在windows环境下利用MobaXterm连接SSH服务"><a href="#4-在windows环境下利用MobaXterm连接SSH服务" class="headerlink" title="4.在windows环境下利用MobaXterm连接SSH服务"></a>4.在windows环境下利用MobaXterm连接SSH服务</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816154355042.png"
-                      alt="image-20230816154355042"
-                ></p>
-<h1 id="5-设置开机自启动："><a href="#5-设置开机自启动：" class="headerlink" title="5.设置开机自启动："></a>5.设置开机自启动：</h1><p>1) </p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/rc.local</span><br></pre></td></tr></table></figure></div>
-
-<ol start="2">
-<li>输入：</li>
-</ol>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">service ssh start</span><br></pre></td></tr></table></figure></div>
-
-]]></content>
-      <tags>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1452,8 +1482,35 @@
                       alt="image-20230816175648622"
                 ></p>
 ]]></content>
+      <categories>
+        <category>软件 装机 应用</category>
+      </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/08/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>休闲</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -1497,6 +1554,9 @@
                       alt="image-20230816180041748"
                 ></p>
 ]]></content>
+      <categories>
+        <category>软件 应用</category>
+      </categories>
       <tags>
         <tag>vscode Linux</tag>
       </tags>
@@ -1687,29 +1747,11 @@
                 ></p>
 <p>出现时表示安装成功</p>
 ]]></content>
+      <categories>
+        <category>软件 装机</category>
+      </categories>
       <tags>
         <tag>Ubuntu Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2023/08/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-]]></content>
-      <tags>
-        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -2075,6 +2117,9 @@
 <p>3、CDN 引用(<strong>不推荐</strong>)</p>
 <p>除了在本地存储图片，还可以将图片上传到一些免费的 CDN 服务中。</p>
 ]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
       <tags>
         <tag>教程</tag>
       </tags>
