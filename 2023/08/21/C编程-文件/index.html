@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="BAI ZHOU">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/08/21/c编程-文件/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="文件指针FILE 在 stdio.h 文件中的文件类型声明： ​     对文件操作的步骤： 1、对文件进行读写等操作之前要打开文件得到文件指针 2、可以通过文件指针对文件进行读写等操作 3、读写等操作完毕后，要关闭文件，关闭文件后，就不能再通过此文件指针操作文件了 补充：c 语言中有三个特殊的文件指针无需定义，在程序中可以直接使用 stdin： 标准输入 默认为当前终端（键盘）我们使用的 sca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C编程__文件">
+<meta property="og:url" content="http://example.com/2023/08/21/C%E7%BC%96%E7%A8%8B-%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="白昼">
+<meta property="og:description" content="文件指针FILE 在 stdio.h 文件中的文件类型声明： ​     对文件操作的步骤： 1、对文件进行读写等操作之前要打开文件得到文件指针 2、可以通过文件指针对文件进行读写等操作 3、读写等操作完毕后，要关闭文件，关闭文件后，就不能再通过此文件指针操作文件了 补充：c 语言中有三个特殊的文件指针无需定义，在程序中可以直接使用 stdin： 标准输入 默认为当前终端（键盘）我们使用的 sca">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B__%E6%96%87%E4%BB%B6/image-20230905205901087.png">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B__%E6%96%87%E4%BB%B6/image-20230905210000511.png">
+<meta property="og:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B__%E6%96%87%E4%BB%B6/image-20230905210014652.png">
+<meta property="article:published_time" content="2023-08-21T10:36:46.000Z">
+<meta property="article:modified_time" content="2023-09-05T14:58:17.201Z">
+<meta property="article:author" content="白昼">
+<meta property="article:tag" content="嵌入式 c语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/C%E7%BC%96%E7%A8%8B__%E6%96%87%E4%BB%B6/image-20230905205901087.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            C编程__文件 -
+        
+        白昼的宝典
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="" rel="stylesheet">
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"BAI ZHOU","subtitle":{"text":["每朵云都下落不明","每盏月亮都不知所踪"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}},"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://status.evanluo.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","Blog":"https://ohevan.com","Friends":"/friends"}},"Links":{"icon":"fa-regular fa-link","submenus":{"Hexo":"https://hexo.io/zh-cn/","Themes":"https://hexo.io/themes/","Redefine":"https://redefine-docs.ohevan.com/getting-started"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"Announce","links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/8/15 00:00:00"};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                白昼的宝典
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://status.evanluo.top/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-chart-bar"></i>
+                                        
+                                        状态
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ME
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://github.com/baizhouhaoyue/baizhouhaoyue.github.io">GITHUB
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://ohevan.com">BLOG
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/friends">友情链接
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-link"></i>
+                                        
+                                        链接&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">HEXO
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://hexo.io/themes/">THEMES
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        target="_blank" rel="noopener" href="https://status.evanluo.top/"  >
+                             
+                                
+                                    <i class="fa-regular fa-chart-bar"></i>
+                                
+                                状态
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/about">ME</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://github.com/baizhouhaoyue/baizhouhaoyue.github.io">GITHUB</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://ohevan.com">BLOG</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/friends">友情链接</a>
+                            </li>
+                        
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-link"></i>
+                                
+                                链接&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">HEXO</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://hexo.io/themes/">THEMES</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">C编程__文件</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.wXOy_YCJC8bSlnbu_R1mugHaFQ?pid=ImgDet&rs=1">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">BAI ZHOU</span>
+                        
+                            <span class="author-label">Lv3</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-21 18:36:46</span>
+        <span class="mobile">2023-08-21 18:36:46</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-09-05 22:58:17</span>
+            <span class="mobile">2023-09-05 22:58:17</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-c%E8%AF%AD%E8%A8%80/">嵌入式 c语言</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h1 id="文件指针"><a href="#文件指针" class="headerlink" title="文件指针"></a>文件指针</h1><p>FILE 在 stdio.h 文件中的文件类型声明：</p>
+<p>​    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E6%96%87%E4%BB%B6/image-20230905205901087.png"
+                      alt="image-20230905205901087"
+                ></p>
+<p>对文件操作的步骤：</p>
+<p>1、对文件进行读写等操作之前要打开文件得到文件指针</p>
+<p>2、可以通过文件指针对文件进行读写等操作</p>
+<p>3、读写等操作完毕后，要关闭文件，关闭文件后，就不能再通过此文件指针操作文件了</p>
+<p>补充：c 语言中有三个特殊的文件指针无需定义，在程序中可以直接使用</p>
+<p>stdin： 标准输入 默认为当前终端（键盘）我们使用的 scanf、 getchar 函数默认从此终端获得数据</p>
+<p>stdout： 标准输出 默认为当前终端（屏幕）我们使用的 printf、 puts 函数默认输出信息到此终端</p>
+<p>stderr： 标准错误输出设备文件 默认为当前终端（屏幕）</p>
+<p>当我们程序出错使用: perror 函数时信息打印在此终端</p>
+<h2 id="文件操作相关API"><a href="#文件操作相关API" class="headerlink" title="文件操作相关API"></a>文件操作相关API</h2><h2 id="打开文件fopen"><a href="#打开文件fopen" class="headerlink" title="打开文件fopen"></a>打开文件fopen</h2><p>函数的定义：FILE *fopen(const char *path, const char *mode);</p>
+<p>函数说明：fopen 函数的功能是打开一个已经存在的文件，并返回这个文件的文件指针（文件的标示）或者创建一个文件，并打开此文件，然后返回文件的标示。</p>
+<p>函数的参数：参数 1:打开的文件的路径， 参数 2：文件打开的方式，即以什么样的方式（只读、只写、可读可写等等）打开文件。</p>
+<p>第二个参数的几种形式（打开文件的方式）：</p>
+<p>读写权限： r  w  a  +</p>
+<p> r:以只读方式打开文件</p>
+<p>w:以只写方式打开文件</p>
+<p>a:以追加方式打开文件</p>
+<p>​    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E6%96%87%E4%BB%B6/image-20230905210000511.png"
+                      alt="image-20230905210000511"
+                ></p>
+<p>​    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E6%96%87%E4%BB%B6/image-20230905210014652.png"
+                      alt="image-20230905210014652"
+                ></p>
+<h2 id="关闭文件fclose"><a href="#关闭文件fclose" class="headerlink" title="关闭文件fclose"></a>关闭文件fclose</h2><p>函数的定义: int fclose(FILE *fp);</p>
+<p>函数的说明：关闭 fp 所代表的文件.</p>
+<p>注意：对同一个文件指针，只能关闭一次。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test01</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    fp = fopen(<span class="string">&quot;../file/tmp&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;fopen&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fp != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fclose(fp);</span><br><span class="line">        fp = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="读写文件内的一个字符fputc与fgetc"><a href="#读写文件内的一个字符fputc与fgetc" class="headerlink" title="读写文件内的一个字符fputc与fgetc"></a>读写文件内的一个字符fputc与fgetc</h2><p>函数的定义：int fputc(int c, FILE *stream)</p>
+<p>函数的说明：fputc 将 c 的值写到 stream 所代表的文件中。</p>
+<p>返回值：</p>
+<p>如果输出成功，则返回输出的字节值；</p>
+<p>如果输出失败，则返回一个 EOF。</p>
+<p>EOF 是在 stdio.h 文件中定义的符号常量，值为-1。</p>
+<p>函数定义：int fgetc(FILE *stream);</p>
+<p>函数说明：fgetc 从 stream 所标示的文件中读取一个字节，将字节值返回。</p>
+<p>返回值：</p>
+<p>以 text 的方式： 读到文件结尾返回 EOF</p>
+<p>以binary 的方式：读到文件结尾，使用 feof(后面会讲)判断结尾</p>
+<p>案例1：读写字符</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">iret = fputc(<span class="string">&#x27;c&#x27;</span>, fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;write %c to file\n&quot;</span>, iret);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fseek(fp, <span class="number">0</span>, SEEK_SET)) <span class="comment">///&lt; 定位文件内部光标到文件的起始位置</span></span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;fseek&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ival = fgetc(fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ival = %d\n&quot;</span>, ival);</span><br></pre></td></tr></table></figure></div>
+
+<p>案例2: 从一个文件(文本文件)中读取所有信息，写入另一个文件中</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test01</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *dst, <span class="type">const</span> <span class="type">char</span> *src)</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fp1, *fp2;</span><br><span class="line">    <span class="type">int</span> ch = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    fp1 = fopen(src, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp1 == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;fopen1&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    fp2 = fopen(dst, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp2 == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;fopen2&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;src = %s, dst = %s\n&quot;</span>, src, dst);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((ch = fgetc(fp1)) != EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        fputc(ch, fp2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fclose(fp1);</span><br><span class="line">    fclose(fp2);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> src[<span class="number">20</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="type">char</span> dst[<span class="number">20</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入源文件及目的文件路径名\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">strcpy</span>(src, argv[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">strcpy</span>(dst, argv[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">    test01(dst, src);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="文件的字符串读写fputs与fgets"><a href="#文件的字符串读写fputs与fgets" class="headerlink" title="文件的字符串读写fputs与fgets"></a>文件的字符串读写fputs与fgets</h2><p>函数定义：char *fgets(char *s, int size, FILE *stream);</p>
+<p>函数功能：从 stream 所指的文件中读取字符，在读取的时候碰到换行符或者是碰到文件的末尾停止读取，或者是读取了 size-1 个字节停止读取，在读取的内容后面会加一个\0,作为字符串的结尾。</p>
+<p>返回值：</p>
+<p>成功返回目的数组的首地址，即 s</p>
+<p>失败返回 NULL</p>
+<p>函数定义：int fputs(const char *s, FILE *stream);</p>
+<p>函数功能：将 s 指向的字符串，写到 stream 所代表的文件中</p>
+<p>返回值：成功返回写入的字节数；失败返回 -1</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test02</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">128</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">strcpy</span>(buf, <span class="string">&quot;hello 1000phone&quot;</span>);</span><br><span class="line"></span><br><span class="line">    fp = fopen(<span class="string">&quot;../file/newfile&quot;</span>, <span class="string">&quot;w+&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;fopen&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fputs</span>(buf, fp);</span><br><span class="line"></span><br><span class="line">    fseek(fp, <span class="number">0</span>, SEEK_SET);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(buf, <span class="string">&#x27;\0&#x27;</span>, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">    fgets(buf, <span class="number">128</span>, fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="文件的读写fwrite与fread"><a href="#文件的读写fwrite与fread" class="headerlink" title="文件的读写fwrite与fread"></a>文件的读写fwrite与fread</h2><p>函数的定义：size_t fwrite(void *ptr, size_t size, size_t nmemb, FILE *stream);</p>
+<p>函数的说明：fwrite 函数将 ptr 指向的内存里的数据，向 stream 所标示的文件中写入数据，一块是 size 个字节，共 nmemb 块。</p>
+<p>返回值：实际写入的块数</p>
+<p>函数的定义：size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);</p>
+<p>函数的说明：fread 函数从 stream 所标示的文件中读取数据，一块是 size 个字节，共 nmemb 块，存放到 ptr 指向的内存里</p>
+<p>返回值：实际读到的块数。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test03</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">st_stu_t</span> stu[<span class="number">2</span>];</span><br><span class="line">    FILE *fp;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(stu, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="type">st_stu_t</span>) * <span class="number">2</span>);</span><br><span class="line">    stu[<span class="number">0</span>].num = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(stu[<span class="number">0</span>].name, <span class="string">&quot;lucy&quot;</span>);</span><br><span class="line"></span><br><span class="line">    stu[<span class="number">1</span>].num = <span class="number">101</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(stu[<span class="number">0</span>].name, <span class="string">&quot;bob&quot;</span>);</span><br><span class="line"></span><br><span class="line">    fp = fopen(<span class="string">&quot;../file/student&quot;</span>, <span class="string">&quot;wb+&quot;</span>);</span><br><span class="line">    <span class="comment">///&lt; 加入判断</span></span><br><span class="line">    fwrite(stu, <span class="keyword">sizeof</span>(<span class="type">st_stu_t</span>), <span class="number">2</span>, fp);</span><br><span class="line"></span><br><span class="line">    rewind(fp); <span class="comment">///&lt; 将文件光标置于文件开始位置</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(stu, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="type">st_stu_t</span>) * <span class="number">2</span>);</span><br><span class="line">    fread(stu, <span class="keyword">sizeof</span>(<span class="type">st_stu_t</span>), <span class="number">2</span>, fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;num1 = %d, num2 = %d\n&quot;</span>, stu[<span class="number">0</span>].num, stu[<span class="number">1</span>].num);</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="格式化读写文件函数"><a href="#格式化读写文件函数" class="headerlink" title="格式化读写文件函数"></a>格式化读写文件函数</h2><p>函数调用:<br>fprintf ( 文件指针，格式字符串， 输出表列）；<br>fscanf ( 文件指针，格式字符串，输入表列）；<br>函数功能:从磁盘文件中读入或输出字符</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test04</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="type">float</span> fa = <span class="number">11.1f</span>;</span><br><span class="line">    <span class="type">char</span> str[<span class="number">20</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">strcpy</span>(str, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    fp = fopen(<span class="string">&quot;../file/format.txt&quot;</span>, <span class="string">&quot;wb+&quot;</span>);</span><br><span class="line">    <span class="comment">///&lt;&lt; 异常判断</span></span><br><span class="line">    <span class="built_in">fprintf</span>(fp, <span class="string">&quot;%d %s %f&quot;</span>, a, str, fa);</span><br><span class="line"></span><br><span class="line">    rewind(fp);</span><br><span class="line"></span><br><span class="line">    a = <span class="number">0</span>;</span><br><span class="line">    fa = <span class="number">0.0f</span>;</span><br><span class="line">    <span class="built_in">memset</span>(str, <span class="string">&#x27;\0&#x27;</span>, <span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fscanf</span>(fp, <span class="string">&quot;%d %s %f&quot;</span>, &amp;a, str, &amp;fa);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %d, fa = %f, str = %s\n&quot;</span>, a, fa, str);</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="随机读写"><a href="#随机读写" class="headerlink" title="随机读写"></a>随机读写</h2><p>概念：移动文件内部的位置指针到需要读写的位置，再进行读写，这种读写称为随机读写实现随机读写的关键是要按要求移动位置指针，这称为文件的定位。</p>
+<p>完成文件定位的函数有：rewind、 fseek 函数</p>
+<p>rewind函数：把文件内部的位置指针移到文件首</p>
+<p>函数使用方法：rewind(文件指针);</p>
+<p>fseek 函数</p>
+<p>函数定义:int fseek(FILE *stream, long offset, int whence);</p>
+<p>​               &#x2F;&#x2F;int fseek(文件类型指针，位移量，起始点);</p>
+<p>函数功能：移动文件流的读写位置.</p>
+<p>参数：</p>
+<p>whence 起始位置，见下面宏定义</p>
+<p>offset偏移量：以起始点为基点，向前、后移动的字节数，正数往文件末尾方向偏移，负数往文件开头方向偏移</p>
+<p>关键的宏定义：</p>
+<ol>
+<li>SEEK_SET    从文件首部开始查找        	0	</li>
+<li>SEEK_CUR    从文件当前位置开始查找  	1</li>
+<li>SEEK_END    从文件末尾开始查找  		2</li>
+</ol>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test05</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    FILE *fp;</span><br><span class="line"></span><br><span class="line">    fp = fopen(<span class="string">&quot;../file/format.txt&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="comment">///&lt;&lt; 异常判断</span></span><br><span class="line"></span><br><span class="line">    fseek(fp, <span class="number">4</span>, SEEK_SET);</span><br><span class="line"></span><br><span class="line">    fread(buf, <span class="number">5</span>, <span class="number">1</span>, fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, buf);</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="ftell-测文件读写位置距文件开始有多少个字节"><a href="#ftell-测文件读写位置距文件开始有多少个字节" class="headerlink" title="ftell 测文件读写位置距文件开始有多少个字节"></a>ftell 测文件读写位置距文件开始有多少个字节</h2><p>定义函数:long ftell(文件指针);</p>
+<p>函数功能：取得文件流目前的读写位置</p>
+<p>返回值：返回当前读写位置(距离文件起始的字节数)，出错时返回-1.</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test06</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="number">0</span>;</span><br><span class="line">    FILE *fp;</span><br><span class="line"></span><br><span class="line">    fp = fopen(<span class="string">&quot;../file/format.txt&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="comment">///&lt;&lt; 异常判断</span></span><br><span class="line">    fseek(fp, <span class="number">0</span>, SEEK_END);</span><br><span class="line"></span><br><span class="line">    length = ftell(fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;length = %d\n&quot;</span>, length);</span><br><span class="line"></span><br><span class="line">    fseek(fp, <span class="number">0</span>, SEEK_SET);</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="feof函数"><a href="#feof函数" class="headerlink" title="feof函数"></a>feof函数</h2><p>函数定义：</p>
+<p>检查是否已抵达给定文件流的结尾。</p>
+<p>参数</p>
+<p>stream  要检验的文件流</p>
+<p>返回值</p>
+<p>若已抵达流尾则为非零值，否则为 0。</p>
+<h2 id="ferror函数"><a href="#ferror函数" class="headerlink" title="ferror函数"></a>ferror函数</h2><p>int ferror( <a class="link"   target="_blank" rel="noopener" href="http://zh.cppreference.com/w/c/io" >FILE <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> *stream ); 检查给定文件流的错误。</p>
+<p>参数：stream 要检查的文件流</p>
+<p>返回值：若文件流已出现错误则为非零值，否则为 0</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> C编程__文件</li>
+        <li><strong>作者:</strong> BAI ZHOU</li>
+        <li><strong>创建于
+                :</strong> 2023-08-21 18:36:46</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2023-09-05 22:58:17
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://redefine.ohevan.com/2023/08/21/C编程-文件/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+            本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-c%E8%AF%AD%E8%A8%80/">#嵌入式 c语言</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/08/21/Makefile%E6%96%87%E4%BB%B6/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Makefile文件</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/08/21/c%E7%BC%96%E7%A8%8B-IO%E7%BC%93%E5%86%B2%E5%8C%BA/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">c编程_IO缓冲区</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">C编程__文件</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88"><span class="nav-text">文件指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%9B%B8%E5%85%B3API"><span class="nav-text">文件操作相关API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6fopen"><span class="nav-text">打开文件fopen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E6%96%87%E4%BB%B6fclose"><span class="nav-text">关闭文件fclose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6%E5%86%85%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6fputc%E4%B8%8Efgetc"><span class="nav-text">读写文件内的一个字符fputc与fgetc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AF%BB%E5%86%99fputs%E4%B8%8Efgets"><span class="nav-text">文件的字符串读写fputs与fgets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%86%99fwrite%E4%B8%8Efread"><span class="nav-text">文件的读写fwrite与fread</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6%E5%87%BD%E6%95%B0"><span class="nav-text">格式化读写文件函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E8%AF%BB%E5%86%99"><span class="nav-text">随机读写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ftell-%E6%B5%8B%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E4%BD%8D%E7%BD%AE%E8%B7%9D%E6%96%87%E4%BB%B6%E5%BC%80%E5%A7%8B%E6%9C%89%E5%A4%9A%E5%B0%91%E4%B8%AA%E5%AD%97%E8%8A%82"><span class="nav-text">ftell 测文件读写位置距文件开始有多少个字节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feof%E5%87%BD%E6%95%B0"><span class="nav-text">feof函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ferror%E5%87%BD%E6%95%B0"><span class="nav-text">ferror函数</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">月光是白昼寄给黑夜的情节，朝霞是黑夜思念白昼的泪光。</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">BAI ZHOU</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

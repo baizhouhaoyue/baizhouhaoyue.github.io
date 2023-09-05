@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="BAI ZHOU">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/09/05/cpp-类与对象/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="第一章	类和对象的基本概念1.1 C 和 C++中 struct 区别核心思想：把一些数据进行封装来描述一个事物 c 语言 struct 只有变量。 c++语言 struct 既有变量，也有函数。 缺点：结构体成员对外部都是可见的。 1.2 类的封装 将数据和方法 封装在一起 加以权限区分 只能借助公共方法访问私有数据 使用关键字class定义一个类。 类的权限：private 私有 protec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPP__类与对象">
+<meta property="og:url" content="http://example.com/2023/09/05/CPP-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="白昼">
+<meta property="og:description" content="第一章	类和对象的基本概念1.1 C 和 C++中 struct 区别核心思想：把一些数据进行封装来描述一个事物 c 语言 struct 只有变量。 c++语言 struct 既有变量，也有函数。 缺点：结构体成员对外部都是可见的。 1.2 类的封装 将数据和方法 封装在一起 加以权限区分 只能借助公共方法访问私有数据 使用关键字class定义一个类。 类的权限：private 私有 protec">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905231808272.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905231834474.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232055585.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232153985.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232313523.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232757738.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232827928.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233538875.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233603627.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233611330.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233643651.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233717962.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233804566.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233948289.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234001086.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234028054.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234049218.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234056169.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234113866.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234130286.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234234785.png">
+<meta property="article:published_time" content="2023-09-05T15:13:41.000Z">
+<meta property="article:modified_time" content="2023-09-05T15:43:15.800Z">
+<meta property="article:author" content="白昼">
+<meta property="article:tag" content="基础 CPP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905231808272.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            CPP__类与对象 -
+        
+        白昼的宝典
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="" rel="stylesheet">
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"BAI ZHOU","subtitle":{"text":["每朵云都下落不明","每盏月亮都不知所踪"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}},"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://status.evanluo.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","Blog":"https://ohevan.com","Friends":"/friends"}},"Links":{"icon":"fa-regular fa-link","submenus":{"Hexo":"https://hexo.io/zh-cn/","Themes":"https://hexo.io/themes/","Redefine":"https://redefine-docs.ohevan.com/getting-started"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"Announce","links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/8/15 00:00:00"};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                白昼的宝典
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://status.evanluo.top/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-chart-bar"></i>
+                                        
+                                        状态
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ME
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://github.com/baizhouhaoyue/baizhouhaoyue.github.io">GITHUB
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://ohevan.com">BLOG
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/friends">友情链接
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-link"></i>
+                                        
+                                        链接&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">HEXO
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://hexo.io/themes/">THEMES
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        target="_blank" rel="noopener" href="https://status.evanluo.top/"  >
+                             
+                                
+                                    <i class="fa-regular fa-chart-bar"></i>
+                                
+                                状态
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/about">ME</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://github.com/baizhouhaoyue/baizhouhaoyue.github.io">GITHUB</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://ohevan.com">BLOG</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/friends">友情链接</a>
+                            </li>
+                        
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-link"></i>
+                                
+                                链接&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">HEXO</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://hexo.io/themes/">THEMES</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">CPP__类与对象</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.wXOy_YCJC8bSlnbu_R1mugHaFQ?pid=ImgDet&rs=1">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">BAI ZHOU</span>
+                        
+                            <span class="author-label">Lv3</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-09-05 23:13:41</span>
+        <span class="mobile">2023-09-05 23:13:41</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-09-05 23:43:15</span>
+            <span class="mobile">2023-09-05 23:43:15</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/CPP%E8%AF%AD%E8%A8%80/">CPP语言</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">基础 CPP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h1 id="第一章类和对象的基本概念"><a href="#第一章类和对象的基本概念" class="headerlink" title="第一章	类和对象的基本概念"></a><strong>第一章	类和对象的基本概念</strong></h1><h2 id="1-1-C-和-C-中-struct-区别"><a href="#1-1-C-和-C-中-struct-区别" class="headerlink" title="1.1 C 和 C++中 struct 区别"></a><strong>1.1 C 和 C++中 struct 区别</strong></h2><p>核心思想：把一些数据进行封装来描述一个事物</p>
+<p>c 语言 struct 只有变量。</p>
+<p>c++语言 struct 既有变量，也有函数。</p>
+<p>缺点：结构体成员对外部都是可见的。</p>
+<p>1.2 类的封装</p>
+<p>将数据和方法 封装在一起 加以权限区分 只能借助公共方法访问私有数据</p>
+<p>使用关键字class定义一个类。</p>
+<p>类的权限：private 私有 protected保护 public公有</p>
+<p>注意：</p>
+<p>1、类的内部 不区分权限， 类的外部才有权限之分。</p>
+<p>2、如果类没有涉及到继承private和protected没有任何区别（都是私有特性）。</p>
+<p>3、如想访问类内部的私有属性，可通过公共方法来实现。</p>
+<p>案例1：定义及使用一个类（在类中实现类函数）</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">        <span class="type">int</span>  ma;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">         <span class="type">int</span> mb;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">         <span class="comment">//Data();</span></span><br><span class="line">         <span class="type">int</span> mc;</span><br><span class="line">         <span class="function"><span class="type">void</span> <span class="title">showData</span><span class="params">()</span></span></span><br><span class="line"><span class="function">         </span>&#123;</span><br><span class="line">             cout &lt;&lt; <span class="string">&quot;a = &quot;</span> &lt;&lt; ma &lt;&lt; endl;</span><br><span class="line">             cout &lt;&lt; <span class="string">&quot;b = &quot;</span> &lt;&lt; mb &lt;&lt; endl;</span><br><span class="line">             cout &lt;&lt; <span class="string">&quot;c = &quot;</span> &lt;&lt; mc &lt;&lt; endl;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="function"><span class="type">void</span> <span class="title">setData</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c)</span></span></span><br><span class="line"><span class="function">         </span>&#123;</span><br><span class="line">            ma = a;</span><br><span class="line">            mb = b;</span><br><span class="line">            mc = c;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Data data;  <span class="comment">///&lt; 实例化对象</span></span><br><span class="line">    data.<span class="built_in">setData</span>(<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>);</span><br><span class="line">    data.<span class="built_in">showData</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905231808272.png"
+                      alt="image-20230905231808272"
+                ></p>
+<p>用户只能同过 <strong>公共方法</strong> 间接 操作 <strong>私有数据</strong>。</p>
+<h2 id="1-2-设计类的思想"><a href="#1-2-设计类的思想" class="headerlink" title="1.2 设计类的思想"></a><strong>1.2 设计类的思想</strong></h2><p>1、明白该类涉及哪些<strong>数据（属性）</strong>。</p>
+<p>2、 实现类当中公共方法。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905231834474.png"
+                      alt="image-20230905231834474"
+                ></p>
+<h2 id="1-3、设计一个Person类"><a href="#1-3、设计一个Person类" class="headerlink" title="1.3、设计一个Person类"></a><strong>1.3、设计一个Person类</strong></h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span>  mage;</span><br><span class="line">    <span class="type">char</span> mname[<span class="number">20</span>];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setPersonInfo</span><span class="params">(<span class="type">int</span> age, <span class="type">char</span> *name)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">getPersonInfo</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;person.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Person::setPersonInfo</span><span class="params">(<span class="type">int</span> age, <span class="type">char</span> * name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(name == <span class="literal">nullptr</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    mage = age;</span><br><span class="line">    <span class="built_in">memset</span>(mname, <span class="string">&#x27;\0&#x27;</span>, <span class="built_in">sizeof</span>(mname));</span><br><span class="line">    <span class="built_in">strcpy</span>(mname, name);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Person::getPersonInfo</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; mname &lt;&lt;  <span class="string">&quot;的年龄&quot;</span> &lt;&lt; mage &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-4C-中结构体和类的区别"><a href="#1-4C-中结构体和类的区别" class="headerlink" title="1.4C++中结构体和类的区别"></a><strong>1.4C++中结构体和类的区别</strong></h2><p>1.class 默认访问权限为 private,struct 默认访问权限为 public。</p>
+<p>2.class访问控制，现实事物本身有些属性和行为是不对外开放。</p>
+<h2 id="1-5-类设计案例"><a href="#1-5-类设计案例" class="headerlink" title="1.5 类设计案例"></a><strong>1.5 类设计案例</strong></h2><p>案例1：设计立方体类(Cube)，求出立方体的面积( 2ab + 2ac + 2bc )和体积( a * b * c)，分别用全局函数和成员函数判断两个立方体是否相等</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> CUBE_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CUBE_H</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cube</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> ml;</span><br><span class="line">    <span class="type">int</span> mw;</span><br><span class="line">    <span class="type">int</span> mh;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="function"><span class="type">void</span> <span class="title">calS</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function"><span class="type">void</span> <span class="title">calV</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function"><span class="type">bool</span> <span class="title">compareCube</span><span class="params">(Cube&amp; ob)</span></span>;</span><br><span class="line">   <span class="function"><span class="type">void</span> <span class="title">setL</span><span class="params">(<span class="type">int</span> l)</span></span>;</span><br><span class="line">   <span class="function"><span class="type">void</span> <span class="title">setW</span><span class="params">(<span class="type">int</span> w)</span></span>;</span><br><span class="line">   <span class="function"><span class="type">void</span> <span class="title">setH</span><span class="params">(<span class="type">int</span> h)</span></span>;</span><br><span class="line">   <span class="function"><span class="type">int</span> <span class="title">getL</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function"><span class="type">int</span> <span class="title">getW</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function"><span class="type">int</span> <span class="title">getH</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// CUBE_H</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;cube.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Cube::setL</span><span class="params">(<span class="type">int</span> l)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ml = l;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Cube::setW</span><span class="params">(<span class="type">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    mw = w;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Cube::setH</span><span class="params">(<span class="type">int</span> h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    mh = h;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Cube::getL</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ml;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Cube::getW</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mw;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Cube::getH</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mh;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Cube::calS</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt; <span class="string">&quot;面积 = &quot;</span> &lt;&lt; (<span class="number">2</span>*ml*mw + <span class="number">2</span>*ml*mh + <span class="number">2</span>*mw*mh) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Cube::calV</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;体积 = &quot;</span> &lt;&lt; ml*mw*mh &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Cube::compareCube</span><span class="params">(Cube &amp;ob)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ml == ob.<span class="built_in">getL</span>() &amp;&amp; mw == ob.<span class="built_in">getW</span>() &amp;&amp; mh == ob.<span class="built_in">getH</span>())</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232055585.png"
+                      alt="image-20230905232055585"
+                ></p>
+<h1 id="第二章构造函数及析构函数"><a href="#第二章构造函数及析构函数" class="headerlink" title="第二章	构造函数及析构函数"></a><strong>第二章	构造函数及析构函数</strong></h1><h2 id="2-1构造函数定义及特征"><a href="#2-1构造函数定义及特征" class="headerlink" title="2.1构造函数定义及特征"></a><strong>2.1构造函数定义及特征</strong></h2><p>构造函数主要作用在于创建对象时为对象的成员属性赋值，构造函数由编译器自动调用，无须手动调用。</p>
+<p>构造函数语法：构造函数函数名和类名相同，没有返回值，不能有 void，但可以有参数。</p>
+<p>案例：调用有参及无参构造函数</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> mA;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">      <span class="built_in">Data</span>()</span><br><span class="line">      &#123;</span><br><span class="line">        mA = <span class="number">20</span>;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无参构造&quot;</span>  &lt;&lt; endl;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">Data</span>(<span class="type">int</span> a)</span><br><span class="line">      &#123;</span><br><span class="line">          mA = a;</span><br><span class="line">          cout &lt;&lt; <span class="string">&quot;有参构造， mA = &quot;</span>  &lt;&lt; mA &lt;&lt; endl;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Data ob; <span class="comment">///&lt; 隐式调用无参构造函数</span></span><br><span class="line">    Data ob3 = <span class="built_in">Data</span>();  <span class="comment">///&lt; 显示调用无参构造</span></span><br><span class="line">    </span><br><span class="line">    <span class="function">Data <span class="title">ob1</span><span class="params">(<span class="number">10</span>)</span></span>;   <span class="comment">///&lt; 隐式调用有参构造</span></span><br><span class="line">    Data ob2 = <span class="number">20</span>; <span class="comment">///&lt;隐式调用有参构造</span></span><br><span class="line">    Data ob4 = <span class="built_in">Data</span>(<span class="number">30</span>); <span class="comment">///&lt; 显示调用有参构造</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*匿名对象*/</span></span><br><span class="line">    <span class="built_in">Data</span>();   <span class="comment">///&lt; 匿名对象只在当前行有效，该行执行完之后对象释放</span></span><br><span class="line">    <span class="built_in">Data</span>(<span class="number">40</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232153985.png"
+                      alt="image-20230905232153985"
+                ></p>
+<h2 id="2-2-构造函数的分类"><a href="#2-2-构造函数的分类" class="headerlink" title="2.2 构造函数的分类"></a><strong>2.2 构造函数的分类</strong></h2><p>按参数类型：分为无参构造函数和有参构造函数</p>
+<p>按类型分类：普通构造函数和拷贝构造函数(复制构造函数)</p>
+<h2 id="2-3-析构函数的定义及特征"><a href="#2-3-析构函数的定义及特征" class="headerlink" title="2.3 析构函数的定义及特征"></a><strong>2.3 析构函数的定义及特征</strong></h2><p>析构函数语法：</p>
+<p>析构函数函数名是在类名前面加”~”组成,没有返回值，不能有 void,不能有参数，不能重载。</p>
+<p>案例1：析构函数调用</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> mA;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">      <span class="built_in">Data</span>()</span><br><span class="line">      &#123;</span><br><span class="line">        mA = <span class="number">20</span>;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无参构造&quot;</span>  &lt;&lt; endl;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">Data</span>(<span class="type">int</span> a):<span class="built_in">mA</span>(a)</span><br><span class="line">      &#123;</span><br><span class="line">         <span class="comment">// mA = a;</span></span><br><span class="line">          cout &lt;&lt; <span class="string">&quot;有参构造， mA = &quot;</span>  &lt;&lt; mA &lt;&lt; endl;</span><br><span class="line">      &#125;</span><br><span class="line">      ~<span class="built_in">Data</span>()</span><br><span class="line">      &#123;</span><br><span class="line">          cout &lt;&lt; <span class="string">&quot;析构函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Data ob; <span class="comment">///&lt; 隐式调用无参构造函数</span></span><br><span class="line">    Data ob3 = <span class="built_in">Data</span>();  <span class="comment">///&lt; 显示调用无参构造</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function">Data <span class="title">ob1</span><span class="params">(<span class="number">10</span>)</span></span>;   <span class="comment">///&lt; 隐式调用有参构造</span></span><br><span class="line">    Data ob2 = <span class="number">20</span>; <span class="comment">///&lt;隐式调用有参构造</span></span><br><span class="line">    Data ob4 = <span class="built_in">Data</span>(<span class="number">30</span>); <span class="comment">///&lt; 显示调用有参构造</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*匿名对象*/</span></span><br><span class="line">    <span class="built_in">Data</span>();   <span class="comment">///&lt; 匿名对象只在当前行有效，该行执行完之后对象释放</span></span><br><span class="line">    <span class="built_in">Data</span>(<span class="number">40</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232313523.png"
+                      alt="image-20230905232313523"
+                ></p>
+<p><strong>2.4 拷贝构造</strong></p>
+<p><strong>2.4.1 拷贝构造函数的定义</strong></p>
+<p>拷贝构造函数：本质是构造函数，函数名和类名相同。</p>
+<p>类名（const 类名 &amp; object）</p>
+<p>注意：</p>
+<p>如果用户不提供拷贝构造 编译器会提供一个默认的拷贝构造（浅拷贝）。</p>
+<p>只有类中有指针成员且指向堆区时 才有必要实现拷贝构造（深拷贝）。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//深拷贝案例</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">B</span>() &#123;cout &lt;&lt; <span class="string">&quot;无参构造&quot;</span> &lt;&lt; endl;&#125;</span><br><span class="line">        <span class="built_in">B</span>(<span class="type">char</span> *str)</span><br><span class="line">        &#123;</span><br><span class="line">         pname = (<span class="type">char</span> *)<span class="built_in">calloc</span>(<span class="number">1</span> ,<span class="number">20</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(pname , str);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;有参构造pname = &quot;</span> &lt;&lt; pname &lt;&lt; endl;</span><br><span class="line">            ch = <span class="number">18</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//浅拷贝默认形式</span></span><br><span class="line"><span class="built_in">B</span>(<span class="type">const</span> B &amp;b)</span><br><span class="line">&#123;</span><br><span class="line">    pname = b.pname;</span><br><span class="line">    ch = b.ch;</span><br><span class="line">    <span class="comment">/* xx = &amp;b.xx    */</span>   <span class="comment">//指针类型也是这样形式</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;浅拷贝构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//自定义一个深拷贝构造函数</span></span><br><span class="line"><span class="built_in">B</span>(<span class="type">const</span> B &amp;b)</span><br><span class="line">&#123;</span><br><span class="line">    pname = (<span class="type">char</span> *)<span class="built_in">calloc</span>(<span class="number">1</span> , <span class="number">20</span>); <span class="comment">// 给拷贝函数的指针类型分配单独地址</span></span><br><span class="line">            <span class="built_in">strcpy</span>(pname ,b.pname);</span><br><span class="line">    ch = b.ch;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;深拷贝构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">char</span> *pname;</span><br><span class="line">    <span class="type">int</span> ch;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="2-4-2-对象作为函数形参时，调用函数会触发拷贝构造"><a href="#2-4-2-对象作为函数形参时，调用函数会触发拷贝构造" class="headerlink" title="2.4.2 对象作为函数形参时，调用函数会触发拷贝构造"></a><strong>2.4.2 对象作为函数形参时，调用函数会触发拷贝构造</strong></h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> mB;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> mA;</span><br><span class="line">    <span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无参构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        mA = a;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;有参构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;析构函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*拷贝构造函数定义*/</span></span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">const</span> Data &amp;ob)</span><br><span class="line">    &#123;</span><br><span class="line">        mB = <span class="number">40</span>;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;mB = &quot;</span> &lt;&lt; mB &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;拷贝构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(Data ob)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Data ob;</span><br><span class="line">    <span class="built_in">func</span>(ob);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232757738.png"
+                      alt="image-20230905232757738"
+                ></p>
+<p><strong>2.4.3 普通对象作为函数返回值</strong></p>
+<p>案例1：在qt、linux下下列操作不会触发拷贝构造</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Data <span class="title">func01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Data ob;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;func01 ob = &quot;</span> &lt;&lt; &amp;ob &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> ob;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   Data ob = <span class="built_in">func01</span>();</span><br><span class="line">   cout &lt;&lt; <span class="string">&quot;test02 ob = &quot;</span> &lt;&lt; &amp;ob &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905232827928.png"
+                      alt="image-20230905232827928"
+                ></p>
+<h2 id="2-4-4-拷贝构造的调用时机"><a href="#2-4-4-拷贝构造的调用时机" class="headerlink" title="2.4.4 拷贝构造的调用时机"></a><strong>2.4.4 拷贝构造的调用时机</strong></h2><p>1.把对象作为函数的形参。</p>
+<p>2.用一个对象初始化另一个对象（默认情况下是浅拷贝）。</p>
+<p>3.函数局部对象以值传递的方式从函数返回(vs debug 模式下调用一次拷贝构造， qt不调用任何构造)</p>
+<h2 id="2-4-5默认无参构造、有参构造、拷贝构造之间屏蔽关系"><a href="#2-4-5默认无参构造、有参构造、拷贝构造之间屏蔽关系" class="headerlink" title="2.4.5默认无参构造、有参构造、拷贝构造之间屏蔽关系"></a><strong>2.4.5默认无参构造、有参构造、拷贝构造之间屏蔽关系</strong></h2><p>1.用户只有实现有参构造或拷贝构造 自动屏蔽 默认无参构造</p>
+<p>2.如果用户只有参或无参构造 不会屏蔽默认拷贝构造。</p>
+<p>3.只有用户实现拷贝构造函数 才会屏蔽默认拷贝构造。</p>
+<p>4.类有指针成员且指向堆区 必须实现拷贝构造 完成深拷贝。深拷贝：让对象的指针成员 指向独立的堆区空间，只拷贝空间的内容</p>
+<h1 id="第三章初始化列表"><a href="#第三章初始化列表" class="headerlink" title="第三章	初始化列表"></a><strong>第三章	初始化列表</strong></h1><h2 id="3-1-对象成员"><a href="#3-1-对象成员" class="headerlink" title="3.1 对象成员"></a><strong>3.1 对象成员</strong></h2><p>构造顺序：先成员构造 再自身构造</p>
+<p>析构顺序：先自身析构 再成员析构</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span> &#123; </span><br><span class="line">    <span class="keyword">private</span>:    </span><br><span class="line">    <span class="type">int</span> mB; </span><br><span class="line">    <span class="keyword">public</span>:    </span><br><span class="line">    <span class="type">int</span> mA;    </span><br><span class="line">    <span class="built_in">Data</span>()    </span><br><span class="line">    &#123;        </span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data无参构造&quot;</span> &lt;&lt; endl;    </span><br><span class="line">    &#125;    </span><br><span class="line">     <span class="built_in">Data</span>(<span class="type">int</span> a, <span class="type">int</span> b):mA&#123;a&#125;, mB&#123;b&#125; <span class="comment">///&lt; 初始化列表    </span></span><br><span class="line">    &#123;        </span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data有参构造 mA = &quot;</span> &lt;&lt; mA &lt;&lt; <span class="string">&quot; mB = &quot;</span> &lt;&lt; mB &lt;&lt; endl;    </span><br><span class="line">    &#125;    </span><br><span class="line">    ~<span class="built_in">Data</span>()    </span><br><span class="line">    &#123;        </span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data析构函数&quot;</span> &lt;&lt; endl;    </span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="comment">/*拷贝构造函数定义*/</span>    </span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">const</span> Data &amp;ob)    </span><br><span class="line">    &#123;        </span><br><span class="line">        mB = <span class="number">40</span>;       </span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;mB = &quot;</span> &lt;&lt; mB &lt;&lt; endl;        </span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data拷贝构造&quot;</span> &lt;&lt; endl;    </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Data01</span> &#123; </span><br><span class="line">    <span class="keyword">public</span>:    </span><br><span class="line">    <span class="built_in">Data01</span>() </span><br><span class="line">    &#123;        </span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data01 无参构造&quot;</span> &lt;&lt; endl;    </span><br><span class="line">    &#125;    </span><br><span class="line">    ~<span class="built_in">Data01</span>() </span><br><span class="line">    &#123;        </span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data01 析构函数&quot;</span> &lt;&lt; endl;    </span><br><span class="line">    &#125;    </span><br><span class="line">    Data ob1; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test04</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;    </span><br><span class="line">    Data01 ob;    </span><br><span class="line">    ob.ob1 = <span class="built_in">Data</span>(<span class="number">10</span>, <span class="number">20</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>3.2 初始化成员列表</strong></p>
+<p>注意：初始化成员列表(参数列表)只能在构造函数使用。</p>
+<p>案例1：初始化列表的使用</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> mB;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> mA;</span><br><span class="line">    <span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无参构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//Data(int a, int b):mA(a), mB(b) ///&lt; 正确，初始化列表</span></span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">int</span> a, <span class="type">int</span> b):mA&#123;a&#125;, mB&#123;b&#125; <span class="comment">///&lt; 初始化列表</span></span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;有参构造 mA = &quot;</span> &lt;&lt; mA &lt;&lt; <span class="string">&quot; mB = &quot;</span> &lt;&lt; mB &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;析构函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*拷贝构造函数定义*/</span></span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">const</span> Data &amp;ob)</span><br><span class="line">    &#123;</span><br><span class="line">        mB = <span class="number">40</span>;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;mB = &quot;</span> &lt;&lt; mB &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;拷贝构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test04</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Data ob = <span class="built_in">Data</span>(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line">    <span class="function">Data <span class="title">ob1</span><span class="params">(<span class="number">20</span>, <span class="number">30</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章explicit关键字"><a href="#第四章explicit关键字" class="headerlink" title="第四章	explicit关键字"></a><strong>第四章	explicit关键字</strong></h1><p>c++提供了关键字 explicit，禁止通过构造函数进行的隐式转换。声明为 explicit 的构造函数不能在隐式转换中使用。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plicit <span class="title">Data</span><span class="params">(<span class="type">int</span> a)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mA = a;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data有参构造 mA = &quot;</span> &lt;&lt; mA &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test05</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Data ob = <span class="number">10</span>;   <span class="comment">// 会产生错误，error: conversion from &#x27;int&#x27; to non-scalar type &#x27;Data&#x27; requested</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章动态对象创建"><a href="#第四章动态对象创建" class="headerlink" title="第四章	动态对象创建"></a><strong>第四章	动态对象创建</strong></h1><h2 id="5-1-动态内存分配的差异"><a href="#5-1-动态内存分配的差异" class="headerlink" title="5.1.动态内存分配的差异"></a><strong>5.1.动态内存分配的差异</strong></h2><p>C语言中动态内存分配函数：malloc、calloc、realloc和free。</p>
+<p>以malloc和free为例：</p>
+<p>在C++中该系列函数：</p>
+<p>1.malloc只分配内存空间，不会调用对象的初始化函数。</p>
+<p>2.free只会释放内存空间，不会调用对象的析构函数。</p>
+<p>故在C++中动态内存的分配引出了new和delete函数。</p>
+<h2 id="5-2-new和delete创建对象"><a href="#5-2-new和delete创建对象" class="headerlink" title="5.2 new和delete创建对象"></a><strong>5.2 new和delete创建对象</strong></h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无参构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        ma = a;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;有参构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;析构函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> ma;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//创建对象，调用无参构造</span></span><br><span class="line">    Data *ob;</span><br><span class="line">    ob = <span class="keyword">new</span> Data;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Data ma = &quot;</span> &lt;&lt; ob-&gt;ma &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">delete</span> ob;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建对象，调用有参构造</span></span><br><span class="line">    Data *ob1;</span><br><span class="line">    ob1 = <span class="keyword">new</span> <span class="built_in">Data</span>(<span class="number">100</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Data ma = &quot;</span> &lt;&lt; ob1-&gt;ma &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">delete</span> ob1;</span><br><span class="line">    ob1 = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233538875.png"
+                      alt="image-20230905233538875"
+                ></p>
+<p>new：分配空间，同时也会初始化该对象。</p>
+<p>delete: 释放空间，同时会调用该对象的析构函数。</p>
+<h2 id="5-3-new和delete函数使用"><a href="#5-3-new和delete函数使用" class="headerlink" title="5.3 new和delete函数使用"></a><strong>5.3 new和delete函数使用</strong></h2><p>new申请堆区空间，delete释放堆区空间。</p>
+<p>new操作普通类型数据：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233603627.png"
+                      alt="image-20230905233603627"
+                ></p>
+<p>new操作普通类型数组：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233611330.png"
+                      alt="image-20230905233611330"
+                ></p>
+<p>注意：操作基本类型：new和delete 与 malloc和free没有区别</p>
+<p><strong>5.4 不要对void *对象进行delete操作</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233643651.png"
+                      alt="image-20230905233643651"
+                ></p>
+<p>delete一个void *类型的对象，因无法确定该类型，不能调用析构函数。</p>
+<h1 id="第六章对象数组"><a href="#第六章对象数组" class="headerlink" title="第六章	对象数组"></a>第六章	对象数组</h1><p>本质是数组，数组内部存储的是对象</p>
+<p>案例1：创建对象数组</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无参构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Data</span><span class="params">(<span class="type">int</span> a)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ma = a;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;有参构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;析构函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> ma;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test04</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// Data *objArr = new Data[5]; /// &lt; 编译器将调用无参构造函数</span></span><br><span class="line">   <span class="comment">//动态创建对象数组，编译器将调用有参构造</span></span><br><span class="line">   Data *objArr = <span class="keyword">new</span> Data[<span class="number">5</span>]&#123;<span class="built_in">Data</span>(<span class="number">10</span>), <span class="built_in">Data</span>(<span class="number">20</span>), <span class="built_in">Data</span>(<span class="number">30</span>), <span class="built_in">Data</span>(<span class="number">40</span>), <span class="built_in">Data</span>(<span class="number">50</span>)&#125;;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">       cout &lt;&lt; <span class="string">&quot;objArr +  &quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot; = &quot;</span> &lt;&lt; objArr[i].ma &lt;&lt; endl;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span>(objArr != <span class="literal">nullptr</span>)&#123;</span><br><span class="line">       <span class="keyword">delete</span> [] objArr;</span><br><span class="line">       objArr = <span class="literal">nullptr</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233717962.png"
+                      alt="image-20230905233717962"
+                ></p>
+<h1 id="第七章静态数组（对象的栈聚合数组）"><a href="#第七章静态数组（对象的栈聚合数组）" class="headerlink" title="第七章	静态数组（对象的栈聚合数组）"></a>第七章	静态数组（对象的栈聚合数组）</h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;无参构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Data</span><span class="params">(<span class="type">int</span> a)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ma = a;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;有参构造&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;析构函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> ma;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test05</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//对象栈聚合初始化，也可称为静态数组</span></span><br><span class="line">    Data ob[] = &#123;<span class="built_in">Data</span>(<span class="number">10</span>), <span class="built_in">Data</span>(<span class="number">20</span>), <span class="built_in">Data</span>(<span class="number">30</span>), <span class="built_in">Data</span>(<span class="number">40</span>), <span class="built_in">Data</span>(<span class="number">50</span>)&#125;;</span><br><span class="line">    n = <span class="built_in">sizeof</span>(ob) / <span class="built_in">sizeof</span>(ob[<span class="number">0</span>]);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot; n = &quot;</span> &lt;&lt; n &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot; NO&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot; = &quot;</span> &lt;&lt; ob[i].ma;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233804566.png"
+                      alt="image-20230905233804566"
+                ></p>
+<h1 id="第八章深拷贝与浅拷贝"><a href="#第八章深拷贝与浅拷贝" class="headerlink" title="第八章	深拷贝与浅拷贝"></a><strong>第八章	深拷贝与浅拷贝</strong></h1><h2 id="8-1深拷贝与浅拷贝的概念"><a href="#8-1深拷贝与浅拷贝的概念" class="headerlink" title="8.1深拷贝与浅拷贝的概念"></a><strong>8.1深拷贝与浅拷贝的概念</strong></h2><p>浅拷贝：同一类型的对象之间可以赋值，使得两个对象的成员变量的值相同，两个对象仍然是独立的两个对象。</p>
+<p>注意：一般情况下， 浅拷贝没有任何副作用，但是当类中有指针，并且指针指向动态分配的内存空间，析构函数做了动态内存释放的处理，会导致内存问题。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905233948289.png"
+                      alt="image-20230905233948289"
+                ></p>
+<p>深拷贝：当类中有指针，并且此指针有动态分配空间（在堆区分配了空间），析构函数做了释放处理，往往需要自定义拷贝构造函数，自行给指针动态分配空间</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234001086.png"
+                      alt="image-20230905234001086"
+                ></p>
+<h1 id="第九章静态成员"><a href="#第九章静态成员" class="headerlink" title="第九章	静态成员"></a><strong>第九章	静态成员</strong></h1><p><strong>9.1 静态数据成员</strong></p>
+<p><strong>9.1.1 静态数据成员的定义及使用</strong></p>
+<p>1.静态数据成员属于类，不属于对象。</p>
+<p>2.静态数据成员在所有的对象中共享。</p>
+<p>\3. 静态成员变量必须在类中声明，在类外定义，在定义时在数据成员前不要加static。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234028054.png"
+                      alt="image-20230905234028054"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234049218.png"
+                      alt="image-20230905234049218"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234056169.png"
+                      alt="image-20230905234056169"
+                ></p>
+<h2 id="9-1-2-静态数据成员的大小"><a href="#9-1-2-静态数据成员的大小" class="headerlink" title="9.1.2 静态数据成员的大小"></a><strong>9.1.2 静态数据成员的大小</strong></h2><p>在类当中，静态数据成员不占用类的空间大小。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234113866.png"
+                      alt="image-20230905234113866"
+                ></p>
+<h2 id="9-1-3-访问私有的静态数据成员可通过静态成员函数或对象的普通成员函数"><a href="#9-1-3-访问私有的静态数据成员可通过静态成员函数或对象的普通成员函数" class="headerlink" title="9.1.3 访问私有的静态数据成员可通过静态成员函数或对象的普通成员函数"></a><strong>9.1.3 访问私有的静态数据成员可通过静态成员函数或对象的普通成员函数</strong></h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234130286.png"
+                      alt="image-20230905234130286"
+                ></p>
+<h2 id="9-2静态成员函数"><a href="#9-2静态成员函数" class="headerlink" title="9.2静态成员函数"></a><strong>9.2静态成员函数</strong></h2><p>注意：静态成员函数主要为了访问静态变量，但是，不能访问普通成员变量。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> mB;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> mC;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">A</span>() &#123;&#125;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">int</span> c)</span><br><span class="line">    &#123;</span><br><span class="line">        mC = c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> mA;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">getmB</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mB;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">getmC</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mC;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getMemB</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mB;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> A::mA = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> A::mB = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="function">A <span class="title">ob</span><span class="params">(<span class="number">30</span>)</span></span>;</span><br><span class="line">   c = ob.<span class="built_in">getmC</span>();</span><br><span class="line">   cout &lt;&lt; <span class="string">&quot;c = &quot;</span> &lt;&lt; c &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> A::mA = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> A::mB = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="function">A <span class="title">ob</span><span class="params">(<span class="number">30</span>)</span></span>;</span><br><span class="line">  <span class="type">int</span>  c = ob.<span class="built_in">getmC</span>(ob);</span><br><span class="line">   cout &lt;&lt; <span class="string">&quot;c = &quot;</span> &lt;&lt; c &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>静态成员函数的意义，不在于信息共享，数据沟通，而在于管理静态数据成员，完成对静态数据成员的封装。</p>
+<p>普通成员函数可访问静态成员变量、也可以访问非静态成员变量。</p>
+<p>扩展知识：</p>
+<p>静态常量数据成员，同样属于类，对象之间共享，具有只读属性。</p>
+<h1 id="第十章单例模式"><a href="#第十章单例模式" class="headerlink" title="第十章	单例模式"></a><strong>第十章	单例模式</strong></h1><p>单例模式概念：单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SingleTon</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">//数据成员</span></span><br><span class="line">    <span class="comment">//第一步将构造函数私有化（防止外界实例化对象）</span></span><br><span class="line">    <span class="built_in">SingleTon</span>()&#123;&#125;</span><br><span class="line">    <span class="comment">//第二步定义静态对象的指针常量</span></span><br><span class="line">    <span class="type">static</span> SingleTon * <span class="type">const</span> single;  <span class="comment">///&lt; 声明</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//第五步删除拷贝构造函数</span></span><br><span class="line">    <span class="built_in">SingleTon</span>(<span class="type">const</span> SingleTon &amp; ob) = <span class="keyword">delete</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//第六步释放拷贝构造对象（利用了运算符重载）</span></span><br><span class="line">    SingleTon&amp; <span class="keyword">operator</span> = (<span class="type">const</span> SingleTon &amp; ob) = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//第四步静态成员 函数获取唯一的指针地址</span></span><br><span class="line">    <span class="function"><span class="type">static</span> SingleTon * <span class="title">getSingleten</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> single;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//成员函数</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printInfo</span><span class="params">(<span class="type">char</span> * str)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;hello &quot;</span> &lt;&lt; str &lt;&lt; endl;</span><br><span class="line">        cnt++;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;cnt = &quot;</span> &lt;&lt; cnt &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//第三部实例化静态成员指针常量</span></span><br><span class="line">SingleTon * <span class="type">const</span> SingleTon::single = <span class="keyword">new</span> SingleTon;  <span class="comment">///&lt; 定义</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SingleTon *ob = ob-&gt;<span class="built_in">getSingleten</span>();</span><br><span class="line">    ob-&gt;<span class="built_in">printInfo</span>(<span class="string">&quot;lucy&quot;</span>);</span><br><span class="line">    ob-&gt;<span class="built_in">printInfo</span>(<span class="string">&quot;bob&quot;</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;ob = &quot;</span> &lt;&lt; ob &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    SingleTon *ob1 = ob-&gt;<span class="built_in">getSingleten</span>();</span><br><span class="line">    ob1-&gt;<span class="built_in">printInfo</span>(<span class="string">&quot;eric&quot;</span>);</span><br><span class="line">    ob1-&gt;<span class="built_in">printInfo</span>(<span class="string">&quot;frank&quot;</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;ob1 = &quot;</span> &lt;&lt; ob1 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> ob;</span><br><span class="line">    <span class="keyword">delete</span> ob1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234234785.png"
+                      alt="image-20230905234234785"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> CPP__类与对象</li>
+        <li><strong>作者:</strong> BAI ZHOU</li>
+        <li><strong>创建于
+                :</strong> 2023-09-05 23:13:41</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2023-09-05 23:43:15
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://redefine.ohevan.com/2023/09/05/CPP-类与对象/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+            本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">#基础 CPP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/09/02/CPP-%E6%A6%82%E8%BF%B0/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">CPP_概述</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">CPP__类与对象</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">第一章	类和对象的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-C-%E5%92%8C-C-%E4%B8%AD-struct-%E5%8C%BA%E5%88%AB"><span class="nav-text">1.1 C 和 C++中 struct 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E7%9A%84%E6%80%9D%E6%83%B3"><span class="nav-text">1.2 设计类的思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E3%80%81%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AAPerson%E7%B1%BB"><span class="nav-text">1.3、设计一个Person类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4C-%E4%B8%AD%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1.4C++中结构体和类的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E7%B1%BB%E8%AE%BE%E8%AE%A1%E6%A1%88%E4%BE%8B"><span class="nav-text">1.5 类设计案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8F%8A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-text">第二章	构造函数及析构函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E5%8F%8A%E7%89%B9%E5%BE%81"><span class="nav-text">2.1构造函数定义及特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">2.2 构造函数的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%8F%8A%E7%89%B9%E5%BE%81"><span class="nav-text">2.3 析构函数的定义及特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-2-%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E6%97%B6%EF%BC%8C%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0%E4%BC%9A%E8%A7%A6%E5%8F%91%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0"><span class="nav-text">2.4.2 对象作为函数形参时，调用函数会触发拷贝构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-4-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E7%9A%84%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA"><span class="nav-text">2.4.4 拷贝构造的调用时机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-5%E9%BB%98%E8%AE%A4%E6%97%A0%E5%8F%82%E6%9E%84%E9%80%A0%E3%80%81%E6%9C%89%E5%8F%82%E6%9E%84%E9%80%A0%E3%80%81%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E4%B9%8B%E9%97%B4%E5%B1%8F%E8%94%BD%E5%85%B3%E7%B3%BB"><span class="nav-text">2.4.5默认无参构造、有参构造、拷贝构造之间屏蔽关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8"><span class="nav-text">第三章	初始化列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98"><span class="nav-text">3.1 对象成员</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0explicit%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">第四章	explicit关键字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%8A%A8%E6%80%81%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA"><span class="nav-text">第四章	动态对象创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-text">5.1.动态内存分配的差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-new%E5%92%8Cdelete%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-text">5.2 new和delete创建对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-new%E5%92%8Cdelete%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8"><span class="nav-text">5.3 new和delete函数使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84"><span class="nav-text">第六章	对象数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%EF%BC%88%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A0%88%E8%81%9A%E5%90%88%E6%95%B0%E7%BB%84%EF%BC%89"><span class="nav-text">第七章	静态数组（对象的栈聚合数组）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-text">第八章	深拷贝与浅拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-text">8.1深拷贝与浅拷贝的概念</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="nav-text">第九章	静态成员</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-2-%E9%9D%99%E6%80%81%E6%95%B0%E6%8D%AE%E6%88%90%E5%91%98%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-text">9.1.2 静态数据成员的大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-3-%E8%AE%BF%E9%97%AE%E7%A7%81%E6%9C%89%E7%9A%84%E9%9D%99%E6%80%81%E6%95%B0%E6%8D%AE%E6%88%90%E5%91%98%E5%8F%AF%E9%80%9A%E8%BF%87%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E6%88%96%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%99%AE%E9%80%9A%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-text">9.1.3 访问私有的静态数据成员可通过静态成员函数或对象的普通成员函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-text">9.2静态成员函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-text">第十章	单例模式</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">月光是白昼寄给黑夜的情节，朝霞是黑夜思念白昼的泪光。</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">BAI ZHOU</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>
