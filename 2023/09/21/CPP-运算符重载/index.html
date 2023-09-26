@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="BAI ZHOU">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/09/21/cpp-运算符重载/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="第一章	运算符重载赋予运算符新的功能，以适应不同的数据类型。 关键字：operator运算符：运算符就是我们要重载运算符，比如：&lt;&lt;（输出） , &gt;&gt;（输入）,+,(),[]等。 重载运算符的步骤： 1.分析运算符的操作数的个数；比如：cout &lt;&lt; xxx; 2.分析运算符左边的运算对象：自定义对象还是其他，这个就决定了我们时使用全局函数还是成员函数。   左">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPP__运算符重载">
+<meta property="og:url" content="http://example.com/2023/09/21/CPP-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/index.html">
+<meta property="og:site_name" content="白昼">
+<meta property="og:description" content="第一章	运算符重载赋予运算符新的功能，以适应不同的数据类型。 关键字：operator运算符：运算符就是我们要重载运算符，比如：&lt;&lt;（输出） , &gt;&gt;（输入）,+,(),[]等。 重载运算符的步骤： 1.分析运算符的操作数的个数；比如：cout &lt;&lt; xxx; 2.分析运算符左边的运算对象：自定义对象还是其他，这个就决定了我们时使用全局函数还是成员函数。   左">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/image-20230921092636470.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/image-20230921093102276.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/image-20230921093847282.png">
+<meta property="article:published_time" content="2023-09-21T01:24:25.000Z">
+<meta property="article:modified_time" content="2023-09-21T01:43:13.987Z">
+<meta property="article:author" content="白昼">
+<meta property="article:tag" content="基础 CPP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/CPP__%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/image-20230921092636470.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            CPP__运算符重载 -
+        
+        白昼的宝典
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="" rel="stylesheet">
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"BAI ZHOU","subtitle":{"text":["每朵云都下落不明","每盏月亮都不知所踪"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}},"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://status.evanluo.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","Blog":"https://ohevan.com","Friends":"/friends"}},"Links":{"icon":"fa-regular fa-link","submenus":{"Hexo":"https://hexo.io/zh-cn/","Themes":"https://hexo.io/themes/","Redefine":"https://redefine-docs.ohevan.com/getting-started"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"Announce","links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/8/15 00:00:00"};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                白昼的宝典
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://status.evanluo.top/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-chart-bar"></i>
+                                        
+                                        状态
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ME
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://github.com/baizhouhaoyue/baizhouhaoyue.github.io">GITHUB
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://ohevan.com">BLOG
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/friends">友情链接
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-link"></i>
+                                        
+                                        链接&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">HEXO
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://hexo.io/themes/">THEMES
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        target="_blank" rel="noopener" href="https://status.evanluo.top/"  >
+                             
+                                
+                                    <i class="fa-regular fa-chart-bar"></i>
+                                
+                                状态
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/about">ME</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://github.com/baizhouhaoyue/baizhouhaoyue.github.io">GITHUB</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://ohevan.com">BLOG</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/friends">友情链接</a>
+                            </li>
+                        
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-link"></i>
+                                
+                                链接&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">HEXO</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://hexo.io/themes/">THEMES</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">CPP__运算符重载</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.wXOy_YCJC8bSlnbu_R1mugHaFQ?pid=ImgDet&rs=1">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">BAI ZHOU</span>
+                        
+                            <span class="author-label">Lv3</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-09-21 09:24:25</span>
+        <span class="mobile">2023-09-21 09:24:25</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-09-21 09:43:13</span>
+            <span class="mobile">2023-09-21 09:43:13</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/CPP%E8%AF%AD%E8%A8%80/">CPP语言</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">基础 CPP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h1 id="第一章运算符重载"><a href="#第一章运算符重载" class="headerlink" title="第一章	运算符重载"></a><strong>第一章	运算符重载</strong></h1><p>赋予运算符新的功能，以适应不同的数据类型。</p>
+<p>关键字：operator运算符：运算符就是我们要重载运算符，比如：&lt;&lt;（输出） , &gt;&gt;（输入）,+,(),[]等。</p>
+<p>重载运算符的步骤：</p>
+<p>1.分析运算符的操作数的个数；比如：cout &lt;&lt; xxx;</p>
+<p>2.分析运算符左边的运算对象：自定义对象还是其他，这个就决定了我们时使用全局函数还是成员函数。</p>
+<p>  左边是其他：使用全局函数（声明为友元）</p>
+<p>  左边是自定义的对象：可以使用全局函数也可使用成员函数（推荐）。</p>
+<h1 id="第二章重载输出"><a href="#第二章重载输出" class="headerlink" title="第二章	重载输出(&lt;&lt;)运算符"></a><strong>第二章	重载输出(&lt;&lt;)运算符</strong></h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span> &lt;&lt;(ostream &amp;out, Person ob);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Person</span>() &#123;&#125;</span><br><span class="line">    <span class="built_in">Person</span>(<span class="type">int</span> a, <span class="type">int</span> n):<span class="built_in">age</span>(a), <span class="built_in">num</span>(n)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//重载运算符时形参建议都是用引用，但输出不能使用引用</span></span><br><span class="line"><span class="comment">//Person ob1; Person ob2  ---&gt;ob1 + ob2 --&gt;临时对象--&gt;没有引用</span></span><br><span class="line">ostream &amp; <span class="keyword">operator</span> &lt;&lt;(ostream &amp;out, Person ob)</span><br><span class="line">&#123;</span><br><span class="line">    out &lt;&lt; ob.age &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; ob.num;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Person <span class="title">lucy</span><span class="params">(<span class="number">20</span>, <span class="number">101</span>)</span></span>;</span><br><span class="line">    <span class="function">Person <span class="title">bob</span><span class="params">(<span class="number">21</span>, <span class="number">102</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; lucy &lt;&lt; <span class="string">&quot; &quot;</span>&lt;&lt; bob &lt;&lt; endl;</span><br><span class="line">   <span class="comment">// operator &lt;&lt;(cout, lucy);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/image-20230921092636470.png"
+                      alt="image-20230921092636470"
+                ></p>
+<h1 id="第三章重载输入"><a href="#第三章重载输入" class="headerlink" title="第三章	重载输入(&gt;&gt;)"></a><strong>第三章	重载输入(&gt;&gt;)</strong></h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">istream &amp;<span class="keyword">operator</span> &gt;&gt;(istream &amp;in, Person &amp;ob)</span><br><span class="line">&#123;</span><br><span class="line">   in &gt;&gt; ob.age  &gt;&gt; ob.num;</span><br><span class="line">   <span class="keyword">return</span> in;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Person lucy;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; lucy;</span><br><span class="line">    cout &lt;&lt; lucy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章重载-运算符"><a href="#第四章重载-运算符" class="headerlink" title="第四章	重载+运算符"></a><strong>第四章	重载+运算符</strong></h1><p>案例1：利用全局函数实现+运算符重载</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//全局函数</span></span><br><span class="line">Person <span class="keyword">operator</span> +(Person ob1, Person ob2)</span><br><span class="line">&#123;</span><br><span class="line">    Person tmp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    tmp.age = ob1.age + ob2.age;</span><br><span class="line">    tmp.num = ob1.num + ob2.num;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Person <span class="title">lucy</span><span class="params">(<span class="number">20</span>, <span class="number">104</span>)</span></span>;</span><br><span class="line">    <span class="function">Person <span class="title">bob</span><span class="params">(<span class="number">23</span>, <span class="number">105</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; lucy + bob;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>案例2：利用成员函数实现+运算符重载</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Person <span class="keyword">operator</span>+(Person ob)</span><br><span class="line">&#123;</span><br><span class="line">    Person tmp;</span><br><span class="line">    tmp.age = <span class="keyword">this</span>-&gt;age + ob.age;</span><br><span class="line">    tmp.num = <span class="keyword">this</span>-&gt;num + ob.num;</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Person <span class="title">lucy</span><span class="params">(<span class="number">20</span>, <span class="number">104</span>)</span></span>;</span><br><span class="line">    <span class="function">Person <span class="title">bob</span><span class="params">(<span class="number">23</span>, <span class="number">105</span>)</span></span>;</span><br><span class="line">   <span class="comment">// cout &lt;&lt; lucy.operator +(bob); ///&lt; 正确</span></span><br><span class="line">    cout &lt;&lt; lucy + bob;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章重载-运算符"><a href="#第五章重载-运算符" class="headerlink" title="第五章	重载++运算符"></a><strong>第五章	重载++运算符</strong></h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Person <span class="keyword">operator</span>++(<span class="type">int</span>) <span class="comment">//++后置</span></span><br><span class="line">&#123;</span><br><span class="line">    Person old = *<span class="keyword">this</span>;</span><br><span class="line">    num++;</span><br><span class="line">    age++;</span><br><span class="line">    <span class="keyword">return</span> old;</span><br><span class="line">&#125;</span><br><span class="line">Person <span class="keyword">operator</span> ++() <span class="comment">//++前置</span></span><br><span class="line">&#123;</span><br><span class="line">    num++;</span><br><span class="line">    age++;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test04</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Person <span class="title">lucy</span><span class="params">(<span class="number">20</span>,<span class="number">100</span>)</span></span>;</span><br><span class="line">    Person bob;</span><br><span class="line">   <span class="comment">// bob = lucy++;</span></span><br><span class="line">    bob = ++lucy;</span><br><span class="line">    cout &lt;&lt; bob;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第六章重载-运算符"><a href="#第六章重载-运算符" class="headerlink" title="第六章	重载&#x3D;&#x3D;运算符"></a>第六章	重载&#x3D;&#x3D;运算符</h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>==(Person &amp;ob)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>((num == ob.num) &amp;&amp; (age == ob.age))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test05</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Person <span class="title">eric</span><span class="params">(<span class="number">23</span>, <span class="number">101</span>)</span></span>;</span><br><span class="line">    <span class="function">Person <span class="title">frike</span><span class="params">(<span class="number">23</span>, <span class="number">101</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(eric == frike)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;eric 等于 frike&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;eric 不等于 frike&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第七章重载-运算符"><a href="#第七章重载-运算符" class="headerlink" title="第七章	重载&amp;&amp;运算符"></a><strong>第七章	重载&amp;&amp;运算符</strong></h1><p>&amp;&amp;与||有什么特点？短路特性</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">f</span>(a &amp;&amp; b)  或 <span class="keyword">if</span>(a || b)</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/image-20230921093102276.png"
+                      alt="image-20230921093102276"
+                ></p>
+<p>注意：尽量不要重载&amp;&amp;与||</p>
+<h1 id="第八章重载函数调用运算符（函数名（））"><a href="#第八章重载函数调用运算符（函数名（））" class="headerlink" title="第八章	重载函数调用运算符（函数名（））"></a>第八章	重载函数调用运算符（函数名（））</h1><p>功能：为算法提供相关策略</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printer ob;</span><br><span class="line">    ob.<span class="built_in">operator</span>()(<span class="string">&quot;frist&quot;</span>);</span><br><span class="line">    <span class="built_in">ob</span>(<span class="string">&quot;one\n&quot;</span>).<span class="built_in">operator</span> ()(<span class="string">&quot;two\n&quot;</span>)(<span class="string">&quot;three\n&quot;</span>);\</span><br><span class="line">    <span class="built_in">ob</span>(<span class="string">&quot;one\n&quot;</span>).<span class="built_in">operator</span> ()(<span class="string">&quot;two\n&quot;</span>)(<span class="string">&quot;three\n&quot;</span>);\</span><br><span class="line">    <span class="built_in">printer</span>().<span class="built_in">operator</span> ()(<span class="string">&quot;one\n&quot;</span>).<span class="built_in">operator</span> ()(<span class="string">&quot;two\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printer</span>()(<span class="string">&quot;one\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>符号重载总结：</strong></p>
+<p>\1. &#x3D;, [], () 和 -&gt; 操作符只能通过成员函数进行重载</p>
+<p>\2. &lt;&lt; 和 &gt;&gt;只能通过全局函数配合友元函数进行重载</p>
+<p>\3. 不要重载 &amp;&amp; 和 || 操作符，因为无法实现短路规则</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/image-20230921093847282.png"
+                      alt="image-20230921093847282"
+                ></p>
+<h1 id="第九章字符串类封装"><a href="#第九章字符串类封装" class="headerlink" title="第九章	字符串类封装"></a><strong>第九章	字符串类封装</strong></h1><p>mystring.h</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MY_STRING_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MY_STRING_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyString</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp;out, MyString ob);</span><br><span class="line">    <span class="keyword">friend</span> istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp;in, MyString &amp;ob);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">char</span> *str;</span><br><span class="line">    <span class="type">int</span>  size;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyString</span>();</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">MyString</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * s)</span></span>;</span><br><span class="line">    <span class="built_in">MyString</span>(<span class="type">const</span> MyString &amp;ob);</span><br><span class="line">    ~<span class="built_in">MyString</span>();</span><br><span class="line">    <span class="built_in">Size</span>();</span><br><span class="line">    <span class="type">char</span> &amp; <span class="keyword">operator</span>[](<span class="type">int</span> index);</span><br><span class="line">    MyString &amp; <span class="keyword">operator</span>=(MyString ob);</span><br><span class="line">    MyString &amp; <span class="keyword">operator</span>=(<span class="type">const</span> <span class="type">char</span> * s);</span><br><span class="line">    MyString  <span class="keyword">operator</span>+(MyString &amp;ob);</span><br><span class="line">    MyString  <span class="keyword">operator</span>+(<span class="type">const</span> <span class="type">char</span> * s);</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&gt;(MyString &amp;ob);</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&gt;(<span class="type">const</span> <span class="type">char</span> * s);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// MY_STRING_H</span></span></span><br></pre></td></tr></table></figure></div>
+
+<p>mystring.cpp</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;mystring.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">MyString::<span class="built_in">MyString</span>()</span><br><span class="line">&#123;</span><br><span class="line">    str = <span class="keyword">new</span> <span class="type">char</span>[<span class="number">0</span>];</span><br><span class="line">    size = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyString::<span class="built_in">MyString</span>(<span class="type">const</span> <span class="type">char</span> *s)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">// cout &lt;&lt; &quot;MyString 有参构造&quot; &lt;&lt; endl;</span></span><br><span class="line">    size = <span class="built_in">strlen</span>(s);</span><br><span class="line">    str = <span class="keyword">new</span> <span class="type">char</span>[size + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(str, s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyString::<span class="built_in">MyString</span>(<span class="type">const</span> MyString &amp;ob)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//  cout &lt;&lt; &quot;MyString 拷贝构造&quot; &lt;&lt; endl;</span></span><br><span class="line">     size = ob.size;</span><br><span class="line">     str = <span class="keyword">new</span> <span class="type">char</span>[size + <span class="number">1</span>];</span><br><span class="line">     <span class="built_in">strcpy</span>(str, ob.str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyString::~<span class="built_in">MyString</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(str != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">delete</span> [] str;</span><br><span class="line">        str = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyString::<span class="built_in">Size</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>-&gt;size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> &amp;MyString::<span class="keyword">operator</span>[](<span class="type">int</span> index)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> str[index];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyString &amp;MyString::<span class="keyword">operator</span>=(MyString ob)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(str != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> [] str;</span><br><span class="line">        str = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    size = ob.size;</span><br><span class="line">    str = <span class="keyword">new</span> <span class="type">char</span>[size + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(str, ob.str);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MyString &amp;MyString::<span class="keyword">operator</span>=(<span class="type">const</span> <span class="type">char</span> *s)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(str != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> [] str;</span><br><span class="line">        str = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    size = <span class="built_in">strlen</span>(s);</span><br><span class="line">    str = <span class="keyword">new</span> <span class="type">char</span>[size + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(str, s);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MyString MyString::<span class="keyword">operator</span>+(MyString &amp;ob)</span><br><span class="line">&#123;</span><br><span class="line">    MyString tmp;</span><br><span class="line">    tmp.size = size + ob.size;</span><br><span class="line">    tmp.str = <span class="keyword">new</span> <span class="type">char</span>[tmp.size];</span><br><span class="line">    <span class="built_in">strcpy</span>(tmp.str, str);</span><br><span class="line">    <span class="built_in">strcat</span>(tmp.str, ob.str);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MyString MyString::<span class="keyword">operator</span>+(<span class="type">const</span> <span class="type">char</span> *s)</span><br><span class="line">&#123;</span><br><span class="line">    MyString tmp;</span><br><span class="line">    tmp.size = size + <span class="built_in">strlen</span>(s);</span><br><span class="line">    tmp.str = <span class="keyword">new</span> <span class="type">char</span>[tmp.size];</span><br><span class="line">    <span class="built_in">strcpy</span>(tmp.str, str);</span><br><span class="line">    <span class="built_in">strcat</span>(tmp.str, s);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> MyString::<span class="keyword">operator</span>&gt;(MyString &amp;ob)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>((<span class="built_in">strcmp</span>(str, ob.str)) &gt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> MyString::<span class="keyword">operator</span>&gt;(<span class="type">const</span> <span class="type">char</span> *s)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">if</span>((<span class="built_in">strcmp</span>(str, s)) &gt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">     <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp;out, MyString ob)</span><br><span class="line">&#123;</span><br><span class="line">    out &lt;&lt; ob.str;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line">istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp;in, MyString &amp;ob)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(ob.str != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">delete</span> [] ob.str;</span><br><span class="line">        ob.str = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    in &gt;&gt; buf;</span><br><span class="line">    ob.size = <span class="built_in">strlen</span>(buf);</span><br><span class="line">    ob.str = <span class="keyword">new</span> <span class="type">char</span>[ob.size + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(ob.str, buf);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> in;</span><br><span class="line">&#125;</span><br><span class="line">main.cpp</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mystring.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">MyString <span class="title">str</span><span class="params">(<span class="string">&quot;hello world&quot;</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; str &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; str.<span class="built_in">Size</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    MyString str1 = str;</span><br><span class="line">    cout &lt;&lt; str1 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    MyString str2;</span><br><span class="line">    cin &gt;&gt; str2;</span><br><span class="line">    str2[<span class="number">1</span>] = <span class="string">&#x27;E&#x27;</span>;</span><br><span class="line">    cout &lt;&lt; str2[<span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; str2 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    MyString str3;</span><br><span class="line">    <span class="function">MyString <span class="title">str4</span><span class="params">(<span class="string">&quot;haha hehe&quot;</span>)</span></span>;</span><br><span class="line">    str3 = str4;</span><br><span class="line">    cout &lt;&lt; str3 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    MyString str5;</span><br><span class="line">    str5 = <span class="string">&quot;xixi heihei&quot;</span>;</span><br><span class="line">    cout &lt;&lt; str5 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="function">MyString <span class="title">str6</span><span class="params">(<span class="string">&quot;hello&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">MyString <span class="title">str7</span><span class="params">(<span class="string">&quot;bob&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; str6 + str7 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; str6 + <span class="string">&quot;taoge&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="function">MyString <span class="title">str8</span><span class="params">(<span class="string">&quot;yishuai&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">MyString <span class="title">str9</span><span class="params">(<span class="string">&quot;zhiwei&quot;</span>)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(str8 &gt; str9)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot; 聪明&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;更聪明&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(str9 &gt; <span class="string">&quot;傻子&quot;</span>)</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;not 傻子&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;is 傻子&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> CPP__运算符重载</li>
+        <li><strong>作者:</strong> BAI ZHOU</li>
+        <li><strong>创建于
+                :</strong> 2023-09-21 09:24:25</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2023-09-21 09:43:13
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://redefine.ohevan.com/2023/09/21/CPP-运算符重载/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+            本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">#基础 CPP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/09/21/CPP-%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">CPP__继承与派生</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/09/21/CPP-%E5%8F%8B%E5%85%83/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">CPP_友元</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">CPP__运算符重载</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD"><span class="nav-text">第一章	运算符重载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E9%87%8D%E8%BD%BD%E8%BE%93%E5%87%BA"><span class="nav-text">第二章	重载输出(&lt;&lt;)运算符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E9%87%8D%E8%BD%BD%E8%BE%93%E5%85%A5"><span class="nav-text">第三章	重载输入(&gt;&gt;)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E9%87%8D%E8%BD%BD-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">第四章	重载+运算符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%87%8D%E8%BD%BD-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">第五章	重载++运算符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E9%87%8D%E8%BD%BD-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">第六章	重载&#x3D;&#x3D;运算符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0%E9%87%8D%E8%BD%BD-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">第七章	重载&amp;&amp;运算符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88%E5%87%BD%E6%95%B0%E5%90%8D%EF%BC%88%EF%BC%89%EF%BC%89"><span class="nav-text">第八章	重载函数调用运算符（函数名（））</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%B0%81%E8%A3%85"><span class="nav-text">第九章	字符串类封装</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">月光是白昼寄给黑夜的情节，朝霞是黑夜思念白昼的泪光。</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">BAI ZHOU</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

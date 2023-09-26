@@ -13,20 +13,25 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/tags/"/>
+    <link rel="canonical" href="http://example.com/2023/09/21/cpp-类型转换/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://example.com/tags/index.html">
+        <meta name="description" content="第一章	上行与下行转换上行转换：把派生类的指针或引用转换成基类表示（安全） 下行转换：把基类指针或引用转换成派生类表示（不安全）  第二章	静态转换关键字：static_cast(); 案例1： 12345678910111213141516171819void test01()&amp;#123;    &#x2F;&#x2F; 基本数据类型转换    int a &#x3D; static_cast&lt;int&gt;(3.14">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPP__类型转换">
+<meta property="og:url" content="http://example.com/2023/09/21/CPP-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/index.html">
 <meta property="og:site_name" content="白昼">
+<meta property="og:description" content="第一章	上行与下行转换上行转换：把派生类的指针或引用转换成基类表示（安全） 下行转换：把基类指针或引用转换成派生类表示（不安全）  第二章	静态转换关键字：static_cast(); 案例1： 12345678910111213141516171819void test01()&amp;#123;    &#x2F;&#x2F; 基本数据类型转换    int a &#x3D; static_cast&lt;int&gt;(3.14">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-17T03:17:41.000Z">
-<meta property="article:modified_time" content="2023-08-17T03:17:41.591Z">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921230330631.png">
+<meta property="article:published_time" content="2023-09-21T15:02:34.000Z">
+<meta property="article:modified_time" content="2023-09-21T15:13:15.229Z">
 <meta property="article:author" content="白昼">
+<meta property="article:tag" content="基础 CPP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921230330631.png">
     
     
     <!--- Icon Part-->
@@ -38,7 +43,7 @@
     
     <title>
         
-            标签 -
+            CPP__类型转换 -
         
         白昼的宝典
     </title>
@@ -408,60 +413,265 @@
             <div class="main-content">
 
                 
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">CPP__类型转换</h1>
+            
+            </div>
+            
                     
-<div class="tagcloud-container">
-	
-	<div>
-		<h1 class="tagcloud-header">标签</h1>
-	</div>
-	<div class="tagcloud-content">
-		<ul class="tag-list" data-show-value="true">
-			
-			<li>
-				<a data-weight="9" href="/tags/%E5%9F%BA%E7%A1%80-CPP/"
-					><i class="fa-solid fa-hashtag"></i>基础 CPP</a
-				>
-			</li>
-			
-			<li>
-				<a data-weight="11" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-c%E8%AF%AD%E8%A8%80/"
-					><i class="fa-solid fa-hashtag"></i>嵌入式 c语言</a
-				>
-			</li>
-			
-			<li>
-				<a data-weight="2" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-c%E8%AF%AD%E8%A8%80-Linux/"
-					><i class="fa-solid fa-hashtag"></i>嵌入式 c语言 Linux</a
-				>
-			</li>
-			
-			<li>
-				<a data-weight="2" href="/tags/Linux/"
-					><i class="fa-solid fa-hashtag"></i>Linux</a
-				>
-			</li>
-			
-			<li>
-				<a data-weight="1" href="/tags/vscode-Linux/"
-					><i class="fa-solid fa-hashtag"></i>vscode Linux</a
-				>
-			</li>
-			
-			<li>
-				<a data-weight="2" href="/tags/%E6%95%99%E7%A8%8B/"
-					><i class="fa-solid fa-hashtag"></i>教程</a
-				>
-			</li>
-			
-			<li>
-				<a data-weight="1" href="/tags/Ubuntu-Linux/"
-					><i class="fa-solid fa-hashtag"></i>Ubuntu Linux</a
-				>
-			</li>
-			
-		</ul>
-	</div>
-	
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.wXOy_YCJC8bSlnbu_R1mugHaFQ?pid=ImgDet&rs=1">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">BAI ZHOU</span>
+                        
+                            <span class="author-label">Lv3</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-09-21 23:02:34</span>
+        <span class="mobile">2023-09-21 23:02:34</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-09-21 23:13:15</span>
+            <span class="mobile">2023-09-21 23:13:15</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/CPP%E8%AF%AD%E8%A8%80/">CPP语言</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">基础 CPP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h1 id="第一章上行与下行转换"><a href="#第一章上行与下行转换" class="headerlink" title="第一章	上行与下行转换"></a><strong>第一章	上行与下行转换</strong></h1><p>上行转换：把派生类的指针或引用转换成基类表示（安全）</p>
+<p>下行转换：把基类指针或引用转换成派生类表示（不安全）</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921230330631.png"
+                      alt="image-20230921230330631"
+                ></p>
+<h1 id="第二章静态转换"><a href="#第二章静态转换" class="headerlink" title="第二章	静态转换"></a><strong>第二章	静态转换</strong></h1><p>关键字：static_cast();</p>
+<p>案例1：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换</span></span><br><span class="line">    <span class="type">int</span> a = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(<span class="number">3.14f</span>);</span><br><span class="line">    <span class="type">float</span> f = <span class="number">0.0f</span>;</span><br><span class="line">    f = <span class="built_in">static_cast</span>&lt;<span class="type">float</span>&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = static_cast&lt;int *&gt;(&amp;f); ///&lt; 错误</span></span><br><span class="line"><span class="comment">//      int n = 10;</span></span><br><span class="line"><span class="comment">//      long *p1 = staitc_cast&lt;long *&gt;(&amp;n);///&lt; 错误</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">static_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);</span><br><span class="line">    <span class="comment">//下行转换(不安全，尽量不要使用)</span></span><br><span class="line">    Son *p1 = <span class="built_in">static_cast</span>&lt;Son *&gt;(<span class="keyword">new</span> Base);</span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line">   <span class="comment">// Son *p2 = static_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第三章动态转换"><a href="#第三章动态转换" class="headerlink" title="第三章	动态转换"></a><strong>第三章	动态转换</strong></h1><p>格式: dynamic_cast()</p>
+<p>概述：dynamiccast 主要用于类层次间的上行转换和下行转换，</p>
+<p>在类层次间进行上行转换时， dynamiccast 和 staticcast 的效果是一样的；</p>
+<p>在进行下行转换时， dynamiccast 具有类型检查的功能，比 static_cast 更安全；</p>
+<p>案例2：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    int a = dynamic_cast&lt;int&gt;(3.14f);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    f = dynamic_cast&lt;float&gt;(10);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = dynamic_cast&lt;int *&gt;(&amp;f);</span></span><br><span class="line"><span class="comment">//    int n = 10;</span></span><br><span class="line"><span class="comment">//    long *p1 = dynamic_cast&lt;long *&gt;(&amp;n);</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">dynamic_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);  <span class="comment">///&lt; 仅支持上行转换</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    Son *p1 = dynamic_cast&lt;Son *&gt;(new Base);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    Son *p2 = dynamic_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章常量转换"><a href="#第四章常量转换" class="headerlink" title="第四章	常量转换"></a><strong>第四章	常量转换</strong></h1><p>格式：const_cast(常量) 或 const_cast(非常量)</p>
+<p>概述：修改类型的 const 属性</p>
+<p>案例3：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    const int a = const_cast&lt;int&gt;(10);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    const f = const_cast&lt;float&gt;(10.11);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  支持(类型必须一致)</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> * n;</span><br><span class="line">    <span class="type">int</span> *p = <span class="built_in">const_cast</span>&lt;<span class="type">int</span> *&gt;(n);</span><br><span class="line">    <span class="type">long</span> * n1;</span><br><span class="line">    <span class="type">const</span> <span class="type">long</span> *p1 = <span class="built_in">const_cast</span>&lt;<span class="type">const</span> <span class="type">long</span> *&gt;(n1);</span><br><span class="line">    <span class="comment">//上行转换 不支持</span></span><br><span class="line"><span class="comment">//    const Base *p3 = new Base;</span></span><br><span class="line"><span class="comment">//    Base *p = const_cast&lt;Base *&gt;(p3);</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    const Son *p1 = const_cast&lt;const Son *&gt;(new Son);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    const Son *p2 = const_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章重新解释转换-reinterpret-cast"><a href="#第五章重新解释转换-reinterpret-cast" class="headerlink" title="第五章	重新解释转换(reinterpret_cast)"></a><strong>第五章	重新解释转换(reinterpret_cast)</strong></h1><p>格式：reinterpret_cast</p>
+<p><strong>仅不支持基本数据类型转换</strong></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> CPP__类型转换</li>
+        <li><strong>作者:</strong> BAI ZHOU</li>
+        <li><strong>创建于
+                :</strong> 2023-09-21 23:02:34</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2023-09-21 23:13:15
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://redefine.ohevan.com/2023/09/21/CPP-类型转换/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+            本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">#基础 CPP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/09/21/CPP-STL%E5%BA%93/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">CPP__STL库</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/09/21/CPP-%E6%A8%A1%E6%9D%BF/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">CPP__模板</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">CPP__类型转换</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E4%B8%8A%E8%A1%8C%E4%B8%8E%E4%B8%8B%E8%A1%8C%E8%BD%AC%E6%8D%A2"><span class="nav-text">第一章	上行与下行转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E9%9D%99%E6%80%81%E8%BD%AC%E6%8D%A2"><span class="nav-text">第二章	静态转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%8A%A8%E6%80%81%E8%BD%AC%E6%8D%A2"><span class="nav-text">第三章	动态转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%B8%B8%E9%87%8F%E8%BD%AC%E6%8D%A2"><span class="nav-text">第四章	常量转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%87%8D%E6%96%B0%E8%A7%A3%E9%87%8A%E8%BD%AC%E6%8D%A2-reinterpret-cast"><span class="nav-text">第五章	重新解释转换(reinterpret_cast)</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
 </div>
 
 
@@ -539,6 +749,27 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-side-tools-container">

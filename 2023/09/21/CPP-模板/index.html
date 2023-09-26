@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="BAI ZHOU">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/09/21/cpp-模板/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="模板的分类：函数模板与类模板 类属 - 类型参数化，又称参数模板 第一章	函数模板函数模板：关键字 template 定义：将函数的形参类型、返回值类型抽象化，用虚拟类型T表示，这就叫函数模板，根据实参确定（推导）T的类型。 123456789101112131415161718192021222324&#x2F;&#x2F;全局函数template &lt;typename T&gt;void swapAllTyp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPP__模板">
+<meta property="og:url" content="http://example.com/2023/09/21/CPP-%E6%A8%A1%E6%9D%BF/index.html">
+<meta property="og:site_name" content="白昼">
+<meta property="og:description" content="模板的分类：函数模板与类模板 类属 - 类型参数化，又称参数模板 第一章	函数模板函数模板：关键字 template 定义：将函数的形参类型、返回值类型抽象化，用虚拟类型T表示，这就叫函数模板，根据实参确定（推导）T的类型。 123456789101112131415161718192021222324&#x2F;&#x2F;全局函数template &lt;typename T&gt;void swapAllTyp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-21T02:33:06.000Z">
+<meta property="article:modified_time" content="2023-09-21T02:58:40.498Z">
+<meta property="article:author" content="白昼">
+<meta property="article:tag" content="基础 CPP">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            CPP__模板 -
+        
+        白昼的宝典
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="" rel="stylesheet">
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"BAI ZHOU","subtitle":{"text":["每朵云都下落不明","每盏月亮都不知所踪"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}},"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://status.evanluo.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","Blog":"https://ohevan.com","Friends":"/friends"}},"Links":{"icon":"fa-regular fa-link","submenus":{"Hexo":"https://hexo.io/zh-cn/","Themes":"https://hexo.io/themes/","Redefine":"https://redefine-docs.ohevan.com/getting-started"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"Announce","links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/8/15 00:00:00"};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                白昼的宝典
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        归档
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    target="_blank" rel="noopener" href="https://status.evanluo.top/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-chart-bar"></i>
+                                        
+                                        状态
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-user"></i>
+                                        
+                                        关于&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a href="/about">ME
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://github.com/baizhouhaoyue/baizhouhaoyue.github.io">GITHUB
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://ohevan.com">BLOG
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a href="/friends">友情链接
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown" 
+                                    href="#" onClick="return false;">
+                                    
+                                        
+                                            <i class="fa-regular fa-link"></i>
+                                        
+                                        链接&nbsp;<i class="fa-solid fa-chevron-down"></i>
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">HEXO
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://hexo.io/themes/">THEMES
+                                        </a>
+                                        </li>
+                                    
+                                        <li>
+                                        <a target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE
+                                        </a>
+                                        </li>
+                                    
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                归档
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        target="_blank" rel="noopener" href="https://status.evanluo.top/"  >
+                             
+                                
+                                    <i class="fa-regular fa-chart-bar"></i>
+                                
+                                状态
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-user"></i>
+                                
+                                关于&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/about">ME</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://github.com/baizhouhaoyue/baizhouhaoyue.github.io">GITHUB</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://ohevan.com">BLOG</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" href="/friends">友情链接</a>
+                            </li>
+                        
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group has-dropdown" 
+                        href="#" onClick="return false;">
+                            
+                                
+                                    <i class="fa-regular fa-link"></i>
+                                
+                                链接&nbsp;<i class="group-hover:rotate-180 transition-transform fa-solid fa-chevron-down"></i>
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                              
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">HEXO</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://hexo.io/themes/">THEMES</a>
+                            </li>
+                        
+                            <li class="text-base flex justify-center items-center hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                <a class="py-0.5" target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/getting-started">REDEFINE</a>
+                            </li>
+                        
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">CPP__模板</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.wXOy_YCJC8bSlnbu_R1mugHaFQ?pid=ImgDet&rs=1">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">BAI ZHOU</span>
+                        
+                            <span class="author-label">Lv3</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-09-21 10:33:06</span>
+        <span class="mobile">2023-09-21 10:33:06</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-09-21 10:58:40</span>
+            <span class="mobile">2023-09-21 10:58:40</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/CPP%E8%AF%AD%E8%A8%80/">CPP语言</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">基础 CPP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <p><strong>模板的分类</strong>：<strong>函数</strong>模板与类<strong>模板</strong></p>
+<p>类属 - 类型参数化，又称<strong>参数模板</strong></p>
+<h1 id="第一章函数模板"><a href="#第一章函数模板" class="headerlink" title="第一章	函数模板"></a><strong>第一章	函数模板</strong></h1><p>函数模板：关键字 template</p>
+<p>定义：将函数的形参类型、返回值类型抽象化，用虚拟类型T表示，这就叫函数模板，根据实参确定（推导）T的类型。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//全局函数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swapAllType</span><span class="params">(T &amp;a, T &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    T tmp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b= tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>,  b = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">swapAllType</span>(a, b);</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> ch1 = <span class="string">&#x27;a&#x27;</span>, ch2 = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">    <span class="built_in">swapAllType</span>(ch1, ch2);</span><br><span class="line">    cout &lt;&lt; ch1 &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; ch2 &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//在函数参数不是指针及引用的的情况，下列写法正确</span></span><br><span class="line"><span class="comment">//    int num = 10;</span></span><br><span class="line"><span class="comment">//    char ch3 = &#x27;C&#x27;;</span></span><br><span class="line"><span class="comment">//    swapAllType&lt;int&gt;(num, ch3);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>用模板是为了实现泛型，可以减轻编程的工作量，增强函数的重用性。</p>
+<p>函数模板的特性：</p>
+<p>1.函数模板本身的编译。</p>
+<p>2.调用位置推导T的类型，再将函数编译成模板函数（类型替换）。</p>
+<p>注意：函数模板在调用时会自动推导出T的类型，不会自动类型转换。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">swapAllType</span>(<span class="number">10</span>, <span class="string">&#x27;a&#x27;</span>);  <span class="comment">//错误</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-1普通函数和函数模板的区别"><a href="#1-1普通函数和函数模板的区别" class="headerlink" title="1.1普通函数和函数模板的区别"></a><strong>1.1普通函数和函数模板的区别</strong></h2><p>1.函数模板不允许自动类型转换。</p>
+<p>2.普通函数能够自动进行类型转换（形参已固定情况下，要注意传递的数据类型，防止精度丢失）</p>
+<h2 id="1-2-普通函数与函数模板同名"><a href="#1-2-普通函数与函数模板同名" class="headerlink" title="1.2 普通函数与函数模板同名"></a><strong>1.2 普通函数与函数模板同名</strong></h2><p>优先调用普通函数，如果要调用函数模板要加&lt;&gt;强制使用函数模板。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapAllType&lt;&gt;(a, b); //表示强制使用函数模板</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-3函数模板的局限性"><a href="#1-3函数模板的局限性" class="headerlink" title="1.3函数模板的局限性"></a><strong>1.3函数模板的局限性</strong></h2><p>利用打印一个对象引出了函数模板的局限性:</p>
+<p>解决方法：1.函数模板参数具体化 ；2.重载运算符</p>
+<p>函数模板参数具体化的实现：</p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="type">void</span> <span class="built_in">printAllType</span>&lt;Person&gt;(Person ob)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>案例：函数模板局限性的解决办法：利用参数具体化</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">printAllType</span><span class="params">(T a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;T = &quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">friend</span> <span class="type">void</span> <span class="built_in">printAllType</span>&lt;Person&gt;(Person ob);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="type">char</span> name[<span class="number">32</span>];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Person</span>(<span class="type">int</span> num, <span class="type">char</span> *name)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;num = num;</span><br><span class="line">        <span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;name, name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;&gt; <span class="type">void</span> <span class="built_in">printAllType</span>&lt;Person&gt;(Person ob)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; ob.num &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; ob.name &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> ch = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="built_in">printAllType</span>(ch);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     <span class="built_in">printAllType</span>(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function">Person <span class="title">lucy</span><span class="params">(<span class="number">100</span>, <span class="string">&quot;lucy&quot;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">printAllType</span>(lucy);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>设计一个算法可以打印任意类型的数组及排序</strong></p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp;out, Data ob);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">int</span> a):<span class="built_in">a</span>(a)&#123;&#125;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&gt;(Data &amp;ob)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> (a &gt; ob.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp;out, Data ob)</span><br><span class="line">&#123;</span><br><span class="line">    out &lt;&lt; ob.a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PrintArray</span><span class="params">(T *arr, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n ;i ++)&#123;</span><br><span class="line">        cout &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SortArr</span><span class="params">(T *arr, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n <span class="number">-1</span>; i++)&#123;</span><br><span class="line">        <span class="type">int</span> min = i;</span><br><span class="line">        <span class="type">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(; j &lt; n ; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[min] &gt; arr[j])</span><br><span class="line">                   min = j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i != min)&#123;</span><br><span class="line">            T tmp   = arr[i];</span><br><span class="line">            arr[i]  = arr[min];</span><br><span class="line">            arr[min]= tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> arr1[<span class="number">5</span>] = &#123;<span class="number">30</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">20</span>, <span class="number">40</span>&#125;;</span><br><span class="line">    <span class="built_in">SortArr</span>(arr1, <span class="number">5</span>);</span><br><span class="line">    <span class="built_in">PrintArray</span>(arr1, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> arr2[] = <span class="string">&quot;hello 1000phone&quot;</span>;</span><br><span class="line">    <span class="built_in">SortArr</span>(arr2, <span class="built_in">sizeof</span>(arr2));</span><br><span class="line">    <span class="built_in">PrintArray</span>(arr2, <span class="built_in">sizeof</span>(arr2));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Data arr3[<span class="number">5</span>] =&#123;<span class="built_in">Data</span>(<span class="number">200</span>), <span class="built_in">Data</span>(<span class="number">300</span>), <span class="built_in">Data</span>(<span class="number">100</span>), <span class="built_in">Data</span>(<span class="number">600</span>), <span class="built_in">Data</span>(<span class="number">500</span>)&#125;;</span><br><span class="line">    <span class="built_in">SortArr</span>(arr3, <span class="number">5</span>);</span><br><span class="line">    <span class="built_in">PrintArray</span>(arr3, <span class="number">5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第二章类模板"><a href="#第二章类模板" class="headerlink" title="第二章	类模板"></a><strong>第二章	类模板</strong></h1><h2 id="1-类模板概述"><a href="#1-类模板概述" class="headerlink" title="1.类模板概述"></a><strong>1.类模板概述</strong></h2><p>将类中的类型抽象化，该类称为类模板。</p>
+<p>案例1：类模板的定义</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T1</span>, <span class="keyword">class</span> <span class="title class_">T2</span>&gt; <span class="comment">///&lt;虚拟类型可以定义多个</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T1 a;</span><br><span class="line">    T2 b;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Data</span>(T1 a, T2 b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;a = a;</span><br><span class="line">        <span class="keyword">this</span>-&gt;b = b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">showData</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Data&lt;<span class="type">int</span>, <span class="type">int</span>&gt; ob1; <span class="comment">///&lt; 如果是类模板，实例化时必须显示指定类型</span></span><br><span class="line">    ob1.<span class="built_in">showData</span>();</span><br><span class="line"></span><br><span class="line">    <span class="function">Data&lt;<span class="type">int</span>, <span class="type">int</span>&gt; <span class="title">ob2</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></span>;</span><br><span class="line">    ob2.<span class="built_in">showData</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>类模板实例化时，必须指定T1和T2的类型。</p>
+<h2 id="2-类模板的分文件实现（-h与-cpp分开）"><a href="#2-类模板的分文件实现（-h与-cpp分开）" class="headerlink" title="2.类模板的分文件实现（.h与.cpp分开）"></a><strong>2.类模板的分文件实现（.h与.cpp分开）</strong></h2><p>.h与.cpp分开写会发生错误：</p>
+<p>因为第一次编译识别头文件，第二次编译因无法识别源文件的内部函数。</p>
+<p>解决办法：把.cpp的内容拷贝到.h文件中，并修改.h文件的后缀名为.hpp类模板文件。</p>
+<p>data.hpp</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> DATA_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATA_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T1</span>, <span class="keyword">class</span> <span class="title class_">T2</span>&gt; <span class="comment">///&lt;虚拟类型可以定义多个</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T1 a;</span><br><span class="line">    T2 b;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Data</span>(T1 a, T2 b);</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">showData</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T1</span>, <span class="keyword">class</span> <span class="title class_">T2</span>&gt;</span><br><span class="line">Data&lt;T1, T2&gt;::<span class="built_in">Data</span>(T1 a, T2 b)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;a = a;</span><br><span class="line">    <span class="keyword">this</span>-&gt;b = b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T1</span>, <span class="keyword">class</span> <span class="title class_">T2</span>&gt;</span><br><span class="line"><span class="type">void</span> Data&lt;T1, T2&gt;::<span class="built_in">showData</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; <span class="string">&quot;  &quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// DATA_H</span></span></span><br></pre></td></tr></table></figure></div>
+
+<p>main.cpp</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;data.hpp&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Data&lt;<span class="type">int</span>, <span class="type">int</span>&gt; ob1; <span class="comment">///&lt; 如果是类模板，实例化时必须显示指定类型</span></span><br><span class="line">    ob1.<span class="built_in">showData</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function">Data&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title">ob2</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;a&#x27;</span>)</span></span>;</span><br><span class="line">    ob2.<span class="built_in">showData</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>3.类模板做函数参数</strong></p>
+<p>案例1：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T1</span>, <span class="keyword">class</span> <span class="title class_">T2</span>&gt; <span class="comment">///&lt;虚拟类型可以定义多个</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T3, <span class="keyword">class</span> T4&gt;</span></span><br><span class="line"><span class="function">    <span class="keyword">friend</span> <span class="type">void</span> <span class="title">showData02</span><span class="params">(Data&lt;T3, T4&gt; &amp;ob)</span></span>; <span class="comment">//函数模板做友元</span></span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">showData01</span><span class="params">(Data&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &amp;ob)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    T1 a;</span><br><span class="line">    T2 b;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Data</span>(T1 a, T2 b);</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">showData</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T1</span>, <span class="keyword">class</span> <span class="title class_">T2</span>&gt;</span><br><span class="line">Data&lt;T1, T2&gt;::<span class="built_in">Data</span>(T1 a, T2 b)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;a = a;</span><br><span class="line">    <span class="keyword">this</span>-&gt;b = b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T1</span>, <span class="keyword">class</span> <span class="title class_">T2</span>&gt;</span><br><span class="line"><span class="type">void</span> Data&lt;T1, T2&gt;::<span class="built_in">showData</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; <span class="string">&quot;  &quot;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//只能访问&lt;int, int&gt;类型的类模板</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showData01</span><span class="params">(Data&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &amp;ob)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; ob.a &lt;&lt; <span class="string">&quot;  &quot;</span> &lt;&lt; ob.b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//函数模板做为友元（类模板做参数），可以接受任意类型</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T3, <span class="keyword">class</span> T4&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showData02</span><span class="params">(Data&lt;T3, T4&gt; &amp;ob)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; ob.a &lt;&lt; <span class="string">&quot;  &quot;</span> &lt;&lt; ob.b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Data&lt;<span class="type">int</span>, <span class="type">int</span>&gt; <span class="title">ob</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></span>;</span><br><span class="line">    <span class="built_in">showData01</span>(ob);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function">Data&lt;<span class="type">char</span>, <span class="type">char</span>&gt; <span class="title">ob1</span><span class="params">(<span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">showData02</span>(ob1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="4-类模板的派生"><a href="#4-类模板的派生" class="headerlink" title="4.类模板的派生"></a><strong>4.类模板的派生</strong></h1><h2 id="4-1类模板派生普通类"><a href="#4-1类模板派生普通类" class="headerlink" title="4.1类模板派生普通类"></a><strong>4.1类模板派生普通类</strong></h2><p>子类实例化的时候需要具体化的父类，子类需要知道父类的具体类型是什么样的，这样 c++编译器才能知道给子类分配多少内存。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T a;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    <span class="built_in">Base</span>(T a):<span class="built_in">a</span>(a)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span>:<span class="keyword">public</span> Base&lt;<span class="type">int</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> b;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Son</span>() &#123;&#125;</span><br><span class="line">    <span class="built_in">Son</span>(<span class="type">int</span> a, <span class="type">int</span> b):<span class="built_in">Base</span>&lt;<span class="type">int</span>&gt;(a),<span class="built_in">b</span>(b)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="4-2类模板派生类模板"><a href="#4-2类模板派生类模板" class="headerlink" title="4.2类模板派生类模板"></a><strong>4.2类模板派生类模板</strong></h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">T1</span>&gt;  <span class="comment">///&lt; 注意：也要加入基类的虚拟类型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Other</span>:<span class="keyword">public</span> Base&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    T1 b;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Other</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Other</span>(<span class="type">int</span> a, <span class="type">int</span> b):<span class="built_in">Base</span>&lt;<span class="type">int</span>&gt;(a),<span class="built_in">b</span>(b)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Other&lt;<span class="type">int</span>, <span class="type">char</span>&gt; <span class="title">ob</span><span class="params">(<span class="number">20</span>, <span class="string">&#x27;b&#x27;</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; ob.a &lt;&lt; <span class="string">&quot;  &quot;</span> &lt;&lt; ob.b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第三章类模板的应用"><a href="#第三章类模板的应用" class="headerlink" title="第三章	类模板的应用"></a><strong>第三章	类模板的应用</strong></h1><p>案例1：设计一个数组模板类(MyArray),完成对不同类型元素的管理</p>
+<p>myarray.hpp</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MYARRAY_HPP</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MYARRAY_HPP</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyArray</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T1</span>&gt;</span><br><span class="line">    <span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span> &lt;&lt;(ostream &amp;out, MyArray&lt;T1&gt; ob);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    T *arr;</span><br><span class="line">    <span class="type">int</span> capacity;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyArray</span>();</span><br><span class="line">    <span class="built_in">MyArray</span>(<span class="type">int</span> capacity);</span><br><span class="line">    <span class="built_in">MyArray</span>(<span class="type">const</span> MyArray &amp;ob);</span><br><span class="line">    ~<span class="built_in">MyArray</span>();</span><br><span class="line">    MyArray &amp;<span class="keyword">operator</span>=(MyArray &amp;ob);</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(T elem)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pop_back</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getCapacity</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// MYARRAY_HPP</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line">MyArray&lt;T&gt;::<span class="built_in">MyArray</span>()</span><br><span class="line">&#123;</span><br><span class="line">    size = <span class="number">0</span>;</span><br><span class="line">    capacity = <span class="number">5</span>;</span><br><span class="line">    arr = <span class="keyword">new</span> T[capacity];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line">MyArray&lt;T&gt;::<span class="built_in">MyArray</span>(<span class="type">int</span> capacity)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;capacity = capacity;</span><br><span class="line">    size = <span class="number">0</span>;</span><br><span class="line">    arr = <span class="keyword">new</span> T[capacity];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line">MyArray&lt;T&gt;::<span class="built_in">MyArray</span>(<span class="type">const</span> MyArray &amp;ob)</span><br><span class="line">&#123;</span><br><span class="line">    capacity = ob.capacity;</span><br><span class="line">    size = ob.size;</span><br><span class="line">    arr = <span class="keyword">new</span> T[capacity];</span><br><span class="line">    <span class="built_in">memcpy</span>(arr, ob.arr, size * <span class="built_in">sizeof</span>(T));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line">MyArray&lt;T&gt;::~<span class="built_in">MyArray</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> [] arr;</span><br><span class="line">        arr = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line">MyArray&lt;T&gt; &amp;MyArray&lt;T&gt;::<span class="keyword">operator</span>=(MyArray&lt;T&gt; &amp;ob)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">delete</span> [] arr;</span><br><span class="line">        arr = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    capacity = ob.capacity;</span><br><span class="line">    size = ob.size;</span><br><span class="line">    arr = <span class="keyword">new</span> T[capacity];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">memcpy</span>(arr, ob.arr, size * <span class="built_in">sizeof</span>(T));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="type">void</span> MyArray&lt;T&gt;::<span class="built_in">push_back</span>(T elem)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == capacity)&#123;</span><br><span class="line">        T *tmpArr = <span class="keyword">new</span> T[<span class="number">2</span>*capacity];</span><br><span class="line">        <span class="built_in">memcpy</span>(tmpArr, arr, size*<span class="built_in">sizeof</span>(T));</span><br><span class="line">        <span class="keyword">delete</span> [] arr;</span><br><span class="line">        arr = tmpArr;</span><br><span class="line">        capacity = <span class="number">2</span> * capacity;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[size] = elem;</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="type">void</span> MyArray&lt;T&gt;::<span class="built_in">pop_back</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == <span class="number">0</span>)&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;数组为空&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    size--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="type">int</span> MyArray&lt;T&gt;::<span class="built_in">getCapacity</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> capacity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T1</span>&gt;</span><br><span class="line">ostream &amp; <span class="keyword">operator</span> &lt;&lt;(ostream &amp;out, MyArray&lt;T1&gt; ob)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; ob.size; i++)</span><br><span class="line">        out &lt;&lt; ob.arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    out &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>main.cpp</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;myarray.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span> &lt;&lt;(ostream &amp;out, Data ob);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">int</span> a):<span class="built_in">a</span>(a)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">ostream &amp; <span class="keyword">operator</span> &lt;&lt;(ostream &amp;out, Data ob)</span><br><span class="line">&#123;</span><br><span class="line">    out &lt;&lt; ob.a;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    MyArray&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line">    arr.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">    arr.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">    arr.<span class="built_in">push_back</span>(<span class="number">40</span>);</span><br><span class="line">    arr.<span class="built_in">push_back</span>(<span class="number">20</span>);</span><br><span class="line">    arr.<span class="built_in">push_back</span>(<span class="number">50</span>);</span><br><span class="line">    arr.<span class="built_in">push_back</span>(<span class="number">70</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;arr :&quot;</span> &lt;&lt; arr &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;arr容量 = &quot;</span> &lt;&lt; arr.<span class="built_in">getCapacity</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      MyArray&lt;Data&gt; arr1;</span><br><span class="line">      <span class="function">Data <span class="title">ob</span><span class="params">(<span class="number">30</span>)</span></span>;</span><br><span class="line">      <span class="function">Data <span class="title">ob1</span><span class="params">(<span class="number">40</span>)</span></span>;</span><br><span class="line">      <span class="function">Data <span class="title">ob2</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">      <span class="function">Data <span class="title">ob3</span><span class="params">(<span class="number">20</span>)</span></span>;</span><br><span class="line">      <span class="function">Data <span class="title">ob4</span><span class="params">(<span class="number">60</span>)</span></span>;</span><br><span class="line">      <span class="function">Data <span class="title">ob5</span><span class="params">(<span class="number">50</span>)</span></span>;</span><br><span class="line">      arr1.<span class="built_in">push_back</span>(ob);</span><br><span class="line">      arr1.<span class="built_in">push_back</span>(ob1);</span><br><span class="line">      arr1.<span class="built_in">push_back</span>(ob2);</span><br><span class="line">      arr1.<span class="built_in">push_back</span>(ob3);</span><br><span class="line">      arr1.<span class="built_in">push_back</span>(ob4);</span><br><span class="line">      arr1.<span class="built_in">push_back</span>(ob5);</span><br><span class="line">      arr1.<span class="built_in">push_back</span>(<span class="built_in">Data</span>(<span class="number">80</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      cout &lt;&lt; <span class="string">&quot;arr1 : &quot;</span> &lt;&lt;  arr1 &lt;&lt; endl;</span><br><span class="line">      cout &lt;&lt; <span class="string">&quot;arr1容量 = &quot;</span> &lt;&lt; arr1.<span class="built_in">getCapacity</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> CPP__模板</li>
+        <li><strong>作者:</strong> BAI ZHOU</li>
+        <li><strong>创建于
+                :</strong> 2023-09-21 10:33:06</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2023-09-21 10:58:40
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://redefine.ohevan.com/2023/09/21/CPP-模板/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+            本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">#基础 CPP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/09/21/CPP-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">CPP__类型转换</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/09/21/CPP-%E5%A4%9A%E6%80%81/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">CPP__多态</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">CPP__模板</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="nav-text">第一章	函数模板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">1.1普通函数和函数模板的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E5%90%8C%E5%90%8D"><span class="nav-text">1.2 普通函数与函数模板同名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-text">1.3函数模板的局限性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%B1%BB%E6%A8%A1%E6%9D%BF"><span class="nav-text">第二章	类模板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%B1%BB%E6%A8%A1%E6%9D%BF%E6%A6%82%E8%BF%B0"><span class="nav-text">1.类模板概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%B1%BB%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%88%86%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0%EF%BC%88-h%E4%B8%8E-cpp%E5%88%86%E5%BC%80%EF%BC%89"><span class="nav-text">2.类模板的分文件实现（.h与.cpp分开）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%B1%BB%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%B4%BE%E7%94%9F"><span class="nav-text">4.类模板的派生</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1%E7%B1%BB%E6%A8%A1%E6%9D%BF%E6%B4%BE%E7%94%9F%E6%99%AE%E9%80%9A%E7%B1%BB"><span class="nav-text">4.1类模板派生普通类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2%E7%B1%BB%E6%A8%A1%E6%9D%BF%E6%B4%BE%E7%94%9F%E7%B1%BB%E6%A8%A1%E6%9D%BF"><span class="nav-text">4.2类模板派生类模板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%B1%BB%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">第三章	类模板的应用</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">月光是白昼寄给黑夜的情节，朝霞是黑夜思念白昼的泪光。</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">BAI ZHOU</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>
