@@ -25,11 +25,15 @@
 <meta property="og:site_name" content="白昼">
 <meta property="og:description" content="第一章	异常的概述异常处理就是处理程序中的错误。 异常事件：数组下标越界、空指针、内存空间不足、读写文件等等。 C语言有异常——-&gt;段错误—————&gt;停止运行。 C++有异常：抛出、捕获、解决。（异常的抛出和解决是分离的） 异常的处理方式： C语言： 1.使用整形变量返回值做为错误标识； 2.使用errno宏（可以理解为一个全局整形变量去记录错误），最后一条语句抛出的问题。 C++异常">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213701747.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213731859.png">
+<meta property="og:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928214002234.png">
 <meta property="article:published_time" content="2023-09-21T15:13:04.000Z">
-<meta property="article:modified_time" content="2023-09-21T16:22:52.908Z">
+<meta property="article:modified_time" content="2023-09-28T13:41:21.309Z">
 <meta property="article:author" content="白昼">
 <meta property="article:tag" content="基础 CPP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213701747.png">
     
     
     <!--- Icon Part-->
@@ -445,8 +449,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-09-22 00:22:52</span>
-            <span class="mobile">2023-09-22 00:22:52</span>
+            <span class="desktop">2023-09-28 21:41:21</span>
+            <span class="mobile">2023-09-28 21:41:21</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -514,7 +518,111 @@
 <h1 id="第二章异常的语法"><a href="#第二章异常的语法" class="headerlink" title="第二章	异常的语法"></a><strong>第二章	异常的语法</strong></h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//尝试捕获异常</span></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获int异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">char</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获char异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(...)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获其他异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 <p>在异常处理过程中有严格的类型匹配机制。</p>
-<h1 id="知识点【3】栈解旋"><a href="#知识点【3】栈解旋" class="headerlink" title="知识点【3】栈解旋"></a><strong>知识点【3】栈解旋</strong></h1>
+<h1 id="第三章栈解旋"><a href="#第三章栈解旋" class="headerlink" title="第三章	栈解旋"></a>第三章	栈解旋</h1><p>问题抛出：try中的对象如何处理？</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213701747.png"
+                      alt="image-20230928213701747"
+                ></p>
+<p>异常被抛出后，从进入 try 块起，到异常被抛掷前，这期间在栈上构造的所有对象，都会被自动析构。析构的顺序与构造的顺序相反，这一过程称为栈的解旋。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;a = a;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data构造 a = &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data析构 a = &quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="function">Data <span class="title">ob1</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">        <span class="function">Data <span class="title">ob2</span><span class="params">(<span class="number">20</span>)</span></span>;</span><br><span class="line">        <span class="keyword">throw</span> <span class="number">30</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">int</span> n)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获int异常 n = &quot;</span> &lt;&lt; n &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213731859.png"
+                      alt="image-20230928213731859"
+                ></p>
+<h1 id="第四章异常接口说明"><a href="#第四章异常接口说明" class="headerlink" title="第四章	异常接口说明"></a><strong>第四章	异常接口说明</strong></h1><p>为了加强程序的可读性，可以在函数声明中列出可能抛出异常的所有类型。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func02</span><span class="params">()</span> <span class="title">throw</span><span class="params">()</span> <span class="comment">//不允许抛出任何异常</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func01</span><span class="params">()</span> <span class="title">throw</span><span class="params">(<span class="type">int</span>, <span class="type">char</span>)</span> <span class="comment">///&lt; 只能抛出int和char类型的异常</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//尝试捕获异常</span></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">func02</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获int异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">char</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获char异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(...)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获其他异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章异常变量的生命周期"><a href="#第五章异常变量的生命周期" class="headerlink" title="第五章	异常变量的生命周期"></a><strong>第五章	异常变量的生命周期</strong></h1><p>指的是用何种类型变量取接收异常。</p>
+<p>异常变量类型：普通变量、指针变量、引用。（每种类型都写一下）</p>
+<p>异常接收：最佳采用引用来接收。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;a = a;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data构造 a = &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">const</span> Data &amp;ob)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data拷贝构造 &quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data析构 a = &quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">Data <span class="title">ob</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">        <span class="keyword">throw</span> ob;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(Data &amp;ob)   <span class="comment">///&lt; 用引用接收（普通变量、指针变量）</span></span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; ob.a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>普通变量捕获异常：形参占用空间，拷贝构造也会耗时。</p>
+<p>指针变量捕获异常：指针边量也会占用空间，必须调用delete。</p>
+<p>引用变量捕获异常：不占用空间，建议使用引用来接收异常。</p>
+<h1 id="第六章异常的多态"><a href="#第六章异常的多态" class="headerlink" title="第六章	异常的多态"></a><strong>第六章	异常的多态</strong></h1><p>目的：使用父类引用捕获所有子类的异常</p>
+<p>条件：</p>
+<p>1.父类的指针或引用要指向子类空间。</p>
+<p>2.父类中要有虚函数，不然父类无法子类的异常处理。</p>
+<p>案例：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">printError</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">nullPointerException</span>:<span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">printError</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;出现空指针异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">outofrangeException</span>:<span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">printError</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;出现越界异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test04</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//throw nullPointerException();  ///&lt;匿名对象</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">outofrangeException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(Base &amp;ex)</span><br><span class="line">    &#123;</span><br><span class="line">         ex.<span class="built_in">printError</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第七章C-标准异常库"><a href="#第七章C-标准异常库" class="headerlink" title="第七章	C++标准异常库"></a><strong>第七章	C++标准异常库</strong></h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928214002234.png"
+                      alt="image-20230928214002234"
+                ></p>
+<table>
+<thead>
+<tr>
+<th align="left">异常</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>std::exception</strong></td>
+<td align="left">该异常是所有标准 C++ 异常的父类。</td>
+</tr>
+<tr>
+<td align="left">std::bad_alloc</td>
+<td align="left">该异常可以通过 <strong>new</strong> 抛出。</td>
+</tr>
+<tr>
+<td align="left">std::bad_cast</td>
+<td align="left">该异常可以通过 <strong>dynamic_cast</strong> 抛出。</td>
+</tr>
+<tr>
+<td align="left">std::bad_typeid</td>
+<td align="left">该异常可以通过 <strong>typeid</strong> 抛出。</td>
+</tr>
+<tr>
+<td align="left">std::bad_exception</td>
+<td align="left">这在处理 C++ 程序中无法预期的异常时非常有用。</td>
+</tr>
+<tr>
+<td align="left"><strong>std::logic_error</strong></td>
+<td align="left">理论上可以通过读取代码来检测到的异常。</td>
+</tr>
+<tr>
+<td align="left">std::domain_error</td>
+<td align="left">当使用了一个无效的数学域时，会抛出该异常。</td>
+</tr>
+<tr>
+<td align="left">std::invalid_argument</td>
+<td align="left">当使用了无效的参数时，会抛出该异常。</td>
+</tr>
+<tr>
+<td align="left">std::length_error</td>
+<td align="left">当创建了太长的 std::string 时，会抛出该异常。</td>
+</tr>
+<tr>
+<td align="left">std::out_of_range</td>
+<td align="left">该异常可以通过方法抛出，例如 std::vector 和 std::bitset&lt;&gt;::operator<a href=""></a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>std::runtime_error</strong></td>
+<td align="left">理论上不可以通过读取代码来检测到的异常。</td>
+</tr>
+<tr>
+<td align="left">std::overflow_error</td>
+<td align="left">当发生数学上溢时，会抛出该异常。</td>
+</tr>
+<tr>
+<td align="left">std::range_error</td>
+<td align="left">当尝试存储超出范围的值时，会抛出该异常。</td>
+</tr>
+<tr>
+<td align="left">std::underflow_error</td>
+<td align="left">当发生数学下溢时，会抛出该异常。</td>
+</tr>
+</tbody></table>
+
         </div>
 
         
@@ -528,7 +636,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-09-22 00:22:52
+                    :</strong> 2023-09-28 21:41:21
             </li>
         
         <li>
@@ -637,7 +745,7 @@
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">CPP__异常</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BC%82%E5%B8%B8%E7%9A%84%E6%A6%82%E8%BF%B0"><span class="nav-text">第一章	异常的概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%BC%82%E5%B8%B8%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="nav-text">第二章	异常的语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E3%80%903%E3%80%91%E6%A0%88%E8%A7%A3%E6%97%8B"><span class="nav-text">知识点【3】栈解旋</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BC%82%E5%B8%B8%E7%9A%84%E6%A6%82%E8%BF%B0"><span class="nav-text">第一章	异常的概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%BC%82%E5%B8%B8%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="nav-text">第二章	异常的语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%A0%88%E8%A7%A3%E6%97%8B"><span class="nav-text">第三章	栈解旋</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E"><span class="nav-text">第四章	异常接口说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%BC%82%E5%B8%B8%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">第五章	异常变量的生命周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%BC%82%E5%B8%B8%E7%9A%84%E5%A4%9A%E6%80%81"><span class="nav-text">第六章	异常的多态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0C-%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8%E5%BA%93"><span class="nav-text">第七章	C++标准异常库</span></a></li></ol>
 
     </div>
 </div>
