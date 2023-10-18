@@ -13,27 +13,29 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2023/09/21/cpp-异常/"/>
+    <link rel="canonical" href="http://example.com/2023/10/18/排序算法/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="第一章	异常的概述异常处理就是处理程序中的错误。 异常事件：数组下标越界、空指针、内存空间不足、读写文件等等。 C语言有异常——-&gt;段错误—————&gt;停止运行。 C++有异常：抛出、捕获、解决。（异常的抛出和解决是分离的） 异常的处理方式： C语言： 1.使用整形变量返回值做为错误标识； 2.使用errno宏（可以理解为一个全局整形变量去记录错误），最后一条语句抛出的问题。 C++异常">
+        <meta name="description" content="第一章	冒泡排序1、演示 2、概述冒泡排序（英语：Bubble Sort）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。 3、实现过程1234567891011121314151617181920#include &lt;stdio.h&gt;void bubble_sort(int arr[], int le">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CPP__异常">
-<meta property="og:url" content="http://example.com/2023/09/21/CPP-%E5%BC%82%E5%B8%B8/index.html">
+<meta property="og:title" content="排序算法">
+<meta property="og:url" content="http://example.com/2023/10/18/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="白昼">
-<meta property="og:description" content="第一章	异常的概述异常处理就是处理程序中的错误。 异常事件：数组下标越界、空指针、内存空间不足、读写文件等等。 C语言有异常——-&gt;段错误—————&gt;停止运行。 C++有异常：抛出、捕获、解决。（异常的抛出和解决是分离的） 异常的处理方式： C语言： 1.使用整形变量返回值做为错误标识； 2.使用errno宏（可以理解为一个全局整形变量去记录错误），最后一条语句抛出的问题。 C++异常">
+<meta property="og:description" content="第一章	冒泡排序1、演示 2、概述冒泡排序（英语：Bubble Sort）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。 3、实现过程1234567891011121314151617181920#include &lt;stdio.h&gt;void bubble_sort(int arr[], int le">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213701747.png">
-<meta property="og:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213731859.png">
-<meta property="og:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928214002234.png">
-<meta property="article:published_time" content="2023-09-21T15:13:04.000Z">
-<meta property="article:modified_time" content="2023-09-28T13:41:21.309Z">
+<meta property="og:image" content="http://example.com/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-33a947c71ad62b254cab62e5364d2813_b.webp">
+<meta property="og:image" content="http://example.com/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033752328_20C9820639C56B5150C7B7B6EAAEDB37">
+<meta property="og:image" content="http://example.com/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp">
+<meta property="og:image" content="http://example.com/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033771610_10CD91D581F995407DD7904923767E27">
+<meta property="og:image" content="http://example.com/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033827676_666EC43E2146695FDD37BBF9E1972818">
+<meta property="article:published_time" content="2023-10-18T02:19:53.000Z">
+<meta property="article:modified_time" content="2023-10-18T12:56:21.496Z">
 <meta property="article:author" content="白昼">
-<meta property="article:tag" content="基础 CPP">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213701747.png">
+<meta name="twitter:image" content="http://example.com/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-33a947c71ad62b254cab62e5364d2813_b.webp">
     
     
     <!--- Icon Part-->
@@ -45,7 +47,7 @@
     
     <title>
         
-            CPP__异常 -
+            排序算法 -
         
         白昼的宝典
     </title>
@@ -419,7 +421,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">CPP__异常</h1>
+                <h1 class="article-title-regular">排序算法</h1>
             
             </div>
             
@@ -441,15 +443,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-09-21 23:13:04</span>
-        <span class="mobile">2023-09-21 23:13:04</span>
+        <span class="desktop">2023-10-18 10:19:53</span>
+        <span class="mobile">2023-10-18 10:19:53</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-09-28 21:41:21</span>
-            <span class="mobile">2023-09-28 21:41:21</span>
+            <span class="desktop">2023-10-18 20:56:21</span>
+            <span class="mobile">2023-10-18 20:56:21</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -463,7 +465,7 @@
                     
                         
                         <li>
-                            <a href="/categories/CPP%E8%AF%AD%E8%A8%80/">CPP语言</a>&nbsp;
+                            <a href="/categories/%E6%8E%92%E5%BA%8F/">排序</a>&nbsp;
                         </li>
                     
                     
@@ -477,7 +479,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">基础 CPP</a>&nbsp;
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
                     </li>
                 
             </ul>
@@ -503,124 +505,81 @@
 
 
         <div class="article-content markdown-body">
-            <h1 id="第一章异常的概述"><a href="#第一章异常的概述" class="headerlink" title="第一章	异常的概述"></a><strong>第一章	异常的概述</strong></h1><p>异常处理就是处理程序中的错误。</p>
-<p><strong>异常事件</strong>：数组下标越界、空指针、内存空间不足、读写文件等等。</p>
-<p>C语言有异常——-&gt;段错误—————&gt;停止运行。</p>
-<p>C++有异常：抛出、捕获、解决。（异常的抛出和解决是分离的）</p>
-<p><strong>异常的处理方式：</strong></p>
-<p>C语言：</p>
-<p>1.使用整形变量返回值做为错误标识；</p>
-<p>2.使用errno宏（可以理解为一个全局整形变量去记录错误），最后一条语句抛出的问题。</p>
-<p>C++异常：</p>
-<p>本质是一个类，有名称：如out_of_range</p>
-<p>流程：抛出异常 —–&gt;捕获异常。</p>
-<h1 id="第二章异常的语法"><a href="#第二章异常的语法" class="headerlink" title="第二章	异常的语法"></a><strong>第二章	异常的语法</strong></h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//尝试捕获异常</span></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获int异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">char</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获char异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(...)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获其他异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>在异常处理过程中有严格的类型匹配机制。</p>
-<h1 id="第三章栈解旋"><a href="#第三章栈解旋" class="headerlink" title="第三章	栈解旋"></a>第三章	栈解旋</h1><p>问题抛出：try中的对象如何处理？</p>
-<p><img  
+            <h1 id="第一章冒泡排序"><a href="#第一章冒泡排序" class="headerlink" title="第一章	冒泡排序"></a>第一章	冒泡排序</h1><h2 id="1、演示"><a href="#1、演示" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213701747.png"
-                      alt="image-20230928213701747"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-33a947c71ad62b254cab62e5364d2813_b.webp"
+                      alt="动图"
                 ></p>
-<p>异常被抛出后，从进入 try 块起，到异常被抛掷前，这期间在栈上构造的所有对象，都会被自动析构。析构的顺序与构造的顺序相反，这一过程称为栈的解旋。</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;a = a;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data构造 a = &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data析构 a = &quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="function">Data <span class="title">ob1</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">        <span class="function">Data <span class="title">ob2</span><span class="params">(<span class="number">20</span>)</span></span>;</span><br><span class="line">        <span class="keyword">throw</span> <span class="number">30</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">int</span> n)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获int异常 n = &quot;</span> &lt;&lt; n &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="2、概述"><a href="#2、概述" class="headerlink" title="2、概述"></a>2、概述</h2><p>冒泡排序（英语：Bubble Sort）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。</p>
+<h2 id="3、实现过程"><a href="#3、实现过程" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void bubble_sort(int arr[], int len) &#123;</span><br><span class="line">    int i, j, temp;</span><br><span class="line">    for (i = 0; i &lt; len - 1; i++)</span><br><span class="line">        for (j = 0; j &lt; len - 1 - i; j++)</span><br><span class="line">            if (arr[j] &gt; arr[j + 1]) &#123;</span><br><span class="line">                temp = arr[j];</span><br><span class="line">                arr[j] = arr[j + 1];</span><br><span class="line">                arr[j + 1] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    int arr[] = &#123; 22, 34, 3, 32, 82, 55, 89, 50, 37, 5, 64, 35, 9, 70 &#125;;</span><br><span class="line">    int len = (int) sizeof(arr) / sizeof(*arr);</span><br><span class="line">    bubble_sort(arr, len);</span><br><span class="line">    int i;</span><br><span class="line">    for (i = 0; i &lt; len; i++)</span><br><span class="line">        printf(&quot;%d &quot;, arr[i]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<p><img  
+<h2 id="第二章选择排序"><a href="#第二章选择排序" class="headerlink" title="第二章	选择排序"></a>第二章	选择排序</h2><h2 id="1、演示-1"><a href="#1、演示-1" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928213731859.png"
-                      alt="image-20230928213731859"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033752328_20C9820639C56B5150C7B7B6EAAEDB37"
+                      alt="图片说明"
                 ></p>
-<h1 id="第四章异常接口说明"><a href="#第四章异常接口说明" class="headerlink" title="第四章	异常接口说明"></a><strong>第四章	异常接口说明</strong></h1><p>为了加强程序的可读性，可以在函数声明中列出可能抛出异常的所有类型。</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func02</span><span class="params">()</span> <span class="title">throw</span><span class="params">()</span> <span class="comment">//不允许抛出任何异常</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func01</span><span class="params">()</span> <span class="title">throw</span><span class="params">(<span class="type">int</span>, <span class="type">char</span>)</span> <span class="comment">///&lt; 只能抛出int和char类型的异常</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//尝试捕获异常</span></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">func02</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">int</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获int异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(<span class="type">char</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获char异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(...)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;捕获其他异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="2、概述-1"><a href="#2、概述-1" class="headerlink" title="2、概述"></a>2、概述</h2><p>选择排序（Selection sort）是一种简单直观的排序算法。它的工作原理如下。首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+<h2 id="3、实现过程-1"><a href="#3、实现过程-1" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a,<span class="type">int</span> *b)</span> <span class="comment">//交換兩個變數</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> temp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">selection_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span> ; i &lt; len - <span class="number">1</span> ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> min = i;</span><br><span class="line">        <span class="keyword">for</span> (j = i + <span class="number">1</span>; j &lt; len; j++)     <span class="comment">//走訪未排序的元素</span></span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[min])    <span class="comment">//找到目前最小值</span></span><br><span class="line">                min = j;    <span class="comment">//紀錄最小值</span></span><br><span class="line">           swap(&amp;arr[min], &amp;arr[i]);    <span class="comment">//做交換</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<h1 id="第五章异常变量的生命周期"><a href="#第五章异常变量的生命周期" class="headerlink" title="第五章	异常变量的生命周期"></a><strong>第五章	异常变量的生命周期</strong></h1><p>指的是用何种类型变量取接收异常。</p>
-<p>异常变量类型：普通变量、指针变量、引用。（每种类型都写一下）</p>
-<p>异常接收：最佳采用引用来接收。</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Data</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;a = a;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data构造 a = &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Data</span>(<span class="type">const</span> Data &amp;ob)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data拷贝构造 &quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Data</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Data析构 a = &quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">Data <span class="title">ob</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">        <span class="keyword">throw</span> ob;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(Data &amp;ob)   <span class="comment">///&lt; 用引用接收（普通变量、指针变量）</span></span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; ob.a &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>普通变量捕获异常：形参占用空间，拷贝构造也会耗时。</p>
-<p>指针变量捕获异常：指针边量也会占用空间，必须调用delete。</p>
-<p>引用变量捕获异常：不占用空间，建议使用引用来接收异常。</p>
-<h1 id="第六章异常的多态"><a href="#第六章异常的多态" class="headerlink" title="第六章	异常的多态"></a><strong>第六章	异常的多态</strong></h1><p>目的：使用父类引用捕获所有子类的异常</p>
-<p>条件：</p>
-<p>1.父类的指针或引用要指向子类空间。</p>
-<p>2.父类中要有虚函数，不然父类无法子类的异常处理。</p>
-<p>案例：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">printError</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">nullPointerException</span>:<span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">printError</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;出现空指针异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">outofrangeException</span>:<span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">printError</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;出现越界异常&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test04</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//throw nullPointerException();  ///&lt;匿名对象</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">outofrangeException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span>(Base &amp;ex)</span><br><span class="line">    &#123;</span><br><span class="line">         ex.<span class="built_in">printError</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第七章C-标准异常库"><a href="#第七章C-标准异常库" class="headerlink" title="第七章	C++标准异常库"></a><strong>第七章	C++标准异常库</strong></h1><p><img  
+<h1 id="第三章插入排序"><a href="#第三章插入排序" class="headerlink" title="第三章	插入排序"></a>第三章	插入排序</h1><h2 id="1、演示-2"><a href="#1、演示-2" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230928214002234.png"
-                      alt="image-20230928214002234"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp"
+                      alt="动图"
                 ></p>
-<table>
-<thead>
-<tr>
-<th align="left">异常</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>std::exception</strong></td>
-<td align="left">该异常是所有标准 C++ 异常的父类。</td>
-</tr>
-<tr>
-<td align="left">std::bad_alloc</td>
-<td align="left">该异常可以通过 <strong>new</strong> 抛出。</td>
-</tr>
-<tr>
-<td align="left">std::bad_cast</td>
-<td align="left">该异常可以通过 <strong>dynamic_cast</strong> 抛出。</td>
-</tr>
-<tr>
-<td align="left">std::bad_typeid</td>
-<td align="left">该异常可以通过 <strong>typeid</strong> 抛出。</td>
-</tr>
-<tr>
-<td align="left">std::bad_exception</td>
-<td align="left">这在处理 C++ 程序中无法预期的异常时非常有用。</td>
-</tr>
-<tr>
-<td align="left"><strong>std::logic_error</strong></td>
-<td align="left">理论上可以通过读取代码来检测到的异常。</td>
-</tr>
-<tr>
-<td align="left">std::domain_error</td>
-<td align="left">当使用了一个无效的数学域时，会抛出该异常。</td>
-</tr>
-<tr>
-<td align="left">std::invalid_argument</td>
-<td align="left">当使用了无效的参数时，会抛出该异常。</td>
-</tr>
-<tr>
-<td align="left">std::length_error</td>
-<td align="left">当创建了太长的 std::string 时，会抛出该异常。</td>
-</tr>
-<tr>
-<td align="left">std::out_of_range</td>
-<td align="left">该异常可以通过方法抛出，例如 std::vector 和 std::bitset&lt;&gt;::operator<a href=""></a>。</td>
-</tr>
-<tr>
-<td align="left"><strong>std::runtime_error</strong></td>
-<td align="left">理论上不可以通过读取代码来检测到的异常。</td>
-</tr>
-<tr>
-<td align="left">std::overflow_error</td>
-<td align="left">当发生数学上溢时，会抛出该异常。</td>
-</tr>
-<tr>
-<td align="left">std::range_error</td>
-<td align="left">当尝试存储超出范围的值时，会抛出该异常。</td>
-</tr>
-<tr>
-<td align="left">std::underflow_error</td>
-<td align="left">当发生数学下溢时，会抛出该异常。</td>
-</tr>
-</tbody></table>
+<h2 id="2、概述-2"><a href="#2、概述-2" class="headerlink" title="2、概述"></a>2、概述</h2><p>插入排序（英语：Insertion Sort）是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，通常采用in-place排序（即只需用到 {\displaystyle O(1)} {\displaystyle O(1)}的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。</p>
+<h2 id="3、实现过程-2"><a href="#3、实现过程-2" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span>&#123;</span><br><span class="line">    <span class="type">int</span> i,j,temp;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j=i;j&gt;<span class="number">0</span> &amp;&amp; arr[j<span class="number">-1</span>]&gt;temp;j--)</span><br><span class="line">                    arr[j] = arr[j<span class="number">-1</span>];</span><br><span class="line">            arr[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章希尔排序"><a href="#第四章希尔排序" class="headerlink" title="第四章	希尔排序"></a>第四章	希尔排序</h1><h2 id="1、演示-3"><a href="#1、演示-3" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033771610_10CD91D581F995407DD7904923767E27"
+                      alt="图片说明"
+                ></p>
+<h2 id="2、概述-3"><a href="#2、概述-3" class="headerlink" title="2、概述"></a>2、概述</h2><p>希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。希尔排序是非稳定排序算法。</p>
+<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
+<ul>
+<li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率</li>
+<li>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位</li>
+</ul>
+<h2 id="3、实现过程-3"><a href="#3、实现过程-3" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">shell_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    <span class="type">int</span> gap, i, j;</span><br><span class="line">    <span class="type">int</span> temp;</span><br><span class="line">    <span class="keyword">for</span> (gap = len &gt;&gt; <span class="number">1</span>; gap &gt; <span class="number">0</span>; gap = gap &gt;&gt; <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> (i = gap; i &lt; len; i++) &#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j = i - gap; j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; temp; j -= gap)</span><br><span class="line">                arr[j + gap] = arr[j];</span><br><span class="line">            arr[j + gap] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章快速排序"><a href="#第五章快速排序" class="headerlink" title="第五章	快速排序"></a>第五章	快速排序</h1><h2 id="1、演示-4"><a href="#1、演示-4" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033827676_666EC43E2146695FDD37BBF9E1972818"
+                      alt="图片说明"
+                ></p>
+<h2 id="2、概述-4"><a href="#2、概述-4" class="headerlink" title="2、概述"></a>2、概述</h2><p>快速排序使用分治法（Divide and conquer）策略来把一个序列（list）分为两个子序列（sub-lists）。</p>
+<blockquote>
+<p>① 从数列中挑出一个元素，称为 “基准”（pivot），<br>② 重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。<br>③ 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</p>
+</blockquote>
+<p>递归到最底部时，数列的大小是零或一，也就是已经排序好了。这个算法一定会结束，因为在每次的迭代（iteration）中，它至少会把一个元素摆到它最后的位置去。</p>
+<h2 id="3、实现过程-4"><a href="#3、实现过程-4" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *x, <span class="type">int</span> *y)</span> &#123;</span><br><span class="line">    <span class="type">int</span> t = *x;</span><br><span class="line">    *x = *y;</span><br><span class="line">    *y = t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">quick_sort_recursive</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (start &gt;= end)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> mid = arr[end];</span><br><span class="line">    <span class="type">int</span> left = start, right = end - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span> (arr[left] &lt; mid &amp;&amp; left &lt; right)</span><br><span class="line">            left++;</span><br><span class="line">        <span class="keyword">while</span> (arr[right] &gt;= mid &amp;&amp; left &lt; right)</span><br><span class="line">            right--;</span><br><span class="line">        swap(&amp;arr[left], &amp;arr[right]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (arr[left] &gt;= arr[end])</span><br><span class="line">        swap(&amp;arr[left], &amp;arr[end]);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        left++;</span><br><span class="line">    <span class="keyword">if</span> (left)</span><br><span class="line">        quick_sort_recursive(arr, start, left - <span class="number">1</span>);</span><br><span class="line">    quick_sort_recursive(arr, left + <span class="number">1</span>, end);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">quick_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    quick_sort_recursive(arr, <span class="number">0</span>, len - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第六章排序总结"><a href="#第六章排序总结" class="headerlink" title="第六章	排序总结"></a>第六章	排序总结</h1><p><strong>冒泡、选择排序算法（从头向后比）</strong></p>
+<ul>
+<li><strong>从头开始排序的比较</strong></li>
+</ul>
+<p>条件目标值小于比较值，并且进行交换则是从大到小</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max &lt; arr[i]</span><br></pre></td></tr></table></figure></div>
+
+<p>条件目标值大于比较值，并且进行交换则是从小到大</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">min &gt; arr[i]</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>插入排序算法（从后向头比）</strong></p>
+<ul>
+<li><strong>从后开始排序的比较</strong></li>
+</ul>
+<p>条件目标值小于比较值，并且进行交换则是从小到大</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max &lt; arr[i]</span><br></pre></td></tr></table></figure></div>
+
+<p>条件目标值大于比较值，并且进行交换则是从大到小</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">min &gt; arr[i]</span><br></pre></td></tr></table></figure></div>
+
+<p>与向前比的算法结果相反。</p>
 
         </div>
 
@@ -628,18 +587,18 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> CPP__异常</li>
+        <li><strong>标题:</strong> 排序算法</li>
         <li><strong>作者:</strong> BAI ZHOU</li>
         <li><strong>创建于
-                :</strong> 2023-09-21 23:13:04</li>
+                :</strong> 2023-10-18 10:19:53</li>
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-09-28 21:41:21
+                    :</strong> 2023-10-18 20:56:21
             </li>
         
         <li>
-            <strong>链接:</strong> https://redefine.ohevan.com/2023/09/21/CPP-异常/
+            <strong>链接:</strong> https://redefine.ohevan.com/2023/10/18/排序算法/
         </li>
         <li>
             <strong>
@@ -660,7 +619,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">#基础 CPP</a>&nbsp;
+                        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>&nbsp;
                     </li>
                 
             </ul>
@@ -671,29 +630,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                        rel="prev"
-                        href="/2023/10/18/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">排序算法</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/2023/09/21/CPP-STL%E5%BA%93/"
+                        href="/2023/09/21/CPP-%E5%BC%82%E5%B8%B8/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">CPP__STL库</span>
+                                <span class="post-nav-title-item">CPP__异常</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -758,8 +702,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">CPP__异常</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%BC%82%E5%B8%B8%E7%9A%84%E6%A6%82%E8%BF%B0"><span class="nav-text">第一章	异常的概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%BC%82%E5%B8%B8%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="nav-text">第二章	异常的语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%A0%88%E8%A7%A3%E6%97%8B"><span class="nav-text">第三章	栈解旋</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E"><span class="nav-text">第四章	异常接口说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%BC%82%E5%B8%B8%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">第五章	异常变量的生命周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E5%BC%82%E5%B8%B8%E7%9A%84%E5%A4%9A%E6%80%81"><span class="nav-text">第六章	异常的多态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0C-%E6%A0%87%E5%87%86%E5%BC%82%E5%B8%B8%E5%BA%93"><span class="nav-text">第七章	C++标准异常库</span></a></li></ol>
+        <div class="page-title">排序算法</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-text">第一章	冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%BC%94%E7%A4%BA"><span class="nav-text">1、演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E6%A6%82%E8%BF%B0"><span class="nav-text">2、概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="nav-text">3、实现过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-text">第二章	选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%BC%94%E7%A4%BA-1"><span class="nav-text">1、演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E6%A6%82%E8%BF%B0-1"><span class="nav-text">2、概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B-1"><span class="nav-text">3、实现过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">第三章	插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%BC%94%E7%A4%BA-2"><span class="nav-text">1、演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E6%A6%82%E8%BF%B0-2"><span class="nav-text">2、概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B-2"><span class="nav-text">3、实现过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="nav-text">第四章	希尔排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%BC%94%E7%A4%BA-3"><span class="nav-text">1、演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E6%A6%82%E8%BF%B0-3"><span class="nav-text">2、概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B-3"><span class="nav-text">3、实现过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="nav-text">第五章	快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%BC%94%E7%A4%BA-4"><span class="nav-text">1、演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E6%A6%82%E8%BF%B0-4"><span class="nav-text">2、概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B-4"><span class="nav-text">3、实现过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%8E%92%E5%BA%8F%E6%80%BB%E7%BB%93"><span class="nav-text">第六章	排序总结</span></a></li></ol>
 
     </div>
 </div>

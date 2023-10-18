@@ -1,67 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CPP_友元</title>
-    <url>/2023/09/21/CPP-%E5%8F%8B%E5%85%83/</url>
-    <content><![CDATA[<h1 id="第一章友元"><a href="#第一章友元" class="headerlink" title="第一章	友元"></a><strong>第一章	友元</strong></h1><p>1.打破了c++的封装性（运算符重载也会使用）</p>
-<p>2.声明友元的关键字是：friend，friend 关键字只出现在声明处</p>
-<ul>
-<li>全局函数，</li>
-<li>类内部的成员函数，</li>
-<li>整个类也可作为友元</li>
-</ul>
-<p>3.友元函数不是类的成员，不带 this 指针友元函数可访问对象任意成员属性，包括私有属性</p>
-<h1 id="第二章全局函数做为友元"><a href="#第二章全局函数做为友元" class="headerlink" title="第二章	全局函数做为友元"></a><strong>第二章	全局函数做为友元</strong></h1><p>案例1：全局函数做为友元</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">visitroom</span><span class="params">(Room &amp;room)</span></span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">visitroom</span><span class="params">(Room &amp;room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.bedroom &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Room <span class="title">room</span><span class="params">(<span class="string">&quot;卧室&quot;</span>, <span class="string">&quot;客厅&quot;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">visitroom</span>(room);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第三章成员函数做为友元"><a href="#第三章成员函数做为友元" class="headerlink" title="第三章	成员函数做为友元"></a><strong>第三章	成员函数做为友元</strong></h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span>; <span class="comment">//向前声明Room类，但并不知道类内部的成员</span></span><br><span class="line"><span class="comment">//作为友元类的定义，必须定义在最上方（友元类就是包含成员函数的类）</span></span><br><span class="line"><span class="comment">//友元类的成员函数必须在所有类的最下方定义</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GoodGay</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">GoodGay</span>()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visitroom01</span><span class="params">(Room &amp; room)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visitroom02</span><span class="params">(Room &amp; room)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">// friend void GoodGay::visitroom01(Room &amp;room);</span></span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">GoodGay::visitroom02</span><span class="params">(Room &amp;room)</span></span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GoodGay::visitroom01</span><span class="params">(Room &amp; room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; &quot;访问&quot; &lt;&lt; room.bedroom &lt;&lt; endl;</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GoodGay::visitroom02</span><span class="params">(Room &amp; room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.bedroom &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Room <span class="title">room</span><span class="params">(<span class="string">&quot;卧室&quot;</span>, <span class="string">&quot;客厅&quot;</span>)</span></span>;</span><br><span class="line">    GoodGay gay;</span><br><span class="line">    gay.<span class="built_in">visitroom01</span>(room);</span><br><span class="line">    gay.<span class="built_in">visitroom02</span>(room);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092100296.png"
-                      alt="image-20230921092100296"
-                ></p>
-<h1 id="第四章类作为友元"><a href="#第四章类作为友元" class="headerlink" title="第四章	类作为友元"></a><strong>第四章	类作为友元</strong></h1><p>在成员函数作为友元的基础上，修改普通类中的友元从成员函数改为类名</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">GoodGay</span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092136915.png"
-                      alt="image-20230921092136915"
-                ></p>
-<p>【友元类注意】</p>
-<p>1．友元关系不能被继承。</p>
-<p>2．友元关系是单向的，类 A 是类 B 的朋友，但类 B 不一定是类 A 的朋友。</p>
-<p>3．友元关系不具有传递性。类 B 是类 A 的朋友，类 C 是类 B 的朋友，但类 C 不一定是类 A 的朋友。</p>
-<p>案例1：电视机类的实现（电视机有开机和关机状态，有音量，有频道，提供音量操作的方法，频道操作的方法。 由于电视机只能逐一调整频道，不能指定频道）</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TV</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">enum</span>&#123;MinChannel = <span class="number">1</span>, MaxChannel = <span class="number">100</span>&#125;;</span><br><span class="line">    <span class="keyword">enum</span>&#123;MinVolume, MaxVolum = <span class="number">100</span>&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">bool</span> state;</span><br><span class="line">    <span class="type">int</span>  volume;</span><br><span class="line">    <span class="type">int</span>  channel;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">TV</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        state = <span class="literal">false</span>;</span><br><span class="line">        volume = MinVolume;</span><br><span class="line">        channel = MinChannel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">TV</span>(<span class="type">bool</span> on, <span class="type">int</span> volume, <span class="type">int</span> channel)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;state = on;</span><br><span class="line">        <span class="keyword">this</span>-&gt;volume = volume;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = channel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">TV</span>(<span class="type">const</span> TV &amp; ob)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;state = ob.state;</span><br><span class="line">        <span class="keyword">this</span>-&gt;volume = ob.volume;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = ob.channel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnOrOff</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetVolume</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetChannel</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">TV <span class="title">tv</span><span class="params">(<span class="literal">true</span>, <span class="number">40</span>, <span class="number">3</span>)</span></span>;</span><br><span class="line">    tv.<span class="built_in">OnOrOff</span>();</span><br><span class="line">    tv.<span class="built_in">SetChannel</span>();</span><br><span class="line">    tv.<span class="built_in">SetVolume</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::OnOrOff</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">bool</span> s = (state ? <span class="literal">true</span>:<span class="literal">false</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;the state of TV is &quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::SetVolume</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(volume == MaxVolum)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;音量已经最大&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>-&gt;volume++;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;音量为&quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;volume &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::SetChannel</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;channel == MaxVolum)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;频道已经最大&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>-&gt;channel++;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;频道为&quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;channel &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第五章强化训练"><a href="#第五章强化训练" class="headerlink" title="第五章	强化训练"></a><strong>第五章	强化训练</strong></h1><p>案例1：动态数组</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092225649.png"
-                      alt="image-20230921092225649"
-                ></p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyArr</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> *arr;</span><br><span class="line">    <span class="type">int</span> capacity;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyArr</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">5</span>];</span><br><span class="line">        capacity = <span class="number">5</span>;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">MyArr</span>(<span class="type">int</span> *p, <span class="type">int</span> _capacity, <span class="type">int</span> _size)</span><br><span class="line">    &#123;</span><br><span class="line">        arr = p;</span><br><span class="line">        capacity = _capacity;</span><br><span class="line">        size = _size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">MyArr</span>(<span class="type">const</span> MyArr &amp; ob)</span><br><span class="line">    &#123;</span><br><span class="line">        capacity = ob.capacity;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="type">int</span>[capacity];</span><br><span class="line">        size = ob.size;</span><br><span class="line">        <span class="built_in">memcpy</span>(arr, ob.arr, size * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">MyArr</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="keyword">delete</span> [] arr;</span><br><span class="line">            arr = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(<span class="type">int</span> element)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pop_back</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printArr</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     MyArr arr;</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">20</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">40</span>);</span><br><span class="line">     arr.<span class="built_in">printArr</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     arr.<span class="built_in">pop_back</span>();</span><br><span class="line">     arr.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">20</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">40</span>);</span><br><span class="line">     arr.<span class="built_in">printArr</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::push_back</span><span class="params">(<span class="type">int</span> element)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == capacity)&#123;</span><br><span class="line">        <span class="type">int</span> *tmp = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">2</span> * capacity];</span><br><span class="line">        <span class="built_in">memcpy</span>(tmp, arr, size * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">        <span class="keyword">delete</span> [] arr;</span><br><span class="line">        arr = tmp;</span><br><span class="line">        capacity  = <span class="number">2</span> * capacity;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[size] = element;</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::pop_back</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == <span class="number">0</span>)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;数组元素个数为0&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// arr[size--] = 0;</span></span><br><span class="line">    size--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::printArr</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">        cout &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092311009.png"
-                      alt="image-20230921092311009"
-                ></p>
-]]></content>
-      <categories>
-        <category>CPP语言</category>
-      </categories>
-      <tags>
-        <tag>基础 CPP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CPP__STL库</title>
     <url>/2023/09/21/CPP-STL%E5%BA%93/</url>
     <content><![CDATA[<h1 id="第一章STL概述-标准模板库"><a href="#第一章STL概述-标准模板库" class="headerlink" title="第一章	STL概述(标准模板库)"></a><strong>第一章	STL概述(标准模板库)</strong></h1><p><strong>概念</strong></p>
@@ -399,6 +338,67 @@
       </tags>
   </entry>
   <entry>
+    <title>CPP_友元</title>
+    <url>/2023/09/21/CPP-%E5%8F%8B%E5%85%83/</url>
+    <content><![CDATA[<h1 id="第一章友元"><a href="#第一章友元" class="headerlink" title="第一章	友元"></a><strong>第一章	友元</strong></h1><p>1.打破了c++的封装性（运算符重载也会使用）</p>
+<p>2.声明友元的关键字是：friend，friend 关键字只出现在声明处</p>
+<ul>
+<li>全局函数，</li>
+<li>类内部的成员函数，</li>
+<li>整个类也可作为友元</li>
+</ul>
+<p>3.友元函数不是类的成员，不带 this 指针友元函数可访问对象任意成员属性，包括私有属性</p>
+<h1 id="第二章全局函数做为友元"><a href="#第二章全局函数做为友元" class="headerlink" title="第二章	全局函数做为友元"></a><strong>第二章	全局函数做为友元</strong></h1><p>案例1：全局函数做为友元</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">visitroom</span><span class="params">(Room &amp;room)</span></span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">visitroom</span><span class="params">(Room &amp;room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.bedroom &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Room <span class="title">room</span><span class="params">(<span class="string">&quot;卧室&quot;</span>, <span class="string">&quot;客厅&quot;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">visitroom</span>(room);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第三章成员函数做为友元"><a href="#第三章成员函数做为友元" class="headerlink" title="第三章	成员函数做为友元"></a><strong>第三章	成员函数做为友元</strong></h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span>; <span class="comment">//向前声明Room类，但并不知道类内部的成员</span></span><br><span class="line"><span class="comment">//作为友元类的定义，必须定义在最上方（友元类就是包含成员函数的类）</span></span><br><span class="line"><span class="comment">//友元类的成员函数必须在所有类的最下方定义</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GoodGay</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">GoodGay</span>()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visitroom01</span><span class="params">(Room &amp; room)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visitroom02</span><span class="params">(Room &amp; room)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">// friend void GoodGay::visitroom01(Room &amp;room);</span></span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">GoodGay::visitroom02</span><span class="params">(Room &amp;room)</span></span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GoodGay::visitroom01</span><span class="params">(Room &amp; room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; &quot;访问&quot; &lt;&lt; room.bedroom &lt;&lt; endl;</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GoodGay::visitroom02</span><span class="params">(Room &amp; room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.bedroom &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Room <span class="title">room</span><span class="params">(<span class="string">&quot;卧室&quot;</span>, <span class="string">&quot;客厅&quot;</span>)</span></span>;</span><br><span class="line">    GoodGay gay;</span><br><span class="line">    gay.<span class="built_in">visitroom01</span>(room);</span><br><span class="line">    gay.<span class="built_in">visitroom02</span>(room);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092100296.png"
+                      alt="image-20230921092100296"
+                ></p>
+<h1 id="第四章类作为友元"><a href="#第四章类作为友元" class="headerlink" title="第四章	类作为友元"></a><strong>第四章	类作为友元</strong></h1><p>在成员函数作为友元的基础上，修改普通类中的友元从成员函数改为类名</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">GoodGay</span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092136915.png"
+                      alt="image-20230921092136915"
+                ></p>
+<p>【友元类注意】</p>
+<p>1．友元关系不能被继承。</p>
+<p>2．友元关系是单向的，类 A 是类 B 的朋友，但类 B 不一定是类 A 的朋友。</p>
+<p>3．友元关系不具有传递性。类 B 是类 A 的朋友，类 C 是类 B 的朋友，但类 C 不一定是类 A 的朋友。</p>
+<p>案例1：电视机类的实现（电视机有开机和关机状态，有音量，有频道，提供音量操作的方法，频道操作的方法。 由于电视机只能逐一调整频道，不能指定频道）</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TV</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">enum</span>&#123;MinChannel = <span class="number">1</span>, MaxChannel = <span class="number">100</span>&#125;;</span><br><span class="line">    <span class="keyword">enum</span>&#123;MinVolume, MaxVolum = <span class="number">100</span>&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">bool</span> state;</span><br><span class="line">    <span class="type">int</span>  volume;</span><br><span class="line">    <span class="type">int</span>  channel;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">TV</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        state = <span class="literal">false</span>;</span><br><span class="line">        volume = MinVolume;</span><br><span class="line">        channel = MinChannel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">TV</span>(<span class="type">bool</span> on, <span class="type">int</span> volume, <span class="type">int</span> channel)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;state = on;</span><br><span class="line">        <span class="keyword">this</span>-&gt;volume = volume;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = channel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">TV</span>(<span class="type">const</span> TV &amp; ob)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;state = ob.state;</span><br><span class="line">        <span class="keyword">this</span>-&gt;volume = ob.volume;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = ob.channel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnOrOff</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetVolume</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetChannel</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">TV <span class="title">tv</span><span class="params">(<span class="literal">true</span>, <span class="number">40</span>, <span class="number">3</span>)</span></span>;</span><br><span class="line">    tv.<span class="built_in">OnOrOff</span>();</span><br><span class="line">    tv.<span class="built_in">SetChannel</span>();</span><br><span class="line">    tv.<span class="built_in">SetVolume</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::OnOrOff</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">bool</span> s = (state ? <span class="literal">true</span>:<span class="literal">false</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;the state of TV is &quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::SetVolume</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(volume == MaxVolum)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;音量已经最大&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>-&gt;volume++;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;音量为&quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;volume &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::SetChannel</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;channel == MaxVolum)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;频道已经最大&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>-&gt;channel++;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;频道为&quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;channel &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章强化训练"><a href="#第五章强化训练" class="headerlink" title="第五章	强化训练"></a><strong>第五章	强化训练</strong></h1><p>案例1：动态数组</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092225649.png"
+                      alt="image-20230921092225649"
+                ></p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyArr</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> *arr;</span><br><span class="line">    <span class="type">int</span> capacity;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyArr</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">5</span>];</span><br><span class="line">        capacity = <span class="number">5</span>;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">MyArr</span>(<span class="type">int</span> *p, <span class="type">int</span> _capacity, <span class="type">int</span> _size)</span><br><span class="line">    &#123;</span><br><span class="line">        arr = p;</span><br><span class="line">        capacity = _capacity;</span><br><span class="line">        size = _size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">MyArr</span>(<span class="type">const</span> MyArr &amp; ob)</span><br><span class="line">    &#123;</span><br><span class="line">        capacity = ob.capacity;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="type">int</span>[capacity];</span><br><span class="line">        size = ob.size;</span><br><span class="line">        <span class="built_in">memcpy</span>(arr, ob.arr, size * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">MyArr</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="keyword">delete</span> [] arr;</span><br><span class="line">            arr = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(<span class="type">int</span> element)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pop_back</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printArr</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     MyArr arr;</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">20</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">40</span>);</span><br><span class="line">     arr.<span class="built_in">printArr</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     arr.<span class="built_in">pop_back</span>();</span><br><span class="line">     arr.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">20</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">40</span>);</span><br><span class="line">     arr.<span class="built_in">printArr</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::push_back</span><span class="params">(<span class="type">int</span> element)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == capacity)&#123;</span><br><span class="line">        <span class="type">int</span> *tmp = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">2</span> * capacity];</span><br><span class="line">        <span class="built_in">memcpy</span>(tmp, arr, size * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">        <span class="keyword">delete</span> [] arr;</span><br><span class="line">        arr = tmp;</span><br><span class="line">        capacity  = <span class="number">2</span> * capacity;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[size] = element;</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::pop_back</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == <span class="number">0</span>)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;数组元素个数为0&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// arr[size--] = 0;</span></span><br><span class="line">    size--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::printArr</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">        cout &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092311009.png"
+                      alt="image-20230921092311009"
+                ></p>
+]]></content>
+      <categories>
+        <category>CPP语言</category>
+      </categories>
+      <tags>
+        <tag>基础 CPP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CPP__多态</title>
     <url>/2023/09/21/CPP-%E5%A4%9A%E6%80%81/</url>
     <content><![CDATA[<h1 id="第一章多态的概念"><a href="#第一章多态的概念" class="headerlink" title="第一章	多态的概念"></a><strong>第一章	多态的概念</strong></h1><h2 id="1-多态的分类"><a href="#1-多态的分类" class="headerlink" title="1.多态的分类"></a><strong>1.多态的分类</strong></h2><p>静态多态：如函数重载、运算符重载、重定义。（编译时确定）</p>
@@ -703,43 +703,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CPP__类型转换</title>
-    <url>/2023/09/21/CPP-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<h1 id="第一章上行与下行转换"><a href="#第一章上行与下行转换" class="headerlink" title="第一章	上行与下行转换"></a><strong>第一章	上行与下行转换</strong></h1><p>上行转换：把派生类的指针或引用转换成基类表示（安全）</p>
-<p>下行转换：把基类指针或引用转换成派生类表示（不安全）</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921230330631.png"
-                      alt="image-20230921230330631"
-                ></p>
-<h1 id="第二章静态转换"><a href="#第二章静态转换" class="headerlink" title="第二章	静态转换"></a><strong>第二章	静态转换</strong></h1><p>关键字：static_cast();</p>
-<p>案例1：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换</span></span><br><span class="line">    <span class="type">int</span> a = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(<span class="number">3.14f</span>);</span><br><span class="line">    <span class="type">float</span> f = <span class="number">0.0f</span>;</span><br><span class="line">    f = <span class="built_in">static_cast</span>&lt;<span class="type">float</span>&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = static_cast&lt;int *&gt;(&amp;f); ///&lt; 错误</span></span><br><span class="line"><span class="comment">//      int n = 10;</span></span><br><span class="line"><span class="comment">//      long *p1 = staitc_cast&lt;long *&gt;(&amp;n);///&lt; 错误</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">static_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);</span><br><span class="line">    <span class="comment">//下行转换(不安全，尽量不要使用)</span></span><br><span class="line">    Son *p1 = <span class="built_in">static_cast</span>&lt;Son *&gt;(<span class="keyword">new</span> Base);</span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line">   <span class="comment">// Son *p2 = static_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第三章动态转换"><a href="#第三章动态转换" class="headerlink" title="第三章	动态转换"></a><strong>第三章	动态转换</strong></h1><p>格式: dynamic_cast()</p>
-<p>概述：dynamiccast 主要用于类层次间的上行转换和下行转换，</p>
-<p>在类层次间进行上行转换时， dynamiccast 和 staticcast 的效果是一样的；</p>
-<p>在进行下行转换时， dynamiccast 具有类型检查的功能，比 static_cast 更安全；</p>
-<p>案例2：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    int a = dynamic_cast&lt;int&gt;(3.14f);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    f = dynamic_cast&lt;float&gt;(10);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = dynamic_cast&lt;int *&gt;(&amp;f);</span></span><br><span class="line"><span class="comment">//    int n = 10;</span></span><br><span class="line"><span class="comment">//    long *p1 = dynamic_cast&lt;long *&gt;(&amp;n);</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">dynamic_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);  <span class="comment">///&lt; 仅支持上行转换</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    Son *p1 = dynamic_cast&lt;Son *&gt;(new Base);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    Son *p2 = dynamic_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第四章常量转换"><a href="#第四章常量转换" class="headerlink" title="第四章	常量转换"></a><strong>第四章	常量转换</strong></h1><p>格式：const_cast(常量) 或 const_cast(非常量)</p>
-<p>概述：修改类型的 const 属性</p>
-<p>案例3：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    const int a = const_cast&lt;int&gt;(10);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    const f = const_cast&lt;float&gt;(10.11);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  支持(类型必须一致)</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> * n;</span><br><span class="line">    <span class="type">int</span> *p = <span class="built_in">const_cast</span>&lt;<span class="type">int</span> *&gt;(n);</span><br><span class="line">    <span class="type">long</span> * n1;</span><br><span class="line">    <span class="type">const</span> <span class="type">long</span> *p1 = <span class="built_in">const_cast</span>&lt;<span class="type">const</span> <span class="type">long</span> *&gt;(n1);</span><br><span class="line">    <span class="comment">//上行转换 不支持</span></span><br><span class="line"><span class="comment">//    const Base *p3 = new Base;</span></span><br><span class="line"><span class="comment">//    Base *p = const_cast&lt;Base *&gt;(p3);</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    const Son *p1 = const_cast&lt;const Son *&gt;(new Son);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    const Son *p2 = const_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第五章重新解释转换-reinterpret-cast"><a href="#第五章重新解释转换-reinterpret-cast" class="headerlink" title="第五章	重新解释转换(reinterpret_cast)"></a><strong>第五章	重新解释转换(reinterpret_cast)</strong></h1><p>格式：reinterpret_cast</p>
-<p><strong>仅不支持基本数据类型转换</strong></p>
-]]></content>
-      <categories>
-        <category>CPP语言</category>
-      </categories>
-      <tags>
-        <tag>基础 CPP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CPP__类与对象</title>
     <url>/2023/09/05/CPP-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/</url>
     <content><![CDATA[<h1 id="第一章类和对象的基本概念"><a href="#第一章类和对象的基本概念" class="headerlink" title="第一章	类和对象的基本概念"></a><strong>第一章	类和对象的基本概念</strong></h1><h2 id="1-1-C-和-C-中-struct-区别"><a href="#1-1-C-和-C-中-struct-区别" class="headerlink" title="1.1 C 和 C++中 struct 区别"></a><strong>1.1 C 和 C++中 struct 区别</strong></h2><p>核心思想：把一些数据进行封装来描述一个事物</p>
@@ -1000,6 +963,43 @@
                      data-src="/imgs/CPP__%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/image-20230905234234785.png"
                       alt="image-20230905234234785"
                 ></p>
+]]></content>
+      <categories>
+        <category>CPP语言</category>
+      </categories>
+      <tags>
+        <tag>基础 CPP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CPP__类型转换</title>
+    <url>/2023/09/21/CPP-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<h1 id="第一章上行与下行转换"><a href="#第一章上行与下行转换" class="headerlink" title="第一章	上行与下行转换"></a><strong>第一章	上行与下行转换</strong></h1><p>上行转换：把派生类的指针或引用转换成基类表示（安全）</p>
+<p>下行转换：把基类指针或引用转换成派生类表示（不安全）</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921230330631.png"
+                      alt="image-20230921230330631"
+                ></p>
+<h1 id="第二章静态转换"><a href="#第二章静态转换" class="headerlink" title="第二章	静态转换"></a><strong>第二章	静态转换</strong></h1><p>关键字：static_cast();</p>
+<p>案例1：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换</span></span><br><span class="line">    <span class="type">int</span> a = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(<span class="number">3.14f</span>);</span><br><span class="line">    <span class="type">float</span> f = <span class="number">0.0f</span>;</span><br><span class="line">    f = <span class="built_in">static_cast</span>&lt;<span class="type">float</span>&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = static_cast&lt;int *&gt;(&amp;f); ///&lt; 错误</span></span><br><span class="line"><span class="comment">//      int n = 10;</span></span><br><span class="line"><span class="comment">//      long *p1 = staitc_cast&lt;long *&gt;(&amp;n);///&lt; 错误</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">static_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);</span><br><span class="line">    <span class="comment">//下行转换(不安全，尽量不要使用)</span></span><br><span class="line">    Son *p1 = <span class="built_in">static_cast</span>&lt;Son *&gt;(<span class="keyword">new</span> Base);</span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line">   <span class="comment">// Son *p2 = static_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第三章动态转换"><a href="#第三章动态转换" class="headerlink" title="第三章	动态转换"></a><strong>第三章	动态转换</strong></h1><p>格式: dynamic_cast()</p>
+<p>概述：dynamiccast 主要用于类层次间的上行转换和下行转换，</p>
+<p>在类层次间进行上行转换时， dynamiccast 和 staticcast 的效果是一样的；</p>
+<p>在进行下行转换时， dynamiccast 具有类型检查的功能，比 static_cast 更安全；</p>
+<p>案例2：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    int a = dynamic_cast&lt;int&gt;(3.14f);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    f = dynamic_cast&lt;float&gt;(10);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = dynamic_cast&lt;int *&gt;(&amp;f);</span></span><br><span class="line"><span class="comment">//    int n = 10;</span></span><br><span class="line"><span class="comment">//    long *p1 = dynamic_cast&lt;long *&gt;(&amp;n);</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">dynamic_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);  <span class="comment">///&lt; 仅支持上行转换</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    Son *p1 = dynamic_cast&lt;Son *&gt;(new Base);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    Son *p2 = dynamic_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章常量转换"><a href="#第四章常量转换" class="headerlink" title="第四章	常量转换"></a><strong>第四章	常量转换</strong></h1><p>格式：const_cast(常量) 或 const_cast(非常量)</p>
+<p>概述：修改类型的 const 属性</p>
+<p>案例3：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    const int a = const_cast&lt;int&gt;(10);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    const f = const_cast&lt;float&gt;(10.11);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  支持(类型必须一致)</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> * n;</span><br><span class="line">    <span class="type">int</span> *p = <span class="built_in">const_cast</span>&lt;<span class="type">int</span> *&gt;(n);</span><br><span class="line">    <span class="type">long</span> * n1;</span><br><span class="line">    <span class="type">const</span> <span class="type">long</span> *p1 = <span class="built_in">const_cast</span>&lt;<span class="type">const</span> <span class="type">long</span> *&gt;(n1);</span><br><span class="line">    <span class="comment">//上行转换 不支持</span></span><br><span class="line"><span class="comment">//    const Base *p3 = new Base;</span></span><br><span class="line"><span class="comment">//    Base *p = const_cast&lt;Base *&gt;(p3);</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    const Son *p1 = const_cast&lt;const Son *&gt;(new Son);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    const Son *p2 = const_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章重新解释转换-reinterpret-cast"><a href="#第五章重新解释转换-reinterpret-cast" class="headerlink" title="第五章	重新解释转换(reinterpret_cast)"></a><strong>第五章	重新解释转换(reinterpret_cast)</strong></h1><p>格式：reinterpret_cast</p>
+<p><strong>仅不支持基本数据类型转换</strong></p>
 ]]></content>
       <categories>
         <category>CPP语言</category>
@@ -2215,109 +2215,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C编程__链表</title>
-    <url>/2023/08/20/C%E7%BC%96%E7%A8%8B-%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<h1 id="第一章单链表"><a href="#第一章单链表" class="headerlink" title="第一章	单链表"></a>第一章	单链表</h1><h2 id="1-1-链表的定义和特点"><a href="#1-1-链表的定义和特点" class="headerlink" title="1.1 链表的定义和特点"></a>1.1 链表的定义和特点</h2><p> 定义：链表是一种物理存储上非连续，数据元素的逻辑顺序通过链表中的指针链接次序，实现的一种线性存储结构。</p>
-<p> 特点：链表由一系列节点（链表中每一个元素称为节点）组成，节点在运行时动态生成（ malloc），</p>
-<p> 每个节点包括两个部分：</p>
-<p>一个是存储数据元素的数据域：数据域内保存的信息右需求决定。</p>
-<p>另一个是存储下一个节点地址的指针域</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230820233949538.png"
-                      alt="image-20230820233949538"
-                ></p>
-<p>链表的构成：</p>
-<p> 链表由一个个节点构成，每个节点一般采用结构体的形式组织，例如：</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stdent</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; STU;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-2-链表的创建"><a href="#1-2-链表的创建" class="headerlink" title="1.2 链表的创建"></a>1.2 链表的创建</h2><p><strong>给一个空链表赋予一个空间，并且判断链表是否为空。</strong></p>
-<ul>
-<li>若为空则将创建的链表作为头表。</li>
-<li>若不为空则用插入法一次添加链表个数。</li>
-</ul>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Createlink</span><span class="params">(STU **p_head, STU *p_new)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;long&quot;</span>);</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;input date\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">        STU *p_move = *p_head;</span><br><span class="line">        <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *p_head = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (p_move-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p_move = p_move-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p_move-&gt;next = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-3链表遍历"><a href="#1-3链表遍历" class="headerlink" title="1.3	链表遍历"></a>1.3	链表遍历</h2><p>向后移动指针循环并输出，直到链表下一次指向为空退出循环。</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">traverse</span><span class="params">(STU *p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov = p_head;</span><br><span class="line">    <span class="keyword">while</span> (p_mov != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%-5d&quot;</span>, p_mov-&gt;num);</span><br><span class="line">        p_mov = p_mov-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-4链表的查找"><a href="#1-4链表的查找" class="headerlink" title="1.4	链表的查找"></a>1.4	链表的查找</h2><p><strong>对比结构体中的值：</strong></p>
-<ul>
-<li>若与需要查找目标值不同则继续遍历；</li>
-<li>若与需要查找目标值相同则输出并退出循环；</li>
-<li>若未找到目标值则返回输出未找到；</li>
-</ul>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号链表查询 结构</span></span><br><span class="line">STU *<span class="title function_">checklink_sum</span><span class="params">(STU *p_head, <span class="type">int</span> num)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov = p_head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p_mov != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (num == p_mov-&gt;num)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> p_mov;</span><br><span class="line">        &#125;</span><br><span class="line">        p_mov = p_mov-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">// 链表中无所需数据</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按学号链表查找 函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">checklink</span><span class="params">(STU *p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入要查询的学号&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    p_head = checklink_sum(p_head, num);</span><br><span class="line">    <span class="keyword">if</span> (p_head != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;已经查到，数据为%-5d\n&quot;</span>, p_head-&gt;num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-
-
-
-<h2 id="1-5-节点插入"><a href="#1-5-节点插入" class="headerlink" title="1.5  节点插入"></a>1.5  节点插入</h2><p>尾插法或头插法增加链表个数。</p>
-<p><strong>尾插法如下：</strong></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230820234728737.png"
-                      alt="image-20230820234728737"
-                ></p>
-<p><strong>运用链表查询方法：</strong></p>
-<ul>
-<li>若查找失败则不进行插入操作；</li>
-<li>若查找成功则先进行新链表指针指向后链表，之后前链表指针指向新链表；</li>
-</ul>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号增加链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">addlink</span><span class="params">(STU **p_head, STU *p_new)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov;</span><br><span class="line">    p_mov = *p_head;</span><br><span class="line">    <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无链表,添加一个头节点,并且输入添加内容&quot;</span>);</span><br><span class="line">        p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">        *p_head = p_new;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入在在几个链表后面插入&quot;</span>);</span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">        <span class="keyword">while</span> (p_mov-&gt;num != num &amp;&amp; p_mov-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p_mov = p_mov-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入要添加几个链表&quot;</span>);</span><br><span class="line">        <span class="type">int</span> numtwo;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;numtwo);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numtwo; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">            p_new-&gt;next = p_mov-&gt;next;</span><br><span class="line">            p_mov-&gt;next = p_new;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;请输入数据到新增链表&quot;</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>头插法与尾插法类似，区别在于头插法要多一个判断。</p>
-<p><strong>判断插入的节点位置是否为头节点：</strong></p>
-<ul>
-<li>若为头节点则需无需前指针指向新节点</li>
-</ul>
-<h2 id="1-6链表的删除"><a href="#1-6链表的删除" class="headerlink" title="1.6链表的删除"></a>1.6链表的删除</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821000912130.png"
-                      alt="image-20230821000912130"
-                ></p>
-<p><strong>运用链表查询方法：</strong></p>
-<ul>
-<li>若查找失败则不进行删除操作；</li>
-<li>若查找成功则先进行前链表指针指向后链表，之后释放查询到的链表；</li>
-</ul>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号链表的删除</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">deletelink</span><span class="params">(STU **p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    STU *pb, *pf;</span><br><span class="line">    pb = pf = *p_head;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入要删除的链表&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链表为空无需删除&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (pb-&gt;num != num &amp;&amp; pb-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pf = pb;</span><br><span class="line">        pb = pb-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (pb-&gt;num == num)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (pb == *p_head)</span><br><span class="line">        &#123;</span><br><span class="line">            *p_head = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            pf-&gt;next = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(pb);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到要删除的指针&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-7链表的排序"><a href="#1-7链表的排序" class="headerlink" title="1.7链表的排序"></a>1.7链表的排序</h2><p>判断是否为空指针或仅有头指针，为空则无排序必要。</p>
-<p>运用排序算法即可进行链表排序，<strong>区别在于多了指针的交换</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 有序链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sortlink</span><span class="params">(STU **head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU p_mov, *pf = <span class="literal">NULL</span>, *pb = <span class="literal">NULL</span>;</span><br><span class="line">    pf = *head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (*head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((*head)-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pf-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pb = pf-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (pb != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (pf-&gt;num &gt; pb-&gt;num)</span><br><span class="line">            &#123;</span><br><span class="line">                p_mov = *pb;</span><br><span class="line">                *pb = *pf;</span><br><span class="line">                *pf = p_mov;</span><br><span class="line"></span><br><span class="line">                p_mov.next = pb-&gt;next;</span><br><span class="line">                pb-&gt;next = pf-&gt;next;</span><br><span class="line">                pf-&gt;next = p_mov.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pb = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        pf = pf-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-8链表逆序"><a href="#1-8链表逆序" class="headerlink" title="1.8链表逆序"></a>1.8链表逆序</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821001815233.png"
-                      alt="image-20230821001815233"
-                ></p>
-<p>先头指针改变后面指针方向，之后改变头指针指向为空</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 链表逆序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">reverse_link</span><span class="params">(STU **head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *pf, *pb, *r;</span><br><span class="line">    pf = *head;</span><br><span class="line">    pb = pf-&gt;next;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pb != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        r = pb-&gt;next;</span><br><span class="line">        pb-&gt;next = pf;</span><br><span class="line">        pf = pb;</span><br><span class="line">        pb = r;</span><br><span class="line">    &#125;</span><br><span class="line">    (*head)-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    (*head) = pf;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第二章双链表"><a href="#第二章双链表" class="headerlink" title="第二章	双链表"></a>第二章	双链表</h1><p>双链表操作与单链表区别仅在于多了一组从尾到头的指针，及每个节点都有两个指针，一个指向下一个节点，一个指向上一个节点。</p>
-<p>操作与单链表类似，因此此处只用一个创建案例表示：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821002302163.png"
-                      alt="image-20230821002302163"
-                ></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span> *<span class="title">next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span> *<span class="title">pre</span>;</span></span><br><span class="line">&#125; DDD;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">creatlink</span><span class="params">(DDD **head, DDD *p_new, DDD **tra)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LONG&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        DDD *p_mov = *head;</span><br><span class="line">        p_new = (DDD *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DDD));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (*head == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *head = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">            p_new-&gt;pre = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (p_mov-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p_mov = p_mov-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p_mov-&gt;next = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">            p_new-&gt;pre = p_mov;</span><br><span class="line">            (*tra) = p_mov-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-]]></content>
-      <categories>
-        <category>C语言</category>
-      </categories>
-      <tags>
-        <tag>嵌入式 c语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C编程__文件</title>
     <url>/2023/08/21/C%E7%BC%96%E7%A8%8B-%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<h1 id="文件指针"><a href="#文件指针" class="headerlink" title="文件指针"></a>文件指针</h1><p>FILE 在 stdio.h 文件中的文件类型声明：</p>
@@ -2605,6 +2502,109 @@
       </tags>
   </entry>
   <entry>
+    <title>C编程__链表</title>
+    <url>/2023/08/20/C%E7%BC%96%E7%A8%8B-%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<h1 id="第一章单链表"><a href="#第一章单链表" class="headerlink" title="第一章	单链表"></a>第一章	单链表</h1><h2 id="1-1-链表的定义和特点"><a href="#1-1-链表的定义和特点" class="headerlink" title="1.1 链表的定义和特点"></a>1.1 链表的定义和特点</h2><p> 定义：链表是一种物理存储上非连续，数据元素的逻辑顺序通过链表中的指针链接次序，实现的一种线性存储结构。</p>
+<p> 特点：链表由一系列节点（链表中每一个元素称为节点）组成，节点在运行时动态生成（ malloc），</p>
+<p> 每个节点包括两个部分：</p>
+<p>一个是存储数据元素的数据域：数据域内保存的信息右需求决定。</p>
+<p>另一个是存储下一个节点地址的指针域</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230820233949538.png"
+                      alt="image-20230820233949538"
+                ></p>
+<p>链表的构成：</p>
+<p> 链表由一个个节点构成，每个节点一般采用结构体的形式组织，例如：</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stdent</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; STU;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-2-链表的创建"><a href="#1-2-链表的创建" class="headerlink" title="1.2 链表的创建"></a>1.2 链表的创建</h2><p><strong>给一个空链表赋予一个空间，并且判断链表是否为空。</strong></p>
+<ul>
+<li>若为空则将创建的链表作为头表。</li>
+<li>若不为空则用插入法一次添加链表个数。</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Createlink</span><span class="params">(STU **p_head, STU *p_new)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;long&quot;</span>);</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;input date\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">        STU *p_move = *p_head;</span><br><span class="line">        <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *p_head = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (p_move-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p_move = p_move-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p_move-&gt;next = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-3链表遍历"><a href="#1-3链表遍历" class="headerlink" title="1.3	链表遍历"></a>1.3	链表遍历</h2><p>向后移动指针循环并输出，直到链表下一次指向为空退出循环。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">traverse</span><span class="params">(STU *p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov = p_head;</span><br><span class="line">    <span class="keyword">while</span> (p_mov != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%-5d&quot;</span>, p_mov-&gt;num);</span><br><span class="line">        p_mov = p_mov-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-4链表的查找"><a href="#1-4链表的查找" class="headerlink" title="1.4	链表的查找"></a>1.4	链表的查找</h2><p><strong>对比结构体中的值：</strong></p>
+<ul>
+<li>若与需要查找目标值不同则继续遍历；</li>
+<li>若与需要查找目标值相同则输出并退出循环；</li>
+<li>若未找到目标值则返回输出未找到；</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号链表查询 结构</span></span><br><span class="line">STU *<span class="title function_">checklink_sum</span><span class="params">(STU *p_head, <span class="type">int</span> num)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov = p_head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p_mov != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (num == p_mov-&gt;num)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> p_mov;</span><br><span class="line">        &#125;</span><br><span class="line">        p_mov = p_mov-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">// 链表中无所需数据</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按学号链表查找 函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">checklink</span><span class="params">(STU *p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入要查询的学号&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    p_head = checklink_sum(p_head, num);</span><br><span class="line">    <span class="keyword">if</span> (p_head != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;已经查到，数据为%-5d\n&quot;</span>, p_head-&gt;num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+<h2 id="1-5-节点插入"><a href="#1-5-节点插入" class="headerlink" title="1.5  节点插入"></a>1.5  节点插入</h2><p>尾插法或头插法增加链表个数。</p>
+<p><strong>尾插法如下：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230820234728737.png"
+                      alt="image-20230820234728737"
+                ></p>
+<p><strong>运用链表查询方法：</strong></p>
+<ul>
+<li>若查找失败则不进行插入操作；</li>
+<li>若查找成功则先进行新链表指针指向后链表，之后前链表指针指向新链表；</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号增加链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">addlink</span><span class="params">(STU **p_head, STU *p_new)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov;</span><br><span class="line">    p_mov = *p_head;</span><br><span class="line">    <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无链表,添加一个头节点,并且输入添加内容&quot;</span>);</span><br><span class="line">        p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">        *p_head = p_new;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入在在几个链表后面插入&quot;</span>);</span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">        <span class="keyword">while</span> (p_mov-&gt;num != num &amp;&amp; p_mov-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p_mov = p_mov-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入要添加几个链表&quot;</span>);</span><br><span class="line">        <span class="type">int</span> numtwo;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;numtwo);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numtwo; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">            p_new-&gt;next = p_mov-&gt;next;</span><br><span class="line">            p_mov-&gt;next = p_new;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;请输入数据到新增链表&quot;</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>头插法与尾插法类似，区别在于头插法要多一个判断。</p>
+<p><strong>判断插入的节点位置是否为头节点：</strong></p>
+<ul>
+<li>若为头节点则需无需前指针指向新节点</li>
+</ul>
+<h2 id="1-6链表的删除"><a href="#1-6链表的删除" class="headerlink" title="1.6链表的删除"></a>1.6链表的删除</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821000912130.png"
+                      alt="image-20230821000912130"
+                ></p>
+<p><strong>运用链表查询方法：</strong></p>
+<ul>
+<li>若查找失败则不进行删除操作；</li>
+<li>若查找成功则先进行前链表指针指向后链表，之后释放查询到的链表；</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号链表的删除</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">deletelink</span><span class="params">(STU **p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    STU *pb, *pf;</span><br><span class="line">    pb = pf = *p_head;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入要删除的链表&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链表为空无需删除&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (pb-&gt;num != num &amp;&amp; pb-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pf = pb;</span><br><span class="line">        pb = pb-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (pb-&gt;num == num)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (pb == *p_head)</span><br><span class="line">        &#123;</span><br><span class="line">            *p_head = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            pf-&gt;next = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(pb);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到要删除的指针&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-7链表的排序"><a href="#1-7链表的排序" class="headerlink" title="1.7链表的排序"></a>1.7链表的排序</h2><p>判断是否为空指针或仅有头指针，为空则无排序必要。</p>
+<p>运用排序算法即可进行链表排序，<strong>区别在于多了指针的交换</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 有序链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sortlink</span><span class="params">(STU **head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU p_mov, *pf = <span class="literal">NULL</span>, *pb = <span class="literal">NULL</span>;</span><br><span class="line">    pf = *head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (*head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((*head)-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pf-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pb = pf-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (pb != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (pf-&gt;num &gt; pb-&gt;num)</span><br><span class="line">            &#123;</span><br><span class="line">                p_mov = *pb;</span><br><span class="line">                *pb = *pf;</span><br><span class="line">                *pf = p_mov;</span><br><span class="line"></span><br><span class="line">                p_mov.next = pb-&gt;next;</span><br><span class="line">                pb-&gt;next = pf-&gt;next;</span><br><span class="line">                pf-&gt;next = p_mov.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pb = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        pf = pf-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-8链表逆序"><a href="#1-8链表逆序" class="headerlink" title="1.8链表逆序"></a>1.8链表逆序</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821001815233.png"
+                      alt="image-20230821001815233"
+                ></p>
+<p>先头指针改变后面指针方向，之后改变头指针指向为空</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 链表逆序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">reverse_link</span><span class="params">(STU **head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *pf, *pb, *r;</span><br><span class="line">    pf = *head;</span><br><span class="line">    pb = pf-&gt;next;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pb != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        r = pb-&gt;next;</span><br><span class="line">        pb-&gt;next = pf;</span><br><span class="line">        pf = pb;</span><br><span class="line">        pb = r;</span><br><span class="line">    &#125;</span><br><span class="line">    (*head)-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    (*head) = pf;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第二章双链表"><a href="#第二章双链表" class="headerlink" title="第二章	双链表"></a>第二章	双链表</h1><p>双链表操作与单链表区别仅在于多了一组从尾到头的指针，及每个节点都有两个指针，一个指向下一个节点，一个指向上一个节点。</p>
+<p>操作与单链表类似，因此此处只用一个创建案例表示：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821002302163.png"
+                      alt="image-20230821002302163"
+                ></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span> *<span class="title">next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span> *<span class="title">pre</span>;</span></span><br><span class="line">&#125; DDD;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">creatlink</span><span class="params">(DDD **head, DDD *p_new, DDD **tra)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LONG&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        DDD *p_mov = *head;</span><br><span class="line">        p_new = (DDD *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DDD));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (*head == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *head = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">            p_new-&gt;pre = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (p_mov-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p_mov = p_mov-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p_mov-&gt;next = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">            p_new-&gt;pre = p_mov;</span><br><span class="line">            (*tra) = p_mov-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>嵌入式 c语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C编程____预处理、动态库、静态库</title>
     <url>/2023/08/16/C%E7%BC%96%E7%A8%8B-%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93/</url>
     <content><![CDATA[<h1 id="第一章c-语言编译过程"><a href="#第一章c-语言编译过程" class="headerlink" title="第一章c 语言编译过程"></a>第一章c 语言编译过程</h1><p><img  
@@ -2838,54 +2838,6 @@
       </tags>
   </entry>
   <entry>
-    <title>UbuntuSSH服务在VSCODE中的应用</title>
-    <url>/2023/08/16/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<p>1.安装Remote-SSH插件</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180014856.png"
-                      alt="image-20230816180014856"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180022960.png"
-                      alt="image-20230816180022960"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180027357.png"
-                      alt="image-20230816180027357"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180031807.png"
-                      alt="image-20230816180031807"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180037210.png"
-                      alt="image-20230816180037210"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180041748.png"
-                      alt="image-20230816180041748"
-                ></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>vscode Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SSH服务安装</title>
     <url>/2023/08/16/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="第一章-SSH服务"><a href="#第一章-SSH服务" class="headerlink" title="第一章    SSH服务"></a>第一章    SSH服务</h1><p><strong>SSH服务功能：实现远程连接，及文件传输服务。</strong></p>
@@ -3021,6 +2973,54 @@
       </tags>
   </entry>
   <entry>
+    <title>UbuntuSSH服务在VSCODE中的应用</title>
+    <url>/2023/08/16/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<p>1.安装Remote-SSH插件</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180014856.png"
+                      alt="image-20230816180014856"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180022960.png"
+                      alt="image-20230816180022960"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180027357.png"
+                      alt="image-20230816180027357"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180031807.png"
+                      alt="image-20230816180031807"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180037210.png"
+                      alt="image-20230816180037210"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/UbuntuSSH%E6%9C%8D%E5%8A%A1%E5%9C%A8VSCODE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/$%7Bfiilename%7D/image-20230816180041748.png"
+                      alt="image-20230816180041748"
+                ></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>vscode Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>c编程_IO缓冲区</title>
     <url>/2023/08/21/c%E7%BC%96%E7%A8%8B-IO%E7%BC%93%E5%86%B2%E5%8C%BA/</url>
     <content><![CDATA[<h1 id="通过标准IO库来对磁盘文件操作特点"><a href="#通过标准IO库来对磁盘文件操作特点" class="headerlink" title="通过标准IO库来对磁盘文件操作特点"></a><strong>通过标准IO库来对磁盘文件操作特点</strong></h1><p>​    <img  
@@ -3083,6 +3083,183 @@
       </categories>
       <tags>
         <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql配置应用</title>
+    <url>/2023/09/08/mysql%E9%85%8D%E7%BD%AE%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<h1 id="第一章数据库理论"><a href="#第一章数据库理论" class="headerlink" title="第一章	数据库理论"></a>第一章	数据库理论</h1><h2 id="1-1数据库概述"><a href="#1-1数据库概述" class="headerlink" title="1.1数据库概述"></a>1.1数据库概述</h2><p><strong>2.数据库使用的原因</strong><br><strong>持久化 (persistence)：</strong><br>把数据保存到可掉电式存储设备中以供之后使用。在企业级应用中，数据持久化意味着将内存中的数据保存到硬盘上加以 “固化”，而持久化的实现过程大多通过各种关系数据库来完成<br>持久化的主要作用：将内存中的数据存储在关系型数据库中，也可以存储在磁盘文件、XML 数据文件中</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/mysql/image-20231008163633280.png"
+                      alt="image-20231008163633280"
+                ></p>
+<p><strong>2. 选择数据库的原因</strong></p>
+<ul>
+<li>开放源代码，使用成本低</li>
+<li>性能卓越，服务稳定</li>
+<li>软件体积小，使用简单，并且易于维护</li>
+<li>历史悠久，社区用户非常活跃，遇到问题可以寻求帮助</li>
+<li>经过了时间的验证</li>
+</ul>
+<h2 id="1-2数据库安装"><a href="#1-2数据库安装" class="headerlink" title="1.2数据库安装"></a>1.2数据库安装</h2><p><strong>以mysql举例</strong></p>
+<p>进入mysql官网<a class="link"   href="https://www.mysql.com/" >MySQL <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>之后点击下载</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/mysql/image-20231008163945694.png"
+                      alt="image-20231008163945694"
+                ></p>
+<p>进入有开源社区</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/mysql/image-20231008164022501.png"
+                      alt="image-20231008164022501"
+                ></p>
+<p>根据所需系统下载对应mysql</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/mysql/image-20231008164207210.png"
+                      alt="image-20231008164207210"
+                ></p>
+<h3 id="1-2-1windows"><a href="#1-2-1windows" class="headerlink" title="1.2.1windows"></a>1.2.1windows</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/mysql/image-20231008164300902.png"
+                      alt="image-20231008164300902"
+                ></p>
+<p>之后选择full，一直选择默认即可</p>
+<h3 id="1-2-2ubuntu"><a href="#1-2-2ubuntu" class="headerlink" title="1.2.2ubuntu"></a>1.2.2ubuntu</h3><p>先执行以下命令</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure></div>
+
+<p>之后执行MySQL安装命令</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install mysql-server</span><br></pre></td></tr></table></figure></div>
+
+<p>安装成功默认会已启动通过以下命令查看</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">service mysql status</span><br></pre></td></tr></table></figure></div>
+
+<p>如果未启动则执行</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">service mysql start</span><br></pre></td></tr></table></figure></div>
+
+<p>验证安装</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">mysql --version</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第二章数据库应用"><a href="#第二章数据库应用" class="headerlink" title="第二章	数据库应用"></a>第二章	数据库应用</h1><p><strong>ubuntu举例</strong></p>
+<h2 id="2-1初始设置"><a href="#2-1初始设置" class="headerlink" title="2.1初始设置"></a>2.1初始设置</h2><p>用以下命令，查看数据库的初始密码:</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo cat /etc/mysql/debian.cnf</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/mysql/image-20231008171908961.png"
+                      alt="image-20231008171908961"
+                ></p>
+<p>登录数据库</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u 账号 -p</span><br></pre></td></tr></table></figure></div>
+
+<p>账号密码为以上初始密码。</p>
+<p>修改数据库密码 </p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">alter user &#x27;root&#x27;@&#x27;localhost&#x27; identified with mysql_native_password by &#x27;1&#x27;</span><br></pre></td></tr></table></figure></div>
+
+<p>刷新权限</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flush privileges</span><br></pre></td></tr></table></figure></div>
+
+<p>退出</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="2-2数据库的远程链接"><a href="#2-2数据库的远程链接" class="headerlink" title="2.2数据库的远程链接"></a>2.2数据库的远程链接</h2><p>先放开MySQL初始端口3306</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo ufw allow 3306</span><br></pre></td></tr></table></figure></div>
+
+<p>打开配置MySQL的配置文件</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/mysql/image-20231008173819338.png"
+                      alt="image-20231008173819338"
+                ></p>
+<p>找到如图位置并且把默认ip改为如图所示，0.0.0.0广播模式</p>
+<p>之后再次进入数据库</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure></div>
+
+<p>查看用户表</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">select &#x27;Host&#x27;,&#x27;User&#x27; FROM user；</span><br></pre></td></tr></table></figure></div>
+
+<p>将用户root的host设为%，%意思为全局链接</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">update user set host = &#x27;%&#x27; where user = &#x27;root&#x27;;  </span><br></pre></td></tr></table></figure></div>
+
+<p>刷新权限</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flush privileges</span><br></pre></td></tr></table></figure></div>
+
+<p>查看root的host是不是成功被修改成为%</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">select host,user from user;</span><br></pre></td></tr></table></figure></div>
+
+<p>进入navicate测试</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/mysql/image-20231009084556320.png"
+                      alt="image-20231009084556320"
+                ></p>
+<h1 id="第三章数据库编程"><a href="#第三章数据库编程" class="headerlink" title="第三章	数据库编程"></a>第三章	数据库编程</h1><h2 id="3-1数据库链接"><a href="#3-1数据库链接" class="headerlink" title="3.1数据库链接"></a>3.1数据库链接</h2><h3 id="3-1-1常用API"><a href="#3-1-1常用API" class="headerlink" title="3.1.1常用API"></a>3.1.1常用API</h3><p><strong>初始化</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL *<span class="title function_">mysql_init</span><span class="params">(MYSQL *mysql)</span></span><br><span class="line">描述：分配或初始化与 <span class="title function_">mysql_real_connect</span><span class="params">()</span>相适应的 MYSQL 对象</span><br><span class="line">参数：</span><br><span class="line">    mysql ：MYSQL*句柄</span><br><span class="line">返回值：</span><br><span class="line">    初始化的 MYSQL*句柄。如果无足够内存以分配新的对象，返回 <span class="literal">NULL</span>。</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>连接数据库</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL *<span class="title function_">mysql_real_connect</span><span class="params">(MYSQL *mysql,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *host,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *user,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *passwd,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *db,</span></span><br><span class="line"><span class="params">     <span class="type">unsigned</span> <span class="type">int</span> port,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *unix_socket,</span></span><br><span class="line"><span class="params">     <span class="type">unsigned</span> <span class="type">long</span> client_flag)</span></span><br><span class="line">描述：<span class="title function_">mysql_real_connect</span><span class="params">()</span>尝试与运行在主机上的 MySQL 数据库引擎建立连接。</span><br><span class="line">参数：</span><br><span class="line">    mysql：MySQL 句柄</span><br><span class="line">    host：“host”的值必须是主机名或 IP 地址. 如果“host”是 <span class="literal">NULL</span> 或字符串&quot;localhost&quot;、”127.0.0.1”，连接将被视为与本地主机的连接.</span><br><span class="line">    user: MySQL 登录的用户名</span><br><span class="line">    passwd: MySQL 登录的密码</span><br><span class="line">    db：数据库名称</span><br><span class="line">    port：MySQL 服务器监听客户端连接到来的端口号（默认：3306）</span><br><span class="line">    unix_socket：如果 unix_socket 不是 <span class="literal">NULL</span>，该字符串描述了应使用的套接字或命名管道（默认为 <span class="literal">NULL</span>）</span><br><span class="line">    client_flag: 通常为 0，可以更改其值，以允许特定功能（详情见手册）</span><br><span class="line">返回值：</span><br><span class="line">    如果连接成功，返回 MYSQL*连接句柄。返回值与第 1 个参数的值相同。</span><br><span class="line">    如果连接失败，返回 <span class="literal">NULL</span>。</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>关闭连接</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">Void <span class="title function_">mysql_close</span><span class="params">(MYSQL *mysql)</span></span><br><span class="line">描述：</span><br><span class="line">关闭前面打开的连接。如果句柄是由 <span class="title function_">mysql_init</span><span class="params">()</span>或 <span class="title function_">mysql_connect</span><span class="params">()</span>自动分配的，<span class="title function_">mysql_close</span><span class="params">()</span>还将解除分配</span><br><span class="line">由 mysql 指向的连接句柄</span><br><span class="line">参数：</span><br><span class="line">MySQL 连接句柄</span><br><span class="line">返回值：</span><br><span class="line">无</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>案例：远程连接数据库</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *host = <span class="string">&quot;192.168.107.130&quot;</span>;</span><br><span class="line"><span class="type">char</span> *user = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="type">char</span> *passwd = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="type">char</span> *db = <span class="string">&quot;game&quot;</span>;</span><br><span class="line"><span class="type">int</span> port = <span class="number">3306</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    MYSQL *con;</span><br><span class="line">    con = mysql_init(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!(con = mysql_real_connect(con, host, user, passwd, db, <span class="number">3306</span>, <span class="literal">NULL</span>, <span class="number">0</span>)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_connect\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链接成功\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//关闭连接</span></span><br><span class="line">    mysql_close(con);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="3-2数据库操作"><a href="#3-2数据库操作" class="headerlink" title="3.2数据库操作"></a>3.2数据库操作</h2><p>数据库的编程操作大致分为两类，查询类和非查询类，因此运用函数也有所不同。</p>
+<h3 id="3-2-1非查询操作"><a href="#3-2-1非查询操作" class="headerlink" title="3.2.1非查询操作"></a>3.2.1非查询操作</h3><p><strong>使用API</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">Int <span class="title function_">mysql_real_query</span><span class="params">(MYSQL *mysql,<span class="type">const</span> <span class="type">char</span> * query,<span class="type">unsigned</span> <span class="type">long</span> length)</span></span><br><span class="line">描述：</span><br><span class="line">执行由“query”指向的 SQL 查询，它应是字符串长度字节“<span class="type">long</span>”。正常情况下，字符串必须包含 1 条 SQL 语句，</span><br><span class="line">而且应为语句添加终结分号（‘;’）或“\g”。如果允许多语句执行，字符串可包含由分号隔开的多条语句。</span><br><span class="line">参数：</span><br><span class="line">mysql：MySQL 句柄</span><br><span class="line">query:需要执行的 MySQL 语句</span><br><span class="line">length：需要执行的 MySQL 语句的长度</span><br><span class="line">返回值：</span><br><span class="line">如果成功，返回 <span class="number">0</span>。</span><br><span class="line">如果失败，返回非 <span class="number">0</span> 值</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>案例：数据库的插入操作</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *host = <span class="string">&quot;192.168.107.130&quot;</span>;</span><br><span class="line"><span class="type">char</span> *user = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="type">char</span> *passwd = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="type">char</span> *db = <span class="string">&quot;game&quot;</span>;</span><br><span class="line"><span class="type">int</span> port = <span class="number">3306</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    MYSQL *con;</span><br><span class="line">    con = mysql_init(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!(con = mysql_real_connect(con, host, user, passwd, db, <span class="number">3306</span>, <span class="literal">NULL</span>, <span class="number">0</span>)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_connect\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链接成功\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> cmd[<span class="number">255</span>] = <span class="string">&quot;INSERT INTO table_name(id, create_time, NAME) VALUES(2, 2, &#x27;你好&#x27;);&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (mysql_real_query(con, cmd, <span class="built_in">strlen</span>(cmd)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_query\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;插入成功\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//关闭连接</span></span><br><span class="line">    mysql_close(con);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="3-2-2查询操作"><a href="#3-2-2查询操作" class="headerlink" title="3.2.2查询操作"></a>3.2.2查询操作</h3><p><strong>使用API</strong></p>
+<p><strong>获取结果集函数：</strong>（如果是查询，必须调用该函数，如果是其他比如增加数据，则没有结果集）</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL_RES *<span class="title function_">mysql_store_result</span><span class="params">(MYSQL *mysql)</span></span><br><span class="line">描述：</span><br><span class="line">    对于成功检索了数据的每个查询（SELECT、SHOW、DESCRIBE、EXPLAIN、CHECK TABLE 等），必须调 用</span><br><span class="line">    <span class="title function_">mysql_store_result</span><span class="params">()</span>或 <span class="title function_">mysql_use_result</span><span class="params">()</span> 。 对于其他查询，不需要调用 <span class="title function_">mysql_store_result</span><span class="params">()</span>或 <span class="title function_">mysql_use_result</span><span class="params">()</span>，</span><br><span class="line">    但是如果在任何情况下均调用 了 <span class="title function_">mysql_store_result</span><span class="params">()</span>，它也不会导致任何伤害或性能降低。通过检查</span><br><span class="line">    <span class="title function_">mysql_store_result</span><span class="params">()</span>是否返回 0，可检测查询 是否没有结果集（以后会更多）</span><br><span class="line">参数：</span><br><span class="line">    Mysql：MySQL 句柄</span><br><span class="line">返回值：</span><br><span class="line">    成功 返回具有多个结果的 MYSQL_RES 结果集合。</span><br><span class="line">    失败 返回 <span class="literal">NULL</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>获取结果集中的列数</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">mysql_num_fields</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：返回结果集中的列数</span><br><span class="line">参数：</span><br><span class="line">    result ：MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">    表示结果集中列数的无符号整数</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>获取结果集中的行数</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">my_ulonglong <span class="title function_">mysql_num_rows</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：</span><br><span class="line">返回结果集中的行数</span><br><span class="line">参数：</span><br><span class="line">result：MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">结果集中的行数</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>获取结果集中列名称</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL_FIELD * <span class="title function_">mysql_fetch_field</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：</span><br><span class="line">返回采用 MYSQL_FIELD 结构的结果集的列。重复调用该函数，以检索关于结果集中所有列的信息。未剩余字</span><br><span class="line">段时，<span class="title function_">mysql_fetch_field</span><span class="params">()</span>返回 <span class="literal">NULL</span>。</span><br><span class="line">参数：</span><br><span class="line">result：MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">当前列的 MYSQL_FIELD 结构。如果未剩余任何列，返回 <span class="literal">NULL</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>获取结果集中的每行数据（重要）</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL_ROW <span class="title function_">mysql_fetch_row</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：</span><br><span class="line">检索结果集的下一行。在 <span class="title function_">mysql_store_result</span><span class="params">()</span>之后使用时，如果没有要检索的行，<span class="title function_">mysql_fetch_row</span><span class="params">()</span>返回 <span class="literal">NULL</span></span><br><span class="line">参数：</span><br><span class="line">MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">下一行的 MYSQL_ROW 结构。如果没有更多要检索的行或出现了错误，返回 <span class="literal">NULL</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>释放结果集</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">Void <span class="title function_">mysql_free_result</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：</span><br><span class="line">释放由 <span class="title function_">mysql_store_result</span><span class="params">()</span>、<span class="title function_">mysql_use_result</span><span class="params">()</span>、<span class="title function_">mysql_list_dbs</span><span class="params">()</span>等为结果集分配的内存。完成对结果集的操</span><br><span class="line">作后，必须调用 <span class="title function_">mysql_free_result</span><span class="params">()</span>释放结果集使用的内存</span><br><span class="line">参数：</span><br><span class="line">MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">无</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>案例：查询数据</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *host = <span class="string">&quot;192.168.107.130&quot;</span>;</span><br><span class="line"><span class="type">char</span> *user = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="type">char</span> *passwd = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="type">char</span> *db = <span class="string">&quot;game&quot;</span>;</span><br><span class="line"><span class="type">int</span> port = <span class="number">3306</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    MYSQL *con;</span><br><span class="line">    con = mysql_init(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!(con = mysql_real_connect(con, host, user, passwd, db, <span class="number">3306</span>, <span class="literal">NULL</span>, <span class="number">0</span>)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_connect\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链接成功\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> cmd[<span class="number">255</span>] ;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">strcpy</span>(cmd, <span class="string">&quot;SELECT * FROM table_name&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (mysql_real_query(con, cmd, <span class="built_in">strlen</span>(cmd)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_query\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    MYSQL_RES *quire = mysql_store_result(con);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (quire != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> col, row;</span><br><span class="line">        col = mysql_num_fields(quire);</span><br><span class="line">        row = mysql_num_rows(quire);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;行数%d, 列数%d\n&quot;</span>, row, col);</span><br><span class="line">        </span><br><span class="line">        MYSQL_RES *quire = mysql_store_result(con);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (quire != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> col, row;</span><br><span class="line">        col = mysql_num_fields(quire);</span><br><span class="line">        row = mysql_num_rows(quire);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;行数%d, 列数%d\n&quot;</span>, row, col);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (col &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            MYSQL_FIELD *COL;</span><br><span class="line">            COL = mysql_fetch_fields(quire);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; row; i++)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, COL[i].name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (row &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            MYSQL_ROW *ROWS;</span><br><span class="line">            <span class="keyword">while</span> (ROWS = mysql_fetch_row(quire))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; col; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, ROWS[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_num_fields&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭连接</span></span><br><span class="line">    mysql_close(con);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/mysql/image-20231009111613106.png"
+                      alt="image-20231009111613106"
+                ></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
       </tags>
   </entry>
   <entry>
@@ -3649,180 +3826,89 @@
       </tags>
   </entry>
   <entry>
-    <title>mysql配置应用</title>
-    <url>/2023/09/08/mysql%E9%85%8D%E7%BD%AE%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<h1 id="第一章数据库理论"><a href="#第一章数据库理论" class="headerlink" title="第一章	数据库理论"></a>第一章	数据库理论</h1><h2 id="1-1数据库概述"><a href="#1-1数据库概述" class="headerlink" title="1.1数据库概述"></a>1.1数据库概述</h2><p><strong>2.数据库使用的原因</strong><br><strong>持久化 (persistence)：</strong><br>把数据保存到可掉电式存储设备中以供之后使用。在企业级应用中，数据持久化意味着将内存中的数据保存到硬盘上加以 “固化”，而持久化的实现过程大多通过各种关系数据库来完成<br>持久化的主要作用：将内存中的数据存储在关系型数据库中，也可以存储在磁盘文件、XML 数据文件中</p>
-<p><img  
+    <title>排序算法</title>
+    <url>/2023/10/18/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="第一章冒泡排序"><a href="#第一章冒泡排序" class="headerlink" title="第一章	冒泡排序"></a>第一章	冒泡排序</h1><h2 id="1、演示"><a href="#1、演示" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/imgs/mysql/image-20231008163633280.png"
-                      alt="image-20231008163633280"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-33a947c71ad62b254cab62e5364d2813_b.webp"
+                      alt="动图"
                 ></p>
-<p><strong>2. 选择数据库的原因</strong></p>
+<h2 id="2、概述"><a href="#2、概述" class="headerlink" title="2、概述"></a>2、概述</h2><p>冒泡排序（英语：Bubble Sort）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。</p>
+<h2 id="3、实现过程"><a href="#3、实现过程" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void bubble_sort(int arr[], int len) &#123;</span><br><span class="line">    int i, j, temp;</span><br><span class="line">    for (i = 0; i &lt; len - 1; i++)</span><br><span class="line">        for (j = 0; j &lt; len - 1 - i; j++)</span><br><span class="line">            if (arr[j] &gt; arr[j + 1]) &#123;</span><br><span class="line">                temp = arr[j];</span><br><span class="line">                arr[j] = arr[j + 1];</span><br><span class="line">                arr[j + 1] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    int arr[] = &#123; 22, 34, 3, 32, 82, 55, 89, 50, 37, 5, 64, 35, 9, 70 &#125;;</span><br><span class="line">    int len = (int) sizeof(arr) / sizeof(*arr);</span><br><span class="line">    bubble_sort(arr, len);</span><br><span class="line">    int i;</span><br><span class="line">    for (i = 0; i &lt; len; i++)</span><br><span class="line">        printf(&quot;%d &quot;, arr[i]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="第二章选择排序"><a href="#第二章选择排序" class="headerlink" title="第二章	选择排序"></a>第二章	选择排序</h2><h2 id="1、演示-1"><a href="#1、演示-1" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033752328_20C9820639C56B5150C7B7B6EAAEDB37"
+                      alt="图片说明"
+                ></p>
+<h2 id="2、概述-1"><a href="#2、概述-1" class="headerlink" title="2、概述"></a>2、概述</h2><p>选择排序（Selection sort）是一种简单直观的排序算法。它的工作原理如下。首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+<h2 id="3、实现过程-1"><a href="#3、实现过程-1" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a,<span class="type">int</span> *b)</span> <span class="comment">//交換兩個變數</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> temp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">selection_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span> ; i &lt; len - <span class="number">1</span> ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> min = i;</span><br><span class="line">        <span class="keyword">for</span> (j = i + <span class="number">1</span>; j &lt; len; j++)     <span class="comment">//走訪未排序的元素</span></span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[min])    <span class="comment">//找到目前最小值</span></span><br><span class="line">                min = j;    <span class="comment">//紀錄最小值</span></span><br><span class="line">           swap(&amp;arr[min], &amp;arr[i]);    <span class="comment">//做交換</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第三章插入排序"><a href="#第三章插入排序" class="headerlink" title="第三章	插入排序"></a>第三章	插入排序</h1><h2 id="1、演示-2"><a href="#1、演示-2" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp"
+                      alt="动图"
+                ></p>
+<h2 id="2、概述-2"><a href="#2、概述-2" class="headerlink" title="2、概述"></a>2、概述</h2><p>插入排序（英语：Insertion Sort）是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，通常采用in-place排序（即只需用到 {\displaystyle O(1)} {\displaystyle O(1)}的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。</p>
+<h2 id="3、实现过程-2"><a href="#3、实现过程-2" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span>&#123;</span><br><span class="line">    <span class="type">int</span> i,j,temp;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j=i;j&gt;<span class="number">0</span> &amp;&amp; arr[j<span class="number">-1</span>]&gt;temp;j--)</span><br><span class="line">                    arr[j] = arr[j<span class="number">-1</span>];</span><br><span class="line">            arr[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章希尔排序"><a href="#第四章希尔排序" class="headerlink" title="第四章	希尔排序"></a>第四章	希尔排序</h1><h2 id="1、演示-3"><a href="#1、演示-3" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033771610_10CD91D581F995407DD7904923767E27"
+                      alt="图片说明"
+                ></p>
+<h2 id="2、概述-3"><a href="#2、概述-3" class="headerlink" title="2、概述"></a>2、概述</h2><p>希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。希尔排序是非稳定排序算法。</p>
+<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
 <ul>
-<li>开放源代码，使用成本低</li>
-<li>性能卓越，服务稳定</li>
-<li>软件体积小，使用简单，并且易于维护</li>
-<li>历史悠久，社区用户非常活跃，遇到问题可以寻求帮助</li>
-<li>经过了时间的验证</li>
+<li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率</li>
+<li>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位</li>
 </ul>
-<h2 id="1-2数据库安装"><a href="#1-2数据库安装" class="headerlink" title="1.2数据库安装"></a>1.2数据库安装</h2><p><strong>以mysql举例</strong></p>
-<p>进入mysql官网<a class="link"   href="https://www.mysql.com/" >MySQL <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>之后点击下载</p>
-<p><img  
+<h2 id="3、实现过程-3"><a href="#3、实现过程-3" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">shell_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    <span class="type">int</span> gap, i, j;</span><br><span class="line">    <span class="type">int</span> temp;</span><br><span class="line">    <span class="keyword">for</span> (gap = len &gt;&gt; <span class="number">1</span>; gap &gt; <span class="number">0</span>; gap = gap &gt;&gt; <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> (i = gap; i &lt; len; i++) &#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j = i - gap; j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; temp; j -= gap)</span><br><span class="line">                arr[j + gap] = arr[j];</span><br><span class="line">            arr[j + gap] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章快速排序"><a href="#第五章快速排序" class="headerlink" title="第五章	快速排序"></a>第五章	快速排序</h1><h2 id="1、演示-4"><a href="#1、演示-4" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/imgs/mysql/image-20231008163945694.png"
-                      alt="image-20231008163945694"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033827676_666EC43E2146695FDD37BBF9E1972818"
+                      alt="图片说明"
                 ></p>
-<p>进入有开源社区</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/mysql/image-20231008164022501.png"
-                      alt="image-20231008164022501"
-                ></p>
-<p>根据所需系统下载对应mysql</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/mysql/image-20231008164207210.png"
-                      alt="image-20231008164207210"
-                ></p>
-<h3 id="1-2-1windows"><a href="#1-2-1windows" class="headerlink" title="1.2.1windows"></a>1.2.1windows</h3><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/mysql/image-20231008164300902.png"
-                      alt="image-20231008164300902"
-                ></p>
-<p>之后选择full，一直选择默认即可</p>
-<h3 id="1-2-2ubuntu"><a href="#1-2-2ubuntu" class="headerlink" title="1.2.2ubuntu"></a>1.2.2ubuntu</h3><p>先执行以下命令</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure></div>
+<h2 id="2、概述-4"><a href="#2、概述-4" class="headerlink" title="2、概述"></a>2、概述</h2><p>快速排序使用分治法（Divide and conquer）策略来把一个序列（list）分为两个子序列（sub-lists）。</p>
+<blockquote>
+<p>① 从数列中挑出一个元素，称为 “基准”（pivot），<br>② 重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。<br>③ 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</p>
+</blockquote>
+<p>递归到最底部时，数列的大小是零或一，也就是已经排序好了。这个算法一定会结束，因为在每次的迭代（iteration）中，它至少会把一个元素摆到它最后的位置去。</p>
+<h2 id="3、实现过程-4"><a href="#3、实现过程-4" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *x, <span class="type">int</span> *y)</span> &#123;</span><br><span class="line">    <span class="type">int</span> t = *x;</span><br><span class="line">    *x = *y;</span><br><span class="line">    *y = t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">quick_sort_recursive</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (start &gt;= end)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> mid = arr[end];</span><br><span class="line">    <span class="type">int</span> left = start, right = end - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span> (arr[left] &lt; mid &amp;&amp; left &lt; right)</span><br><span class="line">            left++;</span><br><span class="line">        <span class="keyword">while</span> (arr[right] &gt;= mid &amp;&amp; left &lt; right)</span><br><span class="line">            right--;</span><br><span class="line">        swap(&amp;arr[left], &amp;arr[right]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (arr[left] &gt;= arr[end])</span><br><span class="line">        swap(&amp;arr[left], &amp;arr[end]);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        left++;</span><br><span class="line">    <span class="keyword">if</span> (left)</span><br><span class="line">        quick_sort_recursive(arr, start, left - <span class="number">1</span>);</span><br><span class="line">    quick_sort_recursive(arr, left + <span class="number">1</span>, end);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">quick_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    quick_sort_recursive(arr, <span class="number">0</span>, len - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure></div>
+<h1 id="第六章排序总结"><a href="#第六章排序总结" class="headerlink" title="第六章	排序总结"></a>第六章	排序总结</h1><p><strong>冒泡、选择排序算法（从头向后比）</strong></p>
+<ul>
+<li><strong>从头开始排序的比较</strong></li>
+</ul>
+<p>条件目标值小于比较值，并且进行交换则是从大到小</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">max &lt; arr[i]</span><br></pre></td></tr></table></figure></div>
 
-<p>之后执行MySQL安装命令</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install mysql-server</span><br></pre></td></tr></table></figure></div>
+<p>条件目标值大于比较值，并且进行交换则是从小到大</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">min &gt; arr[i]</span><br></pre></td></tr></table></figure></div>
 
-<p>安装成功默认会已启动通过以下命令查看</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">service mysql status</span><br></pre></td></tr></table></figure></div>
+<p><strong>插入排序算法（从后向头比）</strong></p>
+<ul>
+<li><strong>从后开始排序的比较</strong></li>
+</ul>
+<p>条件目标值小于比较值，并且进行交换则是从小到大</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">max &lt; arr[i]</span><br></pre></td></tr></table></figure></div>
 
-<p>如果未启动则执行</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">service mysql start</span><br></pre></td></tr></table></figure></div>
+<p>条件目标值大于比较值，并且进行交换则是从大到小</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">min &gt; arr[i]</span><br></pre></td></tr></table></figure></div>
 
-<p>验证安装</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">mysql --version</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第二章数据库应用"><a href="#第二章数据库应用" class="headerlink" title="第二章	数据库应用"></a>第二章	数据库应用</h1><p><strong>ubuntu举例</strong></p>
-<h2 id="2-1初始设置"><a href="#2-1初始设置" class="headerlink" title="2.1初始设置"></a>2.1初始设置</h2><p>用以下命令，查看数据库的初始密码:</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo cat /etc/mysql/debian.cnf</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/mysql/image-20231008171908961.png"
-                      alt="image-20231008171908961"
-                ></p>
-<p>登录数据库</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u 账号 -p</span><br></pre></td></tr></table></figure></div>
-
-<p>账号密码为以上初始密码。</p>
-<p>修改数据库密码 </p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">alter user &#x27;root&#x27;@&#x27;localhost&#x27; identified with mysql_native_password by &#x27;1&#x27;</span><br></pre></td></tr></table></figure></div>
-
-<p>刷新权限</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flush privileges</span><br></pre></td></tr></table></figure></div>
-
-<p>退出</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="2-2数据库的远程链接"><a href="#2-2数据库的远程链接" class="headerlink" title="2.2数据库的远程链接"></a>2.2数据库的远程链接</h2><p>先放开MySQL初始端口3306</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo ufw allow 3306</span><br></pre></td></tr></table></figure></div>
-
-<p>打开配置MySQL的配置文件</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/mysql/image-20231008173819338.png"
-                      alt="image-20231008173819338"
-                ></p>
-<p>找到如图位置并且把默认ip改为如图所示，0.0.0.0广播模式</p>
-<p>之后再次进入数据库</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure></div>
-
-<p>查看用户表</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">select &#x27;Host&#x27;,&#x27;User&#x27; FROM user；</span><br></pre></td></tr></table></figure></div>
-
-<p>将用户root的host设为%，%意思为全局链接</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">update user set host = &#x27;%&#x27; where user = &#x27;root&#x27;;  </span><br></pre></td></tr></table></figure></div>
-
-<p>刷新权限</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">flush privileges</span><br></pre></td></tr></table></figure></div>
-
-<p>查看root的host是不是成功被修改成为%</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">select host,user from user;</span><br></pre></td></tr></table></figure></div>
-
-<p>进入navicate测试</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/mysql/image-20231009084556320.png"
-                      alt="image-20231009084556320"
-                ></p>
-<h1 id="第三章数据库编程"><a href="#第三章数据库编程" class="headerlink" title="第三章	数据库编程"></a>第三章	数据库编程</h1><h2 id="3-1数据库链接"><a href="#3-1数据库链接" class="headerlink" title="3.1数据库链接"></a>3.1数据库链接</h2><h3 id="3-1-1常用API"><a href="#3-1-1常用API" class="headerlink" title="3.1.1常用API"></a>3.1.1常用API</h3><p><strong>初始化</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL *<span class="title function_">mysql_init</span><span class="params">(MYSQL *mysql)</span></span><br><span class="line">描述：分配或初始化与 <span class="title function_">mysql_real_connect</span><span class="params">()</span>相适应的 MYSQL 对象</span><br><span class="line">参数：</span><br><span class="line">    mysql ：MYSQL*句柄</span><br><span class="line">返回值：</span><br><span class="line">    初始化的 MYSQL*句柄。如果无足够内存以分配新的对象，返回 <span class="literal">NULL</span>。</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>连接数据库</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL *<span class="title function_">mysql_real_connect</span><span class="params">(MYSQL *mysql,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *host,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *user,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *passwd,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *db,</span></span><br><span class="line"><span class="params">     <span class="type">unsigned</span> <span class="type">int</span> port,</span></span><br><span class="line"><span class="params">     <span class="type">const</span> <span class="type">char</span> *unix_socket,</span></span><br><span class="line"><span class="params">     <span class="type">unsigned</span> <span class="type">long</span> client_flag)</span></span><br><span class="line">描述：<span class="title function_">mysql_real_connect</span><span class="params">()</span>尝试与运行在主机上的 MySQL 数据库引擎建立连接。</span><br><span class="line">参数：</span><br><span class="line">    mysql：MySQL 句柄</span><br><span class="line">    host：“host”的值必须是主机名或 IP 地址. 如果“host”是 <span class="literal">NULL</span> 或字符串&quot;localhost&quot;、”127.0.0.1”，连接将被视为与本地主机的连接.</span><br><span class="line">    user: MySQL 登录的用户名</span><br><span class="line">    passwd: MySQL 登录的密码</span><br><span class="line">    db：数据库名称</span><br><span class="line">    port：MySQL 服务器监听客户端连接到来的端口号（默认：3306）</span><br><span class="line">    unix_socket：如果 unix_socket 不是 <span class="literal">NULL</span>，该字符串描述了应使用的套接字或命名管道（默认为 <span class="literal">NULL</span>）</span><br><span class="line">    client_flag: 通常为 0，可以更改其值，以允许特定功能（详情见手册）</span><br><span class="line">返回值：</span><br><span class="line">    如果连接成功，返回 MYSQL*连接句柄。返回值与第 1 个参数的值相同。</span><br><span class="line">    如果连接失败，返回 <span class="literal">NULL</span>。</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>关闭连接</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">Void <span class="title function_">mysql_close</span><span class="params">(MYSQL *mysql)</span></span><br><span class="line">描述：</span><br><span class="line">关闭前面打开的连接。如果句柄是由 <span class="title function_">mysql_init</span><span class="params">()</span>或 <span class="title function_">mysql_connect</span><span class="params">()</span>自动分配的，<span class="title function_">mysql_close</span><span class="params">()</span>还将解除分配</span><br><span class="line">由 mysql 指向的连接句柄</span><br><span class="line">参数：</span><br><span class="line">MySQL 连接句柄</span><br><span class="line">返回值：</span><br><span class="line">无</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>案例：远程连接数据库</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *host = <span class="string">&quot;192.168.107.130&quot;</span>;</span><br><span class="line"><span class="type">char</span> *user = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="type">char</span> *passwd = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="type">char</span> *db = <span class="string">&quot;game&quot;</span>;</span><br><span class="line"><span class="type">int</span> port = <span class="number">3306</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    MYSQL *con;</span><br><span class="line">    con = mysql_init(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!(con = mysql_real_connect(con, host, user, passwd, db, <span class="number">3306</span>, <span class="literal">NULL</span>, <span class="number">0</span>)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_connect\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链接成功\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//关闭连接</span></span><br><span class="line">    mysql_close(con);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="3-2数据库操作"><a href="#3-2数据库操作" class="headerlink" title="3.2数据库操作"></a>3.2数据库操作</h2><p>数据库的编程操作大致分为两类，查询类和非查询类，因此运用函数也有所不同。</p>
-<h3 id="3-2-1非查询操作"><a href="#3-2-1非查询操作" class="headerlink" title="3.2.1非查询操作"></a>3.2.1非查询操作</h3><p><strong>使用API</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">Int <span class="title function_">mysql_real_query</span><span class="params">(MYSQL *mysql,<span class="type">const</span> <span class="type">char</span> * query,<span class="type">unsigned</span> <span class="type">long</span> length)</span></span><br><span class="line">描述：</span><br><span class="line">执行由“query”指向的 SQL 查询，它应是字符串长度字节“<span class="type">long</span>”。正常情况下，字符串必须包含 1 条 SQL 语句，</span><br><span class="line">而且应为语句添加终结分号（‘;’）或“\g”。如果允许多语句执行，字符串可包含由分号隔开的多条语句。</span><br><span class="line">参数：</span><br><span class="line">mysql：MySQL 句柄</span><br><span class="line">query:需要执行的 MySQL 语句</span><br><span class="line">length：需要执行的 MySQL 语句的长度</span><br><span class="line">返回值：</span><br><span class="line">如果成功，返回 <span class="number">0</span>。</span><br><span class="line">如果失败，返回非 <span class="number">0</span> 值</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>案例：数据库的插入操作</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *host = <span class="string">&quot;192.168.107.130&quot;</span>;</span><br><span class="line"><span class="type">char</span> *user = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="type">char</span> *passwd = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="type">char</span> *db = <span class="string">&quot;game&quot;</span>;</span><br><span class="line"><span class="type">int</span> port = <span class="number">3306</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    MYSQL *con;</span><br><span class="line">    con = mysql_init(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!(con = mysql_real_connect(con, host, user, passwd, db, <span class="number">3306</span>, <span class="literal">NULL</span>, <span class="number">0</span>)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_connect\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链接成功\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> cmd[<span class="number">255</span>] = <span class="string">&quot;INSERT INTO table_name(id, create_time, NAME) VALUES(2, 2, &#x27;你好&#x27;);&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (mysql_real_query(con, cmd, <span class="built_in">strlen</span>(cmd)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_query\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;插入成功\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//关闭连接</span></span><br><span class="line">    mysql_close(con);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="3-2-2查询操作"><a href="#3-2-2查询操作" class="headerlink" title="3.2.2查询操作"></a>3.2.2查询操作</h3><p><strong>使用API</strong></p>
-<p><strong>获取结果集函数：</strong>（如果是查询，必须调用该函数，如果是其他比如增加数据，则没有结果集）</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL_RES *<span class="title function_">mysql_store_result</span><span class="params">(MYSQL *mysql)</span></span><br><span class="line">描述：</span><br><span class="line">    对于成功检索了数据的每个查询（SELECT、SHOW、DESCRIBE、EXPLAIN、CHECK TABLE 等），必须调 用</span><br><span class="line">    <span class="title function_">mysql_store_result</span><span class="params">()</span>或 <span class="title function_">mysql_use_result</span><span class="params">()</span> 。 对于其他查询，不需要调用 <span class="title function_">mysql_store_result</span><span class="params">()</span>或 <span class="title function_">mysql_use_result</span><span class="params">()</span>，</span><br><span class="line">    但是如果在任何情况下均调用 了 <span class="title function_">mysql_store_result</span><span class="params">()</span>，它也不会导致任何伤害或性能降低。通过检查</span><br><span class="line">    <span class="title function_">mysql_store_result</span><span class="params">()</span>是否返回 0，可检测查询 是否没有结果集（以后会更多）</span><br><span class="line">参数：</span><br><span class="line">    Mysql：MySQL 句柄</span><br><span class="line">返回值：</span><br><span class="line">    成功 返回具有多个结果的 MYSQL_RES 结果集合。</span><br><span class="line">    失败 返回 <span class="literal">NULL</span></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>获取结果集中的列数</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">mysql_num_fields</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：返回结果集中的列数</span><br><span class="line">参数：</span><br><span class="line">    result ：MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">    表示结果集中列数的无符号整数</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>获取结果集中的行数</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">my_ulonglong <span class="title function_">mysql_num_rows</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：</span><br><span class="line">返回结果集中的行数</span><br><span class="line">参数：</span><br><span class="line">result：MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">结果集中的行数</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>获取结果集中列名称</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL_FIELD * <span class="title function_">mysql_fetch_field</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：</span><br><span class="line">返回采用 MYSQL_FIELD 结构的结果集的列。重复调用该函数，以检索关于结果集中所有列的信息。未剩余字</span><br><span class="line">段时，<span class="title function_">mysql_fetch_field</span><span class="params">()</span>返回 <span class="literal">NULL</span>。</span><br><span class="line">参数：</span><br><span class="line">result：MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">当前列的 MYSQL_FIELD 结构。如果未剩余任何列，返回 <span class="literal">NULL</span></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>获取结果集中的每行数据（重要）</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">MYSQL_ROW <span class="title function_">mysql_fetch_row</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：</span><br><span class="line">检索结果集的下一行。在 <span class="title function_">mysql_store_result</span><span class="params">()</span>之后使用时，如果没有要检索的行，<span class="title function_">mysql_fetch_row</span><span class="params">()</span>返回 <span class="literal">NULL</span></span><br><span class="line">参数：</span><br><span class="line">MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">下一行的 MYSQL_ROW 结构。如果没有更多要检索的行或出现了错误，返回 <span class="literal">NULL</span></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>释放结果集</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">Void <span class="title function_">mysql_free_result</span><span class="params">(MYSQL_RES *result)</span></span><br><span class="line">描述：</span><br><span class="line">释放由 <span class="title function_">mysql_store_result</span><span class="params">()</span>、<span class="title function_">mysql_use_result</span><span class="params">()</span>、<span class="title function_">mysql_list_dbs</span><span class="params">()</span>等为结果集分配的内存。完成对结果集的操</span><br><span class="line">作后，必须调用 <span class="title function_">mysql_free_result</span><span class="params">()</span>释放结果集使用的内存</span><br><span class="line">参数：</span><br><span class="line">MYSQL_RES 结果集句柄</span><br><span class="line">返回值：</span><br><span class="line">无</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>案例：查询数据</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mysql/mysql.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *host = <span class="string">&quot;192.168.107.130&quot;</span>;</span><br><span class="line"><span class="type">char</span> *user = <span class="string">&quot;root&quot;</span>;</span><br><span class="line"><span class="type">char</span> *passwd = <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="type">char</span> *db = <span class="string">&quot;game&quot;</span>;</span><br><span class="line"><span class="type">int</span> port = <span class="number">3306</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    MYSQL *con;</span><br><span class="line">    con = mysql_init(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!(con = mysql_real_connect(con, host, user, passwd, db, <span class="number">3306</span>, <span class="literal">NULL</span>, <span class="number">0</span>)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_connect\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链接成功\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> cmd[<span class="number">255</span>] ;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">strcpy</span>(cmd, <span class="string">&quot;SELECT * FROM table_name&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (mysql_real_query(con, cmd, <span class="built_in">strlen</span>(cmd)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_real_query\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    MYSQL_RES *quire = mysql_store_result(con);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (quire != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> col, row;</span><br><span class="line">        col = mysql_num_fields(quire);</span><br><span class="line">        row = mysql_num_rows(quire);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;行数%d, 列数%d\n&quot;</span>, row, col);</span><br><span class="line">        </span><br><span class="line">        MYSQL_RES *quire = mysql_store_result(con);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (quire != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> col, row;</span><br><span class="line">        col = mysql_num_fields(quire);</span><br><span class="line">        row = mysql_num_rows(quire);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;行数%d, 列数%d\n&quot;</span>, row, col);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (col &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            MYSQL_FIELD *COL;</span><br><span class="line">            COL = mysql_fetch_fields(quire);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; row; i++)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, COL[i].name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (row &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            MYSQL_ROW *ROWS;</span><br><span class="line">            <span class="keyword">while</span> (ROWS = mysql_fetch_row(quire))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; col; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, ROWS[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mysql_num_fields&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭连接</span></span><br><span class="line">    mysql_close(con);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/mysql/image-20231009111613106.png"
-                      alt="image-20231009111613106"
-                ></p>
+<p>与向前比的算法结果相反。</p>
 ]]></content>
       <categories>
-        <category>数据库</category>
+        <category>排序</category>
       </categories>
       <tags>
-        <tag>sql</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
