@@ -338,6 +338,67 @@
       </tags>
   </entry>
   <entry>
+    <title>CPP_友元</title>
+    <url>/2023/09/21/CPP-%E5%8F%8B%E5%85%83/</url>
+    <content><![CDATA[<h1 id="第一章友元"><a href="#第一章友元" class="headerlink" title="第一章	友元"></a><strong>第一章	友元</strong></h1><p>1.打破了c++的封装性（运算符重载也会使用）</p>
+<p>2.声明友元的关键字是：friend，friend 关键字只出现在声明处</p>
+<ul>
+<li>全局函数，</li>
+<li>类内部的成员函数，</li>
+<li>整个类也可作为友元</li>
+</ul>
+<p>3.友元函数不是类的成员，不带 this 指针友元函数可访问对象任意成员属性，包括私有属性</p>
+<h1 id="第二章全局函数做为友元"><a href="#第二章全局函数做为友元" class="headerlink" title="第二章	全局函数做为友元"></a><strong>第二章	全局函数做为友元</strong></h1><p>案例1：全局函数做为友元</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">visitroom</span><span class="params">(Room &amp;room)</span></span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">visitroom</span><span class="params">(Room &amp;room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.bedroom &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Room <span class="title">room</span><span class="params">(<span class="string">&quot;卧室&quot;</span>, <span class="string">&quot;客厅&quot;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">visitroom</span>(room);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第三章成员函数做为友元"><a href="#第三章成员函数做为友元" class="headerlink" title="第三章	成员函数做为友元"></a><strong>第三章	成员函数做为友元</strong></h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span>; <span class="comment">//向前声明Room类，但并不知道类内部的成员</span></span><br><span class="line"><span class="comment">//作为友元类的定义，必须定义在最上方（友元类就是包含成员函数的类）</span></span><br><span class="line"><span class="comment">//友元类的成员函数必须在所有类的最下方定义</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GoodGay</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">GoodGay</span>()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visitroom01</span><span class="params">(Room &amp; room)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visitroom02</span><span class="params">(Room &amp; room)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">// friend void GoodGay::visitroom01(Room &amp;room);</span></span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">GoodGay::visitroom02</span><span class="params">(Room &amp;room)</span></span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GoodGay::visitroom01</span><span class="params">(Room &amp; room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; &quot;访问&quot; &lt;&lt; room.bedroom &lt;&lt; endl;</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GoodGay::visitroom02</span><span class="params">(Room &amp; room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.bedroom &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Room <span class="title">room</span><span class="params">(<span class="string">&quot;卧室&quot;</span>, <span class="string">&quot;客厅&quot;</span>)</span></span>;</span><br><span class="line">    GoodGay gay;</span><br><span class="line">    gay.<span class="built_in">visitroom01</span>(room);</span><br><span class="line">    gay.<span class="built_in">visitroom02</span>(room);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092100296.png"
+                      alt="image-20230921092100296"
+                ></p>
+<h1 id="第四章类作为友元"><a href="#第四章类作为友元" class="headerlink" title="第四章	类作为友元"></a><strong>第四章	类作为友元</strong></h1><p>在成员函数作为友元的基础上，修改普通类中的友元从成员函数改为类名</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">GoodGay</span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092136915.png"
+                      alt="image-20230921092136915"
+                ></p>
+<p>【友元类注意】</p>
+<p>1．友元关系不能被继承。</p>
+<p>2．友元关系是单向的，类 A 是类 B 的朋友，但类 B 不一定是类 A 的朋友。</p>
+<p>3．友元关系不具有传递性。类 B 是类 A 的朋友，类 C 是类 B 的朋友，但类 C 不一定是类 A 的朋友。</p>
+<p>案例1：电视机类的实现（电视机有开机和关机状态，有音量，有频道，提供音量操作的方法，频道操作的方法。 由于电视机只能逐一调整频道，不能指定频道）</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TV</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">enum</span>&#123;MinChannel = <span class="number">1</span>, MaxChannel = <span class="number">100</span>&#125;;</span><br><span class="line">    <span class="keyword">enum</span>&#123;MinVolume, MaxVolum = <span class="number">100</span>&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">bool</span> state;</span><br><span class="line">    <span class="type">int</span>  volume;</span><br><span class="line">    <span class="type">int</span>  channel;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">TV</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        state = <span class="literal">false</span>;</span><br><span class="line">        volume = MinVolume;</span><br><span class="line">        channel = MinChannel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">TV</span>(<span class="type">bool</span> on, <span class="type">int</span> volume, <span class="type">int</span> channel)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;state = on;</span><br><span class="line">        <span class="keyword">this</span>-&gt;volume = volume;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = channel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">TV</span>(<span class="type">const</span> TV &amp; ob)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;state = ob.state;</span><br><span class="line">        <span class="keyword">this</span>-&gt;volume = ob.volume;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = ob.channel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnOrOff</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetVolume</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetChannel</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">TV <span class="title">tv</span><span class="params">(<span class="literal">true</span>, <span class="number">40</span>, <span class="number">3</span>)</span></span>;</span><br><span class="line">    tv.<span class="built_in">OnOrOff</span>();</span><br><span class="line">    tv.<span class="built_in">SetChannel</span>();</span><br><span class="line">    tv.<span class="built_in">SetVolume</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::OnOrOff</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">bool</span> s = (state ? <span class="literal">true</span>:<span class="literal">false</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;the state of TV is &quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::SetVolume</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(volume == MaxVolum)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;音量已经最大&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>-&gt;volume++;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;音量为&quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;volume &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::SetChannel</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;channel == MaxVolum)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;频道已经最大&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>-&gt;channel++;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;频道为&quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;channel &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章强化训练"><a href="#第五章强化训练" class="headerlink" title="第五章	强化训练"></a><strong>第五章	强化训练</strong></h1><p>案例1：动态数组</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092225649.png"
+                      alt="image-20230921092225649"
+                ></p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyArr</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> *arr;</span><br><span class="line">    <span class="type">int</span> capacity;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyArr</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">5</span>];</span><br><span class="line">        capacity = <span class="number">5</span>;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">MyArr</span>(<span class="type">int</span> *p, <span class="type">int</span> _capacity, <span class="type">int</span> _size)</span><br><span class="line">    &#123;</span><br><span class="line">        arr = p;</span><br><span class="line">        capacity = _capacity;</span><br><span class="line">        size = _size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">MyArr</span>(<span class="type">const</span> MyArr &amp; ob)</span><br><span class="line">    &#123;</span><br><span class="line">        capacity = ob.capacity;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="type">int</span>[capacity];</span><br><span class="line">        size = ob.size;</span><br><span class="line">        <span class="built_in">memcpy</span>(arr, ob.arr, size * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">MyArr</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="keyword">delete</span> [] arr;</span><br><span class="line">            arr = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(<span class="type">int</span> element)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pop_back</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printArr</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     MyArr arr;</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">20</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">40</span>);</span><br><span class="line">     arr.<span class="built_in">printArr</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     arr.<span class="built_in">pop_back</span>();</span><br><span class="line">     arr.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">20</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">40</span>);</span><br><span class="line">     arr.<span class="built_in">printArr</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::push_back</span><span class="params">(<span class="type">int</span> element)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == capacity)&#123;</span><br><span class="line">        <span class="type">int</span> *tmp = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">2</span> * capacity];</span><br><span class="line">        <span class="built_in">memcpy</span>(tmp, arr, size * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">        <span class="keyword">delete</span> [] arr;</span><br><span class="line">        arr = tmp;</span><br><span class="line">        capacity  = <span class="number">2</span> * capacity;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[size] = element;</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::pop_back</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == <span class="number">0</span>)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;数组元素个数为0&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// arr[size--] = 0;</span></span><br><span class="line">    size--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::printArr</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">        cout &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092311009.png"
+                      alt="image-20230921092311009"
+                ></p>
+]]></content>
+      <categories>
+        <category>CPP语言</category>
+      </categories>
+      <tags>
+        <tag>基础 CPP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CPP__多态</title>
     <url>/2023/09/21/CPP-%E5%A4%9A%E6%80%81/</url>
     <content><![CDATA[<h1 id="第一章多态的概念"><a href="#第一章多态的概念" class="headerlink" title="第一章	多态的概念"></a><strong>第一章	多态的概念</strong></h1><h2 id="1-多态的分类"><a href="#1-多态的分类" class="headerlink" title="1.多态的分类"></a><strong>1.多态的分类</strong></h2><p>静态多态：如函数重载、运算符重载、重定义。（编译时确定）</p>
@@ -563,67 +624,6 @@
 <td align="left">当发生数学下溢时，会抛出该异常。</td>
 </tr>
 </tbody></table>
-]]></content>
-      <categories>
-        <category>CPP语言</category>
-      </categories>
-      <tags>
-        <tag>基础 CPP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CPP_友元</title>
-    <url>/2023/09/21/CPP-%E5%8F%8B%E5%85%83/</url>
-    <content><![CDATA[<h1 id="第一章友元"><a href="#第一章友元" class="headerlink" title="第一章	友元"></a><strong>第一章	友元</strong></h1><p>1.打破了c++的封装性（运算符重载也会使用）</p>
-<p>2.声明友元的关键字是：friend，friend 关键字只出现在声明处</p>
-<ul>
-<li>全局函数，</li>
-<li>类内部的成员函数，</li>
-<li>整个类也可作为友元</li>
-</ul>
-<p>3.友元函数不是类的成员，不带 this 指针友元函数可访问对象任意成员属性，包括私有属性</p>
-<h1 id="第二章全局函数做为友元"><a href="#第二章全局函数做为友元" class="headerlink" title="第二章	全局函数做为友元"></a><strong>第二章	全局函数做为友元</strong></h1><p>案例1：全局函数做为友元</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">visitroom</span><span class="params">(Room &amp;room)</span></span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">visitroom</span><span class="params">(Room &amp;room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.bedroom &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Room <span class="title">room</span><span class="params">(<span class="string">&quot;卧室&quot;</span>, <span class="string">&quot;客厅&quot;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">visitroom</span>(room);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第三章成员函数做为友元"><a href="#第三章成员函数做为友元" class="headerlink" title="第三章	成员函数做为友元"></a><strong>第三章	成员函数做为友元</strong></h1><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span>; <span class="comment">//向前声明Room类，但并不知道类内部的成员</span></span><br><span class="line"><span class="comment">//作为友元类的定义，必须定义在最上方（友元类就是包含成员函数的类）</span></span><br><span class="line"><span class="comment">//友元类的成员函数必须在所有类的最下方定义</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GoodGay</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">GoodGay</span>()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visitroom01</span><span class="params">(Room &amp; room)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visitroom02</span><span class="params">(Room &amp; room)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">// friend void GoodGay::visitroom01(Room &amp;room);</span></span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">GoodGay::visitroom02</span><span class="params">(Room &amp;room)</span></span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GoodGay::visitroom01</span><span class="params">(Room &amp; room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; &quot;访问&quot; &lt;&lt; room.bedroom &lt;&lt; endl;</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GoodGay::visitroom02</span><span class="params">(Room &amp; room)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.bedroom &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;访问&quot;</span> &lt;&lt; room.livingroom &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Room <span class="title">room</span><span class="params">(<span class="string">&quot;卧室&quot;</span>, <span class="string">&quot;客厅&quot;</span>)</span></span>;</span><br><span class="line">    GoodGay gay;</span><br><span class="line">    gay.<span class="built_in">visitroom01</span>(room);</span><br><span class="line">    gay.<span class="built_in">visitroom02</span>(room);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092100296.png"
-                      alt="image-20230921092100296"
-                ></p>
-<h1 id="第四章类作为友元"><a href="#第四章类作为友元" class="headerlink" title="第四章	类作为友元"></a><strong>第四章	类作为友元</strong></h1><p>在成员函数作为友元的基础上，修改普通类中的友元从成员函数改为类名</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Room</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">GoodGay</span>;  <span class="comment">///&lt; 友元只能出现在声明处</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string bedroom;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Room</span>(string bed, string living)</span><br><span class="line">    &#123;</span><br><span class="line">        bedroom = bed;</span><br><span class="line">        livingroom = living;</span><br><span class="line">    &#125;</span><br><span class="line">    string livingroom;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092136915.png"
-                      alt="image-20230921092136915"
-                ></p>
-<p>【友元类注意】</p>
-<p>1．友元关系不能被继承。</p>
-<p>2．友元关系是单向的，类 A 是类 B 的朋友，但类 B 不一定是类 A 的朋友。</p>
-<p>3．友元关系不具有传递性。类 B 是类 A 的朋友，类 C 是类 B 的朋友，但类 C 不一定是类 A 的朋友。</p>
-<p>案例1：电视机类的实现（电视机有开机和关机状态，有音量，有频道，提供音量操作的方法，频道操作的方法。 由于电视机只能逐一调整频道，不能指定频道）</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TV</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">enum</span>&#123;MinChannel = <span class="number">1</span>, MaxChannel = <span class="number">100</span>&#125;;</span><br><span class="line">    <span class="keyword">enum</span>&#123;MinVolume, MaxVolum = <span class="number">100</span>&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">bool</span> state;</span><br><span class="line">    <span class="type">int</span>  volume;</span><br><span class="line">    <span class="type">int</span>  channel;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">TV</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        state = <span class="literal">false</span>;</span><br><span class="line">        volume = MinVolume;</span><br><span class="line">        channel = MinChannel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">TV</span>(<span class="type">bool</span> on, <span class="type">int</span> volume, <span class="type">int</span> channel)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;state = on;</span><br><span class="line">        <span class="keyword">this</span>-&gt;volume = volume;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = channel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">TV</span>(<span class="type">const</span> TV &amp; ob)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;state = ob.state;</span><br><span class="line">        <span class="keyword">this</span>-&gt;volume = ob.volume;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = ob.channel;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnOrOff</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetVolume</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetChannel</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">TV <span class="title">tv</span><span class="params">(<span class="literal">true</span>, <span class="number">40</span>, <span class="number">3</span>)</span></span>;</span><br><span class="line">    tv.<span class="built_in">OnOrOff</span>();</span><br><span class="line">    tv.<span class="built_in">SetChannel</span>();</span><br><span class="line">    tv.<span class="built_in">SetVolume</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::OnOrOff</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">bool</span> s = (state ? <span class="literal">true</span>:<span class="literal">false</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;the state of TV is &quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::SetVolume</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(volume == MaxVolum)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;音量已经最大&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>-&gt;volume++;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;音量为&quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;volume &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TV::SetChannel</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;channel == MaxVolum)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;频道已经最大&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">this</span>-&gt;channel = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>-&gt;channel++;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;频道为&quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;channel &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第五章强化训练"><a href="#第五章强化训练" class="headerlink" title="第五章	强化训练"></a><strong>第五章	强化训练</strong></h1><p>案例1：动态数组</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092225649.png"
-                      alt="image-20230921092225649"
-                ></p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyArr</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> *arr;</span><br><span class="line">    <span class="type">int</span> capacity;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyArr</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">5</span>];</span><br><span class="line">        capacity = <span class="number">5</span>;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">MyArr</span>(<span class="type">int</span> *p, <span class="type">int</span> _capacity, <span class="type">int</span> _size)</span><br><span class="line">    &#123;</span><br><span class="line">        arr = p;</span><br><span class="line">        capacity = _capacity;</span><br><span class="line">        size = _size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">MyArr</span>(<span class="type">const</span> MyArr &amp; ob)</span><br><span class="line">    &#123;</span><br><span class="line">        capacity = ob.capacity;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="type">int</span>[capacity];</span><br><span class="line">        size = ob.size;</span><br><span class="line">        <span class="built_in">memcpy</span>(arr, ob.arr, size * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">MyArr</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="keyword">delete</span> [] arr;</span><br><span class="line">            arr = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(<span class="type">int</span> element)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pop_back</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">printArr</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     MyArr arr;</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">20</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">40</span>);</span><br><span class="line">     arr.<span class="built_in">printArr</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     arr.<span class="built_in">pop_back</span>();</span><br><span class="line">     arr.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">20</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">     arr.<span class="built_in">push_back</span>(<span class="number">40</span>);</span><br><span class="line">     arr.<span class="built_in">printArr</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">test01</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::push_back</span><span class="params">(<span class="type">int</span> element)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == capacity)&#123;</span><br><span class="line">        <span class="type">int</span> *tmp = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">2</span> * capacity];</span><br><span class="line">        <span class="built_in">memcpy</span>(tmp, arr, size * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">        <span class="keyword">delete</span> [] arr;</span><br><span class="line">        arr = tmp;</span><br><span class="line">        capacity  = <span class="number">2</span> * capacity;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[size] = element;</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::pop_back</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(size == <span class="number">0</span>)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;数组元素个数为0&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// arr[size--] = 0;</span></span><br><span class="line">    size--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyArr::printArr</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">        cout &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP_%E5%8F%8B%E5%85%83/image-20230921092311009.png"
-                      alt="image-20230921092311009"
-                ></p>
 ]]></content>
       <categories>
         <category>CPP语言</category>
@@ -972,43 +972,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CPP__类型转换</title>
-    <url>/2023/09/21/CPP-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<h1 id="第一章上行与下行转换"><a href="#第一章上行与下行转换" class="headerlink" title="第一章	上行与下行转换"></a><strong>第一章	上行与下行转换</strong></h1><p>上行转换：把派生类的指针或引用转换成基类表示（安全）</p>
-<p>下行转换：把基类指针或引用转换成派生类表示（不安全）</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921230330631.png"
-                      alt="image-20230921230330631"
-                ></p>
-<h1 id="第二章静态转换"><a href="#第二章静态转换" class="headerlink" title="第二章	静态转换"></a><strong>第二章	静态转换</strong></h1><p>关键字：static_cast();</p>
-<p>案例1：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换</span></span><br><span class="line">    <span class="type">int</span> a = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(<span class="number">3.14f</span>);</span><br><span class="line">    <span class="type">float</span> f = <span class="number">0.0f</span>;</span><br><span class="line">    f = <span class="built_in">static_cast</span>&lt;<span class="type">float</span>&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = static_cast&lt;int *&gt;(&amp;f); ///&lt; 错误</span></span><br><span class="line"><span class="comment">//      int n = 10;</span></span><br><span class="line"><span class="comment">//      long *p1 = staitc_cast&lt;long *&gt;(&amp;n);///&lt; 错误</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">static_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);</span><br><span class="line">    <span class="comment">//下行转换(不安全，尽量不要使用)</span></span><br><span class="line">    Son *p1 = <span class="built_in">static_cast</span>&lt;Son *&gt;(<span class="keyword">new</span> Base);</span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line">   <span class="comment">// Son *p2 = static_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第三章动态转换"><a href="#第三章动态转换" class="headerlink" title="第三章	动态转换"></a><strong>第三章	动态转换</strong></h1><p>格式: dynamic_cast()</p>
-<p>概述：dynamiccast 主要用于类层次间的上行转换和下行转换，</p>
-<p>在类层次间进行上行转换时， dynamiccast 和 staticcast 的效果是一样的；</p>
-<p>在进行下行转换时， dynamiccast 具有类型检查的功能，比 static_cast 更安全；</p>
-<p>案例2：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    int a = dynamic_cast&lt;int&gt;(3.14f);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    f = dynamic_cast&lt;float&gt;(10);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = dynamic_cast&lt;int *&gt;(&amp;f);</span></span><br><span class="line"><span class="comment">//    int n = 10;</span></span><br><span class="line"><span class="comment">//    long *p1 = dynamic_cast&lt;long *&gt;(&amp;n);</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">dynamic_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);  <span class="comment">///&lt; 仅支持上行转换</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    Son *p1 = dynamic_cast&lt;Son *&gt;(new Base);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    Son *p2 = dynamic_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第四章常量转换"><a href="#第四章常量转换" class="headerlink" title="第四章	常量转换"></a><strong>第四章	常量转换</strong></h1><p>格式：const_cast(常量) 或 const_cast(非常量)</p>
-<p>概述：修改类型的 const 属性</p>
-<p>案例3：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    const int a = const_cast&lt;int&gt;(10);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    const f = const_cast&lt;float&gt;(10.11);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  支持(类型必须一致)</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> * n;</span><br><span class="line">    <span class="type">int</span> *p = <span class="built_in">const_cast</span>&lt;<span class="type">int</span> *&gt;(n);</span><br><span class="line">    <span class="type">long</span> * n1;</span><br><span class="line">    <span class="type">const</span> <span class="type">long</span> *p1 = <span class="built_in">const_cast</span>&lt;<span class="type">const</span> <span class="type">long</span> *&gt;(n1);</span><br><span class="line">    <span class="comment">//上行转换 不支持</span></span><br><span class="line"><span class="comment">//    const Base *p3 = new Base;</span></span><br><span class="line"><span class="comment">//    Base *p = const_cast&lt;Base *&gt;(p3);</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    const Son *p1 = const_cast&lt;const Son *&gt;(new Son);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    const Son *p2 = const_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第五章重新解释转换-reinterpret-cast"><a href="#第五章重新解释转换-reinterpret-cast" class="headerlink" title="第五章	重新解释转换(reinterpret_cast)"></a><strong>第五章	重新解释转换(reinterpret_cast)</strong></h1><p>格式：reinterpret_cast</p>
-<p><strong>仅不支持基本数据类型转换</strong></p>
-]]></content>
-      <categories>
-        <category>CPP语言</category>
-      </categories>
-      <tags>
-        <tag>基础 CPP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CPP__继承与派生</title>
     <url>/2023/09/21/CPP-%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/</url>
     <content><![CDATA[<h1 id="第一章继承与派生的概念"><a href="#第一章继承与派生的概念" class="headerlink" title="第一章	继承与派生的概念"></a><strong>第一章	继承与派生的概念</strong></h1><p>面向对象语言的三大特性之一，高效的开发。</p>
@@ -1116,6 +1079,43 @@
                      data-src="/imgs/CPP__%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/image-20230921100527209.png"
                       alt="image-20230921100527209"
                 ></p>
+]]></content>
+      <categories>
+        <category>CPP语言</category>
+      </categories>
+      <tags>
+        <tag>基础 CPP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CPP__类型转换</title>
+    <url>/2023/09/21/CPP-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<h1 id="第一章上行与下行转换"><a href="#第一章上行与下行转换" class="headerlink" title="第一章	上行与下行转换"></a><strong>第一章	上行与下行转换</strong></h1><p>上行转换：把派生类的指针或引用转换成基类表示（安全）</p>
+<p>下行转换：把基类指针或引用转换成派生类表示（不安全）</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921230330631.png"
+                      alt="image-20230921230330631"
+                ></p>
+<h1 id="第二章静态转换"><a href="#第二章静态转换" class="headerlink" title="第二章	静态转换"></a><strong>第二章	静态转换</strong></h1><p>关键字：static_cast();</p>
+<p>案例1：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换</span></span><br><span class="line">    <span class="type">int</span> a = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(<span class="number">3.14f</span>);</span><br><span class="line">    <span class="type">float</span> f = <span class="number">0.0f</span>;</span><br><span class="line">    f = <span class="built_in">static_cast</span>&lt;<span class="type">float</span>&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = static_cast&lt;int *&gt;(&amp;f); ///&lt; 错误</span></span><br><span class="line"><span class="comment">//      int n = 10;</span></span><br><span class="line"><span class="comment">//      long *p1 = staitc_cast&lt;long *&gt;(&amp;n);///&lt; 错误</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">static_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);</span><br><span class="line">    <span class="comment">//下行转换(不安全，尽量不要使用)</span></span><br><span class="line">    Son *p1 = <span class="built_in">static_cast</span>&lt;Son *&gt;(<span class="keyword">new</span> Base);</span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line">   <span class="comment">// Son *p2 = static_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第三章动态转换"><a href="#第三章动态转换" class="headerlink" title="第三章	动态转换"></a><strong>第三章	动态转换</strong></h1><p>格式: dynamic_cast()</p>
+<p>概述：dynamiccast 主要用于类层次间的上行转换和下行转换，</p>
+<p>在类层次间进行上行转换时， dynamiccast 和 staticcast 的效果是一样的；</p>
+<p>在进行下行转换时， dynamiccast 具有类型检查的功能，比 static_cast 更安全；</p>
+<p>案例2：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    int a = dynamic_cast&lt;int&gt;(3.14f);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    f = dynamic_cast&lt;float&gt;(10);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  不支持</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    int *p = dynamic_cast&lt;int *&gt;(&amp;f);</span></span><br><span class="line"><span class="comment">//    int n = 10;</span></span><br><span class="line"><span class="comment">//    long *p1 = dynamic_cast&lt;long *&gt;(&amp;n);</span></span><br><span class="line">    <span class="comment">//上行转换</span></span><br><span class="line">    Base *p = <span class="built_in">dynamic_cast</span>&lt;Base *&gt;(<span class="keyword">new</span> Son);  <span class="comment">///&lt; 仅支持上行转换</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    Son *p1 = dynamic_cast&lt;Son *&gt;(new Base);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    Son *p2 = dynamic_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章常量转换"><a href="#第四章常量转换" class="headerlink" title="第四章	常量转换"></a><strong>第四章	常量转换</strong></h1><p>格式：const_cast(常量) 或 const_cast(非常量)</p>
+<p>概述：修改类型的 const 属性</p>
+<p>案例3：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 基本数据类型转换  不支持</span></span><br><span class="line"><span class="comment">//    const int a = const_cast&lt;int&gt;(10);</span></span><br><span class="line"><span class="comment">//    float f = 0.0f;</span></span><br><span class="line"><span class="comment">//    const f = const_cast&lt;float&gt;(10.11);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//基本指针类型转换  支持(类型必须一致)</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> * n;</span><br><span class="line">    <span class="type">int</span> *p = <span class="built_in">const_cast</span>&lt;<span class="type">int</span> *&gt;(n);</span><br><span class="line">    <span class="type">long</span> * n1;</span><br><span class="line">    <span class="type">const</span> <span class="type">long</span> *p1 = <span class="built_in">const_cast</span>&lt;<span class="type">const</span> <span class="type">long</span> *&gt;(n1);</span><br><span class="line">    <span class="comment">//上行转换 不支持</span></span><br><span class="line"><span class="comment">//    const Base *p3 = new Base;</span></span><br><span class="line"><span class="comment">//    Base *p = const_cast&lt;Base *&gt;(p3);</span></span><br><span class="line">    <span class="comment">//下行转换  不支持</span></span><br><span class="line"><span class="comment">//    const Son *p1 = const_cast&lt;const Son *&gt;(new Son);</span></span><br><span class="line">    <span class="comment">//不相关类型转换 不支持</span></span><br><span class="line"><span class="comment">//    const Son *p2 = const_cast&lt;Son *&gt;(new Other);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章重新解释转换-reinterpret-cast"><a href="#第五章重新解释转换-reinterpret-cast" class="headerlink" title="第五章	重新解释转换(reinterpret_cast)"></a><strong>第五章	重新解释转换(reinterpret_cast)</strong></h1><p>格式：reinterpret_cast</p>
+<p><strong>仅不支持基本数据类型转换</strong></p>
 ]]></content>
       <categories>
         <category>CPP语言</category>
@@ -1642,6 +1642,74 @@
       </tags>
   </entry>
   <entry>
+    <title>C编程____动态内存申请</title>
+    <url>/2023/08/17/C%E7%BC%96%E7%A8%8B-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7/</url>
+    <content><![CDATA[<h1 id="第一章动态分配内存的概述"><a href="#第一章动态分配内存的概述" class="headerlink" title="第一章	动态分配内存的概述"></a>第一章	动态分配内存的概述</h1><p>​	在数组一章中，介绍过数组的长度是预先定义好的，在整个程序中固定不变，但是在实 际的编程中，往往会发生这种情况，即所需的内存空间取决于实际输入的数据，而无法预先 确定 。为了解决上述问题，Ｃ语言提供了一些内存管理函数，这些内存管理函数可以按需 要动态的分配内存空间，也可把不再使用的空间回收再次利用。 </p>
+<p>​	<strong>动态分配内存就是在堆区开辟空间</strong></p>
+<h1 id="第二章静态分配、动态分配"><a href="#第二章静态分配、动态分配" class="headerlink" title="第二章	静态分配、动态分配"></a>第二章	静态分配、动态分配</h1><h2 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h2><ol>
+<li>在程序编译或运行过程中，按事先规定大小分配内存空间的分配方式。int a [10] </li>
+<li>必须事先知道所需空间的大小。 </li>
+<li>分配在栈区或全局变量区，一般以数组的形式。</li>
+<li>按计划分配。</li>
+</ol>
+<h2 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h2><ol>
+<li>在程序运行过程中，根据需要大小自由分配所需空间。 </li>
+<li>按需分配。 </li>
+<li>分配在堆区，一般使用特定的函数进行分配。</li>
+</ol>
+<h1 id="第三章动态分配函数"><a href="#第三章动态分配函数" class="headerlink" title="第三章	动态分配函数"></a>第三章	动态分配函数</h1><h2 id="3-1-malloc"><a href="#3-1-malloc" class="headerlink" title="3.1 malloc"></a>3.1 malloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> *<span class="title function_">malloc</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> size)</span>;</span><br><span class="line">功能：在堆区开辟指定长度的空间，并且空间是连续的</span><br><span class="line">参数：</span><br><span class="line">size：要开辟的空间的大小</span><br><span class="line">返回值：</span><br><span class="line">成功：开辟好的空间的首地址</span><br><span class="line">失败：<span class="literal">NULL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>注意</strong> </p>
+<ol>
+<li>在调用malloc之后，一定要判断一下，是否申请内存成功。</li>
+<li>如果多次malloc申请的内存，第1次和第2次申请的内存不一定是连续的 </li>
+<li>使用malloc开辟空间需要保存开辟好的空间的首地址，但是由于不确定空间用于做 什么，所以本身返回值类型为void *，所以在调用函数时根据接收者的类型对其进行强制类 型转换</li>
+</ol>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"> <span class="type">char</span> *<span class="title function_">fun</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="comment">//char ch[100] = &quot;hello world&quot;;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//静态全局区的空间只要开辟好，除非程序结束，否则不会释放，所以</span></span><br><span class="line"> <span class="comment">//如果是临时使用，不建议使用静态全局区的空间</span></span><br><span class="line"> <span class="comment">//static char ch[100] = &quot;hello world&quot;;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//堆区开辟空间，手动申请手动释放，更加灵活</span></span><br><span class="line"> <span class="comment">//使用malloc函数的时候一般要进行强转</span></span><br><span class="line"> <span class="type">char</span> *str = (<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="keyword">sizeof</span>(<span class="type">char</span>));</span><br><span class="line"> str[<span class="number">0</span>] = <span class="string">&#x27;h&#x27;</span>;</span><br><span class="line"> str[<span class="number">1</span>] = <span class="string">&#x27;e&#x27;</span>;</span><br><span class="line"> str[<span class="number">2</span>] = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line"> str[<span class="number">3</span>] = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line"> str[<span class="number">4</span>] = <span class="string">&#x27;o&#x27;</span>;</span><br><span class="line"> str[<span class="number">5</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> str;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="type">char</span> *p; p = fun();</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;p = %s\n&quot;</span>, p);</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="3-2-calloc"><a href="#3-2-calloc" class="headerlink" title="3.2 calloc"></a>3.2 calloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> * <span class="title function_">calloc</span><span class="params">(<span class="type">size_t</span> nmemb,<span class="type">size_t</span> size)</span>;</span><br><span class="line">功能：在堆区申请指定大小的空间</span><br><span class="line">参数：</span><br><span class="line">nmemb：要申请的空间的块数</span><br><span class="line">size：每块的字节数</span><br><span class="line">返回值：</span><br><span class="line">成功：申请空间的首地址</span><br><span class="line">失败：<span class="literal">NULL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>注意</strong>：</p>
+<p> malloc和calloc函数都是用来申请内存的。</p>
+<p>​	 <strong>区别</strong>： </p>
+<ol>
+<li><p>函数的名字不一样 </p>
+</li>
+<li><p>参数的个数不一样 </p>
+</li>
+<li><p>malloc申请的内存，内存中存放的内容是随机的，不确定的， 而calloc函数申请的内存中的内容为0</p>
+</li>
+</ol>
+<h2 id="3-3-realloc"><a href="#3-3-realloc" class="headerlink" title="3.3 realloc"></a>3.3 realloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">realloc</span><span class="params">(<span class="type">void</span> *s,<span class="type">unsigned</span> <span class="type">int</span> newsize)</span>;</span><br><span class="line">功能：在原本申请好的堆区空间的基础上重新申请内存，新的空间大小为函数的第二个参数</span><br><span class="line">如果原本申请好的空间的后面不足以增加指定的大小，系统会重新找一个足够大的位</span><br><span class="line">置开辟指定的空间，然后将原本空间中的数据拷贝过来，然后释放原本的空间</span><br><span class="line">如果newsize比原先的内存小，则会释放原先内存的后面的存储空间，</span><br><span class="line">只留前面的newsize个字节</span><br><span class="line">参数：</span><br><span class="line">s：原本开辟好的空间的首地址</span><br><span class="line">newsize：重新开辟的空间的大小</span><br><span class="line">返回值：</span><br><span class="line">新的空间的首地址</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章内存释放free"><a href="#第四章内存释放free" class="headerlink" title="第四章	内存释放free"></a>第四章	内存释放free</h1><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">free</span><span class="params">(<span class="type">void</span> *ptr)</span></span><br><span class="line">功能：释放堆区的空间</span><br><span class="line">参数：</span><br><span class="line">ptr：开辟后使用完毕的堆区的空间的首地址</span><br><span class="line">返回值：</span><br><span class="line">无</span><br></pre></td></tr></table></figure></div>
+
+<p>注意：</p>
+<ul>
+<li>free函数只能释放堆区的空间，其他区域的空间无法使用free</li>
+<li>free释放空间必须释放malloc或者calloc或者realloc的返回值对应的空间，不能说只释 放一部分 	</li>
+<li>free(p); 注意当free后，因为没有给p赋值，所以p还是指向原先动态申请的内存。但是 内存已经不能再用了，p变成野指针了，所以一般为了放置野指针，会free完毕之后对p赋 为NULL。</li>
+<li>一块动态申请的内存只能free一次，不能多次free</li>
+</ul>
+<p><strong>注意:malloc calloc relloc 动态申请的内存，只有在free或程序结束的时候才释放。</strong></p>
+<h1 id="第五章内存泄漏"><a href="#第五章内存泄漏" class="headerlink" title="第五章	内存泄漏"></a>第五章	内存泄漏</h1><p><strong>内存泄露的概念</strong>： </p>
+<p>申请的内存，首地址丢了，找不了，再也没法使用了，也没法释放了，这块内存就被泄 露了。 </p>
+<p><strong>内存泄漏案例</strong>：</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">char</span> *p;</span><br><span class="line">p=(<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line"><span class="comment">//接下来，可以用p指向的内存了</span></span><br><span class="line"></span><br><span class="line">p=<span class="string">&quot;hello world&quot;</span>;<span class="comment">//p指向别的地方了，保存字符串常量的首地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从此以后，再也找不到你申请的100个字节了。则动态申请的100个字节就被泄露了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>解决方式</strong>：</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">fun</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="type">char</span> *p;</span><br><span class="line"> p=(<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line"> <span class="comment">//接下来，可以用p指向的内存了 ...</span></span><br><span class="line"> <span class="built_in">free</span>(p);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> fun();</span><br><span class="line"> fun();</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>总结：申请的内存，一定不要把首地址给丢了，在不用的时候一定要释放内存</strong></p>
+]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>嵌入式 c语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C及C++基础</title>
     <url>/2023/08/16/C%E5%8F%8AC-%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<p><strong>学习及练习网站：</strong></p>
@@ -1866,74 +1934,6 @@
 <p>register int ntmp &#x3D; 10; cout &lt;&lt; “ntmp地址 &#x3D; “ &lt;&lt; &amp;ntmp &lt;&lt; endl;</p>
 <h3 id="16-3volatile-关键字"><a href="#16-3volatile-关键字" class="headerlink" title="16.3volatile 关键字"></a>16.3volatile 关键字</h3><p>防止编译器对该变量进行优化，强制访问内存。</p>
 <p>volatile int data&#x3D;0;&#x2F;&#x2F;对data的访问 必须从内存访问</p>
-]]></content>
-      <categories>
-        <category>C语言</category>
-      </categories>
-      <tags>
-        <tag>嵌入式 c语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C编程____动态内存申请</title>
-    <url>/2023/08/17/C%E7%BC%96%E7%A8%8B-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7/</url>
-    <content><![CDATA[<h1 id="第一章动态分配内存的概述"><a href="#第一章动态分配内存的概述" class="headerlink" title="第一章	动态分配内存的概述"></a>第一章	动态分配内存的概述</h1><p>​	在数组一章中，介绍过数组的长度是预先定义好的，在整个程序中固定不变，但是在实 际的编程中，往往会发生这种情况，即所需的内存空间取决于实际输入的数据，而无法预先 确定 。为了解决上述问题，Ｃ语言提供了一些内存管理函数，这些内存管理函数可以按需 要动态的分配内存空间，也可把不再使用的空间回收再次利用。 </p>
-<p>​	<strong>动态分配内存就是在堆区开辟空间</strong></p>
-<h1 id="第二章静态分配、动态分配"><a href="#第二章静态分配、动态分配" class="headerlink" title="第二章	静态分配、动态分配"></a>第二章	静态分配、动态分配</h1><h2 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h2><ol>
-<li>在程序编译或运行过程中，按事先规定大小分配内存空间的分配方式。int a [10] </li>
-<li>必须事先知道所需空间的大小。 </li>
-<li>分配在栈区或全局变量区，一般以数组的形式。</li>
-<li>按计划分配。</li>
-</ol>
-<h2 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h2><ol>
-<li>在程序运行过程中，根据需要大小自由分配所需空间。 </li>
-<li>按需分配。 </li>
-<li>分配在堆区，一般使用特定的函数进行分配。</li>
-</ol>
-<h1 id="第三章动态分配函数"><a href="#第三章动态分配函数" class="headerlink" title="第三章	动态分配函数"></a>第三章	动态分配函数</h1><h2 id="3-1-malloc"><a href="#3-1-malloc" class="headerlink" title="3.1 malloc"></a>3.1 malloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> *<span class="title function_">malloc</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> size)</span>;</span><br><span class="line">功能：在堆区开辟指定长度的空间，并且空间是连续的</span><br><span class="line">参数：</span><br><span class="line">size：要开辟的空间的大小</span><br><span class="line">返回值：</span><br><span class="line">成功：开辟好的空间的首地址</span><br><span class="line">失败：<span class="literal">NULL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>注意</strong> </p>
-<ol>
-<li>在调用malloc之后，一定要判断一下，是否申请内存成功。</li>
-<li>如果多次malloc申请的内存，第1次和第2次申请的内存不一定是连续的 </li>
-<li>使用malloc开辟空间需要保存开辟好的空间的首地址，但是由于不确定空间用于做 什么，所以本身返回值类型为void *，所以在调用函数时根据接收者的类型对其进行强制类 型转换</li>
-</ol>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"> <span class="type">char</span> *<span class="title function_">fun</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="comment">//char ch[100] = &quot;hello world&quot;;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//静态全局区的空间只要开辟好，除非程序结束，否则不会释放，所以</span></span><br><span class="line"> <span class="comment">//如果是临时使用，不建议使用静态全局区的空间</span></span><br><span class="line"> <span class="comment">//static char ch[100] = &quot;hello world&quot;;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//堆区开辟空间，手动申请手动释放，更加灵活</span></span><br><span class="line"> <span class="comment">//使用malloc函数的时候一般要进行强转</span></span><br><span class="line"> <span class="type">char</span> *str = (<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="keyword">sizeof</span>(<span class="type">char</span>));</span><br><span class="line"> str[<span class="number">0</span>] = <span class="string">&#x27;h&#x27;</span>;</span><br><span class="line"> str[<span class="number">1</span>] = <span class="string">&#x27;e&#x27;</span>;</span><br><span class="line"> str[<span class="number">2</span>] = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line"> str[<span class="number">3</span>] = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line"> str[<span class="number">4</span>] = <span class="string">&#x27;o&#x27;</span>;</span><br><span class="line"> str[<span class="number">5</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> str;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="type">char</span> *p; p = fun();</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;p = %s\n&quot;</span>, p);</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="3-2-calloc"><a href="#3-2-calloc" class="headerlink" title="3.2 calloc"></a>3.2 calloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> * <span class="title function_">calloc</span><span class="params">(<span class="type">size_t</span> nmemb,<span class="type">size_t</span> size)</span>;</span><br><span class="line">功能：在堆区申请指定大小的空间</span><br><span class="line">参数：</span><br><span class="line">nmemb：要申请的空间的块数</span><br><span class="line">size：每块的字节数</span><br><span class="line">返回值：</span><br><span class="line">成功：申请空间的首地址</span><br><span class="line">失败：<span class="literal">NULL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>注意</strong>：</p>
-<p> malloc和calloc函数都是用来申请内存的。</p>
-<p>​	 <strong>区别</strong>： </p>
-<ol>
-<li><p>函数的名字不一样 </p>
-</li>
-<li><p>参数的个数不一样 </p>
-</li>
-<li><p>malloc申请的内存，内存中存放的内容是随机的，不确定的， 而calloc函数申请的内存中的内容为0</p>
-</li>
-</ol>
-<h2 id="3-3-realloc"><a href="#3-3-realloc" class="headerlink" title="3.3 realloc"></a>3.3 realloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">realloc</span><span class="params">(<span class="type">void</span> *s,<span class="type">unsigned</span> <span class="type">int</span> newsize)</span>;</span><br><span class="line">功能：在原本申请好的堆区空间的基础上重新申请内存，新的空间大小为函数的第二个参数</span><br><span class="line">如果原本申请好的空间的后面不足以增加指定的大小，系统会重新找一个足够大的位</span><br><span class="line">置开辟指定的空间，然后将原本空间中的数据拷贝过来，然后释放原本的空间</span><br><span class="line">如果newsize比原先的内存小，则会释放原先内存的后面的存储空间，</span><br><span class="line">只留前面的newsize个字节</span><br><span class="line">参数：</span><br><span class="line">s：原本开辟好的空间的首地址</span><br><span class="line">newsize：重新开辟的空间的大小</span><br><span class="line">返回值：</span><br><span class="line">新的空间的首地址</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第四章内存释放free"><a href="#第四章内存释放free" class="headerlink" title="第四章	内存释放free"></a>第四章	内存释放free</h1><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">free</span><span class="params">(<span class="type">void</span> *ptr)</span></span><br><span class="line">功能：释放堆区的空间</span><br><span class="line">参数：</span><br><span class="line">ptr：开辟后使用完毕的堆区的空间的首地址</span><br><span class="line">返回值：</span><br><span class="line">无</span><br></pre></td></tr></table></figure></div>
-
-<p>注意：</p>
-<ul>
-<li>free函数只能释放堆区的空间，其他区域的空间无法使用free</li>
-<li>free释放空间必须释放malloc或者calloc或者realloc的返回值对应的空间，不能说只释 放一部分 	</li>
-<li>free(p); 注意当free后，因为没有给p赋值，所以p还是指向原先动态申请的内存。但是 内存已经不能再用了，p变成野指针了，所以一般为了放置野指针，会free完毕之后对p赋 为NULL。</li>
-<li>一块动态申请的内存只能free一次，不能多次free</li>
-</ul>
-<p><strong>注意:malloc calloc relloc 动态申请的内存，只有在free或程序结束的时候才释放。</strong></p>
-<h1 id="第五章内存泄漏"><a href="#第五章内存泄漏" class="headerlink" title="第五章	内存泄漏"></a>第五章	内存泄漏</h1><p><strong>内存泄露的概念</strong>： </p>
-<p>申请的内存，首地址丢了，找不了，再也没法使用了，也没法释放了，这块内存就被泄 露了。 </p>
-<p><strong>内存泄漏案例</strong>：</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">char</span> *p;</span><br><span class="line">p=(<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line"><span class="comment">//接下来，可以用p指向的内存了</span></span><br><span class="line"></span><br><span class="line">p=<span class="string">&quot;hello world&quot;</span>;<span class="comment">//p指向别的地方了，保存字符串常量的首地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从此以后，再也找不到你申请的100个字节了。则动态申请的100个字节就被泄露了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>解决方式</strong>：</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">fun</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="type">char</span> *p;</span><br><span class="line"> p=(<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line"> <span class="comment">//接下来，可以用p指向的内存了 ...</span></span><br><span class="line"> <span class="built_in">free</span>(p);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> fun();</span><br><span class="line"> fun();</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>总结：申请的内存，一定不要把首地址给丢了，在不用的时候一定要释放内存</strong></p>
 ]]></content>
       <categories>
         <category>C语言</category>
@@ -2882,6 +2882,60 @@
       </tags>
   </entry>
   <entry>
+    <title>Samba服务的搭建</title>
+    <url>/2023/08/16/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p><strong>1.安装Samba服务：</strong></p>
+<p> 安装samba服务器更新安装源：sudo apt-get update</p>
+<p> 安装samba的核心插件：sudo apt-get install samba</p>
+<p><strong>2.配置Samba服务：</strong></p>
+<p> \1. 修改&#x2F;etc&#x2F;samba下的配置文件smb.conf</p>
+<p>  sudo gedit &#x2F;etc&#x2F;samba&#x2F;smb.conf</p>
+<p>2.在该文件尾部添加如下内容：</p>
+<p>[education]  </p>
+<p>path &#x3D; &#x2F;home&#x2F;edu&#x2F;work   &#x2F;&#x2F;chmod 777 &#x2F;home&#x2F;edu&#x2F;work</p>
+<p>public &#x3D; yes</p>
+<p>available &#x3D; yes</p>
+<p>browsable &#x3D;yes</p>
+<p>writable &#x3D; yes</p>
+<p>valid users &#x3D; edu</p>
+<p>保存退出</p>
+<p>\3. 设置用户登录密码</p>
+<p>​    sudo smbpasswd -a edu</p>
+<p>​    输入登录密码</p>
+<p>4.启动Samba服务</p>
+<p>   sudo &#x2F;etc&#x2F;init.d&#x2F;smbd restart</p>
+<p>5.windows下访问Samba共享文件夹</p>
+<p>在搜索命令行内输入：\虚拟机的IP地址</p>
+<p>6.开机自启</p>
+<p>打开文件</p>
+<p>sudo vi &#x2F;etc&#x2F;rc.local</p>
+<p>在exit 0前加入</p>
+<p> &#x2F;etc&#x2F;init.d&#x2F;smbd start</p>
+<p>注意：如提示无权限访问可查看windows设置</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/$%7Bfiilename%7D/image-20230816175410112.png"
+                      alt="image-20230816175410112"
+                ></p>
+<p>3.<strong>Samba服务在Windows下的应用</strong></p>
+<p><strong>映射网络驱动器</strong></p>
+<p>右击我的电脑——————&gt;映射网络驱动器</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/$%7Bfiilename%7D/image-20230816175648622.png"
+                      alt="image-20230816175648622"
+                ></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SSH服务安装</title>
     <url>/2023/08/16/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="第一章-SSH服务"><a href="#第一章-SSH服务" class="headerlink" title="第一章    SSH服务"></a>第一章    SSH服务</h1><p><strong>SSH服务功能：实现远程连接，及文件传输服务。</strong></p>
@@ -2954,60 +3008,6 @@
 </ol>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">service ssh start</span><br></pre></td></tr></table></figure></div>
 
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Samba服务的搭建</title>
-    <url>/2023/08/16/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p><strong>1.安装Samba服务：</strong></p>
-<p> 安装samba服务器更新安装源：sudo apt-get update</p>
-<p> 安装samba的核心插件：sudo apt-get install samba</p>
-<p><strong>2.配置Samba服务：</strong></p>
-<p> \1. 修改&#x2F;etc&#x2F;samba下的配置文件smb.conf</p>
-<p>  sudo gedit &#x2F;etc&#x2F;samba&#x2F;smb.conf</p>
-<p>2.在该文件尾部添加如下内容：</p>
-<p>[education]  </p>
-<p>path &#x3D; &#x2F;home&#x2F;edu&#x2F;work   &#x2F;&#x2F;chmod 777 &#x2F;home&#x2F;edu&#x2F;work</p>
-<p>public &#x3D; yes</p>
-<p>available &#x3D; yes</p>
-<p>browsable &#x3D;yes</p>
-<p>writable &#x3D; yes</p>
-<p>valid users &#x3D; edu</p>
-<p>保存退出</p>
-<p>\3. 设置用户登录密码</p>
-<p>​    sudo smbpasswd -a edu</p>
-<p>​    输入登录密码</p>
-<p>4.启动Samba服务</p>
-<p>   sudo &#x2F;etc&#x2F;init.d&#x2F;smbd restart</p>
-<p>5.windows下访问Samba共享文件夹</p>
-<p>在搜索命令行内输入：\虚拟机的IP地址</p>
-<p>6.开机自启</p>
-<p>打开文件</p>
-<p>sudo vi &#x2F;etc&#x2F;rc.local</p>
-<p>在exit 0前加入</p>
-<p> &#x2F;etc&#x2F;init.d&#x2F;smbd start</p>
-<p>注意：如提示无权限访问可查看windows设置</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/$%7Bfiilename%7D/image-20230816175410112.png"
-                      alt="image-20230816175410112"
-                ></p>
-<p>3.<strong>Samba服务在Windows下的应用</strong></p>
-<p><strong>映射网络驱动器</strong></p>
-<p>右击我的电脑——————&gt;映射网络驱动器</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/$%7Bfiilename%7D/image-20230816175648622.png"
-                      alt="image-20230816175648622"
-                ></p>
 ]]></content>
       <categories>
         <category>Linux</category>
@@ -3310,569 +3310,6 @@
     <title>qt概述与安装</title>
     <url>/2023/12/05/qt%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>ubuntu22.04的安装</title>
-    <url>/2023/08/16/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<h1 id="第一章-开始软件"><a href="#第一章-开始软件" class="headerlink" title="第一章 开始软件"></a>第一章 开始软件</h1><p>虚拟机工具VMware：</p>
-<p><a class="link"   href="https://customerconnect.vmware.com/cn/downloads/#all_products" >所有下载 (vmware.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>VMtool：</p>
-<p><a class="link"   href="https://customerconnect.vmware.com/cn/downloads/info/slug/datacenter_cloud_infrastructure/vmware_tools/12_x" >下载 VMware Tools - VMware Customer Connect <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>ubuntu所需镜像：</p>
-<p><a class="link"   href="https://mirrors.aliyun.com/ubuntu-releases/22.04/" >ubuntu-releases-22.04安装包下载_开源镜像站-阿里云 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/a066d04eef0f40f0b085c721b229bf0a.png"
-                      alt="a066d04eef0f40f0b085c721b229bf0a"
-                ></p>
-<h1 id="第二章-vmware新建ubuntu"><a href="#第二章-vmware新建ubuntu" class="headerlink" title="第二章   vmware新建ubuntu"></a>第二章   vmware新建ubuntu</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094803019.png"
-                      alt="image-20230816094803019"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094808162.png"
-                      alt="image-20230816094808162"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094816344.png"
-                      alt="image-20230816094816344"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095606500.png"
-                      alt="image-20230816095606500"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095612327-1692166364806.png"
-                      alt="image-20230816095612327"
-                ></p>
-<h1 id="第三章-对ubuntu22进行硬件配置"><a href="#第三章-对ubuntu22进行硬件配置" class="headerlink" title="第三章     对ubuntu22进行硬件配置"></a>第三章     对ubuntu22进行硬件配置</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095700054-1692166380640.png"
-                      alt="image-20230816095700054"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095830906-1692166386417.png"
-                      alt="image-20230816095830906"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100029825-1692166394987.png"
-                      alt="image-20230816100029825"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100216999.png"
-                      alt="image-20230816100216999"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100423202.png"
-                      alt="image-20230816100423202"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100446951.png"
-                      alt="image-20230816100446951"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101236635.png"
-                      alt="image-20230816101236635"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101433412.png"
-                      alt="image-20230816101433412"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166437093.png"
-                      alt="image-20230816101910424"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166445930.png"
-                      alt="image-20230816101910424"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816102123509-1692166451322.png"
-                      alt="image-20230816102123509"
-                ></p>
-<p>下载完后安装完毕</p>
-<h1 id="第四章-vmtool工具安装"><a href="#第四章-vmtool工具安装" class="headerlink" title="第四章  vmtool工具安装"></a>第四章  vmtool工具安装</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143153587.png"
-                      alt="image-20230816143153587"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143426805.png"
-                      alt="image-20230816143426805"
-                ></p>
-<p>桌面鼠标右键新建文件夹</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143935974.png"
-                      alt="image-20230816143935974"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143903174.png"
-                      alt="image-20230816143903174"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144146568.png"
-                      alt="image-20230816144146568"
-                ></p>
-<p>输入以下指令：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf  VMware Tools-10.0.5-3228253.tar.gz</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144226310.png"
-                      alt="image-20230816144226310"
-                ></p>
-<p>进入解压文件夹</p>
-<p>输入以下指令：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> vmware-tools-distrib/</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144805755.png"
-                      alt="image-20230816144805755"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145129812.png"
-                      alt="image-20230816145129812"
-                ></p>
-<p>输入以下指令安装</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ./vmware-intall.pl</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145318287.png"
-                      alt="image-20230816145318287"
-                ></p>
-<p>有问题就一直回车，当出现yes或no时，一直输入yes</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145659470.png"
-                      alt="image-20230816145659470"
-                ></p>
-<p>出现时表示安装成功</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo博客搭建和使用教程(Windows)</title>
-    <url>/2023/08/14/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-Windows/</url>
-    <content><![CDATA[<p><strong>提前声明：</strong></p>
-<p>本文借鉴codingpath文章（<a class="link"   href="https://zhuanlan.zhihu.com/p/547520780" >2022 Hexo 博客搭建和使用教程(Windows) - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>），后根据本人理解重新编写。</p>
-<h1 id="Hexo博客"><a href="#Hexo博客" class="headerlink" title="Hexo博客"></a>Hexo博客</h1><p><strong>Hexo介绍：</strong></p>
-<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 [Markdown]<a class="link"   href="https://daringfireball.net/projects/markdown/" >Daring Fireball: Markdown <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>Hexo 官方中文网站: <a href="%5BHexo%5D(https://hexo.io/zh-cn/index.html)">Hexo</a></p>
-<h2 id="第一章-前期准备"><a href="#第一章-前期准备" class="headerlink" title="第一章 前期准备"></a><strong>第一章 前期准备</strong></h2><h3 id="1-1-安装前所需环境介绍"><a href="#1-1-安装前所需环境介绍" class="headerlink" title="1.1 安装前所需环境介绍"></a><strong>1.1 安装前所需环境介绍</strong></h3><p>安装 Hexo 之前，需要确保您的 PC 中已经安装以下工具:</p>
-<ul>
-<li>Node.js [地址: [Node.js (nodejs.org)](<a class="link"   href="https://nodejs.org/en" >Node.js (nodejs.org) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)]</li>
-<li>Git [地址: [Git (git-scm.com)](<a class="link"   href="https://git-scm.com/" >Git (git-scm.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)]</li>
-</ul>
-<p>如果您的电脑已经具备所需工具，那么您可以直接进入第二章开始安装 Hexo 了。</p>
-<p>如果您还未安装这两款工具，那么请按照以下步骤进行安装。</p>
-<h3 id="1-2-安装-Git"><a href="#1-2-安装-Git" class="headerlink" title="1.2 安装 Git"></a><strong>1.2 安装 Git</strong></h3><ul>
-<li>官方下载地址: [Git - Downloading Package (git-scm.com)](<a class="link"   href="https://git-scm.com/download/win" >Git - Downloading Package (git-scm.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-<li>安装与使用: 详情见 Git 笔记(尚未写出)</li>
-<li>注意事项: 建议选择 64-bit Git for Windows Setup，并且安装时要勾选 <strong>Add to PATH</strong> 选项</li>
-<li><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234245181.png"
-                      alt="image-20230814234245181"
-                ></li>
-</ul>
-<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">git -v</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234451029.png"
-                      alt="image-20230814234451029"
-                ></p>
-<h3 id="1-3-安装-Node-js"><a href="#1-3-安装-Node-js" class="headerlink" title="1.3 安装 Node.js"></a><strong>1.3 安装 Node.js</strong></h3><ul>
-<li>官方下载地址: <a class="link"   href="https://link.zhihu.com/?target=https://nodejs.org/en/" >Node.js (nodejs.org) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-<li>安装与使用: 详情见 Node 笔记(尚未写出)</li>
-<li>注意事项: 使用 Node.js 官方安装程序时，请确保勾选 <strong>Add to PATH</strong> 选项（默认已勾选）</li>
-</ul>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/image-20230814234403808.png"
-                      alt="image-20230814234403808"
-                ></p>
-<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">node --version</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234810874.png"
-                      alt="image-20230814234810874"
-                ></p>
-<p>至此，您已经完成了安装 Hexo 所需的所有额外环境，接下来就可以安装 Hexo 了。</p>
-<h2 id="第二章-安装-Hexo"><a href="#第二章-安装-Hexo" class="headerlink" title="第二章 安装 Hexo"></a><strong>第二章 安装 Hexo</strong></h2><h3 id="2-1-安装-cnpm"><a href="#2-1-安装-cnpm" class="headerlink" title="2.1 安装 cnpm"></a><strong>2.1 安装 cnpm</strong></h3><p>当您安装 Node.js 之后，便可以在命令行中通过 node install 命令安装您想要的程序了。但本文推荐使用 cnpm 安装 Hexo，所以需要先通过 npm install 安装 cnpm。</p>
-<ul>
-<li><p>命令: <code>npm install -g cnpm --registry==https://registry.npm.taobao.org</code><br>说明: -g 表示进行全局安装，–registry&#x3D;&#x3D;<a class="link"   href="https://link.zhihu.com/?target=https://registry.npm.taobao.org/" >https://registry.npm.taobao.org <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 表示使用淘宝镜像安装 cnpm</p>
-</li>
-<li><p>安装后验证: 在 cmd 中输入命令 cnpm -v, 可查看 cnpm 版本</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235223236.png"
-                      alt="image-20230814235223236"
-                ></p>
-</li>
-</ul>
-<h3 id="2-2-安装-Hexo"><a href="#2-2-安装-Hexo" class="headerlink" title="2.2 安装 Hexo"></a><strong>2.2 安装 Hexo</strong></h3><ul>
-<li>命令: <code>cnpm install -g hexo-cli</code><br>说明: -g 表示全局安装，hexo-cli 为所安装的包</li>
-<li>安装后验证: 在 cmd 中输入命令 hexo -v, 可查看 hexo 版本</li>
-</ul>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235304068.png"
-                      alt="image-20230814235304068"
-                ></p>
-<h3 id="2-3-注意事项"><a href="#2-3-注意事项" class="headerlink" title="2.3 注意事项"></a><strong>2.3 注意事项</strong></h3><p>建议永远安装最新版本的 Hexo，以及 [推荐的 Node.js 版本](<a class="link"   href="https://hexo.io/zh-cn/docs/index.html#%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90" >文档 | Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)。</p>
-<table>
-<thead>
-<tr>
-<th>Hexo 版本</th>
-<th>最低兼容 Node.js 版本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>6.0+</td>
-<td>12.13.0</td>
-</tr>
-<tr>
-<td>5.0+</td>
-<td>10.13.0</td>
-</tr>
-<tr>
-<td>4.1 - 4.2</td>
-<td>8.10</td>
-</tr>
-<tr>
-<td>4.0</td>
-<td>8.6</td>
-</tr>
-<tr>
-<td>3.3 - 3.9</td>
-<td>6.9</td>
-</tr>
-<tr>
-<td>3.2 - 3.3</td>
-<td>0.12</td>
-</tr>
-<tr>
-<td>3.0 - 3.1</td>
-<td>0.10 or iojs</td>
-</tr>
-<tr>
-<td>0.0.1 - 2.8</td>
-<td>0.10</td>
-</tr>
-</tbody></table>
-<hr>
-<p>至此，您已成成功安装了 Hexo，接下来进入 Github 的配置吧!</p>
-<h2 id="第三章-配置-Github"><a href="#第三章-配置-Github" class="headerlink" title="第三章 配置 Github"></a><strong>第三章 配置 Github</strong></h2><p>如果您还没有 Gihub 账户，请注册一个 Github 账户吧!</p>
-<h3 id="3-1-在-Github-上创建仓库"><a href="#3-1-在-Github-上创建仓库" class="headerlink" title="3.1 在 Github 上创建仓库"></a><strong>3.1 在 Github 上创建仓库</strong></h3><ul>
-<li>新建一个名为: <a class="link"   href="https://link.zhihu.com/?target=http://username.github.io" >http://username.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的仓库(username 为您的 Github 用户名)</li>
-<li>比如，如果您的 github 用户名是 test，那么您就新建名为 <a class="link"   href="https://link.zhihu.com/?target=http://test.github.io" >http://test.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的仓库（必须是您的用户名，其它名称无效），将来你的网站访问地址就是 <a class="link"   href="https://link.zhihu.com/?target=https://test.github.io/" >https://test.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 了。由此可见，每一个 github 账户最多只能创建一个这样可以直接使用域名访问的仓库。</li>
-</ul>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235852254.png"
-                      alt="&lt;!--&lt;!--image-20230814235852254--&gt;--&gt;"
-                ></p>
-<h3 id="3-2-配置-SSH-免密登录"><a href="#3-2-配置-SSH-免密登录" class="headerlink" title="3.2 配置 SSH 免密登录"></a><strong>3.2 配置 SSH 免密登录</strong></h3><p>为什么要配置这个呢？因为您提交代码肯定要拥有您的 github 权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用 ssh key 来解决本地和服务器的连接问题。</p>
-<p><strong>注:</strong> 如果您已经配置过 SSH，可跳过此步骤</p>
-<p><strong>步骤:</strong></p>
-<p>1、首先打开电脑文件夹，找到 C:\Users\您的用户名\ .ssh文件夹并删除(如果没有，则直接进入第二步)</p>
-<p>2、在 C:\Users\您的用户名 文件夹下右键打开 Git Bash Here 输入命令: <code>ssh-keygen -t rsa -C &quot;你的github登录邮箱&quot;</code> 生成.ssh秘钥，输入后连敲三次回车，出现下图情况代表成功</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000353188.png"
-                      alt="image-20230815000353188"
-                ></p>
-<p>3、生成了一个新的 C:\Users\您的用户名\ .ssh文件夹，打开这个文件夹，找到 .ssh\id_rsa.pub 文件，记事本打开并复制里面的内容</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001007080.png"
-                      alt="image-20230815001007080"
-                ></p>
-<p>4、打开您的 github 主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key，把复制的内容粘贴进去，title 随便填，保存即可，我们的公钥就添加成功了，设置好如下图:</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000521134.png"
-                      alt="image-20230815000521134"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000545361.png"
-                      alt="image-20230815000545361"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000615104.png"
-                      alt="image-20230815000615104"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000711127.png"
-                      alt="image-20230815000711127"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000812045.png"
-                      alt="image-20230815000812045"
-                ></p>
-<p>5、检测是否设置成功:</p>
-<p>输入命令: <code>ssh -T git@github.com</code></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001156227.png"
-                      alt="image-20230815001156227"
-                ></p>
-<p>看到以上信息说明 SSH 已配置成功!</p>
-<p>如果出现提示则选择yes知道成功；</p>
-<p>6、此外您还需要如下配置:</p>
-<p>命令: <code>git config --global user.name &quot;您的 Github username&quot;</code> &#x2F;&#x2F; 注意是 username, 而非昵称</p>
-<p>命令: <code>git config --global user.email &quot;xxx@qq.com&quot;</code> &#x2F;&#x2F; 填写您的 github 注册邮箱</p>
-<p><u></u></p>
-<p>至此，您已经成功配置好了 Github，接下来开始搭建个人博客吧!</p>
-<h2 id="第四章-使用-Hexo-搭建博客"><a href="#第四章-使用-Hexo-搭建博客" class="headerlink" title="第四章 使用 Hexo 搭建博客"></a><strong>第四章 使用 Hexo 搭建博客</strong></h2><h2 id="Hexo-的一些命令"><a href="#Hexo-的一些命令" class="headerlink" title="Hexo 的一些命令"></a>Hexo 的一些命令</h2><ul>
-<li>生成静态文件：<code>hexo g</code>；</li>
-<li>清空静态文件：<code>hexo cl</code>；</li>
-<li>在本地运行：<code>hexo s</code>；</li>
-<li>部署到网站：<code>hexo d</code>；</li>
-<li>生成静态文件并部署到网站：<code>hexo d -g</code> 或 <code>hexo g -d</code>；</li>
-<li>创建新文章：<code>hexo new &lt;file&gt;</code>。</li>
-</ul>
-<h3 id="4-1-初始化"><a href="#4-1-初始化" class="headerlink" title="4.1 初始化"></a><strong>4.1 初始化</strong></h3><p>1、在电脑的某个磁盘或路径新建一个名为 hexo 的文件夹(名字可以随便取)，比如我的是 D:\hexo，由于这个文件夹将来就作为您存放代码的地方，所以最好不要随便放</p>
-<p>2、在 D:\hexo 文件夹下右键打开 Git Bash Here，输入命令: <code>hexo init</code> 进行初始化</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001538223.png"
-                      alt="image-20230815001538223"
-                ></p>
-<p>hexo 会自动下载一些文件到这个目录，包括 node_modules，目录结构如下图:</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001610824.png"
-                      alt="image-20230815001610824"
-                ></p>
-<p>3、执行命令: <code>hexo g</code> 会在 public 文件夹下生成相关的 html 文件，这些文件将来需要提交到 Github 上</p>
-<p>4、执行命令: <code>hexo s</code> 可以开启本地预览服务，打开浏览器访问 <a class="link"   href="https://link.zhihu.com/?target=http://localhost:4000/" >http://localhost:4000 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 即可看到博客内容</p>
-<h3 id="4-2-将博客部署到-Github"><a href="#4-2-将博客部署到-Github" class="headerlink" title="4.2 将博客部署到 Github"></a><strong>4.2 将博客部署到 Github</strong></h3><p>1、在 D:\hexo 目录下安装 hexo-deployer-git 插件</p>
-<ul>
-<li>命令: <code>npm install hexo-deployer-git --save</code></li>
-</ul>
-<p>2、编辑 D:\hexo 目录下的 _config.yml 文件，在文件末尾添加如下内容:</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815002403780.png"
-                      alt="image-20230815002403780"
-                ></p>
-<p>注意: 其中 repository 中的内容即为 github 个人主页链接地址</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815103422386.png"
-                      alt="image-20230815103422386"
-                ></p>
-<p>3、在 D:\hexo 目录下，输入命令: <code>hexo d</code> 将本地 blog 推送到 github 远程仓库，也可能需要输入 username &amp; pwd</p>
-<p>推送成功后，即可通过<a class="link"   href="https://baizhouhaoyue.github.io/%E8%AE%BF%E9%97%AE%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%BA%86" >https://baizhouhaoyue.github.io/访问个人博客了 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>!</p>
-<h2 id="第五章-更换主题"><a href="#第五章-更换主题" class="headerlink" title="第五章 更换主题"></a><strong>第五章 更换主题</strong></h2><p>在 D:\hexo 目录下有一个 themes 文件夹，该文件夹下存放着 hexo 所使用的主题</p>
-<h3 id="5-1-搜索主题"><a href="#5-1-搜索主题" class="headerlink" title="5.1 搜索主题"></a><strong>5.1 搜索主题</strong></h3><ul>
-<li>hexo 官方提供了很多主题供我们使用，地址: <a class="link"   href="https://hexo.io/themes/" >Themes | Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 选择喜欢的主题并点击即可跳转至 github</li>
-<li>您可以在 github 中直接搜索 hexo 主题</li>
-</ul>
-<h3 id="5-2-下载主题"><a href="#5-2-下载主题" class="headerlink" title="5.2 下载主题"></a><strong>5.2 下载主题</strong></h3><p>方法一：</p>
-<p>1、在 D:\hexo 目录下右键 Git Bash Here</p>
-<p>2、执行命令: <code>git clone 主题http链接 themes/主题名称</code> 将主题下载至 themes 文件夹下</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815104851562.png"
-                      alt="image-20230815104851562"
-                ></p>
-<ul>
-<li>可以在该文件夹下查看是否下载成功</li>
-<li><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815104919031.png"
-                      alt="image-20230815104919031"
-                ></li>
-</ul>
-<p>方法二：</p>
-<p>1、在 D:\hexo 目录下右键 Git Bash Here</p>
-<p>2、执行命令: npm install hexo-theme-主题名@latest 将主题下载至 themes 文件夹下(根据主题要求文档)</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105237283.png"
-                      alt="image-20230815105237283"
-                ></p>
-<h3 id="5-3-使用主题"><a href="#5-3-使用主题" class="headerlink" title="5.3 使用主题"></a><strong>5.3 使用主题</strong></h3><p>​    	方法一：</p>
-<ul>
-<li><p>打开 D:\hexo 目录下的 _config.yml 文件，在里面找到 theme: landscape改为theme: yilia-plus(yilia-plus为我们要使用的主题名)，然后执行 <code>hexo clean</code> 先删除旧的 html 文件，再执行 <code>hexo g</code> 重新生成，再执行 <code>hexo d</code> 推送到远程仓库</p>
-</li>
-<li><p>在浏览器输入相应域名，发现主题已更换</p>
-</li>
-<li><p>注意: 可能需要等一段时间刷新才更换 please be patient</p>
-<p>方法二：</p>
-<p>在 Hexo 根目录的 <code>_config.yml</code> 文件中，将 <code>theme</code> 值修改为   主题名  。</p>
-<p>_config.yml</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">theme: redefine</span><br></pre></td></tr></table></figure></div></li>
-</ul>
-<h3 id="5-4-修改主题内容"><a href="#5-4-修改主题内容" class="headerlink" title="5.4 修改主题内容"></a><strong>5.4 修改主题内容</strong></h3><p>您可以在 themes&#x2F;yilia-plus 文件夹中查看该主题的内容，并可编辑该文件夹中的 _config.yml 文件修改主题样式</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105641322.png"
-                      alt="image-20230815105641322"
-                ></p>
-<p>注意: 记得编辑根目录下的 _config.yml 文件，将信息修改为自己的</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105804677.png"
-                      alt="image-20230815105804677"
-                ></p>
-<h2 id="第六章-使用-Typora-编写博客"><a href="#第六章-使用-Typora-编写博客" class="headerlink" title="第六章 使用 Typora 编写博客"></a><strong>第六章 使用 Typora 编写博客</strong></h2><h3 id="6-1-Typora-介绍"><a href="#6-1-Typora-介绍" class="headerlink" title="6.1 Typora 介绍"></a><strong>6.1 Typora 介绍</strong></h3><p>Typora 是一款轻便简洁的 Markdown 编辑器，支持即时渲染技术，这也是与其他 Markdown 编辑器最显著的区别。即时渲染使得你写Markdown 就像是写 Word 文档一样流畅自如，不像其他编辑器的有编辑栏和显示栏。</p>
-<p>优点:</p>
-<ul>
-<li><strong>简洁美观</strong></li>
-<li><strong>实时预览</strong></li>
-<li><strong>扩展语法</strong></li>
-<li><strong>跨平台</strong></li>
-</ul>
-<h3 id="6-2-安装-Typora"><a href="#6-2-安装-Typora" class="headerlink" title="6.2 安装 Typora"></a><strong>6.2 安装 Typora</strong></h3><p>官网: <a class="link"   href="https://typoraio.cn/" >Typora 官方中文站 (typoraio.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 遗憾收费了。</p>
-<p>为此再次感谢<strong>codingpath大佬</strong><a class="link"   href="https://www.zhihu.com/people/nu-li-nu-li-zai-nu-li-x-80-72" > codingpath - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>提供的免费资源<a class="link"   href="https://www.aliyundrive.com/s/1SQzr6JXeR8" >阿里云盘分享 (aliyundrive.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="6-3-写博客"><a href="#6-3-写博客" class="headerlink" title="6.3 写博客"></a><strong>6.3 写博客</strong></h3><p>1、在 D:\hexo 目录下，通过输入命令: <code>hexo new &quot;文章 title&quot;</code> 会在 &#x2F;source 文件夹下生成对应文章的 .md 文件，然后就可以通过 Typora 打开此文件编写文章并保存了</p>
-<p>2、当您写完该篇文章后，依次输入以下命令:</p>
-<p><code>hexo clean</code> 删除 public 文件夹，即删除旧的博客文章</p>
-<p><code>hexo g</code> 生成 public 文件夹，即生成新的博客文章相关 html 文件</p>
-<p><code>hexo d</code> 将博客推送到 github</p>
-<h3 id="6-4-向-Hexo-博客中插入图片"><a href="#6-4-向-Hexo-博客中插入图片" class="headerlink" title="6.4 向 Hexo 博客中插入图片"></a><strong>6.4 向 Hexo 博客中插入图片</strong></h3><p>Hexo 有多种图片插入方式，可以将图片存放在本地引用或者将图片放在 CDN 上引用。</p>
-<p>1、本地引用–绝对路径</p>
-<p>当 Hexo 项目中只用到少量图片时，可以将图片统一放在 source&#x2F;images 文件夹中，通过 markdown 语法访问它们。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815110743723.png"
-                      alt="image-20230815110743723"
-                ></p>
-<p>设置Typora的图片默认路径</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815110915289.png"
-                      alt="image-20230815110915289"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111430665.png"
-                      alt="image-20230815111430665"
-                ></p>
-<p>按照如图配置，如果你用的Hexo写博客，复制这个即可<code>../../source/imgs/$&#123;fiilename&#125;</code><br>它的意思是将文中的照片复制一份到<code>imgs</code>里的<code>$&#123;fiilename&#125;</code>文件里<br>如果没有用Hexo，按照这个思路设置对路径即可</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111532830.png"
-                      alt="image-20230815111532830"
-                ></p>
-<p>2、本地引用–相对路径</p>
-<p>图片除了可以放在统一的 images 文件夹中，还可以放在文章自己的目录中。文章的目录可以通过配置 _config.yml 来生成。</p>
-<p>打开项目根目录中的 *_config.yml 文件，将 _config.yml文件中的配置项 post_asset_folder 设为 true 后，执行命令 <code>hexo new &quot;post_name&quot;</code>，在 source&#x2F;*posts 中会生成文章 post_name.md 和同名文件夹 post_name。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111657186.png"
-                      alt="image-20230815111657186"
-                ></p>
-<p>将图片资源放在 post_name 文件夹中，文章就可以使用相对路径引用图片资源了。</p>
-<div class="highlight-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="code"><pre><span class="line">![](image.jpg)</span><br></pre></td></tr></table></figure></div>
-
-<p>但是使用这种引用方式，图片只能在文章中显示，但无法在首页中正常显示。</p>
-<p>如果希望图片在文章和首页中同时显示，可以使用标签插件语法(<strong>推荐使用这种引用方法</strong>)。</p>
-<div class="highlight-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img image.jpg This is an image %&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>3、CDN 引用(<strong>不推荐</strong>)</p>
-<p>除了在本地存储图片，还可以将图片上传到一些免费的 CDN 服务中。</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>教程</tag>
-      </tags>
   </entry>
   <entry>
     <title>linux高级系统编程</title>
@@ -5749,6 +5186,569 @@
       </categories>
       <tags>
         <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu22.04的安装</title>
+    <url>/2023/08/16/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="第一章-开始软件"><a href="#第一章-开始软件" class="headerlink" title="第一章 开始软件"></a>第一章 开始软件</h1><p>虚拟机工具VMware：</p>
+<p><a class="link"   href="https://customerconnect.vmware.com/cn/downloads/#all_products" >所有下载 (vmware.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>VMtool：</p>
+<p><a class="link"   href="https://customerconnect.vmware.com/cn/downloads/info/slug/datacenter_cloud_infrastructure/vmware_tools/12_x" >下载 VMware Tools - VMware Customer Connect <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>ubuntu所需镜像：</p>
+<p><a class="link"   href="https://mirrors.aliyun.com/ubuntu-releases/22.04/" >ubuntu-releases-22.04安装包下载_开源镜像站-阿里云 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/a066d04eef0f40f0b085c721b229bf0a.png"
+                      alt="a066d04eef0f40f0b085c721b229bf0a"
+                ></p>
+<h1 id="第二章-vmware新建ubuntu"><a href="#第二章-vmware新建ubuntu" class="headerlink" title="第二章   vmware新建ubuntu"></a>第二章   vmware新建ubuntu</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094803019.png"
+                      alt="image-20230816094803019"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094808162.png"
+                      alt="image-20230816094808162"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094816344.png"
+                      alt="image-20230816094816344"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095606500.png"
+                      alt="image-20230816095606500"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095612327-1692166364806.png"
+                      alt="image-20230816095612327"
+                ></p>
+<h1 id="第三章-对ubuntu22进行硬件配置"><a href="#第三章-对ubuntu22进行硬件配置" class="headerlink" title="第三章     对ubuntu22进行硬件配置"></a>第三章     对ubuntu22进行硬件配置</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095700054-1692166380640.png"
+                      alt="image-20230816095700054"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095830906-1692166386417.png"
+                      alt="image-20230816095830906"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100029825-1692166394987.png"
+                      alt="image-20230816100029825"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100216999.png"
+                      alt="image-20230816100216999"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100423202.png"
+                      alt="image-20230816100423202"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100446951.png"
+                      alt="image-20230816100446951"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101236635.png"
+                      alt="image-20230816101236635"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101433412.png"
+                      alt="image-20230816101433412"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166437093.png"
+                      alt="image-20230816101910424"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166445930.png"
+                      alt="image-20230816101910424"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816102123509-1692166451322.png"
+                      alt="image-20230816102123509"
+                ></p>
+<p>下载完后安装完毕</p>
+<h1 id="第四章-vmtool工具安装"><a href="#第四章-vmtool工具安装" class="headerlink" title="第四章  vmtool工具安装"></a>第四章  vmtool工具安装</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143153587.png"
+                      alt="image-20230816143153587"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143426805.png"
+                      alt="image-20230816143426805"
+                ></p>
+<p>桌面鼠标右键新建文件夹</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143935974.png"
+                      alt="image-20230816143935974"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143903174.png"
+                      alt="image-20230816143903174"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144146568.png"
+                      alt="image-20230816144146568"
+                ></p>
+<p>输入以下指令：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf  VMware Tools-10.0.5-3228253.tar.gz</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144226310.png"
+                      alt="image-20230816144226310"
+                ></p>
+<p>进入解压文件夹</p>
+<p>输入以下指令：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> vmware-tools-distrib/</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144805755.png"
+                      alt="image-20230816144805755"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145129812.png"
+                      alt="image-20230816145129812"
+                ></p>
+<p>输入以下指令安装</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ./vmware-intall.pl</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145318287.png"
+                      alt="image-20230816145318287"
+                ></p>
+<p>有问题就一直回车，当出现yes或no时，一直输入yes</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145659470.png"
+                      alt="image-20230816145659470"
+                ></p>
+<p>出现时表示安装成功</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo博客搭建和使用教程(Windows)</title>
+    <url>/2023/08/14/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-Windows/</url>
+    <content><![CDATA[<p><strong>提前声明：</strong></p>
+<p>本文借鉴codingpath文章（<a class="link"   href="https://zhuanlan.zhihu.com/p/547520780" >2022 Hexo 博客搭建和使用教程(Windows) - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>），后根据本人理解重新编写。</p>
+<h1 id="Hexo博客"><a href="#Hexo博客" class="headerlink" title="Hexo博客"></a>Hexo博客</h1><p><strong>Hexo介绍：</strong></p>
+<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 [Markdown]<a class="link"   href="https://daringfireball.net/projects/markdown/" >Daring Fireball: Markdown <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>Hexo 官方中文网站: <a href="%5BHexo%5D(https://hexo.io/zh-cn/index.html)">Hexo</a></p>
+<h2 id="第一章-前期准备"><a href="#第一章-前期准备" class="headerlink" title="第一章 前期准备"></a><strong>第一章 前期准备</strong></h2><h3 id="1-1-安装前所需环境介绍"><a href="#1-1-安装前所需环境介绍" class="headerlink" title="1.1 安装前所需环境介绍"></a><strong>1.1 安装前所需环境介绍</strong></h3><p>安装 Hexo 之前，需要确保您的 PC 中已经安装以下工具:</p>
+<ul>
+<li>Node.js [地址: [Node.js (nodejs.org)](<a class="link"   href="https://nodejs.org/en" >Node.js (nodejs.org) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)]</li>
+<li>Git [地址: [Git (git-scm.com)](<a class="link"   href="https://git-scm.com/" >Git (git-scm.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)]</li>
+</ul>
+<p>如果您的电脑已经具备所需工具，那么您可以直接进入第二章开始安装 Hexo 了。</p>
+<p>如果您还未安装这两款工具，那么请按照以下步骤进行安装。</p>
+<h3 id="1-2-安装-Git"><a href="#1-2-安装-Git" class="headerlink" title="1.2 安装 Git"></a><strong>1.2 安装 Git</strong></h3><ul>
+<li>官方下载地址: [Git - Downloading Package (git-scm.com)](<a class="link"   href="https://git-scm.com/download/win" >Git - Downloading Package (git-scm.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li>安装与使用: 详情见 Git 笔记(尚未写出)</li>
+<li>注意事项: 建议选择 64-bit Git for Windows Setup，并且安装时要勾选 <strong>Add to PATH</strong> 选项</li>
+<li><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234245181.png"
+                      alt="image-20230814234245181"
+                ></li>
+</ul>
+<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">git -v</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234451029.png"
+                      alt="image-20230814234451029"
+                ></p>
+<h3 id="1-3-安装-Node-js"><a href="#1-3-安装-Node-js" class="headerlink" title="1.3 安装 Node.js"></a><strong>1.3 安装 Node.js</strong></h3><ul>
+<li>官方下载地址: <a class="link"   href="https://link.zhihu.com/?target=https://nodejs.org/en/" >Node.js (nodejs.org) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li>安装与使用: 详情见 Node 笔记(尚未写出)</li>
+<li>注意事项: 使用 Node.js 官方安装程序时，请确保勾选 <strong>Add to PATH</strong> 选项（默认已勾选）</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/image-20230814234403808.png"
+                      alt="image-20230814234403808"
+                ></p>
+<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">node --version</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234810874.png"
+                      alt="image-20230814234810874"
+                ></p>
+<p>至此，您已经完成了安装 Hexo 所需的所有额外环境，接下来就可以安装 Hexo 了。</p>
+<h2 id="第二章-安装-Hexo"><a href="#第二章-安装-Hexo" class="headerlink" title="第二章 安装 Hexo"></a><strong>第二章 安装 Hexo</strong></h2><h3 id="2-1-安装-cnpm"><a href="#2-1-安装-cnpm" class="headerlink" title="2.1 安装 cnpm"></a><strong>2.1 安装 cnpm</strong></h3><p>当您安装 Node.js 之后，便可以在命令行中通过 node install 命令安装您想要的程序了。但本文推荐使用 cnpm 安装 Hexo，所以需要先通过 npm install 安装 cnpm。</p>
+<ul>
+<li><p>命令: <code>npm install -g cnpm --registry==https://registry.npm.taobao.org</code><br>说明: -g 表示进行全局安装，–registry&#x3D;&#x3D;<a class="link"   href="https://link.zhihu.com/?target=https://registry.npm.taobao.org/" >https://registry.npm.taobao.org <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 表示使用淘宝镜像安装 cnpm</p>
+</li>
+<li><p>安装后验证: 在 cmd 中输入命令 cnpm -v, 可查看 cnpm 版本</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235223236.png"
+                      alt="image-20230814235223236"
+                ></p>
+</li>
+</ul>
+<h3 id="2-2-安装-Hexo"><a href="#2-2-安装-Hexo" class="headerlink" title="2.2 安装 Hexo"></a><strong>2.2 安装 Hexo</strong></h3><ul>
+<li>命令: <code>cnpm install -g hexo-cli</code><br>说明: -g 表示全局安装，hexo-cli 为所安装的包</li>
+<li>安装后验证: 在 cmd 中输入命令 hexo -v, 可查看 hexo 版本</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235304068.png"
+                      alt="image-20230814235304068"
+                ></p>
+<h3 id="2-3-注意事项"><a href="#2-3-注意事项" class="headerlink" title="2.3 注意事项"></a><strong>2.3 注意事项</strong></h3><p>建议永远安装最新版本的 Hexo，以及 [推荐的 Node.js 版本](<a class="link"   href="https://hexo.io/zh-cn/docs/index.html#%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90" >文档 | Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)。</p>
+<table>
+<thead>
+<tr>
+<th>Hexo 版本</th>
+<th>最低兼容 Node.js 版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6.0+</td>
+<td>12.13.0</td>
+</tr>
+<tr>
+<td>5.0+</td>
+<td>10.13.0</td>
+</tr>
+<tr>
+<td>4.1 - 4.2</td>
+<td>8.10</td>
+</tr>
+<tr>
+<td>4.0</td>
+<td>8.6</td>
+</tr>
+<tr>
+<td>3.3 - 3.9</td>
+<td>6.9</td>
+</tr>
+<tr>
+<td>3.2 - 3.3</td>
+<td>0.12</td>
+</tr>
+<tr>
+<td>3.0 - 3.1</td>
+<td>0.10 or iojs</td>
+</tr>
+<tr>
+<td>0.0.1 - 2.8</td>
+<td>0.10</td>
+</tr>
+</tbody></table>
+<hr>
+<p>至此，您已成成功安装了 Hexo，接下来进入 Github 的配置吧!</p>
+<h2 id="第三章-配置-Github"><a href="#第三章-配置-Github" class="headerlink" title="第三章 配置 Github"></a><strong>第三章 配置 Github</strong></h2><p>如果您还没有 Gihub 账户，请注册一个 Github 账户吧!</p>
+<h3 id="3-1-在-Github-上创建仓库"><a href="#3-1-在-Github-上创建仓库" class="headerlink" title="3.1 在 Github 上创建仓库"></a><strong>3.1 在 Github 上创建仓库</strong></h3><ul>
+<li>新建一个名为: <a class="link"   href="https://link.zhihu.com/?target=http://username.github.io" >http://username.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的仓库(username 为您的 Github 用户名)</li>
+<li>比如，如果您的 github 用户名是 test，那么您就新建名为 <a class="link"   href="https://link.zhihu.com/?target=http://test.github.io" >http://test.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的仓库（必须是您的用户名，其它名称无效），将来你的网站访问地址就是 <a class="link"   href="https://link.zhihu.com/?target=https://test.github.io/" >https://test.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 了。由此可见，每一个 github 账户最多只能创建一个这样可以直接使用域名访问的仓库。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235852254.png"
+                      alt="&lt;!--&lt;!--image-20230814235852254--&gt;--&gt;"
+                ></p>
+<h3 id="3-2-配置-SSH-免密登录"><a href="#3-2-配置-SSH-免密登录" class="headerlink" title="3.2 配置 SSH 免密登录"></a><strong>3.2 配置 SSH 免密登录</strong></h3><p>为什么要配置这个呢？因为您提交代码肯定要拥有您的 github 权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用 ssh key 来解决本地和服务器的连接问题。</p>
+<p><strong>注:</strong> 如果您已经配置过 SSH，可跳过此步骤</p>
+<p><strong>步骤:</strong></p>
+<p>1、首先打开电脑文件夹，找到 C:\Users\您的用户名\ .ssh文件夹并删除(如果没有，则直接进入第二步)</p>
+<p>2、在 C:\Users\您的用户名 文件夹下右键打开 Git Bash Here 输入命令: <code>ssh-keygen -t rsa -C &quot;你的github登录邮箱&quot;</code> 生成.ssh秘钥，输入后连敲三次回车，出现下图情况代表成功</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000353188.png"
+                      alt="image-20230815000353188"
+                ></p>
+<p>3、生成了一个新的 C:\Users\您的用户名\ .ssh文件夹，打开这个文件夹，找到 .ssh\id_rsa.pub 文件，记事本打开并复制里面的内容</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001007080.png"
+                      alt="image-20230815001007080"
+                ></p>
+<p>4、打开您的 github 主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key，把复制的内容粘贴进去，title 随便填，保存即可，我们的公钥就添加成功了，设置好如下图:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000521134.png"
+                      alt="image-20230815000521134"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000545361.png"
+                      alt="image-20230815000545361"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000615104.png"
+                      alt="image-20230815000615104"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000711127.png"
+                      alt="image-20230815000711127"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000812045.png"
+                      alt="image-20230815000812045"
+                ></p>
+<p>5、检测是否设置成功:</p>
+<p>输入命令: <code>ssh -T git@github.com</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001156227.png"
+                      alt="image-20230815001156227"
+                ></p>
+<p>看到以上信息说明 SSH 已配置成功!</p>
+<p>如果出现提示则选择yes知道成功；</p>
+<p>6、此外您还需要如下配置:</p>
+<p>命令: <code>git config --global user.name &quot;您的 Github username&quot;</code> &#x2F;&#x2F; 注意是 username, 而非昵称</p>
+<p>命令: <code>git config --global user.email &quot;xxx@qq.com&quot;</code> &#x2F;&#x2F; 填写您的 github 注册邮箱</p>
+<p><u></u></p>
+<p>至此，您已经成功配置好了 Github，接下来开始搭建个人博客吧!</p>
+<h2 id="第四章-使用-Hexo-搭建博客"><a href="#第四章-使用-Hexo-搭建博客" class="headerlink" title="第四章 使用 Hexo 搭建博客"></a><strong>第四章 使用 Hexo 搭建博客</strong></h2><h2 id="Hexo-的一些命令"><a href="#Hexo-的一些命令" class="headerlink" title="Hexo 的一些命令"></a>Hexo 的一些命令</h2><ul>
+<li>生成静态文件：<code>hexo g</code>；</li>
+<li>清空静态文件：<code>hexo cl</code>；</li>
+<li>在本地运行：<code>hexo s</code>；</li>
+<li>部署到网站：<code>hexo d</code>；</li>
+<li>生成静态文件并部署到网站：<code>hexo d -g</code> 或 <code>hexo g -d</code>；</li>
+<li>创建新文章：<code>hexo new &lt;file&gt;</code>。</li>
+</ul>
+<h3 id="4-1-初始化"><a href="#4-1-初始化" class="headerlink" title="4.1 初始化"></a><strong>4.1 初始化</strong></h3><p>1、在电脑的某个磁盘或路径新建一个名为 hexo 的文件夹(名字可以随便取)，比如我的是 D:\hexo，由于这个文件夹将来就作为您存放代码的地方，所以最好不要随便放</p>
+<p>2、在 D:\hexo 文件夹下右键打开 Git Bash Here，输入命令: <code>hexo init</code> 进行初始化</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001538223.png"
+                      alt="image-20230815001538223"
+                ></p>
+<p>hexo 会自动下载一些文件到这个目录，包括 node_modules，目录结构如下图:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001610824.png"
+                      alt="image-20230815001610824"
+                ></p>
+<p>3、执行命令: <code>hexo g</code> 会在 public 文件夹下生成相关的 html 文件，这些文件将来需要提交到 Github 上</p>
+<p>4、执行命令: <code>hexo s</code> 可以开启本地预览服务，打开浏览器访问 <a class="link"   href="https://link.zhihu.com/?target=http://localhost:4000/" >http://localhost:4000 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 即可看到博客内容</p>
+<h3 id="4-2-将博客部署到-Github"><a href="#4-2-将博客部署到-Github" class="headerlink" title="4.2 将博客部署到 Github"></a><strong>4.2 将博客部署到 Github</strong></h3><p>1、在 D:\hexo 目录下安装 hexo-deployer-git 插件</p>
+<ul>
+<li>命令: <code>npm install hexo-deployer-git --save</code></li>
+</ul>
+<p>2、编辑 D:\hexo 目录下的 _config.yml 文件，在文件末尾添加如下内容:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815002403780.png"
+                      alt="image-20230815002403780"
+                ></p>
+<p>注意: 其中 repository 中的内容即为 github 个人主页链接地址</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815103422386.png"
+                      alt="image-20230815103422386"
+                ></p>
+<p>3、在 D:\hexo 目录下，输入命令: <code>hexo d</code> 将本地 blog 推送到 github 远程仓库，也可能需要输入 username &amp; pwd</p>
+<p>推送成功后，即可通过<a class="link"   href="https://baizhouhaoyue.github.io/%E8%AE%BF%E9%97%AE%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%BA%86" >https://baizhouhaoyue.github.io/访问个人博客了 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>!</p>
+<h2 id="第五章-更换主题"><a href="#第五章-更换主题" class="headerlink" title="第五章 更换主题"></a><strong>第五章 更换主题</strong></h2><p>在 D:\hexo 目录下有一个 themes 文件夹，该文件夹下存放着 hexo 所使用的主题</p>
+<h3 id="5-1-搜索主题"><a href="#5-1-搜索主题" class="headerlink" title="5.1 搜索主题"></a><strong>5.1 搜索主题</strong></h3><ul>
+<li>hexo 官方提供了很多主题供我们使用，地址: <a class="link"   href="https://hexo.io/themes/" >Themes | Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 选择喜欢的主题并点击即可跳转至 github</li>
+<li>您可以在 github 中直接搜索 hexo 主题</li>
+</ul>
+<h3 id="5-2-下载主题"><a href="#5-2-下载主题" class="headerlink" title="5.2 下载主题"></a><strong>5.2 下载主题</strong></h3><p>方法一：</p>
+<p>1、在 D:\hexo 目录下右键 Git Bash Here</p>
+<p>2、执行命令: <code>git clone 主题http链接 themes/主题名称</code> 将主题下载至 themes 文件夹下</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815104851562.png"
+                      alt="image-20230815104851562"
+                ></p>
+<ul>
+<li>可以在该文件夹下查看是否下载成功</li>
+<li><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815104919031.png"
+                      alt="image-20230815104919031"
+                ></li>
+</ul>
+<p>方法二：</p>
+<p>1、在 D:\hexo 目录下右键 Git Bash Here</p>
+<p>2、执行命令: npm install hexo-theme-主题名@latest 将主题下载至 themes 文件夹下(根据主题要求文档)</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105237283.png"
+                      alt="image-20230815105237283"
+                ></p>
+<h3 id="5-3-使用主题"><a href="#5-3-使用主题" class="headerlink" title="5.3 使用主题"></a><strong>5.3 使用主题</strong></h3><p>​    	方法一：</p>
+<ul>
+<li><p>打开 D:\hexo 目录下的 _config.yml 文件，在里面找到 theme: landscape改为theme: yilia-plus(yilia-plus为我们要使用的主题名)，然后执行 <code>hexo clean</code> 先删除旧的 html 文件，再执行 <code>hexo g</code> 重新生成，再执行 <code>hexo d</code> 推送到远程仓库</p>
+</li>
+<li><p>在浏览器输入相应域名，发现主题已更换</p>
+</li>
+<li><p>注意: 可能需要等一段时间刷新才更换 please be patient</p>
+<p>方法二：</p>
+<p>在 Hexo 根目录的 <code>_config.yml</code> 文件中，将 <code>theme</code> 值修改为   主题名  。</p>
+<p>_config.yml</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">theme: redefine</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h3 id="5-4-修改主题内容"><a href="#5-4-修改主题内容" class="headerlink" title="5.4 修改主题内容"></a><strong>5.4 修改主题内容</strong></h3><p>您可以在 themes&#x2F;yilia-plus 文件夹中查看该主题的内容，并可编辑该文件夹中的 _config.yml 文件修改主题样式</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105641322.png"
+                      alt="image-20230815105641322"
+                ></p>
+<p>注意: 记得编辑根目录下的 _config.yml 文件，将信息修改为自己的</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105804677.png"
+                      alt="image-20230815105804677"
+                ></p>
+<h2 id="第六章-使用-Typora-编写博客"><a href="#第六章-使用-Typora-编写博客" class="headerlink" title="第六章 使用 Typora 编写博客"></a><strong>第六章 使用 Typora 编写博客</strong></h2><h3 id="6-1-Typora-介绍"><a href="#6-1-Typora-介绍" class="headerlink" title="6.1 Typora 介绍"></a><strong>6.1 Typora 介绍</strong></h3><p>Typora 是一款轻便简洁的 Markdown 编辑器，支持即时渲染技术，这也是与其他 Markdown 编辑器最显著的区别。即时渲染使得你写Markdown 就像是写 Word 文档一样流畅自如，不像其他编辑器的有编辑栏和显示栏。</p>
+<p>优点:</p>
+<ul>
+<li><strong>简洁美观</strong></li>
+<li><strong>实时预览</strong></li>
+<li><strong>扩展语法</strong></li>
+<li><strong>跨平台</strong></li>
+</ul>
+<h3 id="6-2-安装-Typora"><a href="#6-2-安装-Typora" class="headerlink" title="6.2 安装 Typora"></a><strong>6.2 安装 Typora</strong></h3><p>官网: <a class="link"   href="https://typoraio.cn/" >Typora 官方中文站 (typoraio.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 遗憾收费了。</p>
+<p>为此再次感谢<strong>codingpath大佬</strong><a class="link"   href="https://www.zhihu.com/people/nu-li-nu-li-zai-nu-li-x-80-72" > codingpath - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>提供的免费资源<a class="link"   href="https://www.aliyundrive.com/s/1SQzr6JXeR8" >阿里云盘分享 (aliyundrive.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="6-3-写博客"><a href="#6-3-写博客" class="headerlink" title="6.3 写博客"></a><strong>6.3 写博客</strong></h3><p>1、在 D:\hexo 目录下，通过输入命令: <code>hexo new &quot;文章 title&quot;</code> 会在 &#x2F;source 文件夹下生成对应文章的 .md 文件，然后就可以通过 Typora 打开此文件编写文章并保存了</p>
+<p>2、当您写完该篇文章后，依次输入以下命令:</p>
+<p><code>hexo clean</code> 删除 public 文件夹，即删除旧的博客文章</p>
+<p><code>hexo g</code> 生成 public 文件夹，即生成新的博客文章相关 html 文件</p>
+<p><code>hexo d</code> 将博客推送到 github</p>
+<h3 id="6-4-向-Hexo-博客中插入图片"><a href="#6-4-向-Hexo-博客中插入图片" class="headerlink" title="6.4 向 Hexo 博客中插入图片"></a><strong>6.4 向 Hexo 博客中插入图片</strong></h3><p>Hexo 有多种图片插入方式，可以将图片存放在本地引用或者将图片放在 CDN 上引用。</p>
+<p>1、本地引用–绝对路径</p>
+<p>当 Hexo 项目中只用到少量图片时，可以将图片统一放在 source&#x2F;images 文件夹中，通过 markdown 语法访问它们。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815110743723.png"
+                      alt="image-20230815110743723"
+                ></p>
+<p>设置Typora的图片默认路径</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815110915289.png"
+                      alt="image-20230815110915289"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111430665.png"
+                      alt="image-20230815111430665"
+                ></p>
+<p>按照如图配置，如果你用的Hexo写博客，复制这个即可<code>../../source/imgs/$&#123;fiilename&#125;</code><br>它的意思是将文中的照片复制一份到<code>imgs</code>里的<code>$&#123;fiilename&#125;</code>文件里<br>如果没有用Hexo，按照这个思路设置对路径即可</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111532830.png"
+                      alt="image-20230815111532830"
+                ></p>
+<p>2、本地引用–相对路径</p>
+<p>图片除了可以放在统一的 images 文件夹中，还可以放在文章自己的目录中。文章的目录可以通过配置 _config.yml 来生成。</p>
+<p>打开项目根目录中的 *_config.yml 文件，将 _config.yml文件中的配置项 post_asset_folder 设为 true 后，执行命令 <code>hexo new &quot;post_name&quot;</code>，在 source&#x2F;*posts 中会生成文章 post_name.md 和同名文件夹 post_name。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111657186.png"
+                      alt="image-20230815111657186"
+                ></p>
+<p>将图片资源放在 post_name 文件夹中，文章就可以使用相对路径引用图片资源了。</p>
+<div class="highlight-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="code"><pre><span class="line">![](image.jpg)</span><br></pre></td></tr></table></figure></div>
+
+<p>但是使用这种引用方式，图片只能在文章中显示，但无法在首页中正常显示。</p>
+<p>如果希望图片在文章和首页中同时显示，可以使用标签插件语法(<strong>推荐使用这种引用方法</strong>)。</p>
+<div class="highlight-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img image.jpg This is an image %&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>3、CDN 引用(<strong>不推荐</strong>)</p>
+<p>除了在本地存储图片，还可以将图片上传到一些免费的 CDN 服务中。</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
