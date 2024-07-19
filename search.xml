@@ -399,111 +399,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CPP__多态</title>
-    <url>/2023/09/21/CPP-%E5%A4%9A%E6%80%81/</url>
-    <content><![CDATA[<h1 id="第一章多态的概念"><a href="#第一章多态的概念" class="headerlink" title="第一章	多态的概念"></a><strong>第一章	多态的概念</strong></h1><h2 id="1-多态的分类"><a href="#1-多态的分类" class="headerlink" title="1.多态的分类"></a><strong>1.多态的分类</strong></h2><p>静态多态：如函数重载、运算符重载、重定义。（编译时确定）</p>
-<p>也可称为：早绑定，静态联编</p>
-<p>动态多态：在运行时确定你的调用。如：虚函数、派生类。</p>
-<p>也可称为：晚绑定，动态联编</p>
-<h2 id="2-虚函数的引入"><a href="#2-虚函数的引入" class="headerlink" title="2.虚函数的引入"></a><strong>2.虚函数的引入</strong></h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921101445684.png"
-                      alt="image-20230921101445684"
-                ></p>
-<p>设计一个算法：可以让基类可以操作派生类的所有数据及方法。</p>
-<h2 id="3-父类指针指向子类空间带来的问题"><a href="#3-父类指针指向子类空间带来的问题" class="headerlink" title="3.父类指针指向子类空间带来的问题"></a><strong>3.父类指针指向子类空间带来的问题</strong></h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Animal</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;动物在歌唱....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>:<span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Cat</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;小猫在喵喵喵....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Animal *p = <span class="keyword">new</span> Cat;</span><br><span class="line">    p-&gt;<span class="built_in">speak</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="4-虚函数"><a href="#4-虚函数" class="headerlink" title="4.虚函数"></a><strong>4.虚函数</strong></h2><p>作用：父类指针可以通过虚函数间接访问子类空间中子类重写的父类函数。</p>
-<p>关键字virtual把成员函数修饰为虚函数，在父类的函数前加上virtual，即可达到效果。</p>
-<p>原理：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921101615308.png"
-                      alt="image-20230921101615308"
-                ></p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Animal</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">speak</span><span class="params">()</span>    <span class="comment">///&lt; 父类的函数声明为虚函数</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;动物在歌唱....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>:<span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Cat</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;小猫在喵喵喵....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Animal *p = <span class="keyword">new</span> Cat;</span><br><span class="line">    p-&gt;<span class="built_in">speak</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921101711816.png"
-                      alt="image-20230921101711816"
-                ></p>
-<p>子类重写父类的虚函数必须函数名、返回值、形参全部一致(析构函数除外)。</p>
-<p>virtual修饰的成员函数，就是一个函数指针，大小就为指针大小。</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">cout &lt;&lt; <span class="string">&quot;Animal 大小为:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(Animal);</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921101749272.png"
-                      alt="image-20230921101749272"
-                ></p>
-<p>虚函数所在的类 如果没有涉及继承，那么该虚函数指针指向父类的同名函数。</p>
-<h3 id="4-1动态绑定条件"><a href="#4-1动态绑定条件" class="headerlink" title="4.1动态绑定条件"></a><strong>4.1动态绑定条件</strong></h3><p>有继承，子类重写父类的虚函数，父类指针或引用指向子类空间，父类指针或引用才能调用子类重写的虚函数。</p>
-<h3 id="4-2-动态绑定的原理"><a href="#4-2-动态绑定的原理" class="headerlink" title="4.2 动态绑定的原理"></a><strong>4.2 动态绑定的原理</strong></h3><p>父类有序函数，父类产生虚函数指针指向虚函数表，表中记录的是父类的虚函数地址，如果子类重写父类的虚函数，那么子类会继承父类的虚函数表以及虚函数指针，并且将虚函数表中记录的函数入口地址修改成子类重写的函数入口地址，这时父类指针指向子类空间，父类指针调用虚函数就间接调用子类重写的虚函数。</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AnimalSpeak</span><span class="params">(Animal *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p-&gt;<span class="built_in">speak</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">AnimalSpeak</span>(<span class="keyword">new</span> Cat);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="4-3多态之纯虚函数"><a href="#4-3多态之纯虚函数" class="headerlink" title="4.3多态之纯虚函数"></a><strong>4.3多态之纯虚函数</strong></h3><p>语法：virtual  void speak() &#x3D; 0; &#x2F;&#x2F;没有函数体</p>
-<p>纯虚函数所在的类不能实例化对象，该类也可称为抽象类。</p>
-<p>如果有继承子类必须重写其基类（抽象类）中的全部纯虚函数。</p>
-<h3 id="4-3虚析构函数"><a href="#4-3虚析构函数" class="headerlink" title="4.3虚析构函数"></a><strong>4.3虚析构函数</strong></h3><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921102007796.png"
-                      alt="image-20230921102007796"
-                ></p>
-<p>解决办法：将父类（Animal）的析构函数设置为虚析构。</p>
-<p>语法：virtual ~Animal()</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921102019123.png"
-                      alt="image-20230921102019123"
-                ></p>
-<p>子类提供析构函数，就会修改虚函数表中的析构函数的地址。</p>
-<p>注意：调用子类析构，会自动继续调用父类的析构。</p>
-<p>案例1：</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">virtual</span> ~<span class="built_in">Animal</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Animal 析构&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line">~<span class="built_in">Cat</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Cat 析构&quot;</span>  &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AnimalSpeak</span><span class="params">(Animal *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p-&gt;<span class="built_in">speak</span>();</span><br><span class="line">    <span class="keyword">delete</span> p; <span class="comment">///&lt; 会触发析构</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921102050222.png"
-                      alt="image-20230921102050222"
-                ></p>
-<p>如子类又派生了新的子类，那么基子类也要写成虚析构。</p>
-<h3 id="4-4纯虚析构函数"><a href="#4-4纯虚析构函数" class="headerlink" title="4.4纯虚析构函数"></a><strong>4.4纯虚析构函数</strong></h3><p>格式：virtual ~Animal() &#x3D; 0;</p>
-<p>使用方式：</p>
-<p>1.类中定义，类外实现。</p>
-<p>2.实现纯虚构函数时要把virtual去掉。</p>
-<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Animal</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;动物在歌唱....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Animal</span>() = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Animal::~<span class="built_in">Animal</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Animal 析构&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="4-5虚函数与纯虚函数的区别"><a href="#4-5虚函数与纯虚函数的区别" class="headerlink" title="4.5虚函数与纯虚函数的区别"></a><strong>4.5虚函数与纯虚函数的区别</strong></h3><ul>
-<li>虚函数与纯虚函数都可以通过父类指针间接调用子类重写的虚函数。</li>
-<li>虚函数 不用&#x3D;0修饰，有函数体，所在类不是抽象类，可以实例化对象。</li>
-<li>纯虚函数 用&#x3D;0修饰，没有函数体，所在类是抽象类，不可以实例化对象。</li>
-</ul>
-<h3 id="4-6虚析构与纯虚析构的区别"><a href="#4-6虚析构与纯虚析构的区别" class="headerlink" title="4.6虚析构与纯虚析构的区别"></a><strong>4.6虚析构与纯虚析构的区别</strong></h3><ul>
-<li>虚析构与纯虚析构都是为了基类与派生类中的指针成员空间的释放。</li>
-<li>虚析构 不用&#x3D;0修饰，所在类不是抽象类，可以实例化对象。</li>
-<li>纯虚析构 用&#x3D;0修饰，所在类是抽象类，不可以实例化对象。</li>
-</ul>
-<h1 id="第二章重载、重定义、重写的区别"><a href="#第二章重载、重定义、重写的区别" class="headerlink" title="第二章	重载、重定义、重写的区别"></a>第二章	重载、重定义、重写的区别</h1><p>1.重载：不涉及继承，函数名相同，形参的个数、类型及顺序可以不同，以作为重载的条件同时const 也可以作为重载条件</p>
-<p>，返回值类型不能做为重载的条件。</p>
-<p>2.重定义：涉及继承，子类重定义父类的同名函数（非虚函数），返回值类型及形参可以相同也可以不同。</p>
-<p>3.重写：涉及继承，子类重写父类的虚函数，返回值类型、形参必须和父类同名函数一致。</p>
-]]></content>
-      <categories>
-        <category>CPP语言</category>
-      </categories>
-      <tags>
-        <tag>基础 CPP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CPP__异常</title>
     <url>/2023/09/21/CPP-%E5%BC%82%E5%B8%B8/</url>
     <content><![CDATA[<h1 id="第一章异常的概述"><a href="#第一章异常的概述" class="headerlink" title="第一章	异常的概述"></a><strong>第一章	异常的概述</strong></h1><p>异常处理就是处理程序中的错误。</p>
@@ -624,6 +519,111 @@
 <td align="left">当发生数学下溢时，会抛出该异常。</td>
 </tr>
 </tbody></table>
+]]></content>
+      <categories>
+        <category>CPP语言</category>
+      </categories>
+      <tags>
+        <tag>基础 CPP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CPP__多态</title>
+    <url>/2023/09/21/CPP-%E5%A4%9A%E6%80%81/</url>
+    <content><![CDATA[<h1 id="第一章多态的概念"><a href="#第一章多态的概念" class="headerlink" title="第一章	多态的概念"></a><strong>第一章	多态的概念</strong></h1><h2 id="1-多态的分类"><a href="#1-多态的分类" class="headerlink" title="1.多态的分类"></a><strong>1.多态的分类</strong></h2><p>静态多态：如函数重载、运算符重载、重定义。（编译时确定）</p>
+<p>也可称为：早绑定，静态联编</p>
+<p>动态多态：在运行时确定你的调用。如：虚函数、派生类。</p>
+<p>也可称为：晚绑定，动态联编</p>
+<h2 id="2-虚函数的引入"><a href="#2-虚函数的引入" class="headerlink" title="2.虚函数的引入"></a><strong>2.虚函数的引入</strong></h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921101445684.png"
+                      alt="image-20230921101445684"
+                ></p>
+<p>设计一个算法：可以让基类可以操作派生类的所有数据及方法。</p>
+<h2 id="3-父类指针指向子类空间带来的问题"><a href="#3-父类指针指向子类空间带来的问题" class="headerlink" title="3.父类指针指向子类空间带来的问题"></a><strong>3.父类指针指向子类空间带来的问题</strong></h2><div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Animal</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;动物在歌唱....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>:<span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Cat</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;小猫在喵喵喵....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Animal *p = <span class="keyword">new</span> Cat;</span><br><span class="line">    p-&gt;<span class="built_in">speak</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="4-虚函数"><a href="#4-虚函数" class="headerlink" title="4.虚函数"></a><strong>4.虚函数</strong></h2><p>作用：父类指针可以通过虚函数间接访问子类空间中子类重写的父类函数。</p>
+<p>关键字virtual把成员函数修饰为虚函数，在父类的函数前加上virtual，即可达到效果。</p>
+<p>原理：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921101615308.png"
+                      alt="image-20230921101615308"
+                ></p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Animal</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">speak</span><span class="params">()</span>    <span class="comment">///&lt; 父类的函数声明为虚函数</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;动物在歌唱....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>:<span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Cat</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;小猫在喵喵喵....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Animal *p = <span class="keyword">new</span> Cat;</span><br><span class="line">    p-&gt;<span class="built_in">speak</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921101711816.png"
+                      alt="image-20230921101711816"
+                ></p>
+<p>子类重写父类的虚函数必须函数名、返回值、形参全部一致(析构函数除外)。</p>
+<p>virtual修饰的成员函数，就是一个函数指针，大小就为指针大小。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line">cout &lt;&lt; <span class="string">&quot;Animal 大小为:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(Animal);</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921101749272.png"
+                      alt="image-20230921101749272"
+                ></p>
+<p>虚函数所在的类 如果没有涉及继承，那么该虚函数指针指向父类的同名函数。</p>
+<h3 id="4-1动态绑定条件"><a href="#4-1动态绑定条件" class="headerlink" title="4.1动态绑定条件"></a><strong>4.1动态绑定条件</strong></h3><p>有继承，子类重写父类的虚函数，父类指针或引用指向子类空间，父类指针或引用才能调用子类重写的虚函数。</p>
+<h3 id="4-2-动态绑定的原理"><a href="#4-2-动态绑定的原理" class="headerlink" title="4.2 动态绑定的原理"></a><strong>4.2 动态绑定的原理</strong></h3><p>父类有序函数，父类产生虚函数指针指向虚函数表，表中记录的是父类的虚函数地址，如果子类重写父类的虚函数，那么子类会继承父类的虚函数表以及虚函数指针，并且将虚函数表中记录的函数入口地址修改成子类重写的函数入口地址，这时父类指针指向子类空间，父类指针调用虚函数就间接调用子类重写的虚函数。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AnimalSpeak</span><span class="params">(Animal *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p-&gt;<span class="built_in">speak</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">AnimalSpeak</span>(<span class="keyword">new</span> Cat);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="4-3多态之纯虚函数"><a href="#4-3多态之纯虚函数" class="headerlink" title="4.3多态之纯虚函数"></a><strong>4.3多态之纯虚函数</strong></h3><p>语法：virtual  void speak() &#x3D; 0; &#x2F;&#x2F;没有函数体</p>
+<p>纯虚函数所在的类不能实例化对象，该类也可称为抽象类。</p>
+<p>如果有继承子类必须重写其基类（抽象类）中的全部纯虚函数。</p>
+<h3 id="4-3虚析构函数"><a href="#4-3虚析构函数" class="headerlink" title="4.3虚析构函数"></a><strong>4.3虚析构函数</strong></h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921102007796.png"
+                      alt="image-20230921102007796"
+                ></p>
+<p>解决办法：将父类（Animal）的析构函数设置为虚析构。</p>
+<p>语法：virtual ~Animal()</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921102019123.png"
+                      alt="image-20230921102019123"
+                ></p>
+<p>子类提供析构函数，就会修改虚函数表中的析构函数的地址。</p>
+<p>注意：调用子类析构，会自动继续调用父类的析构。</p>
+<p>案例1：</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">virtual</span> ~<span class="built_in">Animal</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Animal 析构&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line">~<span class="built_in">Cat</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Cat 析构&quot;</span>  &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AnimalSpeak</span><span class="params">(Animal *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p-&gt;<span class="built_in">speak</span>();</span><br><span class="line">    <span class="keyword">delete</span> p; <span class="comment">///&lt; 会触发析构</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/CPP__%E5%A4%9A%E6%80%81/image-20230921102050222.png"
+                      alt="image-20230921102050222"
+                ></p>
+<p>如子类又派生了新的子类，那么基子类也要写成虚析构。</p>
+<h3 id="4-4纯虚析构函数"><a href="#4-4纯虚析构函数" class="headerlink" title="4.4纯虚析构函数"></a><strong>4.4纯虚析构函数</strong></h3><p>格式：virtual ~Animal() &#x3D; 0;</p>
+<p>使用方式：</p>
+<p>1.类中定义，类外实现。</p>
+<p>2.实现纯虚构函数时要把virtual去掉。</p>
+<div class="highlight-container" data-rel="Cpp"><figure class="iseeu highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Animal</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;动物在歌唱....&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Animal</span>() = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Animal::~<span class="built_in">Animal</span>()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Animal 析构&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="4-5虚函数与纯虚函数的区别"><a href="#4-5虚函数与纯虚函数的区别" class="headerlink" title="4.5虚函数与纯虚函数的区别"></a><strong>4.5虚函数与纯虚函数的区别</strong></h3><ul>
+<li>虚函数与纯虚函数都可以通过父类指针间接调用子类重写的虚函数。</li>
+<li>虚函数 不用&#x3D;0修饰，有函数体，所在类不是抽象类，可以实例化对象。</li>
+<li>纯虚函数 用&#x3D;0修饰，没有函数体，所在类是抽象类，不可以实例化对象。</li>
+</ul>
+<h3 id="4-6虚析构与纯虚析构的区别"><a href="#4-6虚析构与纯虚析构的区别" class="headerlink" title="4.6虚析构与纯虚析构的区别"></a><strong>4.6虚析构与纯虚析构的区别</strong></h3><ul>
+<li>虚析构与纯虚析构都是为了基类与派生类中的指针成员空间的释放。</li>
+<li>虚析构 不用&#x3D;0修饰，所在类不是抽象类，可以实例化对象。</li>
+<li>纯虚析构 用&#x3D;0修饰，所在类是抽象类，不可以实例化对象。</li>
+</ul>
+<h1 id="第二章重载、重定义、重写的区别"><a href="#第二章重载、重定义、重写的区别" class="headerlink" title="第二章	重载、重定义、重写的区别"></a>第二章	重载、重定义、重写的区别</h1><p>1.重载：不涉及继承，函数名相同，形参的个数、类型及顺序可以不同，以作为重载的条件同时const 也可以作为重载条件</p>
+<p>，返回值类型不能做为重载的条件。</p>
+<p>2.重定义：涉及继承，子类重定义父类的同名函数（非虚函数），返回值类型及形参可以相同也可以不同。</p>
+<p>3.重写：涉及继承，子类重写父类的虚函数，返回值类型、形参必须和父类同名函数一致。</p>
 ]]></content>
       <categories>
         <category>CPP语言</category>
@@ -1642,74 +1642,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C编程____动态内存申请</title>
-    <url>/2023/08/17/C%E7%BC%96%E7%A8%8B-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7/</url>
-    <content><![CDATA[<h1 id="第一章动态分配内存的概述"><a href="#第一章动态分配内存的概述" class="headerlink" title="第一章	动态分配内存的概述"></a>第一章	动态分配内存的概述</h1><p>​	在数组一章中，介绍过数组的长度是预先定义好的，在整个程序中固定不变，但是在实 际的编程中，往往会发生这种情况，即所需的内存空间取决于实际输入的数据，而无法预先 确定 。为了解决上述问题，Ｃ语言提供了一些内存管理函数，这些内存管理函数可以按需 要动态的分配内存空间，也可把不再使用的空间回收再次利用。 </p>
-<p>​	<strong>动态分配内存就是在堆区开辟空间</strong></p>
-<h1 id="第二章静态分配、动态分配"><a href="#第二章静态分配、动态分配" class="headerlink" title="第二章	静态分配、动态分配"></a>第二章	静态分配、动态分配</h1><h2 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h2><ol>
-<li>在程序编译或运行过程中，按事先规定大小分配内存空间的分配方式。int a [10] </li>
-<li>必须事先知道所需空间的大小。 </li>
-<li>分配在栈区或全局变量区，一般以数组的形式。</li>
-<li>按计划分配。</li>
-</ol>
-<h2 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h2><ol>
-<li>在程序运行过程中，根据需要大小自由分配所需空间。 </li>
-<li>按需分配。 </li>
-<li>分配在堆区，一般使用特定的函数进行分配。</li>
-</ol>
-<h1 id="第三章动态分配函数"><a href="#第三章动态分配函数" class="headerlink" title="第三章	动态分配函数"></a>第三章	动态分配函数</h1><h2 id="3-1-malloc"><a href="#3-1-malloc" class="headerlink" title="3.1 malloc"></a>3.1 malloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> *<span class="title function_">malloc</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> size)</span>;</span><br><span class="line">功能：在堆区开辟指定长度的空间，并且空间是连续的</span><br><span class="line">参数：</span><br><span class="line">size：要开辟的空间的大小</span><br><span class="line">返回值：</span><br><span class="line">成功：开辟好的空间的首地址</span><br><span class="line">失败：<span class="literal">NULL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>注意</strong> </p>
-<ol>
-<li>在调用malloc之后，一定要判断一下，是否申请内存成功。</li>
-<li>如果多次malloc申请的内存，第1次和第2次申请的内存不一定是连续的 </li>
-<li>使用malloc开辟空间需要保存开辟好的空间的首地址，但是由于不确定空间用于做 什么，所以本身返回值类型为void *，所以在调用函数时根据接收者的类型对其进行强制类 型转换</li>
-</ol>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"> <span class="type">char</span> *<span class="title function_">fun</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="comment">//char ch[100] = &quot;hello world&quot;;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//静态全局区的空间只要开辟好，除非程序结束，否则不会释放，所以</span></span><br><span class="line"> <span class="comment">//如果是临时使用，不建议使用静态全局区的空间</span></span><br><span class="line"> <span class="comment">//static char ch[100] = &quot;hello world&quot;;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//堆区开辟空间，手动申请手动释放，更加灵活</span></span><br><span class="line"> <span class="comment">//使用malloc函数的时候一般要进行强转</span></span><br><span class="line"> <span class="type">char</span> *str = (<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="keyword">sizeof</span>(<span class="type">char</span>));</span><br><span class="line"> str[<span class="number">0</span>] = <span class="string">&#x27;h&#x27;</span>;</span><br><span class="line"> str[<span class="number">1</span>] = <span class="string">&#x27;e&#x27;</span>;</span><br><span class="line"> str[<span class="number">2</span>] = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line"> str[<span class="number">3</span>] = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line"> str[<span class="number">4</span>] = <span class="string">&#x27;o&#x27;</span>;</span><br><span class="line"> str[<span class="number">5</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> str;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="type">char</span> *p; p = fun();</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;p = %s\n&quot;</span>, p);</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="3-2-calloc"><a href="#3-2-calloc" class="headerlink" title="3.2 calloc"></a>3.2 calloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> * <span class="title function_">calloc</span><span class="params">(<span class="type">size_t</span> nmemb,<span class="type">size_t</span> size)</span>;</span><br><span class="line">功能：在堆区申请指定大小的空间</span><br><span class="line">参数：</span><br><span class="line">nmemb：要申请的空间的块数</span><br><span class="line">size：每块的字节数</span><br><span class="line">返回值：</span><br><span class="line">成功：申请空间的首地址</span><br><span class="line">失败：<span class="literal">NULL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>注意</strong>：</p>
-<p> malloc和calloc函数都是用来申请内存的。</p>
-<p>​	 <strong>区别</strong>： </p>
-<ol>
-<li><p>函数的名字不一样 </p>
-</li>
-<li><p>参数的个数不一样 </p>
-</li>
-<li><p>malloc申请的内存，内存中存放的内容是随机的，不确定的， 而calloc函数申请的内存中的内容为0</p>
-</li>
-</ol>
-<h2 id="3-3-realloc"><a href="#3-3-realloc" class="headerlink" title="3.3 realloc"></a>3.3 realloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">realloc</span><span class="params">(<span class="type">void</span> *s,<span class="type">unsigned</span> <span class="type">int</span> newsize)</span>;</span><br><span class="line">功能：在原本申请好的堆区空间的基础上重新申请内存，新的空间大小为函数的第二个参数</span><br><span class="line">如果原本申请好的空间的后面不足以增加指定的大小，系统会重新找一个足够大的位</span><br><span class="line">置开辟指定的空间，然后将原本空间中的数据拷贝过来，然后释放原本的空间</span><br><span class="line">如果newsize比原先的内存小，则会释放原先内存的后面的存储空间，</span><br><span class="line">只留前面的newsize个字节</span><br><span class="line">参数：</span><br><span class="line">s：原本开辟好的空间的首地址</span><br><span class="line">newsize：重新开辟的空间的大小</span><br><span class="line">返回值：</span><br><span class="line">新的空间的首地址</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第四章内存释放free"><a href="#第四章内存释放free" class="headerlink" title="第四章	内存释放free"></a>第四章	内存释放free</h1><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">free</span><span class="params">(<span class="type">void</span> *ptr)</span></span><br><span class="line">功能：释放堆区的空间</span><br><span class="line">参数：</span><br><span class="line">ptr：开辟后使用完毕的堆区的空间的首地址</span><br><span class="line">返回值：</span><br><span class="line">无</span><br></pre></td></tr></table></figure></div>
-
-<p>注意：</p>
-<ul>
-<li>free函数只能释放堆区的空间，其他区域的空间无法使用free</li>
-<li>free释放空间必须释放malloc或者calloc或者realloc的返回值对应的空间，不能说只释 放一部分 	</li>
-<li>free(p); 注意当free后，因为没有给p赋值，所以p还是指向原先动态申请的内存。但是 内存已经不能再用了，p变成野指针了，所以一般为了放置野指针，会free完毕之后对p赋 为NULL。</li>
-<li>一块动态申请的内存只能free一次，不能多次free</li>
-</ul>
-<p><strong>注意:malloc calloc relloc 动态申请的内存，只有在free或程序结束的时候才释放。</strong></p>
-<h1 id="第五章内存泄漏"><a href="#第五章内存泄漏" class="headerlink" title="第五章	内存泄漏"></a>第五章	内存泄漏</h1><p><strong>内存泄露的概念</strong>： </p>
-<p>申请的内存，首地址丢了，找不了，再也没法使用了，也没法释放了，这块内存就被泄 露了。 </p>
-<p><strong>内存泄漏案例</strong>：</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">char</span> *p;</span><br><span class="line">p=(<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line"><span class="comment">//接下来，可以用p指向的内存了</span></span><br><span class="line"></span><br><span class="line">p=<span class="string">&quot;hello world&quot;</span>;<span class="comment">//p指向别的地方了，保存字符串常量的首地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从此以后，再也找不到你申请的100个字节了。则动态申请的100个字节就被泄露了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>解决方式</strong>：</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">fun</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="type">char</span> *p;</span><br><span class="line"> p=(<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line"> <span class="comment">//接下来，可以用p指向的内存了 ...</span></span><br><span class="line"> <span class="built_in">free</span>(p);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> fun();</span><br><span class="line"> fun();</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
-<p><strong>总结：申请的内存，一定不要把首地址给丢了，在不用的时候一定要释放内存</strong></p>
-]]></content>
-      <categories>
-        <category>C语言</category>
-      </categories>
-      <tags>
-        <tag>嵌入式 c语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C及C++基础</title>
     <url>/2023/08/16/C%E5%8F%8AC-%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<p><strong>学习及练习网站：</strong></p>
@@ -1934,6 +1866,74 @@
 <p>register int ntmp &#x3D; 10; cout &lt;&lt; “ntmp地址 &#x3D; “ &lt;&lt; &amp;ntmp &lt;&lt; endl;</p>
 <h3 id="16-3volatile-关键字"><a href="#16-3volatile-关键字" class="headerlink" title="16.3volatile 关键字"></a>16.3volatile 关键字</h3><p>防止编译器对该变量进行优化，强制访问内存。</p>
 <p>volatile int data&#x3D;0;&#x2F;&#x2F;对data的访问 必须从内存访问</p>
+]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>嵌入式 c语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C编程____动态内存申请</title>
+    <url>/2023/08/17/C%E7%BC%96%E7%A8%8B-%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%94%B3%E8%AF%B7/</url>
+    <content><![CDATA[<h1 id="第一章动态分配内存的概述"><a href="#第一章动态分配内存的概述" class="headerlink" title="第一章	动态分配内存的概述"></a>第一章	动态分配内存的概述</h1><p>​	在数组一章中，介绍过数组的长度是预先定义好的，在整个程序中固定不变，但是在实 际的编程中，往往会发生这种情况，即所需的内存空间取决于实际输入的数据，而无法预先 确定 。为了解决上述问题，Ｃ语言提供了一些内存管理函数，这些内存管理函数可以按需 要动态的分配内存空间，也可把不再使用的空间回收再次利用。 </p>
+<p>​	<strong>动态分配内存就是在堆区开辟空间</strong></p>
+<h1 id="第二章静态分配、动态分配"><a href="#第二章静态分配、动态分配" class="headerlink" title="第二章	静态分配、动态分配"></a>第二章	静态分配、动态分配</h1><h2 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h2><ol>
+<li>在程序编译或运行过程中，按事先规定大小分配内存空间的分配方式。int a [10] </li>
+<li>必须事先知道所需空间的大小。 </li>
+<li>分配在栈区或全局变量区，一般以数组的形式。</li>
+<li>按计划分配。</li>
+</ol>
+<h2 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h2><ol>
+<li>在程序运行过程中，根据需要大小自由分配所需空间。 </li>
+<li>按需分配。 </li>
+<li>分配在堆区，一般使用特定的函数进行分配。</li>
+</ol>
+<h1 id="第三章动态分配函数"><a href="#第三章动态分配函数" class="headerlink" title="第三章	动态分配函数"></a>第三章	动态分配函数</h1><h2 id="3-1-malloc"><a href="#3-1-malloc" class="headerlink" title="3.1 malloc"></a>3.1 malloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> *<span class="title function_">malloc</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> size)</span>;</span><br><span class="line">功能：在堆区开辟指定长度的空间，并且空间是连续的</span><br><span class="line">参数：</span><br><span class="line">size：要开辟的空间的大小</span><br><span class="line">返回值：</span><br><span class="line">成功：开辟好的空间的首地址</span><br><span class="line">失败：<span class="literal">NULL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>注意</strong> </p>
+<ol>
+<li>在调用malloc之后，一定要判断一下，是否申请内存成功。</li>
+<li>如果多次malloc申请的内存，第1次和第2次申请的内存不一定是连续的 </li>
+<li>使用malloc开辟空间需要保存开辟好的空间的首地址，但是由于不确定空间用于做 什么，所以本身返回值类型为void *，所以在调用函数时根据接收者的类型对其进行强制类 型转换</li>
+</ol>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"> <span class="type">char</span> *<span class="title function_">fun</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="comment">//char ch[100] = &quot;hello world&quot;;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//静态全局区的空间只要开辟好，除非程序结束，否则不会释放，所以</span></span><br><span class="line"> <span class="comment">//如果是临时使用，不建议使用静态全局区的空间</span></span><br><span class="line"> <span class="comment">//static char ch[100] = &quot;hello world&quot;;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//堆区开辟空间，手动申请手动释放，更加灵活</span></span><br><span class="line"> <span class="comment">//使用malloc函数的时候一般要进行强转</span></span><br><span class="line"> <span class="type">char</span> *str = (<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="keyword">sizeof</span>(<span class="type">char</span>));</span><br><span class="line"> str[<span class="number">0</span>] = <span class="string">&#x27;h&#x27;</span>;</span><br><span class="line"> str[<span class="number">1</span>] = <span class="string">&#x27;e&#x27;</span>;</span><br><span class="line"> str[<span class="number">2</span>] = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line"> str[<span class="number">3</span>] = <span class="string">&#x27;l&#x27;</span>;</span><br><span class="line"> str[<span class="number">4</span>] = <span class="string">&#x27;o&#x27;</span>;</span><br><span class="line"> str[<span class="number">5</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> str;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="type">char</span> *p; p = fun();</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;p = %s\n&quot;</span>, p);</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="3-2-calloc"><a href="#3-2-calloc" class="headerlink" title="3.2 calloc"></a>3.2 calloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> * <span class="title function_">calloc</span><span class="params">(<span class="type">size_t</span> nmemb,<span class="type">size_t</span> size)</span>;</span><br><span class="line">功能：在堆区申请指定大小的空间</span><br><span class="line">参数：</span><br><span class="line">nmemb：要申请的空间的块数</span><br><span class="line">size：每块的字节数</span><br><span class="line">返回值：</span><br><span class="line">成功：申请空间的首地址</span><br><span class="line">失败：<span class="literal">NULL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>注意</strong>：</p>
+<p> malloc和calloc函数都是用来申请内存的。</p>
+<p>​	 <strong>区别</strong>： </p>
+<ol>
+<li><p>函数的名字不一样 </p>
+</li>
+<li><p>参数的个数不一样 </p>
+</li>
+<li><p>malloc申请的内存，内存中存放的内容是随机的，不确定的， 而calloc函数申请的内存中的内容为0</p>
+</li>
+</ol>
+<h2 id="3-3-realloc"><a href="#3-3-realloc" class="headerlink" title="3.3 realloc"></a>3.3 realloc</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span>* <span class="title function_">realloc</span><span class="params">(<span class="type">void</span> *s,<span class="type">unsigned</span> <span class="type">int</span> newsize)</span>;</span><br><span class="line">功能：在原本申请好的堆区空间的基础上重新申请内存，新的空间大小为函数的第二个参数</span><br><span class="line">如果原本申请好的空间的后面不足以增加指定的大小，系统会重新找一个足够大的位</span><br><span class="line">置开辟指定的空间，然后将原本空间中的数据拷贝过来，然后释放原本的空间</span><br><span class="line">如果newsize比原先的内存小，则会释放原先内存的后面的存储空间，</span><br><span class="line">只留前面的newsize个字节</span><br><span class="line">参数：</span><br><span class="line">s：原本开辟好的空间的首地址</span><br><span class="line">newsize：重新开辟的空间的大小</span><br><span class="line">返回值：</span><br><span class="line">新的空间的首地址</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章内存释放free"><a href="#第四章内存释放free" class="headerlink" title="第四章	内存释放free"></a>第四章	内存释放free</h1><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">free</span><span class="params">(<span class="type">void</span> *ptr)</span></span><br><span class="line">功能：释放堆区的空间</span><br><span class="line">参数：</span><br><span class="line">ptr：开辟后使用完毕的堆区的空间的首地址</span><br><span class="line">返回值：</span><br><span class="line">无</span><br></pre></td></tr></table></figure></div>
+
+<p>注意：</p>
+<ul>
+<li>free函数只能释放堆区的空间，其他区域的空间无法使用free</li>
+<li>free释放空间必须释放malloc或者calloc或者realloc的返回值对应的空间，不能说只释 放一部分 	</li>
+<li>free(p); 注意当free后，因为没有给p赋值，所以p还是指向原先动态申请的内存。但是 内存已经不能再用了，p变成野指针了，所以一般为了放置野指针，会free完毕之后对p赋 为NULL。</li>
+<li>一块动态申请的内存只能free一次，不能多次free</li>
+</ul>
+<p><strong>注意:malloc calloc relloc 动态申请的内存，只有在free或程序结束的时候才释放。</strong></p>
+<h1 id="第五章内存泄漏"><a href="#第五章内存泄漏" class="headerlink" title="第五章	内存泄漏"></a>第五章	内存泄漏</h1><p><strong>内存泄露的概念</strong>： </p>
+<p>申请的内存，首地址丢了，找不了，再也没法使用了，也没法释放了，这块内存就被泄 露了。 </p>
+<p><strong>内存泄漏案例</strong>：</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">char</span> *p;</span><br><span class="line">p=(<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line"><span class="comment">//接下来，可以用p指向的内存了</span></span><br><span class="line"></span><br><span class="line">p=<span class="string">&quot;hello world&quot;</span>;<span class="comment">//p指向别的地方了，保存字符串常量的首地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//从此以后，再也找不到你申请的100个字节了。则动态申请的100个字节就被泄露了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>解决方式</strong>：</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">fun</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="type">char</span> *p;</span><br><span class="line"> p=(<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line"> <span class="comment">//接下来，可以用p指向的内存了 ...</span></span><br><span class="line"> <span class="built_in">free</span>(p);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> fun();</span><br><span class="line"> fun();</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>总结：申请的内存，一定不要把首地址给丢了，在不用的时候一定要释放内存</strong></p>
 ]]></content>
       <categories>
         <category>C语言</category>
@@ -2338,109 +2338,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C编程__链表</title>
-    <url>/2023/08/20/C%E7%BC%96%E7%A8%8B-%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<h1 id="第一章单链表"><a href="#第一章单链表" class="headerlink" title="第一章	单链表"></a>第一章	单链表</h1><h2 id="1-1-链表的定义和特点"><a href="#1-1-链表的定义和特点" class="headerlink" title="1.1 链表的定义和特点"></a>1.1 链表的定义和特点</h2><p> 定义：链表是一种物理存储上非连续，数据元素的逻辑顺序通过链表中的指针链接次序，实现的一种线性存储结构。</p>
-<p> 特点：链表由一系列节点（链表中每一个元素称为节点）组成，节点在运行时动态生成（ malloc），</p>
-<p> 每个节点包括两个部分：</p>
-<p>一个是存储数据元素的数据域：数据域内保存的信息右需求决定。</p>
-<p>另一个是存储下一个节点地址的指针域</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230820233949538.png"
-                      alt="image-20230820233949538"
-                ></p>
-<p>链表的构成：</p>
-<p> 链表由一个个节点构成，每个节点一般采用结构体的形式组织，例如：</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stdent</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; STU;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-2-链表的创建"><a href="#1-2-链表的创建" class="headerlink" title="1.2 链表的创建"></a>1.2 链表的创建</h2><p><strong>给一个空链表赋予一个空间，并且判断链表是否为空。</strong></p>
-<ul>
-<li>若为空则将创建的链表作为头表。</li>
-<li>若不为空则用插入法一次添加链表个数。</li>
-</ul>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Createlink</span><span class="params">(STU **p_head, STU *p_new)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;long&quot;</span>);</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;input date\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">        STU *p_move = *p_head;</span><br><span class="line">        <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *p_head = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (p_move-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p_move = p_move-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p_move-&gt;next = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-3链表遍历"><a href="#1-3链表遍历" class="headerlink" title="1.3	链表遍历"></a>1.3	链表遍历</h2><p>向后移动指针循环并输出，直到链表下一次指向为空退出循环。</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">traverse</span><span class="params">(STU *p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov = p_head;</span><br><span class="line">    <span class="keyword">while</span> (p_mov != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%-5d&quot;</span>, p_mov-&gt;num);</span><br><span class="line">        p_mov = p_mov-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-4链表的查找"><a href="#1-4链表的查找" class="headerlink" title="1.4	链表的查找"></a>1.4	链表的查找</h2><p><strong>对比结构体中的值：</strong></p>
-<ul>
-<li>若与需要查找目标值不同则继续遍历；</li>
-<li>若与需要查找目标值相同则输出并退出循环；</li>
-<li>若未找到目标值则返回输出未找到；</li>
-</ul>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号链表查询 结构</span></span><br><span class="line">STU *<span class="title function_">checklink_sum</span><span class="params">(STU *p_head, <span class="type">int</span> num)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov = p_head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p_mov != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (num == p_mov-&gt;num)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> p_mov;</span><br><span class="line">        &#125;</span><br><span class="line">        p_mov = p_mov-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">// 链表中无所需数据</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按学号链表查找 函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">checklink</span><span class="params">(STU *p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入要查询的学号&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    p_head = checklink_sum(p_head, num);</span><br><span class="line">    <span class="keyword">if</span> (p_head != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;已经查到，数据为%-5d\n&quot;</span>, p_head-&gt;num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-
-
-
-<h2 id="1-5-节点插入"><a href="#1-5-节点插入" class="headerlink" title="1.5  节点插入"></a>1.5  节点插入</h2><p>尾插法或头插法增加链表个数。</p>
-<p><strong>尾插法如下：</strong></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230820234728737.png"
-                      alt="image-20230820234728737"
-                ></p>
-<p><strong>运用链表查询方法：</strong></p>
-<ul>
-<li>若查找失败则不进行插入操作；</li>
-<li>若查找成功则先进行新链表指针指向后链表，之后前链表指针指向新链表；</li>
-</ul>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号增加链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">addlink</span><span class="params">(STU **p_head, STU *p_new)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov;</span><br><span class="line">    p_mov = *p_head;</span><br><span class="line">    <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无链表,添加一个头节点,并且输入添加内容&quot;</span>);</span><br><span class="line">        p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">        *p_head = p_new;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入在在几个链表后面插入&quot;</span>);</span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">        <span class="keyword">while</span> (p_mov-&gt;num != num &amp;&amp; p_mov-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p_mov = p_mov-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入要添加几个链表&quot;</span>);</span><br><span class="line">        <span class="type">int</span> numtwo;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;numtwo);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numtwo; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">            p_new-&gt;next = p_mov-&gt;next;</span><br><span class="line">            p_mov-&gt;next = p_new;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;请输入数据到新增链表&quot;</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>头插法与尾插法类似，区别在于头插法要多一个判断。</p>
-<p><strong>判断插入的节点位置是否为头节点：</strong></p>
-<ul>
-<li>若为头节点则需无需前指针指向新节点</li>
-</ul>
-<h2 id="1-6链表的删除"><a href="#1-6链表的删除" class="headerlink" title="1.6链表的删除"></a>1.6链表的删除</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821000912130.png"
-                      alt="image-20230821000912130"
-                ></p>
-<p><strong>运用链表查询方法：</strong></p>
-<ul>
-<li>若查找失败则不进行删除操作；</li>
-<li>若查找成功则先进行前链表指针指向后链表，之后释放查询到的链表；</li>
-</ul>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号链表的删除</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">deletelink</span><span class="params">(STU **p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    STU *pb, *pf;</span><br><span class="line">    pb = pf = *p_head;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入要删除的链表&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链表为空无需删除&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (pb-&gt;num != num &amp;&amp; pb-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pf = pb;</span><br><span class="line">        pb = pb-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (pb-&gt;num == num)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (pb == *p_head)</span><br><span class="line">        &#123;</span><br><span class="line">            *p_head = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            pf-&gt;next = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(pb);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到要删除的指针&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-7链表的排序"><a href="#1-7链表的排序" class="headerlink" title="1.7链表的排序"></a>1.7链表的排序</h2><p>判断是否为空指针或仅有头指针，为空则无排序必要。</p>
-<p>运用排序算法即可进行链表排序，<strong>区别在于多了指针的交换</strong></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 有序链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sortlink</span><span class="params">(STU **head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU p_mov, *pf = <span class="literal">NULL</span>, *pb = <span class="literal">NULL</span>;</span><br><span class="line">    pf = *head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (*head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((*head)-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pf-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pb = pf-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (pb != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (pf-&gt;num &gt; pb-&gt;num)</span><br><span class="line">            &#123;</span><br><span class="line">                p_mov = *pb;</span><br><span class="line">                *pb = *pf;</span><br><span class="line">                *pf = p_mov;</span><br><span class="line"></span><br><span class="line">                p_mov.next = pb-&gt;next;</span><br><span class="line">                pb-&gt;next = pf-&gt;next;</span><br><span class="line">                pf-&gt;next = p_mov.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pb = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        pf = pf-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="1-8链表逆序"><a href="#1-8链表逆序" class="headerlink" title="1.8链表逆序"></a>1.8链表逆序</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821001815233.png"
-                      alt="image-20230821001815233"
-                ></p>
-<p>先头指针改变后面指针方向，之后改变头指针指向为空</p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 链表逆序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">reverse_link</span><span class="params">(STU **head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *pf, *pb, *r;</span><br><span class="line">    pf = *head;</span><br><span class="line">    pb = pf-&gt;next;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pb != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        r = pb-&gt;next;</span><br><span class="line">        pb-&gt;next = pf;</span><br><span class="line">        pf = pb;</span><br><span class="line">        pb = r;</span><br><span class="line">    &#125;</span><br><span class="line">    (*head)-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    (*head) = pf;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第二章双链表"><a href="#第二章双链表" class="headerlink" title="第二章	双链表"></a>第二章	双链表</h1><p>双链表操作与单链表区别仅在于多了一组从尾到头的指针，及每个节点都有两个指针，一个指向下一个节点，一个指向上一个节点。</p>
-<p>操作与单链表类似，因此此处只用一个创建案例表示：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821002302163.png"
-                      alt="image-20230821002302163"
-                ></p>
-<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span> *<span class="title">next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span> *<span class="title">pre</span>;</span></span><br><span class="line">&#125; DDD;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">creatlink</span><span class="params">(DDD **head, DDD *p_new, DDD **tra)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LONG&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        DDD *p_mov = *head;</span><br><span class="line">        p_new = (DDD *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DDD));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (*head == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *head = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">            p_new-&gt;pre = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (p_mov-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p_mov = p_mov-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p_mov-&gt;next = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">            p_new-&gt;pre = p_mov;</span><br><span class="line">            (*tra) = p_mov-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-]]></content>
-      <categories>
-        <category>C语言</category>
-      </categories>
-      <tags>
-        <tag>嵌入式 c语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C编程____结构体、共用体及枚举</title>
     <url>/2023/08/17/C%E7%BC%96%E7%A8%8B-%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E7%94%A8%E4%BD%93%E5%8F%8A%E6%9E%9A%E4%B8%BE/</url>
     <content><![CDATA[<h1 id="结构体类型的概念及定义"><a href="#结构体类型的概念及定义" class="headerlink" title="结构体类型的概念及定义"></a>结构体类型的概念及定义</h1><h1 id="第一章结构体类型的概念及定义"><a href="#第一章结构体类型的概念及定义" class="headerlink" title="第一章	结构体类型的概念及定义"></a>第一章	结构体类型的概念及定义</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h2><p>结构体是一种构造类型的数据结构，是一种或多种基本类型或构造类型的数据的集合</p>
@@ -2772,6 +2669,109 @@
       </tags>
   </entry>
   <entry>
+    <title>C编程__链表</title>
+    <url>/2023/08/20/C%E7%BC%96%E7%A8%8B-%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<h1 id="第一章单链表"><a href="#第一章单链表" class="headerlink" title="第一章	单链表"></a>第一章	单链表</h1><h2 id="1-1-链表的定义和特点"><a href="#1-1-链表的定义和特点" class="headerlink" title="1.1 链表的定义和特点"></a>1.1 链表的定义和特点</h2><p> 定义：链表是一种物理存储上非连续，数据元素的逻辑顺序通过链表中的指针链接次序，实现的一种线性存储结构。</p>
+<p> 特点：链表由一系列节点（链表中每一个元素称为节点）组成，节点在运行时动态生成（ malloc），</p>
+<p> 每个节点包括两个部分：</p>
+<p>一个是存储数据元素的数据域：数据域内保存的信息右需求决定。</p>
+<p>另一个是存储下一个节点地址的指针域</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230820233949538.png"
+                      alt="image-20230820233949538"
+                ></p>
+<p>链表的构成：</p>
+<p> 链表由一个个节点构成，每个节点一般采用结构体的形式组织，例如：</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stdent</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; STU;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-2-链表的创建"><a href="#1-2-链表的创建" class="headerlink" title="1.2 链表的创建"></a>1.2 链表的创建</h2><p><strong>给一个空链表赋予一个空间，并且判断链表是否为空。</strong></p>
+<ul>
+<li>若为空则将创建的链表作为头表。</li>
+<li>若不为空则用插入法一次添加链表个数。</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Createlink</span><span class="params">(STU **p_head, STU *p_new)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;long&quot;</span>);</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;input date\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">        STU *p_move = *p_head;</span><br><span class="line">        <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *p_head = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (p_move-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p_move = p_move-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p_move-&gt;next = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-3链表遍历"><a href="#1-3链表遍历" class="headerlink" title="1.3	链表遍历"></a>1.3	链表遍历</h2><p>向后移动指针循环并输出，直到链表下一次指向为空退出循环。</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 遍历链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">traverse</span><span class="params">(STU *p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov = p_head;</span><br><span class="line">    <span class="keyword">while</span> (p_mov != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%-5d&quot;</span>, p_mov-&gt;num);</span><br><span class="line">        p_mov = p_mov-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-4链表的查找"><a href="#1-4链表的查找" class="headerlink" title="1.4	链表的查找"></a>1.4	链表的查找</h2><p><strong>对比结构体中的值：</strong></p>
+<ul>
+<li>若与需要查找目标值不同则继续遍历；</li>
+<li>若与需要查找目标值相同则输出并退出循环；</li>
+<li>若未找到目标值则返回输出未找到；</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号链表查询 结构</span></span><br><span class="line">STU *<span class="title function_">checklink_sum</span><span class="params">(STU *p_head, <span class="type">int</span> num)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov = p_head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p_mov != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (num == p_mov-&gt;num)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> p_mov;</span><br><span class="line">        &#125;</span><br><span class="line">        p_mov = p_mov-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">// 链表中无所需数据</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按学号链表查找 函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">checklink</span><span class="params">(STU *p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入要查询的学号&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    p_head = checklink_sum(p_head, num);</span><br><span class="line">    <span class="keyword">if</span> (p_head != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;已经查到，数据为%-5d\n&quot;</span>, p_head-&gt;num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+<h2 id="1-5-节点插入"><a href="#1-5-节点插入" class="headerlink" title="1.5  节点插入"></a>1.5  节点插入</h2><p>尾插法或头插法增加链表个数。</p>
+<p><strong>尾插法如下：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230820234728737.png"
+                      alt="image-20230820234728737"
+                ></p>
+<p><strong>运用链表查询方法：</strong></p>
+<ul>
+<li>若查找失败则不进行插入操作；</li>
+<li>若查找成功则先进行新链表指针指向后链表，之后前链表指针指向新链表；</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号增加链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">addlink</span><span class="params">(STU **p_head, STU *p_new)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *p_mov;</span><br><span class="line">    p_mov = *p_head;</span><br><span class="line">    <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无链表,添加一个头节点,并且输入添加内容&quot;</span>);</span><br><span class="line">        p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">        *p_head = p_new;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入在在几个链表后面插入&quot;</span>);</span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">        <span class="keyword">while</span> (p_mov-&gt;num != num &amp;&amp; p_mov-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p_mov = p_mov-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入要添加几个链表&quot;</span>);</span><br><span class="line">        <span class="type">int</span> numtwo;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;numtwo);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numtwo; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            p_new = (STU *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(STU));</span><br><span class="line">            p_new-&gt;next = p_mov-&gt;next;</span><br><span class="line">            p_mov-&gt;next = p_new;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;请输入数据到新增链表&quot;</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>头插法与尾插法类似，区别在于头插法要多一个判断。</p>
+<p><strong>判断插入的节点位置是否为头节点：</strong></p>
+<ul>
+<li>若为头节点则需无需前指针指向新节点</li>
+</ul>
+<h2 id="1-6链表的删除"><a href="#1-6链表的删除" class="headerlink" title="1.6链表的删除"></a>1.6链表的删除</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821000912130.png"
+                      alt="image-20230821000912130"
+                ></p>
+<p><strong>运用链表查询方法：</strong></p>
+<ul>
+<li>若查找失败则不进行删除操作；</li>
+<li>若查找成功则先进行前链表指针指向后链表，之后释放查询到的链表；</li>
+</ul>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按学号链表的删除</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">deletelink</span><span class="params">(STU **p_head)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    STU *pb, *pf;</span><br><span class="line">    pb = pf = *p_head;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入要删除的链表&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    <span class="keyword">if</span> (*p_head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链表为空无需删除&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (pb-&gt;num != num &amp;&amp; pb-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pf = pb;</span><br><span class="line">        pb = pb-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (pb-&gt;num == num)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (pb == *p_head)</span><br><span class="line">        &#123;</span><br><span class="line">            *p_head = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            pf-&gt;next = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(pb);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到要删除的指针&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-7链表的排序"><a href="#1-7链表的排序" class="headerlink" title="1.7链表的排序"></a>1.7链表的排序</h2><p>判断是否为空指针或仅有头指针，为空则无排序必要。</p>
+<p>运用排序算法即可进行链表排序，<strong>区别在于多了指针的交换</strong></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 有序链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">sortlink</span><span class="params">(STU **head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU p_mov, *pf = <span class="literal">NULL</span>, *pb = <span class="literal">NULL</span>;</span><br><span class="line">    pf = *head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (*head == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((*head)-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pf-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pb = pf-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (pb != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (pf-&gt;num &gt; pb-&gt;num)</span><br><span class="line">            &#123;</span><br><span class="line">                p_mov = *pb;</span><br><span class="line">                *pb = *pf;</span><br><span class="line">                *pf = p_mov;</span><br><span class="line"></span><br><span class="line">                p_mov.next = pb-&gt;next;</span><br><span class="line">                pb-&gt;next = pf-&gt;next;</span><br><span class="line">                pf-&gt;next = p_mov.next;</span><br><span class="line">            &#125;</span><br><span class="line">            pb = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        pf = pf-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="1-8链表逆序"><a href="#1-8链表逆序" class="headerlink" title="1.8链表逆序"></a>1.8链表逆序</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821001815233.png"
+                      alt="image-20230821001815233"
+                ></p>
+<p>先头指针改变后面指针方向，之后改变头指针指向为空</p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 链表逆序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">reverse_link</span><span class="params">(STU **head)</span></span><br><span class="line">&#123;</span><br><span class="line">    STU *pf, *pb, *r;</span><br><span class="line">    pf = *head;</span><br><span class="line">    pb = pf-&gt;next;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (pb != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        r = pb-&gt;next;</span><br><span class="line">        pb-&gt;next = pf;</span><br><span class="line">        pf = pb;</span><br><span class="line">        pb = r;</span><br><span class="line">    &#125;</span><br><span class="line">    (*head)-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    (*head) = pf;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第二章双链表"><a href="#第二章双链表" class="headerlink" title="第二章	双链表"></a>第二章	双链表</h1><p>双链表操作与单链表区别仅在于多了一组从尾到头的指针，及每个节点都有两个指针，一个指向下一个节点，一个指向上一个节点。</p>
+<p>操作与单链表类似，因此此处只用一个创建案例表示：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/C%E7%BC%96%E7%A8%8B__%E9%93%BE%E8%A1%A8/$%7Bfiilename%7D/image-20230821002302163.png"
+                      alt="image-20230821002302163"
+                ></p>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span> *<span class="title">next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DDDblelink</span> *<span class="title">pre</span>;</span></span><br><span class="line">&#125; DDD;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">creatlink</span><span class="params">(DDD **head, DDD *p_new, DDD **tra)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;LONG&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        DDD *p_mov = *head;</span><br><span class="line">        p_new = (DDD *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DDD));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;p_new-&gt;num);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (*head == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            *head = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">            p_new-&gt;pre = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (p_mov-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p_mov = p_mov-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p_mov-&gt;next = p_new;</span><br><span class="line">            p_new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">            p_new-&gt;pre = p_mov;</span><br><span class="line">            (*tra) = p_mov-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>嵌入式 c语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C语言函数</title>
     <url>/2024/05/15/C%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<h1 id="第一章字符串操作函数"><a href="#第一章字符串操作函数" class="headerlink" title="第一章	字符串操作函数"></a>第一章	字符串操作函数</h1><h2 id="获取字符串的长度"><a href="#获取字符串的长度" class="headerlink" title="获取字符串的长度"></a>获取字符串的长度</h2><p>**strlen()  **</p>
@@ -2784,7 +2784,7 @@
 <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">strncpy</span><span class="params">(<span class="type">char</span> *dest, <span class="type">const</span> <span class="type">char</span> *src, <span class="type">size_t</span> n)</span> &#123;</span><br><span class="line">    <span class="type">char</span> *p = dest;</span><br><span class="line">    <span class="keyword">while</span> (n-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        *p++ = *src++;</span><br><span class="line">        <span class="keyword">if</span> (*src == <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    *p = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 <h2 id="连接两个字符串"><a href="#连接两个字符串" class="headerlink" title="连接两个字符串"></a>连接两个字符串</h2><p>**strcat()  **</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">char *strcat(char *dest, const char *src) &#123;</span><br><span class="line">    char *ptr = dest;</span><br><span class="line">    while (*ptr!= &#x27;\0&#x27;) &#123;</span><br><span class="line">        ptr++;</span><br><span class="line">    &#125;</span><br><span class="line">    while ((*ptr++ = *src++)!= &#x27;\0&#x27;);</span><br><span class="line">    return dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">strcat</span><span class="params">(<span class="type">char</span> *dest, <span class="type">const</span> <span class="type">char</span> *src)</span> &#123;</span><br><span class="line">    <span class="type">char</span> *ptr = dest;</span><br><span class="line">    <span class="keyword">while</span> (*ptr!= <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">        ptr++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ((*ptr++ = *src++)!= <span class="string">&#x27;\0&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 <p><strong>strncat</strong></p>
 <div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">strncat</span><span class="params">(<span class="type">char</span> *dest, <span class="type">const</span> <span class="type">char</span> *src, <span class="type">size_t</span> n)</span> &#123;</span><br><span class="line">    <span class="type">char</span> *p = dest;</span><br><span class="line">    <span class="keyword">while</span> (*p!= <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">        p++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (n-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        *p++ = *src++;</span><br><span class="line">        <span class="keyword">if</span> (*src == <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    *p = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
@@ -2882,60 +2882,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Samba服务的搭建</title>
-    <url>/2023/08/16/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p><strong>1.安装Samba服务：</strong></p>
-<p> 安装samba服务器更新安装源：sudo apt-get update</p>
-<p> 安装samba的核心插件：sudo apt-get install samba</p>
-<p><strong>2.配置Samba服务：</strong></p>
-<p> \1. 修改&#x2F;etc&#x2F;samba下的配置文件smb.conf</p>
-<p>  sudo gedit &#x2F;etc&#x2F;samba&#x2F;smb.conf</p>
-<p>2.在该文件尾部添加如下内容：</p>
-<p>[education]  </p>
-<p>path &#x3D; &#x2F;home&#x2F;edu&#x2F;work   &#x2F;&#x2F;chmod 777 &#x2F;home&#x2F;edu&#x2F;work</p>
-<p>public &#x3D; yes</p>
-<p>available &#x3D; yes</p>
-<p>browsable &#x3D;yes</p>
-<p>writable &#x3D; yes</p>
-<p>valid users &#x3D; edu</p>
-<p>保存退出</p>
-<p>\3. 设置用户登录密码</p>
-<p>​    sudo smbpasswd -a edu</p>
-<p>​    输入登录密码</p>
-<p>4.启动Samba服务</p>
-<p>   sudo &#x2F;etc&#x2F;init.d&#x2F;smbd restart</p>
-<p>5.windows下访问Samba共享文件夹</p>
-<p>在搜索命令行内输入：\虚拟机的IP地址</p>
-<p>6.开机自启</p>
-<p>打开文件</p>
-<p>sudo vi &#x2F;etc&#x2F;rc.local</p>
-<p>在exit 0前加入</p>
-<p> &#x2F;etc&#x2F;init.d&#x2F;smbd start</p>
-<p>注意：如提示无权限访问可查看windows设置</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/$%7Bfiilename%7D/image-20230816175410112.png"
-                      alt="image-20230816175410112"
-                ></p>
-<p>3.<strong>Samba服务在Windows下的应用</strong></p>
-<p><strong>映射网络驱动器</strong></p>
-<p>右击我的电脑——————&gt;映射网络驱动器</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/$%7Bfiilename%7D/image-20230816175648622.png"
-                      alt="image-20230816175648622"
-                ></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SSH服务安装</title>
     <url>/2023/08/16/SSH%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="第一章-SSH服务"><a href="#第一章-SSH服务" class="headerlink" title="第一章    SSH服务"></a>第一章    SSH服务</h1><p><strong>SSH服务功能：实现远程连接，及文件传输服务。</strong></p>
@@ -3008,6 +2954,60 @@
 </ol>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">service ssh start</span><br></pre></td></tr></table></figure></div>
 
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Samba服务的搭建</title>
+    <url>/2023/08/16/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p><strong>1.安装Samba服务：</strong></p>
+<p> 安装samba服务器更新安装源：sudo apt-get update</p>
+<p> 安装samba的核心插件：sudo apt-get install samba</p>
+<p><strong>2.配置Samba服务：</strong></p>
+<p> \1. 修改&#x2F;etc&#x2F;samba下的配置文件smb.conf</p>
+<p>  sudo gedit &#x2F;etc&#x2F;samba&#x2F;smb.conf</p>
+<p>2.在该文件尾部添加如下内容：</p>
+<p>[education]  </p>
+<p>path &#x3D; &#x2F;home&#x2F;edu&#x2F;work   &#x2F;&#x2F;chmod 777 &#x2F;home&#x2F;edu&#x2F;work</p>
+<p>public &#x3D; yes</p>
+<p>available &#x3D; yes</p>
+<p>browsable &#x3D;yes</p>
+<p>writable &#x3D; yes</p>
+<p>valid users &#x3D; edu</p>
+<p>保存退出</p>
+<p>\3. 设置用户登录密码</p>
+<p>​    sudo smbpasswd -a edu</p>
+<p>​    输入登录密码</p>
+<p>4.启动Samba服务</p>
+<p>   sudo &#x2F;etc&#x2F;init.d&#x2F;smbd restart</p>
+<p>5.windows下访问Samba共享文件夹</p>
+<p>在搜索命令行内输入：\虚拟机的IP地址</p>
+<p>6.开机自启</p>
+<p>打开文件</p>
+<p>sudo vi &#x2F;etc&#x2F;rc.local</p>
+<p>在exit 0前加入</p>
+<p> &#x2F;etc&#x2F;init.d&#x2F;smbd start</p>
+<p>注意：如提示无权限访问可查看windows设置</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/$%7Bfiilename%7D/image-20230816175410112.png"
+                      alt="image-20230816175410112"
+                ></p>
+<p>3.<strong>Samba服务在Windows下的应用</strong></p>
+<p><strong>映射网络驱动器</strong></p>
+<p>右击我的电脑——————&gt;映射网络驱动器</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/Samba%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/$%7Bfiilename%7D/image-20230816175648622.png"
+                      alt="image-20230816175648622"
+                ></p>
 ]]></content>
       <categories>
         <category>Linux</category>
@@ -3310,6 +3310,655 @@
     <title>qt概述与安装</title>
     <url>/2023/12/05/qt%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>ubuntu22.04的安装</title>
+    <url>/2023/08/16/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="第一章-开始软件"><a href="#第一章-开始软件" class="headerlink" title="第一章 开始软件"></a>第一章 开始软件</h1><p>虚拟机工具VMware：</p>
+<p><a class="link"   href="https://customerconnect.vmware.com/cn/downloads/#all_products" >所有下载 (vmware.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>VMtool：</p>
+<p><a class="link"   href="https://customerconnect.vmware.com/cn/downloads/info/slug/datacenter_cloud_infrastructure/vmware_tools/12_x" >下载 VMware Tools - VMware Customer Connect <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>ubuntu所需镜像：</p>
+<p><a class="link"   href="https://mirrors.aliyun.com/ubuntu-releases/22.04/" >ubuntu-releases-22.04安装包下载_开源镜像站-阿里云 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/a066d04eef0f40f0b085c721b229bf0a.png"
+                      alt="a066d04eef0f40f0b085c721b229bf0a"
+                ></p>
+<h1 id="第二章-vmware新建ubuntu"><a href="#第二章-vmware新建ubuntu" class="headerlink" title="第二章   vmware新建ubuntu"></a>第二章   vmware新建ubuntu</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094803019.png"
+                      alt="image-20230816094803019"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094808162.png"
+                      alt="image-20230816094808162"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094816344.png"
+                      alt="image-20230816094816344"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095606500.png"
+                      alt="image-20230816095606500"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095612327-1692166364806.png"
+                      alt="image-20230816095612327"
+                ></p>
+<h1 id="第三章-对ubuntu22进行硬件配置"><a href="#第三章-对ubuntu22进行硬件配置" class="headerlink" title="第三章     对ubuntu22进行硬件配置"></a>第三章     对ubuntu22进行硬件配置</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095700054-1692166380640.png"
+                      alt="image-20230816095700054"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095830906-1692166386417.png"
+                      alt="image-20230816095830906"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100029825-1692166394987.png"
+                      alt="image-20230816100029825"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100216999.png"
+                      alt="image-20230816100216999"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100423202.png"
+                      alt="image-20230816100423202"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100446951.png"
+                      alt="image-20230816100446951"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101236635.png"
+                      alt="image-20230816101236635"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101433412.png"
+                      alt="image-20230816101433412"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166437093.png"
+                      alt="image-20230816101910424"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166445930.png"
+                      alt="image-20230816101910424"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816102123509-1692166451322.png"
+                      alt="image-20230816102123509"
+                ></p>
+<p>下载完后安装完毕</p>
+<h1 id="第四章-vmtool工具安装"><a href="#第四章-vmtool工具安装" class="headerlink" title="第四章  vmtool工具安装"></a>第四章  vmtool工具安装</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143153587.png"
+                      alt="image-20230816143153587"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143426805.png"
+                      alt="image-20230816143426805"
+                ></p>
+<p>桌面鼠标右键新建文件夹</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143935974.png"
+                      alt="image-20230816143935974"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143903174.png"
+                      alt="image-20230816143903174"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144146568.png"
+                      alt="image-20230816144146568"
+                ></p>
+<p>输入以下指令：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf  VMware Tools-10.0.5-3228253.tar.gz</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144226310.png"
+                      alt="image-20230816144226310"
+                ></p>
+<p>进入解压文件夹</p>
+<p>输入以下指令：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> vmware-tools-distrib/</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144805755.png"
+                      alt="image-20230816144805755"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145129812.png"
+                      alt="image-20230816145129812"
+                ></p>
+<p>输入以下指令安装</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ./vmware-intall.pl</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145318287.png"
+                      alt="image-20230816145318287"
+                ></p>
+<p>有问题就一直回车，当出现yes或no时，一直输入yes</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145659470.png"
+                      alt="image-20230816145659470"
+                ></p>
+<p>出现时表示安装成功</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo博客搭建和使用教程(Windows)</title>
+    <url>/2023/08/14/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-Windows/</url>
+    <content><![CDATA[<p><strong>提前声明：</strong></p>
+<p>本文借鉴codingpath文章（<a class="link"   href="https://zhuanlan.zhihu.com/p/547520780" >2022 Hexo 博客搭建和使用教程(Windows) - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>），后根据本人理解重新编写。</p>
+<h1 id="Hexo博客"><a href="#Hexo博客" class="headerlink" title="Hexo博客"></a>Hexo博客</h1><p><strong>Hexo介绍：</strong></p>
+<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 [Markdown]<a class="link"   href="https://daringfireball.net/projects/markdown/" >Daring Fireball: Markdown <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>Hexo 官方中文网站: <a href="%5BHexo%5D(https://hexo.io/zh-cn/index.html)">Hexo</a></p>
+<h2 id="第一章-前期准备"><a href="#第一章-前期准备" class="headerlink" title="第一章 前期准备"></a><strong>第一章 前期准备</strong></h2><h3 id="1-1-安装前所需环境介绍"><a href="#1-1-安装前所需环境介绍" class="headerlink" title="1.1 安装前所需环境介绍"></a><strong>1.1 安装前所需环境介绍</strong></h3><p>安装 Hexo 之前，需要确保您的 PC 中已经安装以下工具:</p>
+<ul>
+<li>Node.js [地址: [Node.js (nodejs.org)](<a class="link"   href="https://nodejs.org/en" >Node.js (nodejs.org) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)]</li>
+<li>Git [地址: [Git (git-scm.com)](<a class="link"   href="https://git-scm.com/" >Git (git-scm.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)]</li>
+</ul>
+<p>如果您的电脑已经具备所需工具，那么您可以直接进入第二章开始安装 Hexo 了。</p>
+<p>如果您还未安装这两款工具，那么请按照以下步骤进行安装。</p>
+<h3 id="1-2-安装-Git"><a href="#1-2-安装-Git" class="headerlink" title="1.2 安装 Git"></a><strong>1.2 安装 Git</strong></h3><ul>
+<li>官方下载地址: [Git - Downloading Package (git-scm.com)](<a class="link"   href="https://git-scm.com/download/win" >Git - Downloading Package (git-scm.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li>安装与使用: 详情见 Git 笔记(尚未写出)</li>
+<li>注意事项: 建议选择 64-bit Git for Windows Setup，并且安装时要勾选 <strong>Add to PATH</strong> 选项</li>
+<li><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234245181.png"
+                      alt="image-20230814234245181"
+                ></li>
+</ul>
+<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">git -v</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234451029.png"
+                      alt="image-20230814234451029"
+                ></p>
+<h3 id="1-3-安装-Node-js"><a href="#1-3-安装-Node-js" class="headerlink" title="1.3 安装 Node.js"></a><strong>1.3 安装 Node.js</strong></h3><ul>
+<li>官方下载地址: <a class="link"   href="https://link.zhihu.com/?target=https://nodejs.org/en/" >Node.js (nodejs.org) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li>安装与使用: 详情见 Node 笔记(尚未写出)</li>
+<li>注意事项: 使用 Node.js 官方安装程序时，请确保勾选 <strong>Add to PATH</strong> 选项（默认已勾选）</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/image-20230814234403808.png"
+                      alt="image-20230814234403808"
+                ></p>
+<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">node --version</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234810874.png"
+                      alt="image-20230814234810874"
+                ></p>
+<p>至此，您已经完成了安装 Hexo 所需的所有额外环境，接下来就可以安装 Hexo 了。</p>
+<h2 id="第二章-安装-Hexo"><a href="#第二章-安装-Hexo" class="headerlink" title="第二章 安装 Hexo"></a><strong>第二章 安装 Hexo</strong></h2><h3 id="2-1-安装-cnpm"><a href="#2-1-安装-cnpm" class="headerlink" title="2.1 安装 cnpm"></a><strong>2.1 安装 cnpm</strong></h3><p>当您安装 Node.js 之后，便可以在命令行中通过 node install 命令安装您想要的程序了。但本文推荐使用 cnpm 安装 Hexo，所以需要先通过 npm install 安装 cnpm。</p>
+<ul>
+<li><p>命令: <code>npm install -g cnpm --registry==https://registry.npm.taobao.org</code><br>说明: -g 表示进行全局安装，–registry&#x3D;&#x3D;<a class="link"   href="https://link.zhihu.com/?target=https://registry.npm.taobao.org/" >https://registry.npm.taobao.org <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 表示使用淘宝镜像安装 cnpm</p>
+</li>
+<li><p>安装后验证: 在 cmd 中输入命令 cnpm -v, 可查看 cnpm 版本</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235223236.png"
+                      alt="image-20230814235223236"
+                ></p>
+</li>
+</ul>
+<h3 id="2-2-安装-Hexo"><a href="#2-2-安装-Hexo" class="headerlink" title="2.2 安装 Hexo"></a><strong>2.2 安装 Hexo</strong></h3><ul>
+<li>命令: <code>cnpm install -g hexo-cli</code><br>说明: -g 表示全局安装，hexo-cli 为所安装的包</li>
+<li>安装后验证: 在 cmd 中输入命令 hexo -v, 可查看 hexo 版本</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235304068.png"
+                      alt="image-20230814235304068"
+                ></p>
+<h3 id="2-3-注意事项"><a href="#2-3-注意事项" class="headerlink" title="2.3 注意事项"></a><strong>2.3 注意事项</strong></h3><p>建议永远安装最新版本的 Hexo，以及 [推荐的 Node.js 版本](<a class="link"   href="https://hexo.io/zh-cn/docs/index.html#%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90" >文档 | Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)。</p>
+<table>
+<thead>
+<tr>
+<th>Hexo 版本</th>
+<th>最低兼容 Node.js 版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6.0+</td>
+<td>12.13.0</td>
+</tr>
+<tr>
+<td>5.0+</td>
+<td>10.13.0</td>
+</tr>
+<tr>
+<td>4.1 - 4.2</td>
+<td>8.10</td>
+</tr>
+<tr>
+<td>4.0</td>
+<td>8.6</td>
+</tr>
+<tr>
+<td>3.3 - 3.9</td>
+<td>6.9</td>
+</tr>
+<tr>
+<td>3.2 - 3.3</td>
+<td>0.12</td>
+</tr>
+<tr>
+<td>3.0 - 3.1</td>
+<td>0.10 or iojs</td>
+</tr>
+<tr>
+<td>0.0.1 - 2.8</td>
+<td>0.10</td>
+</tr>
+</tbody></table>
+<hr>
+<p>至此，您已成成功安装了 Hexo，接下来进入 Github 的配置吧!</p>
+<h2 id="第三章-配置-Github"><a href="#第三章-配置-Github" class="headerlink" title="第三章 配置 Github"></a><strong>第三章 配置 Github</strong></h2><p>如果您还没有 Gihub 账户，请注册一个 Github 账户吧!</p>
+<h3 id="3-1-在-Github-上创建仓库"><a href="#3-1-在-Github-上创建仓库" class="headerlink" title="3.1 在 Github 上创建仓库"></a><strong>3.1 在 Github 上创建仓库</strong></h3><ul>
+<li>新建一个名为: <a class="link"   href="https://link.zhihu.com/?target=http://username.github.io" >http://username.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的仓库(username 为您的 Github 用户名)</li>
+<li>比如，如果您的 github 用户名是 test，那么您就新建名为 <a class="link"   href="https://link.zhihu.com/?target=http://test.github.io" >http://test.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的仓库（必须是您的用户名，其它名称无效），将来你的网站访问地址就是 <a class="link"   href="https://link.zhihu.com/?target=https://test.github.io/" >https://test.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 了。由此可见，每一个 github 账户最多只能创建一个这样可以直接使用域名访问的仓库。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235852254.png"
+                      alt="&lt;!--&lt;!--image-20230814235852254--&gt;--&gt;"
+                ></p>
+<h3 id="3-2-配置-SSH-免密登录"><a href="#3-2-配置-SSH-免密登录" class="headerlink" title="3.2 配置 SSH 免密登录"></a><strong>3.2 配置 SSH 免密登录</strong></h3><p>为什么要配置这个呢？因为您提交代码肯定要拥有您的 github 权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用 ssh key 来解决本地和服务器的连接问题。</p>
+<p><strong>注:</strong> 如果您已经配置过 SSH，可跳过此步骤</p>
+<p><strong>步骤:</strong></p>
+<p>1、首先打开电脑文件夹，找到 C:\Users\您的用户名\ .ssh文件夹并删除(如果没有，则直接进入第二步)</p>
+<p>2、在 C:\Users\您的用户名 文件夹下右键打开 Git Bash Here 输入命令: <code>ssh-keygen -t rsa -C &quot;你的github登录邮箱&quot;</code> 生成.ssh秘钥，输入后连敲三次回车，出现下图情况代表成功</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000353188.png"
+                      alt="image-20230815000353188"
+                ></p>
+<p>3、生成了一个新的 C:\Users\您的用户名\ .ssh文件夹，打开这个文件夹，找到 .ssh\id_rsa.pub 文件，记事本打开并复制里面的内容</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001007080.png"
+                      alt="image-20230815001007080"
+                ></p>
+<p>4、打开您的 github 主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key，把复制的内容粘贴进去，title 随便填，保存即可，我们的公钥就添加成功了，设置好如下图:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000521134.png"
+                      alt="image-20230815000521134"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000545361.png"
+                      alt="image-20230815000545361"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000615104.png"
+                      alt="image-20230815000615104"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000711127.png"
+                      alt="image-20230815000711127"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000812045.png"
+                      alt="image-20230815000812045"
+                ></p>
+<p>5、检测是否设置成功:</p>
+<p>输入命令: <code>ssh -T git@github.com</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001156227.png"
+                      alt="image-20230815001156227"
+                ></p>
+<p>看到以上信息说明 SSH 已配置成功!</p>
+<p>如果出现提示则选择yes知道成功；</p>
+<p>6、此外您还需要如下配置:</p>
+<p>命令: <code>git config --global user.name &quot;您的 Github username&quot;</code> &#x2F;&#x2F; 注意是 username, 而非昵称</p>
+<p>命令: <code>git config --global user.email &quot;xxx@qq.com&quot;</code> &#x2F;&#x2F; 填写您的 github 注册邮箱</p>
+<p><u></u></p>
+<p>至此，您已经成功配置好了 Github，接下来开始搭建个人博客吧!</p>
+<h2 id="第四章-使用-Hexo-搭建博客"><a href="#第四章-使用-Hexo-搭建博客" class="headerlink" title="第四章 使用 Hexo 搭建博客"></a><strong>第四章 使用 Hexo 搭建博客</strong></h2><h2 id="Hexo-的一些命令"><a href="#Hexo-的一些命令" class="headerlink" title="Hexo 的一些命令"></a>Hexo 的一些命令</h2><ul>
+<li>生成静态文件：<code>hexo g</code>；</li>
+<li>清空静态文件：<code>hexo cl</code>；</li>
+<li>在本地运行：<code>hexo s</code>；</li>
+<li>部署到网站：<code>hexo d</code>；</li>
+<li>生成静态文件并部署到网站：<code>hexo d -g</code> 或 <code>hexo g -d</code>；</li>
+<li>创建新文章：<code>hexo new &lt;file&gt;</code>。</li>
+</ul>
+<h3 id="4-1-初始化"><a href="#4-1-初始化" class="headerlink" title="4.1 初始化"></a><strong>4.1 初始化</strong></h3><p>1、在电脑的某个磁盘或路径新建一个名为 hexo 的文件夹(名字可以随便取)，比如我的是 D:\hexo，由于这个文件夹将来就作为您存放代码的地方，所以最好不要随便放</p>
+<p>2、在 D:\hexo 文件夹下右键打开 Git Bash Here，输入命令: <code>hexo init</code> 进行初始化</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001538223.png"
+                      alt="image-20230815001538223"
+                ></p>
+<p>hexo 会自动下载一些文件到这个目录，包括 node_modules，目录结构如下图:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001610824.png"
+                      alt="image-20230815001610824"
+                ></p>
+<p>3、执行命令: <code>hexo g</code> 会在 public 文件夹下生成相关的 html 文件，这些文件将来需要提交到 Github 上</p>
+<p>4、执行命令: <code>hexo s</code> 可以开启本地预览服务，打开浏览器访问 <a class="link"   href="https://link.zhihu.com/?target=http://localhost:4000/" >http://localhost:4000 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 即可看到博客内容</p>
+<h3 id="4-2-将博客部署到-Github"><a href="#4-2-将博客部署到-Github" class="headerlink" title="4.2 将博客部署到 Github"></a><strong>4.2 将博客部署到 Github</strong></h3><p>1、在 D:\hexo 目录下安装 hexo-deployer-git 插件</p>
+<ul>
+<li>命令: <code>npm install hexo-deployer-git --save</code></li>
+</ul>
+<p>2、编辑 D:\hexo 目录下的 _config.yml 文件，在文件末尾添加如下内容:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815002403780.png"
+                      alt="image-20230815002403780"
+                ></p>
+<p>注意: 其中 repository 中的内容即为 github 个人主页链接地址</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815103422386.png"
+                      alt="image-20230815103422386"
+                ></p>
+<p>3、在 D:\hexo 目录下，输入命令: <code>hexo d</code> 将本地 blog 推送到 github 远程仓库，也可能需要输入 username &amp; pwd</p>
+<p>推送成功后，即可通过<a class="link"   href="https://baizhouhaoyue.github.io/%E8%AE%BF%E9%97%AE%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%BA%86" >https://baizhouhaoyue.github.io/访问个人博客了 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>!</p>
+<h2 id="第五章-更换主题"><a href="#第五章-更换主题" class="headerlink" title="第五章 更换主题"></a><strong>第五章 更换主题</strong></h2><p>在 D:\hexo 目录下有一个 themes 文件夹，该文件夹下存放着 hexo 所使用的主题</p>
+<h3 id="5-1-搜索主题"><a href="#5-1-搜索主题" class="headerlink" title="5.1 搜索主题"></a><strong>5.1 搜索主题</strong></h3><ul>
+<li>hexo 官方提供了很多主题供我们使用，地址: <a class="link"   href="https://hexo.io/themes/" >Themes | Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 选择喜欢的主题并点击即可跳转至 github</li>
+<li>您可以在 github 中直接搜索 hexo 主题</li>
+</ul>
+<h3 id="5-2-下载主题"><a href="#5-2-下载主题" class="headerlink" title="5.2 下载主题"></a><strong>5.2 下载主题</strong></h3><p>方法一：</p>
+<p>1、在 D:\hexo 目录下右键 Git Bash Here</p>
+<p>2、执行命令: <code>git clone 主题http链接 themes/主题名称</code> 将主题下载至 themes 文件夹下</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815104851562.png"
+                      alt="image-20230815104851562"
+                ></p>
+<ul>
+<li>可以在该文件夹下查看是否下载成功</li>
+<li><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815104919031.png"
+                      alt="image-20230815104919031"
+                ></li>
+</ul>
+<p>方法二：</p>
+<p>1、在 D:\hexo 目录下右键 Git Bash Here</p>
+<p>2、执行命令: npm install hexo-theme-主题名@latest 将主题下载至 themes 文件夹下(根据主题要求文档)</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105237283.png"
+                      alt="image-20230815105237283"
+                ></p>
+<h3 id="5-3-使用主题"><a href="#5-3-使用主题" class="headerlink" title="5.3 使用主题"></a><strong>5.3 使用主题</strong></h3><p>​    	方法一：</p>
+<ul>
+<li><p>打开 D:\hexo 目录下的 _config.yml 文件，在里面找到 theme: landscape改为theme: yilia-plus(yilia-plus为我们要使用的主题名)，然后执行 <code>hexo clean</code> 先删除旧的 html 文件，再执行 <code>hexo g</code> 重新生成，再执行 <code>hexo d</code> 推送到远程仓库</p>
+</li>
+<li><p>在浏览器输入相应域名，发现主题已更换</p>
+</li>
+<li><p>注意: 可能需要等一段时间刷新才更换 please be patient</p>
+<p>方法二：</p>
+<p>在 Hexo 根目录的 <code>_config.yml</code> 文件中，将 <code>theme</code> 值修改为   主题名  。</p>
+<p>_config.yml</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">theme: redefine</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h3 id="5-4-修改主题内容"><a href="#5-4-修改主题内容" class="headerlink" title="5.4 修改主题内容"></a><strong>5.4 修改主题内容</strong></h3><p>您可以在 themes&#x2F;yilia-plus 文件夹中查看该主题的内容，并可编辑该文件夹中的 _config.yml 文件修改主题样式</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105641322.png"
+                      alt="image-20230815105641322"
+                ></p>
+<p>注意: 记得编辑根目录下的 _config.yml 文件，将信息修改为自己的</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105804677.png"
+                      alt="image-20230815105804677"
+                ></p>
+<h2 id="第六章-使用-Typora-编写博客"><a href="#第六章-使用-Typora-编写博客" class="headerlink" title="第六章 使用 Typora 编写博客"></a><strong>第六章 使用 Typora 编写博客</strong></h2><h3 id="6-1-Typora-介绍"><a href="#6-1-Typora-介绍" class="headerlink" title="6.1 Typora 介绍"></a><strong>6.1 Typora 介绍</strong></h3><p>Typora 是一款轻便简洁的 Markdown 编辑器，支持即时渲染技术，这也是与其他 Markdown 编辑器最显著的区别。即时渲染使得你写Markdown 就像是写 Word 文档一样流畅自如，不像其他编辑器的有编辑栏和显示栏。</p>
+<p>优点:</p>
+<ul>
+<li><strong>简洁美观</strong></li>
+<li><strong>实时预览</strong></li>
+<li><strong>扩展语法</strong></li>
+<li><strong>跨平台</strong></li>
+</ul>
+<h3 id="6-2-安装-Typora"><a href="#6-2-安装-Typora" class="headerlink" title="6.2 安装 Typora"></a><strong>6.2 安装 Typora</strong></h3><p>官网: <a class="link"   href="https://typoraio.cn/" >Typora 官方中文站 (typoraio.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 遗憾收费了。</p>
+<p>为此再次感谢<strong>codingpath大佬</strong><a class="link"   href="https://www.zhihu.com/people/nu-li-nu-li-zai-nu-li-x-80-72" > codingpath - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>提供的免费资源<a class="link"   href="https://www.aliyundrive.com/s/1SQzr6JXeR8" >阿里云盘分享 (aliyundrive.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="6-3-写博客"><a href="#6-3-写博客" class="headerlink" title="6.3 写博客"></a><strong>6.3 写博客</strong></h3><p>1、在 D:\hexo 目录下，通过输入命令: <code>hexo new &quot;文章 title&quot;</code> 会在 &#x2F;source 文件夹下生成对应文章的 .md 文件，然后就可以通过 Typora 打开此文件编写文章并保存了</p>
+<p>2、当您写完该篇文章后，依次输入以下命令:</p>
+<p><code>hexo clean</code> 删除 public 文件夹，即删除旧的博客文章</p>
+<p><code>hexo g</code> 生成 public 文件夹，即生成新的博客文章相关 html 文件</p>
+<p><code>hexo d</code> 将博客推送到 github</p>
+<h3 id="6-4-向-Hexo-博客中插入图片"><a href="#6-4-向-Hexo-博客中插入图片" class="headerlink" title="6.4 向 Hexo 博客中插入图片"></a><strong>6.4 向 Hexo 博客中插入图片</strong></h3><p>Hexo 有多种图片插入方式，可以将图片存放在本地引用或者将图片放在 CDN 上引用。</p>
+<p>1、本地引用–绝对路径</p>
+<p>当 Hexo 项目中只用到少量图片时，可以将图片统一放在 source&#x2F;images 文件夹中，通过 markdown 语法访问它们。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815110743723.png"
+                      alt="image-20230815110743723"
+                ></p>
+<p>设置Typora的图片默认路径</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815110915289.png"
+                      alt="image-20230815110915289"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111430665.png"
+                      alt="image-20230815111430665"
+                ></p>
+<p>按照如图配置，如果你用的Hexo写博客，复制这个即可<code>../../source/imgs/$&#123;fiilename&#125;</code><br>它的意思是将文中的照片复制一份到<code>imgs</code>里的<code>$&#123;fiilename&#125;</code>文件里<br>如果没有用Hexo，按照这个思路设置对路径即可</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111532830.png"
+                      alt="image-20230815111532830"
+                ></p>
+<p>2、本地引用–相对路径</p>
+<p>图片除了可以放在统一的 images 文件夹中，还可以放在文章自己的目录中。文章的目录可以通过配置 _config.yml 来生成。</p>
+<p>打开项目根目录中的 *_config.yml 文件，将 _config.yml文件中的配置项 post_asset_folder 设为 true 后，执行命令 <code>hexo new &quot;post_name&quot;</code>，在 source&#x2F;*posts 中会生成文章 post_name.md 和同名文件夹 post_name。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111657186.png"
+                      alt="image-20230815111657186"
+                ></p>
+<p>将图片资源放在 post_name 文件夹中，文章就可以使用相对路径引用图片资源了。</p>
+<div class="highlight-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="code"><pre><span class="line">![](image.jpg)</span><br></pre></td></tr></table></figure></div>
+
+<p>但是使用这种引用方式，图片只能在文章中显示，但无法在首页中正常显示。</p>
+<p>如果希望图片在文章和首页中同时显示，可以使用标签插件语法(<strong>推荐使用这种引用方法</strong>)。</p>
+<div class="highlight-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img image.jpg This is an image %&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>3、CDN 引用(<strong>不推荐</strong>)</p>
+<p>除了在本地存储图片，还可以将图片上传到一些免费的 CDN 服务中。</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>排序算法</title>
+    <url>/2023/10/18/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="第一章冒泡排序"><a href="#第一章冒泡排序" class="headerlink" title="第一章	冒泡排序"></a>第一章	冒泡排序</h1><h2 id="1、演示"><a href="#1、演示" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-33a947c71ad62b254cab62e5364d2813_b.webp"
+                      alt="动图"
+                ></p>
+<h2 id="2、概述"><a href="#2、概述" class="headerlink" title="2、概述"></a>2、概述</h2><p>冒泡排序（英语：Bubble Sort）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。</p>
+<h2 id="3、实现过程"><a href="#3、实现过程" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void bubble_sort(int arr[], int len) &#123;</span><br><span class="line">    int i, j, temp;</span><br><span class="line">    for (i = 0; i &lt; len - 1; i++)</span><br><span class="line">        for (j = 0; j &lt; len - 1 - i; j++)</span><br><span class="line">            if (arr[j] &gt; arr[j + 1]) &#123;</span><br><span class="line">                temp = arr[j];</span><br><span class="line">                arr[j] = arr[j + 1];</span><br><span class="line">                arr[j + 1] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    int arr[] = &#123; 22, 34, 3, 32, 82, 55, 89, 50, 37, 5, 64, 35, 9, 70 &#125;;</span><br><span class="line">    int len = (int) sizeof(arr) / sizeof(*arr);</span><br><span class="line">    bubble_sort(arr, len);</span><br><span class="line">    int i;</span><br><span class="line">    for (i = 0; i &lt; len; i++)</span><br><span class="line">        printf(&quot;%d &quot;, arr[i]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="第二章选择排序"><a href="#第二章选择排序" class="headerlink" title="第二章	选择排序"></a>第二章	选择排序</h2><h2 id="1、演示-1"><a href="#1、演示-1" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033752328_20C9820639C56B5150C7B7B6EAAEDB37"
+                      alt="图片说明"
+                ></p>
+<h2 id="2、概述-1"><a href="#2、概述-1" class="headerlink" title="2、概述"></a>2、概述</h2><p>选择排序（Selection sort）是一种简单直观的排序算法。它的工作原理如下。首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+<h2 id="3、实现过程-1"><a href="#3、实现过程-1" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a,<span class="type">int</span> *b)</span> <span class="comment">//交換兩個變數</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> temp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">selection_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span> ; i &lt; len - <span class="number">1</span> ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> min = i;</span><br><span class="line">        <span class="keyword">for</span> (j = i + <span class="number">1</span>; j &lt; len; j++)     <span class="comment">//走訪未排序的元素</span></span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[min])    <span class="comment">//找到目前最小值</span></span><br><span class="line">                min = j;    <span class="comment">//紀錄最小值</span></span><br><span class="line">           swap(&amp;arr[min], &amp;arr[i]);    <span class="comment">//做交換</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第三章插入排序"><a href="#第三章插入排序" class="headerlink" title="第三章	插入排序"></a>第三章	插入排序</h1><h2 id="1、演示-2"><a href="#1、演示-2" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp"
+                      alt="动图"
+                ></p>
+<h2 id="2、概述-2"><a href="#2、概述-2" class="headerlink" title="2、概述"></a>2、概述</h2><p>插入排序（英语：Insertion Sort）是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，通常采用in-place排序（即只需用到 {\displaystyle O(1)} {\displaystyle O(1)}的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。</p>
+<h2 id="3、实现过程-2"><a href="#3、实现过程-2" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span>&#123;</span><br><span class="line">    <span class="type">int</span> i,j,temp;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j=i;j&gt;<span class="number">0</span> &amp;&amp; arr[j<span class="number">-1</span>]&gt;temp;j--)</span><br><span class="line">                    arr[j] = arr[j<span class="number">-1</span>];</span><br><span class="line">            arr[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第四章希尔排序"><a href="#第四章希尔排序" class="headerlink" title="第四章	希尔排序"></a>第四章	希尔排序</h1><h2 id="1、演示-3"><a href="#1、演示-3" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033771610_10CD91D581F995407DD7904923767E27"
+                      alt="图片说明"
+                ></p>
+<h2 id="2、概述-3"><a href="#2、概述-3" class="headerlink" title="2、概述"></a>2、概述</h2><p>希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。希尔排序是非稳定排序算法。</p>
+<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
+<ul>
+<li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率</li>
+<li>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位</li>
+</ul>
+<h2 id="3、实现过程-3"><a href="#3、实现过程-3" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">shell_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    <span class="type">int</span> gap, i, j;</span><br><span class="line">    <span class="type">int</span> temp;</span><br><span class="line">    <span class="keyword">for</span> (gap = len &gt;&gt; <span class="number">1</span>; gap &gt; <span class="number">0</span>; gap = gap &gt;&gt; <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> (i = gap; i &lt; len; i++) &#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j = i - gap; j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; temp; j -= gap)</span><br><span class="line">                arr[j + gap] = arr[j];</span><br><span class="line">            arr[j + gap] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第五章快速排序"><a href="#第五章快速排序" class="headerlink" title="第五章	快速排序"></a>第五章	快速排序</h1><h2 id="1、演示-4"><a href="#1、演示-4" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033827676_666EC43E2146695FDD37BBF9E1972818"
+                      alt="图片说明"
+                ></p>
+<h2 id="2、概述-4"><a href="#2、概述-4" class="headerlink" title="2、概述"></a>2、概述</h2><p>快速排序使用分治法（Divide and conquer）策略来把一个序列（list）分为两个子序列（sub-lists）。</p>
+<blockquote>
+<p>① 从数列中挑出一个元素，称为 “基准”（pivot），<br>② 重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。<br>③ 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</p>
+</blockquote>
+<p>递归到最底部时，数列的大小是零或一，也就是已经排序好了。这个算法一定会结束，因为在每次的迭代（iteration）中，它至少会把一个元素摆到它最后的位置去。</p>
+<h2 id="3、实现过程-4"><a href="#3、实现过程-4" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *x, <span class="type">int</span> *y)</span> &#123;</span><br><span class="line">    <span class="type">int</span> t = *x;</span><br><span class="line">    *x = *y;</span><br><span class="line">    *y = t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">quick_sort_recursive</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (start &gt;= end)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> mid = arr[end];</span><br><span class="line">    <span class="type">int</span> left = start, right = end - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span> (arr[left] &lt; mid &amp;&amp; left &lt; right)</span><br><span class="line">            left++;</span><br><span class="line">        <span class="keyword">while</span> (arr[right] &gt;= mid &amp;&amp; left &lt; right)</span><br><span class="line">            right--;</span><br><span class="line">        swap(&amp;arr[left], &amp;arr[right]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (arr[left] &gt;= arr[end])</span><br><span class="line">        swap(&amp;arr[left], &amp;arr[end]);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        left++;</span><br><span class="line">    <span class="keyword">if</span> (left)</span><br><span class="line">        quick_sort_recursive(arr, start, left - <span class="number">1</span>);</span><br><span class="line">    quick_sort_recursive(arr, left + <span class="number">1</span>, end);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">quick_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    quick_sort_recursive(arr, <span class="number">0</span>, len - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="第六章排序总结"><a href="#第六章排序总结" class="headerlink" title="第六章	排序总结"></a>第六章	排序总结</h1><p><strong>冒泡、选择排序算法（从头向后比）</strong></p>
+<ul>
+<li><strong>从头开始排序的比较</strong></li>
+</ul>
+<p>条件目标值小于比较值，并且进行交换则是从大到小</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">max &lt; arr[i]</span><br></pre></td></tr></table></figure></div>
+
+<p>条件目标值大于比较值，并且进行交换则是从小到大</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">min &gt; arr[i]</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>插入排序算法（从后向头比）</strong></p>
+<ul>
+<li><strong>从后开始排序的比较</strong></li>
+</ul>
+<p>条件目标值小于比较值，并且进行交换则是从小到大</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">max &lt; arr[i]</span><br></pre></td></tr></table></figure></div>
+
+<p>条件目标值大于比较值，并且进行交换则是从大到小</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">min &gt; arr[i]</span><br></pre></td></tr></table></figure></div>
+
+<p>与向前比的算法结果相反。</p>
+]]></content>
+      <categories>
+        <category>排序</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
   </entry>
   <entry>
     <title>linux高级系统编程</title>
@@ -5186,655 +5835,6 @@
       </categories>
       <tags>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ubuntu22.04的安装</title>
-    <url>/2023/08/16/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<h1 id="第一章-开始软件"><a href="#第一章-开始软件" class="headerlink" title="第一章 开始软件"></a>第一章 开始软件</h1><p>虚拟机工具VMware：</p>
-<p><a class="link"   href="https://customerconnect.vmware.com/cn/downloads/#all_products" >所有下载 (vmware.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>VMtool：</p>
-<p><a class="link"   href="https://customerconnect.vmware.com/cn/downloads/info/slug/datacenter_cloud_infrastructure/vmware_tools/12_x" >下载 VMware Tools - VMware Customer Connect <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>ubuntu所需镜像：</p>
-<p><a class="link"   href="https://mirrors.aliyun.com/ubuntu-releases/22.04/" >ubuntu-releases-22.04安装包下载_开源镜像站-阿里云 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/a066d04eef0f40f0b085c721b229bf0a.png"
-                      alt="a066d04eef0f40f0b085c721b229bf0a"
-                ></p>
-<h1 id="第二章-vmware新建ubuntu"><a href="#第二章-vmware新建ubuntu" class="headerlink" title="第二章   vmware新建ubuntu"></a>第二章   vmware新建ubuntu</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094803019.png"
-                      alt="image-20230816094803019"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094808162.png"
-                      alt="image-20230816094808162"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816094816344.png"
-                      alt="image-20230816094816344"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095606500.png"
-                      alt="image-20230816095606500"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095612327-1692166364806.png"
-                      alt="image-20230816095612327"
-                ></p>
-<h1 id="第三章-对ubuntu22进行硬件配置"><a href="#第三章-对ubuntu22进行硬件配置" class="headerlink" title="第三章     对ubuntu22进行硬件配置"></a>第三章     对ubuntu22进行硬件配置</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095700054-1692166380640.png"
-                      alt="image-20230816095700054"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816095830906-1692166386417.png"
-                      alt="image-20230816095830906"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100029825-1692166394987.png"
-                      alt="image-20230816100029825"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100216999.png"
-                      alt="image-20230816100216999"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100423202.png"
-                      alt="image-20230816100423202"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816100446951.png"
-                      alt="image-20230816100446951"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101236635.png"
-                      alt="image-20230816101236635"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101433412.png"
-                      alt="image-20230816101433412"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166437093.png"
-                      alt="image-20230816101910424"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816101910424-1692166445930.png"
-                      alt="image-20230816101910424"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816102123509-1692166451322.png"
-                      alt="image-20230816102123509"
-                ></p>
-<p>下载完后安装完毕</p>
-<h1 id="第四章-vmtool工具安装"><a href="#第四章-vmtool工具安装" class="headerlink" title="第四章  vmtool工具安装"></a>第四章  vmtool工具安装</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143153587.png"
-                      alt="image-20230816143153587"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143426805.png"
-                      alt="image-20230816143426805"
-                ></p>
-<p>桌面鼠标右键新建文件夹</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143935974.png"
-                      alt="image-20230816143935974"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816143903174.png"
-                      alt="image-20230816143903174"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144146568.png"
-                      alt="image-20230816144146568"
-                ></p>
-<p>输入以下指令：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf  VMware Tools-10.0.5-3228253.tar.gz</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144226310.png"
-                      alt="image-20230816144226310"
-                ></p>
-<p>进入解压文件夹</p>
-<p>输入以下指令：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> vmware-tools-distrib/</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816144805755.png"
-                      alt="image-20230816144805755"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145129812.png"
-                      alt="image-20230816145129812"
-                ></p>
-<p>输入以下指令安装</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ./vmware-intall.pl</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145318287.png"
-                      alt="image-20230816145318287"
-                ></p>
-<p>有问题就一直回车，当出现yes或no时，一直输入yes</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/ubuntu22-04%E7%9A%84%E5%AE%89%E8%A3%85/$%7Bfiilename%7D/image-20230816145659470.png"
-                      alt="image-20230816145659470"
-                ></p>
-<p>出现时表示安装成功</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo博客搭建和使用教程(Windows)</title>
-    <url>/2023/08/14/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-Windows/</url>
-    <content><![CDATA[<p><strong>提前声明：</strong></p>
-<p>本文借鉴codingpath文章（<a class="link"   href="https://zhuanlan.zhihu.com/p/547520780" >2022 Hexo 博客搭建和使用教程(Windows) - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>），后根据本人理解重新编写。</p>
-<h1 id="Hexo博客"><a href="#Hexo博客" class="headerlink" title="Hexo博客"></a>Hexo博客</h1><p><strong>Hexo介绍：</strong></p>
-<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 [Markdown]<a class="link"   href="https://daringfireball.net/projects/markdown/" >Daring Fireball: Markdown <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>Hexo 官方中文网站: <a href="%5BHexo%5D(https://hexo.io/zh-cn/index.html)">Hexo</a></p>
-<h2 id="第一章-前期准备"><a href="#第一章-前期准备" class="headerlink" title="第一章 前期准备"></a><strong>第一章 前期准备</strong></h2><h3 id="1-1-安装前所需环境介绍"><a href="#1-1-安装前所需环境介绍" class="headerlink" title="1.1 安装前所需环境介绍"></a><strong>1.1 安装前所需环境介绍</strong></h3><p>安装 Hexo 之前，需要确保您的 PC 中已经安装以下工具:</p>
-<ul>
-<li>Node.js [地址: [Node.js (nodejs.org)](<a class="link"   href="https://nodejs.org/en" >Node.js (nodejs.org) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)]</li>
-<li>Git [地址: [Git (git-scm.com)](<a class="link"   href="https://git-scm.com/" >Git (git-scm.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)]</li>
-</ul>
-<p>如果您的电脑已经具备所需工具，那么您可以直接进入第二章开始安装 Hexo 了。</p>
-<p>如果您还未安装这两款工具，那么请按照以下步骤进行安装。</p>
-<h3 id="1-2-安装-Git"><a href="#1-2-安装-Git" class="headerlink" title="1.2 安装 Git"></a><strong>1.2 安装 Git</strong></h3><ul>
-<li>官方下载地址: [Git - Downloading Package (git-scm.com)](<a class="link"   href="https://git-scm.com/download/win" >Git - Downloading Package (git-scm.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-<li>安装与使用: 详情见 Git 笔记(尚未写出)</li>
-<li>注意事项: 建议选择 64-bit Git for Windows Setup，并且安装时要勾选 <strong>Add to PATH</strong> 选项</li>
-<li><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234245181.png"
-                      alt="image-20230814234245181"
-                ></li>
-</ul>
-<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">git -v</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234451029.png"
-                      alt="image-20230814234451029"
-                ></p>
-<h3 id="1-3-安装-Node-js"><a href="#1-3-安装-Node-js" class="headerlink" title="1.3 安装 Node.js"></a><strong>1.3 安装 Node.js</strong></h3><ul>
-<li>官方下载地址: <a class="link"   href="https://link.zhihu.com/?target=https://nodejs.org/en/" >Node.js (nodejs.org) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
-<li>安装与使用: 详情见 Node 笔记(尚未写出)</li>
-<li>注意事项: 使用 Node.js 官方安装程序时，请确保勾选 <strong>Add to PATH</strong> 选项（默认已勾选）</li>
-</ul>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/image-20230814234403808.png"
-                      alt="image-20230814234403808"
-                ></p>
-<p>win + R 在命令行输入cmd进入终端模式，输入下面指令，当显示版本则安装成功</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">node --version</span><br></pre></td></tr></table></figure></div>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814234810874.png"
-                      alt="image-20230814234810874"
-                ></p>
-<p>至此，您已经完成了安装 Hexo 所需的所有额外环境，接下来就可以安装 Hexo 了。</p>
-<h2 id="第二章-安装-Hexo"><a href="#第二章-安装-Hexo" class="headerlink" title="第二章 安装 Hexo"></a><strong>第二章 安装 Hexo</strong></h2><h3 id="2-1-安装-cnpm"><a href="#2-1-安装-cnpm" class="headerlink" title="2.1 安装 cnpm"></a><strong>2.1 安装 cnpm</strong></h3><p>当您安装 Node.js 之后，便可以在命令行中通过 node install 命令安装您想要的程序了。但本文推荐使用 cnpm 安装 Hexo，所以需要先通过 npm install 安装 cnpm。</p>
-<ul>
-<li><p>命令: <code>npm install -g cnpm --registry==https://registry.npm.taobao.org</code><br>说明: -g 表示进行全局安装，–registry&#x3D;&#x3D;<a class="link"   href="https://link.zhihu.com/?target=https://registry.npm.taobao.org/" >https://registry.npm.taobao.org <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 表示使用淘宝镜像安装 cnpm</p>
-</li>
-<li><p>安装后验证: 在 cmd 中输入命令 cnpm -v, 可查看 cnpm 版本</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235223236.png"
-                      alt="image-20230814235223236"
-                ></p>
-</li>
-</ul>
-<h3 id="2-2-安装-Hexo"><a href="#2-2-安装-Hexo" class="headerlink" title="2.2 安装 Hexo"></a><strong>2.2 安装 Hexo</strong></h3><ul>
-<li>命令: <code>cnpm install -g hexo-cli</code><br>说明: -g 表示全局安装，hexo-cli 为所安装的包</li>
-<li>安装后验证: 在 cmd 中输入命令 hexo -v, 可查看 hexo 版本</li>
-</ul>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235304068.png"
-                      alt="image-20230814235304068"
-                ></p>
-<h3 id="2-3-注意事项"><a href="#2-3-注意事项" class="headerlink" title="2.3 注意事项"></a><strong>2.3 注意事项</strong></h3><p>建议永远安装最新版本的 Hexo，以及 [推荐的 Node.js 版本](<a class="link"   href="https://hexo.io/zh-cn/docs/index.html#%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90" >文档 | Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)。</p>
-<table>
-<thead>
-<tr>
-<th>Hexo 版本</th>
-<th>最低兼容 Node.js 版本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>6.0+</td>
-<td>12.13.0</td>
-</tr>
-<tr>
-<td>5.0+</td>
-<td>10.13.0</td>
-</tr>
-<tr>
-<td>4.1 - 4.2</td>
-<td>8.10</td>
-</tr>
-<tr>
-<td>4.0</td>
-<td>8.6</td>
-</tr>
-<tr>
-<td>3.3 - 3.9</td>
-<td>6.9</td>
-</tr>
-<tr>
-<td>3.2 - 3.3</td>
-<td>0.12</td>
-</tr>
-<tr>
-<td>3.0 - 3.1</td>
-<td>0.10 or iojs</td>
-</tr>
-<tr>
-<td>0.0.1 - 2.8</td>
-<td>0.10</td>
-</tr>
-</tbody></table>
-<hr>
-<p>至此，您已成成功安装了 Hexo，接下来进入 Github 的配置吧!</p>
-<h2 id="第三章-配置-Github"><a href="#第三章-配置-Github" class="headerlink" title="第三章 配置 Github"></a><strong>第三章 配置 Github</strong></h2><p>如果您还没有 Gihub 账户，请注册一个 Github 账户吧!</p>
-<h3 id="3-1-在-Github-上创建仓库"><a href="#3-1-在-Github-上创建仓库" class="headerlink" title="3.1 在 Github 上创建仓库"></a><strong>3.1 在 Github 上创建仓库</strong></h3><ul>
-<li>新建一个名为: <a class="link"   href="https://link.zhihu.com/?target=http://username.github.io" >http://username.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的仓库(username 为您的 Github 用户名)</li>
-<li>比如，如果您的 github 用户名是 test，那么您就新建名为 <a class="link"   href="https://link.zhihu.com/?target=http://test.github.io" >http://test.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 的仓库（必须是您的用户名，其它名称无效），将来你的网站访问地址就是 <a class="link"   href="https://link.zhihu.com/?target=https://test.github.io/" >https://test.github.io <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 了。由此可见，每一个 github 账户最多只能创建一个这样可以直接使用域名访问的仓库。</li>
-</ul>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230814235852254.png"
-                      alt="&lt;!--&lt;!--image-20230814235852254--&gt;--&gt;"
-                ></p>
-<h3 id="3-2-配置-SSH-免密登录"><a href="#3-2-配置-SSH-免密登录" class="headerlink" title="3.2 配置 SSH 免密登录"></a><strong>3.2 配置 SSH 免密登录</strong></h3><p>为什么要配置这个呢？因为您提交代码肯定要拥有您的 github 权限才可以，但是直接使用用户名和密码太不安全了，所以我们使用 ssh key 来解决本地和服务器的连接问题。</p>
-<p><strong>注:</strong> 如果您已经配置过 SSH，可跳过此步骤</p>
-<p><strong>步骤:</strong></p>
-<p>1、首先打开电脑文件夹，找到 C:\Users\您的用户名\ .ssh文件夹并删除(如果没有，则直接进入第二步)</p>
-<p>2、在 C:\Users\您的用户名 文件夹下右键打开 Git Bash Here 输入命令: <code>ssh-keygen -t rsa -C &quot;你的github登录邮箱&quot;</code> 生成.ssh秘钥，输入后连敲三次回车，出现下图情况代表成功</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000353188.png"
-                      alt="image-20230815000353188"
-                ></p>
-<p>3、生成了一个新的 C:\Users\您的用户名\ .ssh文件夹，打开这个文件夹，找到 .ssh\id_rsa.pub 文件，记事本打开并复制里面的内容</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001007080.png"
-                      alt="image-20230815001007080"
-                ></p>
-<p>4、打开您的 github 主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key，把复制的内容粘贴进去，title 随便填，保存即可，我们的公钥就添加成功了，设置好如下图:</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000521134.png"
-                      alt="image-20230815000521134"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000545361.png"
-                      alt="image-20230815000545361"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000615104.png"
-                      alt="image-20230815000615104"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000711127.png"
-                      alt="image-20230815000711127"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815000812045.png"
-                      alt="image-20230815000812045"
-                ></p>
-<p>5、检测是否设置成功:</p>
-<p>输入命令: <code>ssh -T git@github.com</code></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001156227.png"
-                      alt="image-20230815001156227"
-                ></p>
-<p>看到以上信息说明 SSH 已配置成功!</p>
-<p>如果出现提示则选择yes知道成功；</p>
-<p>6、此外您还需要如下配置:</p>
-<p>命令: <code>git config --global user.name &quot;您的 Github username&quot;</code> &#x2F;&#x2F; 注意是 username, 而非昵称</p>
-<p>命令: <code>git config --global user.email &quot;xxx@qq.com&quot;</code> &#x2F;&#x2F; 填写您的 github 注册邮箱</p>
-<p><u></u></p>
-<p>至此，您已经成功配置好了 Github，接下来开始搭建个人博客吧!</p>
-<h2 id="第四章-使用-Hexo-搭建博客"><a href="#第四章-使用-Hexo-搭建博客" class="headerlink" title="第四章 使用 Hexo 搭建博客"></a><strong>第四章 使用 Hexo 搭建博客</strong></h2><h2 id="Hexo-的一些命令"><a href="#Hexo-的一些命令" class="headerlink" title="Hexo 的一些命令"></a>Hexo 的一些命令</h2><ul>
-<li>生成静态文件：<code>hexo g</code>；</li>
-<li>清空静态文件：<code>hexo cl</code>；</li>
-<li>在本地运行：<code>hexo s</code>；</li>
-<li>部署到网站：<code>hexo d</code>；</li>
-<li>生成静态文件并部署到网站：<code>hexo d -g</code> 或 <code>hexo g -d</code>；</li>
-<li>创建新文章：<code>hexo new &lt;file&gt;</code>。</li>
-</ul>
-<h3 id="4-1-初始化"><a href="#4-1-初始化" class="headerlink" title="4.1 初始化"></a><strong>4.1 初始化</strong></h3><p>1、在电脑的某个磁盘或路径新建一个名为 hexo 的文件夹(名字可以随便取)，比如我的是 D:\hexo，由于这个文件夹将来就作为您存放代码的地方，所以最好不要随便放</p>
-<p>2、在 D:\hexo 文件夹下右键打开 Git Bash Here，输入命令: <code>hexo init</code> 进行初始化</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001538223.png"
-                      alt="image-20230815001538223"
-                ></p>
-<p>hexo 会自动下载一些文件到这个目录，包括 node_modules，目录结构如下图:</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815001610824.png"
-                      alt="image-20230815001610824"
-                ></p>
-<p>3、执行命令: <code>hexo g</code> 会在 public 文件夹下生成相关的 html 文件，这些文件将来需要提交到 Github 上</p>
-<p>4、执行命令: <code>hexo s</code> 可以开启本地预览服务，打开浏览器访问 <a class="link"   href="https://link.zhihu.com/?target=http://localhost:4000/" >http://localhost:4000 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 即可看到博客内容</p>
-<h3 id="4-2-将博客部署到-Github"><a href="#4-2-将博客部署到-Github" class="headerlink" title="4.2 将博客部署到 Github"></a><strong>4.2 将博客部署到 Github</strong></h3><p>1、在 D:\hexo 目录下安装 hexo-deployer-git 插件</p>
-<ul>
-<li>命令: <code>npm install hexo-deployer-git --save</code></li>
-</ul>
-<p>2、编辑 D:\hexo 目录下的 _config.yml 文件，在文件末尾添加如下内容:</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815002403780.png"
-                      alt="image-20230815002403780"
-                ></p>
-<p>注意: 其中 repository 中的内容即为 github 个人主页链接地址</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815103422386.png"
-                      alt="image-20230815103422386"
-                ></p>
-<p>3、在 D:\hexo 目录下，输入命令: <code>hexo d</code> 将本地 blog 推送到 github 远程仓库，也可能需要输入 username &amp; pwd</p>
-<p>推送成功后，即可通过<a class="link"   href="https://baizhouhaoyue.github.io/%E8%AE%BF%E9%97%AE%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%BA%86" >https://baizhouhaoyue.github.io/访问个人博客了 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>!</p>
-<h2 id="第五章-更换主题"><a href="#第五章-更换主题" class="headerlink" title="第五章 更换主题"></a><strong>第五章 更换主题</strong></h2><p>在 D:\hexo 目录下有一个 themes 文件夹，该文件夹下存放着 hexo 所使用的主题</p>
-<h3 id="5-1-搜索主题"><a href="#5-1-搜索主题" class="headerlink" title="5.1 搜索主题"></a><strong>5.1 搜索主题</strong></h3><ul>
-<li>hexo 官方提供了很多主题供我们使用，地址: <a class="link"   href="https://hexo.io/themes/" >Themes | Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 选择喜欢的主题并点击即可跳转至 github</li>
-<li>您可以在 github 中直接搜索 hexo 主题</li>
-</ul>
-<h3 id="5-2-下载主题"><a href="#5-2-下载主题" class="headerlink" title="5.2 下载主题"></a><strong>5.2 下载主题</strong></h3><p>方法一：</p>
-<p>1、在 D:\hexo 目录下右键 Git Bash Here</p>
-<p>2、执行命令: <code>git clone 主题http链接 themes/主题名称</code> 将主题下载至 themes 文件夹下</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815104851562.png"
-                      alt="image-20230815104851562"
-                ></p>
-<ul>
-<li>可以在该文件夹下查看是否下载成功</li>
-<li><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815104919031.png"
-                      alt="image-20230815104919031"
-                ></li>
-</ul>
-<p>方法二：</p>
-<p>1、在 D:\hexo 目录下右键 Git Bash Here</p>
-<p>2、执行命令: npm install hexo-theme-主题名@latest 将主题下载至 themes 文件夹下(根据主题要求文档)</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105237283.png"
-                      alt="image-20230815105237283"
-                ></p>
-<h3 id="5-3-使用主题"><a href="#5-3-使用主题" class="headerlink" title="5.3 使用主题"></a><strong>5.3 使用主题</strong></h3><p>​    	方法一：</p>
-<ul>
-<li><p>打开 D:\hexo 目录下的 _config.yml 文件，在里面找到 theme: landscape改为theme: yilia-plus(yilia-plus为我们要使用的主题名)，然后执行 <code>hexo clean</code> 先删除旧的 html 文件，再执行 <code>hexo g</code> 重新生成，再执行 <code>hexo d</code> 推送到远程仓库</p>
-</li>
-<li><p>在浏览器输入相应域名，发现主题已更换</p>
-</li>
-<li><p>注意: 可能需要等一段时间刷新才更换 please be patient</p>
-<p>方法二：</p>
-<p>在 Hexo 根目录的 <code>_config.yml</code> 文件中，将 <code>theme</code> 值修改为   主题名  。</p>
-<p>_config.yml</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">theme: redefine</span><br></pre></td></tr></table></figure></div></li>
-</ul>
-<h3 id="5-4-修改主题内容"><a href="#5-4-修改主题内容" class="headerlink" title="5.4 修改主题内容"></a><strong>5.4 修改主题内容</strong></h3><p>您可以在 themes&#x2F;yilia-plus 文件夹中查看该主题的内容，并可编辑该文件夹中的 _config.yml 文件修改主题样式</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105641322.png"
-                      alt="image-20230815105641322"
-                ></p>
-<p>注意: 记得编辑根目录下的 _config.yml 文件，将信息修改为自己的</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815105804677.png"
-                      alt="image-20230815105804677"
-                ></p>
-<h2 id="第六章-使用-Typora-编写博客"><a href="#第六章-使用-Typora-编写博客" class="headerlink" title="第六章 使用 Typora 编写博客"></a><strong>第六章 使用 Typora 编写博客</strong></h2><h3 id="6-1-Typora-介绍"><a href="#6-1-Typora-介绍" class="headerlink" title="6.1 Typora 介绍"></a><strong>6.1 Typora 介绍</strong></h3><p>Typora 是一款轻便简洁的 Markdown 编辑器，支持即时渲染技术，这也是与其他 Markdown 编辑器最显著的区别。即时渲染使得你写Markdown 就像是写 Word 文档一样流畅自如，不像其他编辑器的有编辑栏和显示栏。</p>
-<p>优点:</p>
-<ul>
-<li><strong>简洁美观</strong></li>
-<li><strong>实时预览</strong></li>
-<li><strong>扩展语法</strong></li>
-<li><strong>跨平台</strong></li>
-</ul>
-<h3 id="6-2-安装-Typora"><a href="#6-2-安装-Typora" class="headerlink" title="6.2 安装 Typora"></a><strong>6.2 安装 Typora</strong></h3><p>官网: <a class="link"   href="https://typoraio.cn/" >Typora 官方中文站 (typoraio.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 遗憾收费了。</p>
-<p>为此再次感谢<strong>codingpath大佬</strong><a class="link"   href="https://www.zhihu.com/people/nu-li-nu-li-zai-nu-li-x-80-72" > codingpath - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>提供的免费资源<a class="link"   href="https://www.aliyundrive.com/s/1SQzr6JXeR8" >阿里云盘分享 (aliyundrive.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="6-3-写博客"><a href="#6-3-写博客" class="headerlink" title="6.3 写博客"></a><strong>6.3 写博客</strong></h3><p>1、在 D:\hexo 目录下，通过输入命令: <code>hexo new &quot;文章 title&quot;</code> 会在 &#x2F;source 文件夹下生成对应文章的 .md 文件，然后就可以通过 Typora 打开此文件编写文章并保存了</p>
-<p>2、当您写完该篇文章后，依次输入以下命令:</p>
-<p><code>hexo clean</code> 删除 public 文件夹，即删除旧的博客文章</p>
-<p><code>hexo g</code> 生成 public 文件夹，即生成新的博客文章相关 html 文件</p>
-<p><code>hexo d</code> 将博客推送到 github</p>
-<h3 id="6-4-向-Hexo-博客中插入图片"><a href="#6-4-向-Hexo-博客中插入图片" class="headerlink" title="6.4 向 Hexo 博客中插入图片"></a><strong>6.4 向 Hexo 博客中插入图片</strong></h3><p>Hexo 有多种图片插入方式，可以将图片存放在本地引用或者将图片放在 CDN 上引用。</p>
-<p>1、本地引用–绝对路径</p>
-<p>当 Hexo 项目中只用到少量图片时，可以将图片统一放在 source&#x2F;images 文件夹中，通过 markdown 语法访问它们。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815110743723.png"
-                      alt="image-20230815110743723"
-                ></p>
-<p>设置Typora的图片默认路径</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815110915289.png"
-                      alt="image-20230815110915289"
-                ></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111430665.png"
-                      alt="image-20230815111430665"
-                ></p>
-<p>按照如图配置，如果你用的Hexo写博客，复制这个即可<code>../../source/imgs/$&#123;fiilename&#125;</code><br>它的意思是将文中的照片复制一份到<code>imgs</code>里的<code>$&#123;fiilename&#125;</code>文件里<br>如果没有用Hexo，按照这个思路设置对路径即可</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111532830.png"
-                      alt="image-20230815111532830"
-                ></p>
-<p>2、本地引用–相对路径</p>
-<p>图片除了可以放在统一的 images 文件夹中，还可以放在文章自己的目录中。文章的目录可以通过配置 _config.yml 来生成。</p>
-<p>打开项目根目录中的 *_config.yml 文件，将 _config.yml文件中的配置项 post_asset_folder 设为 true 后，执行命令 <code>hexo new &quot;post_name&quot;</code>，在 source&#x2F;*posts 中会生成文章 post_name.md 和同名文件夹 post_name。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/$%7Bfiilename%7D/image-20230815111657186.png"
-                      alt="image-20230815111657186"
-                ></p>
-<p>将图片资源放在 post_name 文件夹中，文章就可以使用相对路径引用图片资源了。</p>
-<div class="highlight-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="code"><pre><span class="line">![](image.jpg)</span><br></pre></td></tr></table></figure></div>
-
-<p>但是使用这种引用方式，图片只能在文章中显示，但无法在首页中正常显示。</p>
-<p>如果希望图片在文章和首页中同时显示，可以使用标签插件语法(<strong>推荐使用这种引用方法</strong>)。</p>
-<div class="highlight-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img image.jpg This is an image %&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>3、CDN 引用(<strong>不推荐</strong>)</p>
-<p>除了在本地存储图片，还可以将图片上传到一些免费的 CDN 服务中。</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>排序算法</title>
-    <url>/2023/10/18/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="第一章冒泡排序"><a href="#第一章冒泡排序" class="headerlink" title="第一章	冒泡排序"></a>第一章	冒泡排序</h1><h2 id="1、演示"><a href="#1、演示" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-33a947c71ad62b254cab62e5364d2813_b.webp"
-                      alt="动图"
-                ></p>
-<h2 id="2、概述"><a href="#2、概述" class="headerlink" title="2、概述"></a>2、概述</h2><p>冒泡排序（英语：Bubble Sort）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。</p>
-<h2 id="3、实现过程"><a href="#3、实现过程" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void bubble_sort(int arr[], int len) &#123;</span><br><span class="line">    int i, j, temp;</span><br><span class="line">    for (i = 0; i &lt; len - 1; i++)</span><br><span class="line">        for (j = 0; j &lt; len - 1 - i; j++)</span><br><span class="line">            if (arr[j] &gt; arr[j + 1]) &#123;</span><br><span class="line">                temp = arr[j];</span><br><span class="line">                arr[j] = arr[j + 1];</span><br><span class="line">                arr[j + 1] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">    int arr[] = &#123; 22, 34, 3, 32, 82, 55, 89, 50, 37, 5, 64, 35, 9, 70 &#125;;</span><br><span class="line">    int len = (int) sizeof(arr) / sizeof(*arr);</span><br><span class="line">    bubble_sort(arr, len);</span><br><span class="line">    int i;</span><br><span class="line">    for (i = 0; i &lt; len; i++)</span><br><span class="line">        printf(&quot;%d &quot;, arr[i]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="第二章选择排序"><a href="#第二章选择排序" class="headerlink" title="第二章	选择排序"></a>第二章	选择排序</h2><h2 id="1、演示-1"><a href="#1、演示-1" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033752328_20C9820639C56B5150C7B7B6EAAEDB37"
-                      alt="图片说明"
-                ></p>
-<h2 id="2、概述-1"><a href="#2、概述-1" class="headerlink" title="2、概述"></a>2、概述</h2><p>选择排序（Selection sort）是一种简单直观的排序算法。它的工作原理如下。首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
-<h2 id="3、实现过程-1"><a href="#3、实现过程-1" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a,<span class="type">int</span> *b)</span> <span class="comment">//交換兩個變數</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> temp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">selection_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span> ; i &lt; len - <span class="number">1</span> ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> min = i;</span><br><span class="line">        <span class="keyword">for</span> (j = i + <span class="number">1</span>; j &lt; len; j++)     <span class="comment">//走訪未排序的元素</span></span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[min])    <span class="comment">//找到目前最小值</span></span><br><span class="line">                min = j;    <span class="comment">//紀錄最小值</span></span><br><span class="line">           swap(&amp;arr[min], &amp;arr[i]);    <span class="comment">//做交換</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第三章插入排序"><a href="#第三章插入排序" class="headerlink" title="第三章	插入排序"></a>第三章	插入排序</h1><h2 id="1、演示-2"><a href="#1、演示-2" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp"
-                      alt="动图"
-                ></p>
-<h2 id="2、概述-2"><a href="#2、概述-2" class="headerlink" title="2、概述"></a>2、概述</h2><p>插入排序（英语：Insertion Sort）是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，通常采用in-place排序（即只需用到 {\displaystyle O(1)} {\displaystyle O(1)}的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。</p>
-<h2 id="3、实现过程-2"><a href="#3、实现过程-2" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span>&#123;</span><br><span class="line">    <span class="type">int</span> i,j,temp;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j=i;j&gt;<span class="number">0</span> &amp;&amp; arr[j<span class="number">-1</span>]&gt;temp;j--)</span><br><span class="line">                    arr[j] = arr[j<span class="number">-1</span>];</span><br><span class="line">            arr[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第四章希尔排序"><a href="#第四章希尔排序" class="headerlink" title="第四章	希尔排序"></a>第四章	希尔排序</h1><h2 id="1、演示-3"><a href="#1、演示-3" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033771610_10CD91D581F995407DD7904923767E27"
-                      alt="图片说明"
-                ></p>
-<h2 id="2、概述-3"><a href="#2、概述-3" class="headerlink" title="2、概述"></a>2、概述</h2><p>希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。希尔排序是非稳定排序算法。</p>
-<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
-<ul>
-<li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率</li>
-<li>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位</li>
-</ul>
-<h2 id="3、实现过程-3"><a href="#3、实现过程-3" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">shell_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    <span class="type">int</span> gap, i, j;</span><br><span class="line">    <span class="type">int</span> temp;</span><br><span class="line">    <span class="keyword">for</span> (gap = len &gt;&gt; <span class="number">1</span>; gap &gt; <span class="number">0</span>; gap = gap &gt;&gt; <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> (i = gap; i &lt; len; i++) &#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j = i - gap; j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; temp; j -= gap)</span><br><span class="line">                arr[j + gap] = arr[j];</span><br><span class="line">            arr[j + gap] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第五章快速排序"><a href="#第五章快速排序" class="headerlink" title="第五章	快速排序"></a>第五章	快速排序</h1><h2 id="1、演示-4"><a href="#1、演示-4" class="headerlink" title="1、演示"></a>1、演示</h2><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/imgs/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/334190970_1569033827676_666EC43E2146695FDD37BBF9E1972818"
-                      alt="图片说明"
-                ></p>
-<h2 id="2、概述-4"><a href="#2、概述-4" class="headerlink" title="2、概述"></a>2、概述</h2><p>快速排序使用分治法（Divide and conquer）策略来把一个序列（list）分为两个子序列（sub-lists）。</p>
-<blockquote>
-<p>① 从数列中挑出一个元素，称为 “基准”（pivot），<br>② 重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。<br>③ 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</p>
-</blockquote>
-<p>递归到最底部时，数列的大小是零或一，也就是已经排序好了。这个算法一定会结束，因为在每次的迭代（iteration）中，它至少会把一个元素摆到它最后的位置去。</p>
-<h2 id="3、实现过程-4"><a href="#3、实现过程-4" class="headerlink" title="3、实现过程"></a>3、实现过程</h2><div class="highlight-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *x, <span class="type">int</span> *y)</span> &#123;</span><br><span class="line">    <span class="type">int</span> t = *x;</span><br><span class="line">    *x = *y;</span><br><span class="line">    *y = t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">quick_sort_recursive</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (start &gt;= end)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> mid = arr[end];</span><br><span class="line">    <span class="type">int</span> left = start, right = end - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span> (arr[left] &lt; mid &amp;&amp; left &lt; right)</span><br><span class="line">            left++;</span><br><span class="line">        <span class="keyword">while</span> (arr[right] &gt;= mid &amp;&amp; left &lt; right)</span><br><span class="line">            right--;</span><br><span class="line">        swap(&amp;arr[left], &amp;arr[right]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (arr[left] &gt;= arr[end])</span><br><span class="line">        swap(&amp;arr[left], &amp;arr[end]);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        left++;</span><br><span class="line">    <span class="keyword">if</span> (left)</span><br><span class="line">        quick_sort_recursive(arr, start, left - <span class="number">1</span>);</span><br><span class="line">    quick_sort_recursive(arr, left + <span class="number">1</span>, end);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">quick_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    quick_sort_recursive(arr, <span class="number">0</span>, len - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="第六章排序总结"><a href="#第六章排序总结" class="headerlink" title="第六章	排序总结"></a>第六章	排序总结</h1><p><strong>冒泡、选择排序算法（从头向后比）</strong></p>
-<ul>
-<li><strong>从头开始排序的比较</strong></li>
-</ul>
-<p>条件目标值小于比较值，并且进行交换则是从大到小</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">max &lt; arr[i]</span><br></pre></td></tr></table></figure></div>
-
-<p>条件目标值大于比较值，并且进行交换则是从小到大</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">min &gt; arr[i]</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>插入排序算法（从后向头比）</strong></p>
-<ul>
-<li><strong>从后开始排序的比较</strong></li>
-</ul>
-<p>条件目标值小于比较值，并且进行交换则是从小到大</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">max &lt; arr[i]</span><br></pre></td></tr></table></figure></div>
-
-<p>条件目标值大于比较值，并且进行交换则是从大到小</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">min &gt; arr[i]</span><br></pre></td></tr></table></figure></div>
-
-<p>与向前比的算法结果相反。</p>
-]]></content>
-      <categories>
-        <category>排序</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
