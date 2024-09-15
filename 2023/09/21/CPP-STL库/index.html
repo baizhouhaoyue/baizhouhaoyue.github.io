@@ -72,157 +72,6 @@
     
 
     
-        <style>
-    :root {
-        --preloader-background-color: #fff;
-        --preloader-text-color: #000;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --preloader-background-color: #202124;
-            --preloader-text-color: #fff;
-        }
-    }
-
-    @media (prefers-color-scheme: light) {
-        :root {
-            --preloader-background-color: #fff;
-            --preloader-text-color: #000;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .ml13 {
-            font-size: 2.6rem !important; /* Adjust this value as needed */
-        }
-    }
-
-    .preloader {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        padding: 12px;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh; /* 'h-screen' is 100% of the viewport height */
-        background-color: var(--preloader-background-color);
-        z-index: 1100; /* 'z-[1100]' sets the z-index */
-        transition: opacity 0.2s ease-in-out;
-    }
-
-    .ml13 {
-        font-size: 3.2rem;
-        /* text-transform: uppercase; */
-        color: var(--preloader-text-color);
-        letter-spacing: -1px;
-        font-weight: 500;
-        font-family: 'Chillax-Variable', sans-serif;
-        text-align: center;
-    }
-
-    .ml13 .word {
-        display: inline-flex;
-        flex-wrap: wrap;
-        white-space: nowrap;
-    }
-
-    .ml13 .letter {
-        display: inline-block;
-        line-height: 1em;
-    }
-</style>
-
-<div class="preloader">
-    
-<script src="/js/libs/anime.min.js"></script>
-
-    <h1 class="ml13">
-        白昼的宝典
-    </h1>
-    <script>
-        var textWrapper = document.querySelector('.ml13');
-        // Split text into words
-        var words = textWrapper.textContent.trim().split(' ');
-
-        // Clear the existing content
-        textWrapper.innerHTML = '';
-
-        // Wrap each word and its letters in spans
-        words.forEach(function(word) {
-            var wordSpan = document.createElement('span');
-            wordSpan.classList.add('word');
-            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
-            textWrapper.appendChild(wordSpan);
-            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
-        });
-
-
-        anime.timeline({loop: true})
-            .add({
-                targets: '.ml13 .letter',
-                translateY: [100,0],
-                translateZ: 0,
-                opacity: [0,1],
-                easing: "easeOutExpo",
-                duration: 1400,
-                delay: (el, i) => 300 + 30 * i
-            }).add({
-            targets: '.ml13 .letter',
-            translateY: [0,-100],
-            opacity: [1,0],
-            easing: "easeInExpo",
-            duration: 1200,
-            delay: (el, i) => 100 + 30 * i
-        });
-
-        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
-
-        // If the theme status is not found in local storage, check the preferred color scheme
-        if (themeStatus === undefined || themeStatus === null) {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                themeStatus = 'dark';
-            } else {
-                themeStatus = 'light';
-            }
-        }
-
-        // Now you can use the themeStatus variable in your code
-        if (themeStatus) {
-            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
-            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
-        } else {
-            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
-            document.documentElement.style.setProperty('--preloader-text-color', '#000');
-        }
-
-        window.addEventListener('load', function () {
-            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
-        });
-
-        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
-        hidePreloaderAfterTimeout(5000);
-
-        function hidePreloaderAfterTimeout(delay) {
-            setTimeout(function () {
-                var preloader = document.querySelector('.preloader');
-                preloader.style.opacity = '0';
-                setTimeout(function () {
-                    preloader.style.display = 'none';
-                }, 200);
-            }, delay);
-        }
-    </script>
-</div>
-    
-
-    
 <link rel="stylesheet" href="/css/style.css">
 
 
@@ -233,10 +82,10 @@
     
 
     
-<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
 
     
-<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
 
     <!--- Font Part-->
     
@@ -245,11 +94,12 @@
         <link href="" rel="stylesheet">
     
     
-
+    
+    
 
     <script id="hexo-configurations">
     window.config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"BAI ZHOU","subtitle":{"text":["每朵云都下落不明","每盏月亮都不知所踪"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://status.evanluo.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","Blog":"https://ohevan.com","Friends":"/friends"}},"Links":{"icon":"fa-regular fa-link","submenus":{"Hexo":"https://hexo.io/zh-cn/","Themes":"https://hexo.io/themes/","Redefine":"https://redefine-docs.ohevan.com/getting-started"}}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"现在正在完善qt相关知识点","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/8/15 00:00:00"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"BAI ZHOU","subtitle":{"text":["每朵云都下落不明","每盏月亮都不知所踪"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.7.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://status.evanluo.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","Blog":"https://ohevan.com","Friends":"/friends"}},"Links":{"icon":"fa-regular fa-link","submenus":{"Hexo":"https://hexo.io/zh-cn/","Themes":"https://hexo.io/themes/","Redefine":"https://redefine-docs.ohevan.com/getting-started"}}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"现在正在完善qt相关知识点","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/8/15 00:00:00"};
     window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
     window.data = {"masonry":false};
   </script>
@@ -285,6 +135,7 @@
 <!--        </span>-->
     
 </div>
+
 
 
 <main class="page-container" id="swup">
@@ -652,7 +503,7 @@
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">34</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">35</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -678,7 +529,7 @@
         <div class="article-title relative w-full">
             
                 <div class="w-full flex items-center pt-6 justify-start">
-                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">CPP__STL库</h1>
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">CPP__STL库</h1>
                 </div>
             
             </div>
@@ -1194,6 +1045,7 @@
           serverURL: 'https://example.example.com',
           lang: 'zh-CN',
           dark: 'body[class~="dark-mode"]',
+          reaction: false,
           requiredMeta: ['nick', 'mail'],
           emoji: [],
           recaptchaV3Key: "wasd",
@@ -1222,7 +1074,7 @@
         <div class="toc-content-container">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <div class="toc-title">此页目录</div>
+        <div class="toc-title">目录</div>
         <div class="page-title">CPP__STL库</div>
         <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0STL%E6%A6%82%E8%BF%B0-%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93"><span class="nav-text">第一章	STL概述(标准模板库)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%B8%B8%E7%94%A8%E5%AE%B9%E5%99%A8"><span class="nav-text">第二章	常用容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1string-%E5%AE%B9%E5%99%A8"><span class="nav-text">2.1string 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1%E6%9E%84%E9%80%A0%E4%B8%8E%E8%B5%8B%E5%80%BC"><span class="nav-text">2.1.1构造与赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2string-%E5%AD%98%E5%8F%96%E5%AD%97%E7%AC%A6%E6%93%8D%E4%BD%9C"><span class="nav-text">2.1.2string 存取字符操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-string%E7%9A%84%E6%8B%BC%E6%8E%A5"><span class="nav-text">2.1.3 string的拼接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-4%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83"><span class="nav-text">2.1.4字符串比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-5string%E5%AD%90%E4%B8%B2"><span class="nav-text">2.1.5string子串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-6-string-%E5%92%8C-c-style-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2"><span class="nav-text">2.1.6  string 和 c-style 字符串转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-vector%E5%AE%B9%E5%99%A8"><span class="nav-text">2.2 vector容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-vector%E5%AE%B9%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="nav-text">2.2.1 vector容器概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-vector%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-text">2.2.2 vector构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-%E8%B5%8B%E5%80%BC"><span class="nav-text">2.2.3 赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-vector%E5%A4%A7%E5%B0%8F%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-text">2.2.4 vector大小的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5vector-%E6%8F%92%E5%85%A5%E5%92%8C%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="nav-text">2.2.5vector 插入和删除操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-6%E5%B7%A7%E7%94%A8swap%E6%94%B6%E7%BC%A9%E7%A9%BA%E9%97%B4"><span class="nav-text">2.2.6巧用swap收缩空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3deque%E5%AE%B9%E5%99%A8"><span class="nav-text">2.3deque容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-deque%E5%AE%B9%E5%99%A8%E7%89%B9%E6%80%A7"><span class="nav-text">2.3.1 deque容器特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2%E5%B8%B8%E7%94%A8API"><span class="nav-text">2.3.2常用API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4stack%E5%AE%B9%E5%99%A8%EF%BC%88%E6%A0%88%E5%AE%B9%E5%99%A8%EF%BC%89"><span class="nav-text">2.4stack容器（栈容器）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-stack%E5%AE%B9%E5%99%A8%E7%89%B9%E7%82%B9"><span class="nav-text">2.4.1 stack容器特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-%E5%B8%B8%E7%94%A8API"><span class="nav-text">2.4.2 常用API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-queue-%E5%AE%B9%E5%99%A8"><span class="nav-text">2.5 queue 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-queue-%E5%AE%B9%E5%99%A8%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">2.5.1 queue 容器基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-2-queue-%E6%B2%A1%E6%9C%89%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-text">2.5.2 queue 没有迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-3-queue-%E5%B8%B8%E7%94%A8-API"><span class="nav-text">2.5.3 queue 常用 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-list-%E5%AE%B9%E5%99%A8"><span class="nav-text">2.6 list 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-1-list-%E5%AE%B9%E5%99%A8%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">2.6.1 list 容器基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-2-list-%E5%AE%B9%E5%99%A8%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-text">2.6.2 list 容器的迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-4-list-%E5%B8%B8%E7%94%A8-API"><span class="nav-text">2.6.4 list 常用 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-set-multiset-%E5%AE%B9%E5%99%A8"><span class="nav-text">2.7 set&#x2F;multiset 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-1-set-multiset-%E5%AE%B9%E5%99%A8%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">2.7.1 set&#x2F;multiset 容器基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-2-set-%E5%B8%B8%E7%94%A8-API"><span class="nav-text">2.7.2 set 常用 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-%E5%AF%B9%E7%BB%84-pair"><span class="nav-text">2.8 对组(pair)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-map-multimap-%E5%AE%B9%E5%99%A8"><span class="nav-text">2.9 map&#x2F;multimap 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-1-map-multimap-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">2.9.1 map&#x2F;multimap 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-2-map-multimap-%E5%B8%B8%E7%94%A8-API"><span class="nav-text">2.9.2 map&#x2F;multimap 常用 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-STL-%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8%E6%97%B6%E6%9C%BA"><span class="nav-text">2.10 STL 容器使用时机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AE%97%E6%B3%95"><span class="nav-text">第三章	算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BB%BF%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-text">3.1 函数对象（仿函数）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">3.1.1 函数对象的定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E8%B0%93%E8%AF%8D"><span class="nav-text">3.2 谓词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%EF%BC%88%E7%94%B1STL%E6%8F%90%E4%BE%9B%E7%9A%84%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="nav-text">3.3内建函数对象（由STL提供的函数对象）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-text">第四章	适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-text">4.1函数对象作为适配器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%81%9A%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-text">4.2函数指针做适配器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%81%9A%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-text">4.3 成员函数做适配器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4%E5%8F%96%E5%8F%8D%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-text">4.4取反适配器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95"><span class="nav-text">第五章	常用算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95"><span class="nav-text">5.1遍历算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-for-each%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95-%E9%81%8D%E5%8E%86%E5%AE%B9%E5%99%A8%E5%85%83%E7%B4%A0"><span class="nav-text">5.1.1 for_each遍历算法 遍历容器元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2-transform%E7%AE%97%E6%B3%95"><span class="nav-text">5.1.2 transform算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95"><span class="nav-text">5.2 查找算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-1-find-%E7%AE%97%E6%B3%95-%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0"><span class="nav-text">5.2.1 find 算法 查找元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-2find-if-%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%9F%A5%E6%89%BE"><span class="nav-text">5.2.2find_if 算法 条件查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-3-adjacent-find-%E7%AE%97%E6%B3%95"><span class="nav-text">5.2.3 adjacent_find 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-4-adjacent-find-%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%B3%95"><span class="nav-text">5.2.4 adjacent_find 算法 二分查找法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-5-binary-search%E4%BA%8C%E5%88%86%E6%B3%95%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95"><span class="nav-text">5.2.5 binary_search二分法查找算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-6-count-if%E7%AE%97%E6%B3%95%E7%BB%9F%E8%AE%A1%E5%85%83%E7%B4%A0%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0"><span class="nav-text">5.2.6 count_if算法统计元素出现次数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-text">5.3 排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-merge-%E5%90%88%E5%B9%B6"><span class="nav-text">5.3.1 merge 合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-sort%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-text">5.3.2 sort排序算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-3-random-shuffle-%E6%B4%97%E7%89%8C%E7%AE%97%E6%B3%95"><span class="nav-text">5.3.3 random_shuffle 洗牌算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-4-reverse-%E7%AE%97%E6%B3%95-%E5%8F%8D%E8%BD%AC%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-text">5.3.4 reverse 算法 反转指定范围的元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E5%B8%B8%E7%94%A8%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%9B%BF%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-text">5.4 常用拷贝和替换算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-1-copy-%E7%AE%97%E6%B3%95-%E5%B0%86%E5%AE%B9%E5%99%A8%E5%86%85%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E5%85%83%E7%B4%A0%E6%8B%B7%E8%B4%9D%E5%88%B0%E5%8F%A6%E4%B8%80%E5%AE%B9%E5%99%A8%E4%B8%AD"><span class="nav-text">5.4.1 copy 算法 将容器内指定范围的元素拷贝到另一容器中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-2replace-%E7%AE%97%E6%B3%95-%E5%B0%86%E5%AE%B9%E5%99%A8%E5%86%85%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E6%97%A7%E5%85%83%E7%B4%A0%E4%BF%AE%E6%94%B9%E4%B8%BA%E6%96%B0%E5%85%83%E7%B4%A0"><span class="nav-text">5.4.2replace 算法 将容器内指定范围的旧元素修改为新元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-3replace-if-%E7%AE%97%E6%B3%95-%E5%B0%86%E5%AE%B9%E5%99%A8%E5%86%85%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4%E6%BB%A1%E8%B6%B3%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%85%83%E7%B4%A0%E6%9B%BF%E6%8D%A2%E4%B8%BA%E6%96%B0%E5%85%83%E7%B4%A0"><span class="nav-text">5.4.3replace_if 算法 将容器内指定范围满足条件的元素替换为新元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%95%B0%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95"><span class="nav-text">5.5 常用算数生成算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-1-accmulate-%E7%AE%97%E6%B3%95-%E8%AE%A1%E7%AE%97%E5%AE%B9%E5%99%A8%E5%85%83%E7%B4%A0%E7%B4%AF%E8%AE%A1%E6%80%BB%E5%92%8C"><span class="nav-text">5.5.1 accmulate 算法 计算容器元素累计总和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-2-fill-%E7%AE%97%E6%B3%95-%E5%90%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-text">5.5.2 fill 算法 向容器中添加元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88%E7%AE%97%E6%B3%95"><span class="nav-text">5.6常用集合算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E6%80%BB%E7%BB%93%E6%80%A7%E6%A1%88%E4%BE%8B"><span class="nav-text">第六章	总结性案例</span></a></li></ol>
 
@@ -1259,7 +1111,7 @@
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共 34 篇文章
+                        共撰写了 35 篇文章
                     </span>
                     
                 </p>
@@ -1284,7 +1136,7 @@
         
         <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
             <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
-            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.7.1</a></span>
         </div>
         
         
@@ -1396,7 +1248,7 @@
                 <input autocomplete="off"
                        autocorrect="off"
                        autocapitalize="off"
-                       placeholder="搜索..."
+                       placeholder="站内搜索您需要的内容..."
                        spellcheck="false"
                        type="search"
                        class="search-input"
@@ -1514,6 +1366,10 @@
 
 
 
+
+
+    
+<script src="/js/libs/anime.min.js"></script>
 
 
 

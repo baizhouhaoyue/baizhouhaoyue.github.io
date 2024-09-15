@@ -47,157 +47,6 @@
     
 
     
-        <style>
-    :root {
-        --preloader-background-color: #fff;
-        --preloader-text-color: #000;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --preloader-background-color: #202124;
-            --preloader-text-color: #fff;
-        }
-    }
-
-    @media (prefers-color-scheme: light) {
-        :root {
-            --preloader-background-color: #fff;
-            --preloader-text-color: #000;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .ml13 {
-            font-size: 2.6rem !important; /* Adjust this value as needed */
-        }
-    }
-
-    .preloader {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        padding: 12px;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh; /* 'h-screen' is 100% of the viewport height */
-        background-color: var(--preloader-background-color);
-        z-index: 1100; /* 'z-[1100]' sets the z-index */
-        transition: opacity 0.2s ease-in-out;
-    }
-
-    .ml13 {
-        font-size: 3.2rem;
-        /* text-transform: uppercase; */
-        color: var(--preloader-text-color);
-        letter-spacing: -1px;
-        font-weight: 500;
-        font-family: 'Chillax-Variable', sans-serif;
-        text-align: center;
-    }
-
-    .ml13 .word {
-        display: inline-flex;
-        flex-wrap: wrap;
-        white-space: nowrap;
-    }
-
-    .ml13 .letter {
-        display: inline-block;
-        line-height: 1em;
-    }
-</style>
-
-<div class="preloader">
-    
-<script src="/js/libs/anime.min.js"></script>
-
-    <h1 class="ml13">
-        白昼的宝典
-    </h1>
-    <script>
-        var textWrapper = document.querySelector('.ml13');
-        // Split text into words
-        var words = textWrapper.textContent.trim().split(' ');
-
-        // Clear the existing content
-        textWrapper.innerHTML = '';
-
-        // Wrap each word and its letters in spans
-        words.forEach(function(word) {
-            var wordSpan = document.createElement('span');
-            wordSpan.classList.add('word');
-            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
-            textWrapper.appendChild(wordSpan);
-            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
-        });
-
-
-        anime.timeline({loop: true})
-            .add({
-                targets: '.ml13 .letter',
-                translateY: [100,0],
-                translateZ: 0,
-                opacity: [0,1],
-                easing: "easeOutExpo",
-                duration: 1400,
-                delay: (el, i) => 300 + 30 * i
-            }).add({
-            targets: '.ml13 .letter',
-            translateY: [0,-100],
-            opacity: [1,0],
-            easing: "easeInExpo",
-            duration: 1200,
-            delay: (el, i) => 100 + 30 * i
-        });
-
-        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
-
-        // If the theme status is not found in local storage, check the preferred color scheme
-        if (themeStatus === undefined || themeStatus === null) {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                themeStatus = 'dark';
-            } else {
-                themeStatus = 'light';
-            }
-        }
-
-        // Now you can use the themeStatus variable in your code
-        if (themeStatus) {
-            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
-            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
-        } else {
-            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
-            document.documentElement.style.setProperty('--preloader-text-color', '#000');
-        }
-
-        window.addEventListener('load', function () {
-            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
-        });
-
-        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
-        hidePreloaderAfterTimeout(5000);
-
-        function hidePreloaderAfterTimeout(delay) {
-            setTimeout(function () {
-                var preloader = document.querySelector('.preloader');
-                preloader.style.opacity = '0';
-                setTimeout(function () {
-                    preloader.style.display = 'none';
-                }, 200);
-            }, delay);
-        }
-    </script>
-</div>
-    
-
-    
 <link rel="stylesheet" href="/css/style.css">
 
 
@@ -208,10 +57,10 @@
     
 
     
-<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
 
     
-<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
 
     <!--- Font Part-->
     
@@ -220,11 +69,12 @@
         <link href="" rel="stylesheet">
     
     
-
+    
+    
 
     <script id="hexo-configurations">
     window.config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"BAI ZHOU","subtitle":{"text":["每朵云都下落不明","每盏月亮都不知所踪"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://status.evanluo.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","Blog":"https://ohevan.com","Friends":"/friends"}},"Links":{"icon":"fa-regular fa-link","submenus":{"Hexo":"https://hexo.io/zh-cn/","Themes":"https://hexo.io/themes/","Redefine":"https://redefine-docs.ohevan.com/getting-started"}}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"现在正在完善qt相关知识点","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/8/15 00:00:00"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"BAI ZHOU","subtitle":{"text":["每朵云都下落不明","每盏月亮都不知所踪"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.7.1","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://status.evanluo.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/baizhouhaoyue/baizhouhaoyue.github.io","Blog":"https://ohevan.com","Friends":"/friends"}},"Links":{"icon":"fa-regular fa-link","submenus":{"Hexo":"https://hexo.io/zh-cn/","Themes":"https://hexo.io/themes/","Redefine":"https://redefine-docs.ohevan.com/getting-started"}}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"现在正在完善qt相关知识点","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/8/15 00:00:00"};
     window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
     window.data = {"masonry":false};
   </script>
@@ -260,6 +110,7 @@
 <!--        </span>-->
     
 </div>
+
 
 
 <main class="page-container" id="swup">
@@ -662,7 +513,7 @@
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">34</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">35</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -744,7 +595,7 @@
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">34</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">35</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -771,6 +622,80 @@
                 
                 <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
                     <h3 class="home-article-title">
+                        <a href="/2023/09/21/CPP-%E5%A4%9A%E6%80%81/">
+                            CPP__多态
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            第一章	多态的概念1.多态的分类静态多态：如函数重载、运算符重载、重定义。（编译时确定）
+也可称为：早绑定，静态联编
+动态多态：在运行时确定你的调用。如：虚函数、派生类。
+也可称为：晚绑定，动态联编
+2.虚函数的引入
+设计一个算法：可以让基类可以操作派生类的所有数据及方法。
+3.父类指针指向子类空间带来的问题1234567891011121314151617181920212223class...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Thu Sep 21 2023 10:13:30 GMT+0800">
+                
+                    2023-09-21
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category">
+                <i class="fa-solid fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/CPP%E8%AF%AD%E8%A8%80/">CPP语言</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/%E5%9F%BA%E7%A1%80-CPP/">基础 CPP</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2023/09/21/CPP-%E5%A4%9A%E6%80%81/">阅读全文<span class="seo-reader-text">CPP__多态</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
                         <a href="/2023/09/21/CPP-%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/">
                             CPP__继承与派生
                         </a>
@@ -778,13 +703,16 @@
 
                     <div class="home-article-content markdown-body">
                         
+                            
                             第一章	继承与派生的概念面向对象语言的三大特性之一，高效的开发。
 
 继承的语法：
 class 派生类（子类）：继承方式 继承
 继承方式：public、protected、private
 案例1：
-1234class Bus : public Moto...
+1234class Bus : public MotoCar&#123;    //新增自己的属性与方法&#125;;
+
+派生类中的成员，包含两大部分：一类是从基类继承过来的，一类是自己增加的成员。...
                         
                     </div>
 
@@ -851,10 +779,13 @@ class 派生类（子类）：继承方式 继承
 
                     <div class="home-article-content markdown-body">
                         
+                            
                             第一章	运算符重载赋予运算符新的功能，以适应不同的数据类型。
 关键字：operator运算符：运算符就是我们要重载运算符，比如：&lt;&lt;（输出） , &gt;&gt;（输入）,+,(),[]等。
 重载运算符的步骤：
-1.分析运算符的操作数的个...
+1.分析运算符的操作数的个数；比如：cout &lt;&lt; xxx;
+2.分析运算符左边的运算对象：自定义对象还是其他，这个就决定了我们时使用全局函数还是成员函数。
+...
                         
                     </div>
 
@@ -921,6 +852,7 @@ class 派生类（子类）：继承方式 继承
 
                     <div class="home-article-content markdown-body">
                         
+                            
                             第一章	友元1.打破了c++的封装性（运算符重载也会使用）
 2.声明友元的关键字是：friend，friend 关键字只出现在声明处
 
@@ -928,7 +860,9 @@ class 派生类（子类）：继承方式 继承
 类内部的成员函数，
 整个类也可作为友元
 
-3.友元函数不是类的成员，不带 this 指针友元函数可访问...
+3.友元函数不是类的成员，不带 this 指针友元函数可访问对象任意成员属性，包括私有属性
+第二章	全局函数做为友元案例1：全局函数做为友元
+1234567891011121314151617181920...
                         
                     </div>
 
@@ -995,7 +929,12 @@ class 派生类（子类）：继承方式 继承
 
                     <div class="home-article-content markdown-body">
                         
-                            第一章	数据库理论1.1数据库概述2.数据库使用的原因持久化 (persistence)：把数据保存到可掉电式存储设备中以供之后使用。在企业级应用中，数据持久化意味着将内存中的数据保存到硬盘上加以 “固化”，而持久化的实现过程大多通过各种关系数据库来...
+                            
+                            第一章	数据库理论1.1数据库概述2.数据库使用的原因持久化 (persistence)：把数据保存到可掉电式存储设备中以供之后使用。在企业级应用中，数据持久化意味着将内存中的数据保存到硬盘上加以 “固化”，而持久化的实现过程大多通过各种关系数据库来完成持久化的主要作用：将内存中的数据存储在关系型数据库中，也可以存储在磁盘文件、XML 数据文件中
+
+2. 选择数据库的原因
+
+开放源代码，使用...
                         
                     </div>
 
@@ -1062,11 +1001,15 @@ class 派生类（子类）：继承方式 继承
 
                     <div class="home-article-content markdown-body">
                         
+                            
                             第一章	类和对象的基本概念1.1 C 和 C++中 struct 区别核心思想：把一些数据进行封装来描述一个事物
 c 语言 struct 只有变量。
 c++语言 struct 既有变量，也有函数。
 缺点：结构体成员对外部都是可见的。
-1.2 类的封装...
+1.2 类的封装
+将数据和方法 封装在一起 加以权限区分 只能借助公共方法访问私有数据
+使用关键字class定义一个类。
+类的权限：private 私有 pro...
                         
                     </div>
 
@@ -1133,10 +1076,12 @@ c++语言 struct 既有变量，也有函数。
 
                     <div class="home-article-content markdown-body">
                         
+                            
                             第一章	C++语言概述c++语言：面向对象的编程语言
 两大编程思想：面向对象、泛型编程。
 三大特点：封装、继承以及多态。
-第二章	C++语言三大特点2.1 封装：把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信...
+第二章	C++语言三大特点2.1 封装：把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。类将成员变量和成员函数封装在类的内部，根据需要设置访问权限，通过成员函数管理内部状态。
+2.2继承：继承所表达的是类之间相关的关...
                         
                     </div>
 
@@ -1203,8 +1148,10 @@ c++语言 struct 既有变量，也有函数。
 
                     <div class="home-article-content markdown-body">
                         
+                            
                             Mafile概述makefile 是个文件，这个文件中描述了咱们程序的编译规则咱们执行 make 命令的时候， make 命令会在当前目录下找 makefile 文件，根据 makefile 文件里的规则，编译当前项目的程序。
-makefile 主要...
+makefile 主要解决两个问题：
+1)、大量代码的关系维护大项目中源代码比较多，手工维护、编译时间长而且编译命令复杂，难以记忆及维护把代码维护命令及编译命令写在 ...
                         
                     </div>
 
@@ -1271,12 +1218,15 @@ makefile 主要...
 
                     <div class="home-article-content markdown-body">
                         
+                            
                             文件指针FILE 在 stdio.h 文件中的文件类型声明：
 ​    
 对文件操作的步骤：
 1、对文件进行读写等操作之前要打开文件得到文件指针
 2、可以通过文件指针对文件进行读写等操作
-3、读写等操作完毕后，要关闭文件，关闭文件后，就不能再通过此文...
+3、读写等操作完毕后，要关闭文件，关闭文件后，就不能再通过此文件指针操作文件了
+补充：c 语言中有三个特殊的文件指针无需定义，在程序中可以直接使用
+stdin： 标准输入 默认为当前终端（键盘）我们使用的 ...
                         
                     </div>
 
@@ -1343,10 +1293,11 @@ makefile 主要...
 
                     <div class="home-article-content markdown-body">
                         
+                            
                             通过标准IO库来对磁盘文件操作特点​    
 文件缓冲区是库函数申请的一段内存，由库函数对其进行操作。
 案例1：可变参数函数使用
-123456789101112131415161718192021222324252627282930313233343...
+1234567891011121314151617181920212223242526272829303132333435#include &lt;stdio.h&gt;#include &lt;stdarg.h&gt;#define RED &quot;\033...
                         
                     </div>
 
@@ -1397,75 +1348,6 @@ makefile 主要...
                 </div>
             </li>
         
-            <li class="home-article-item">
-
-                
-
-                
-
-                
-                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
-                    <h3 class="home-article-title">
-                        <a href="/2023/08/20/C%E7%BC%96%E7%A8%8B-%E9%93%BE%E8%A1%A8/">
-                            C编程__链表
-                        </a>
-                    </h3>
-
-                    <div class="home-article-content markdown-body">
-                        
-                            第一章	单链表1.1 链表的定义和特点 定义：链表是一种物理存储上非连续，数据元素的逻辑顺序通过链表中的指针链接次序，实现的一种线性存储结构。
- 特点：链表由一系列节点（链表中每一个元素称为节点）组成，节点在运行时动态生成（ malloc），
- ...
-                        
-                    </div>
-
-                    <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sun Aug 20 2023 23:36:57 GMT+0800">
-                
-                    2023-08-20
-                
-            </span>
-        </span>
-        
-            <span class="home-article-category">
-                <i class="fa-solid fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F-c%E8%AF%AD%E8%A8%80/">嵌入式 c语言</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2023/08/20/C%E7%BC%96%E7%A8%8B-%E9%93%BE%E8%A1%A8/">阅读全文<span class="seo-reader-text">C编程__链表</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-                </div>
-            </li>
-        
     </ul>
 
     <div class="home-paginator px-7 py-5">
@@ -1502,7 +1384,7 @@ makefile 主要...
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共 34 篇文章
+                        共撰写了 35 篇文章
                     </span>
                     
                 </p>
@@ -1527,7 +1409,7 @@ makefile 主要...
         
         <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
             <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
-            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.7.1</a></span>
         </div>
         
         
@@ -1618,7 +1500,7 @@ makefile 主要...
                 <input autocomplete="off"
                        autocorrect="off"
                        autocapitalize="off"
-                       placeholder="搜索..."
+                       placeholder="站内搜索您需要的内容..."
                        spellcheck="false"
                        type="search"
                        class="search-input"
@@ -1737,6 +1619,10 @@ makefile 主要...
 
 
 
+
+
+    
+<script src="/js/libs/anime.min.js"></script>
 
 
 
